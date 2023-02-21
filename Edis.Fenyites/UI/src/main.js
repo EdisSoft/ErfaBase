@@ -22,7 +22,7 @@ import httpContext from './utils/httpContext';
 import ApiService from './services/ApiService';
 import HttpStatusCode from './data/enums/httpStatusCode';
 import settings from './data/settings';
-import { GetSocketConnectionId, sendToSocket } from './utils/socketConnection';
+//import { GetSocketConnectionId, sendToSocket } from './utils/socketConnection';
 
 Vue.config.productionTip = false;
 Vue.config.devtools = !settings.isProd;
@@ -57,11 +57,11 @@ async function init() {
   try {
     console.log(router);
     var getAppData = await apiService.GetAppData();
-    var socketConnectionId = GetSocketConnectionId();
-    let data = [socketConnectionId, getAppData.UserData.RogzitoIntezet.Id];
-    if (socketConnectionId != null) {
-      sendToSocket('SetIntezetIdToUser', data);
-    }
+    //var socketConnectionId = GetSocketConnectionId();
+    //let data = [socketConnectionId, getAppData.UserData.RogzitoIntezet.Id];
+    // if (socketConnectionId != null) {
+    //   sendToSocket('SetIntezetIdToUser', data);
+    // }
   } catch (e) {
     console.log(e);
     if (e.jqXHR && e.jqXHR.status == HttpStatusCode.INTERNAL_SERVER_ERROR)

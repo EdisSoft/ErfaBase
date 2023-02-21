@@ -143,7 +143,7 @@ export default {
       }
       esemenyListStatusz.loading = true;
       try {
-        await apiService.GetEsemenyek();
+        await apiService.GetGyartasiMegbizasok();
       } catch (error) {
         console.error(error);
       }
@@ -171,7 +171,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      esemenyek: EsemenyStoreTypes.getters.getEsemenyek,
+      esemenyek: EsemenyStoreTypes.getters.getGyartasiMegbizasok,
       userInfo: UserStoreTypes.getters.getUserInfo,
       vanJogosultsaga: UserStoreTypes.getters.vanJogosultsaga,
     }),

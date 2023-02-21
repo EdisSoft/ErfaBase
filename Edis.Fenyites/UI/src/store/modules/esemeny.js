@@ -2,11 +2,11 @@ import removeNamespace from '../../utils/vueUtils';
 import { Object } from 'core-js';
 export const EsemenyStoreTypes = {
   getters: {
-    getEsemenyek: 'esemeny/getEsemenyek',
+    getGyartasiMegbizasok: 'esemeny/getGyartasiMegbizasok',
   },
   actions: {
-    addEsemenyek: 'esemeny/addEsemenyek',
-    setEsemenyek: 'esemeny/setEsemenyek',
+    addGyartasiMegbizasok: 'esemeny/addGyartasiMegbizasok',
+    setGyartasiMegbizasok: 'esemeny/setGyartasiMegbizasok',
   },
   mutations: {
     SET_ESEMENYEK: 'esemeny/SET_ESEMENYEK',
@@ -25,14 +25,14 @@ export var esemenyListStatusz = {
 };
 
 const getters = {
-  [_types.getters.getEsemenyek]: (state) => {
+  [_types.getters.getGyartasiMegbizasok]: (state) => {
     var esemenyek = state.esemenyek;
     return esemenyek;
   },
 };
 
 const actions = {
-  [_types.actions.addEsemenyek]({ commit, state }, { value }) {
+  [_types.actions.addGyartasiMegbizasok]({ commit, state }, { value }) {
     // Események törlése, ha új érkezik
     var esemenyek = state.esemenyek;
     esemenyek = esemenyek.filter(
@@ -45,7 +45,7 @@ const actions = {
 
     commit(_types.mutations.SET_ESEMENYEK, esemenyek);
   },
-  [_types.actions.setEsemenyek]({ commit }, { value }) {
+  [_types.actions.setGyartasiMegbizasok]({ commit }, { value }) {
     // Események törlése, ha új érkezik
     var esemenyek = [];
     // Todo: ez mutationsba kellene

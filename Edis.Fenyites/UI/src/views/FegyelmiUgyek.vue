@@ -202,7 +202,7 @@ import { ConfirmModalFunctions } from '../functions/ConfirmModalFunctions';
 //import ApiService from '../services/ApiService';
 import { apiService } from '../main';
 import { selectDatatable } from '../utils/common';
-import { sendToSocket, GetSocketConnectionId } from '../utils/socketConnection';
+// import { sendToSocket, GetSocketConnectionId } from '../utils/socketConnection';
 import { NotificationFunctions } from '../functions/notificationFunctions';
 import Intezetek from '../data/enums/intezetek';
 
@@ -278,12 +278,12 @@ export default {
     },
 
     IntezetValasztas: async function (intezetId) {
-      var socketConnectionId = GetSocketConnectionId();
+      //var socketConnectionId = GetSocketConnectionId();
       let data = [];
       apiService
         .IntezetValtas({ intezetId: intezetId, mock: true })
         .then((r) => {
-          sendToSocket('SetIntezetIdToUser', data);
+          //sendToSocket('SetIntezetIdToUser', data);
         })
         .catch((err) => {
           NotificationFunctions.AjaxError({

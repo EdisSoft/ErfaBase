@@ -14,7 +14,7 @@ namespace Edis.Fenyites.Controllers.Erfa
         public JsonResult GetGyartasiMegbizasok()
         {
             var gyartasiMegbizasok = GyartasiMegbizasFunctions.GetGyartasiMegbizasok();
-            return Json(new { gyartasiMegbizasok });
+            return Json( gyartasiMegbizasok);
         }
     }
 }

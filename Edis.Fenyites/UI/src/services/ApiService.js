@@ -6,7 +6,7 @@ import { FenyitesStoreTypes } from '../store/modules/fenyites';
 import { FegyelmiUgyStoreTypes } from '../store/modules/fegyelmiugy';
 import { EsemenyStoreTypes } from '../store/modules/esemeny';
 import { AppStoreTypes } from '../store/modules/app';
-import { KonalyticsInit, ka } from './../utils/konalytics';
+//import { KonalyticsInit, ka } from './../utils/konalytics';
 import { GetSocketConnectionId } from '../utils/socketConnection';
 import {
   GetGeoLocation,
@@ -136,11 +136,7 @@ class ApiService {
         store.dispatch(UserStoreTypes.actions.setUserInfo, {
           value: result.UserData,
         });
-        ka('event', {
-          category: 'click',
-          action: 'IntezetValtas',
-          label: 'Intézet váltás - IntezetId: ' + intezetId,
-        });
+        
         return result;
       })
       .then(() => {
@@ -181,15 +177,7 @@ class ApiService {
       });
     }
 
-    try {
-      if (result.KonalyticsData) {
-        KonalyticsInit(result.KonalyticsData);
-      } else {
-        console.log('Konalytics indításához nem érkeztek adatok a szervertől');
-      }
-    } catch (error) {
-      console.log('Konalytics indítása sikertelen', error);
-    }
+    
 
     return result;
   }
@@ -305,13 +293,13 @@ class ApiService {
       mock,
     });
   }
-  async GetEsemenyek({ mock = true } = {}) {
-    var url = settings.baseUrl + 'Api/Esemeny/GetEsemenyek';
-    await store.dispatch(EsemenyStoreTypes.actions.setEsemenyek, {
+  async GetGyartasiMegbizasok({ mock = true } = {}) {
+    var url = settings.baseUrl + 'Api/GyartasiMegbizas/GetGyartasiMegbizasok';
+    await store.dispatch(EsemenyStoreTypes.actions.setGyartasiMegbizasok, {
       value: Object.freeze([]),
     });
     let result = await this.http.post({ url, mock });
-    await store.dispatch(EsemenyStoreTypes.actions.setEsemenyek, {
+    await store.dispatch(EsemenyStoreTypes.actions.setGyartasiMegbizasok, {
       value: Object.freeze(result),
     });
     return result;
@@ -407,7 +395,7 @@ class ApiService {
       await store.dispatch(FegyelmiUgyStoreTypes.actions.setFegyelmiUgyek, {
         value: Object.freeze([]),
       });
-      var url = settings.baseUrl + 'Api/GyartasiMegbizas/GetGyartasiMegbizasok';
+      var url = settings.baseUrl + 'Api/FegyelmiUgy/GetFegyelmiUgyek';
       let result = await this.http.post({
         url,
         data,

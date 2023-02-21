@@ -348,10 +348,10 @@ import { mapGetters } from 'vuex';
 import { UserStoreTypes } from '../../store/modules/user';
 import { strCompare, boolCompare, sortStr } from '../../utils/sort';
 import { apiService, eventBus } from '../../main';
-import {
-  sendToSocket,
-  GetSocketConnectionId,
-} from '../../utils/socketConnection';
+// import {
+//   sendToSocket,
+//   GetSocketConnectionId,
+// } from '../../utils/socketConnection';
 import { NotificationFunctions } from '../../functions/notificationFunctions';
 import { BeallitasokStoreTypes } from '../../store/modules/beallitasok';
 import { timeout } from '../../utils/common';
@@ -922,11 +922,11 @@ export default {
       intro.start();
     },
     async IntezetValasztas(intezetId) {
-      var socketConnectionId = GetSocketConnectionId();
+      // var socketConnectionId = GetSocketConnectionId();
 
       let data = [];
-      if (socketConnectionId && intezetId) {
-        data = [socketConnectionId, intezetId];
+      if (intezetId) {
+        data = intezetId;
       }
       if (this.userInfo.RogzitoIntezet.Id == intezetId) {
         console.log('IntezetValasztas() - Nem kell adatokat letölteni');
@@ -940,7 +940,6 @@ export default {
           intezetId: intezetId,
           mock: true,
         });
-        sendToSocket('SetIntezetIdToUser', data);
       } catch (error) {
         NotificationFunctions.AjaxError({
           title: 'Hiba',

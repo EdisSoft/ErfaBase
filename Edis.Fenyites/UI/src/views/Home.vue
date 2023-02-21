@@ -14,22 +14,22 @@
 </template>
 
 <script>
-import { sendToSocket } from '../utils/socketConnection';
+//import { sendToSocket } from '../utils/socketConnection';
 export default {
   name: 'home',
   components: {},
   methods: {
-    Hello() {
-      sendToSocket('Hello');
-    },
-    DateTimeStringTeszt() {
-      var date = new Date().toUTCString();
-      sendToSocket('DateTimeStringTeszt', [date]);
-    },
-    DateTimeTeszt() {
-      var date = new Date();
-      sendToSocket('DateTimeTeszt', [date]);
-    },
+    // Hello() {
+    //   sendToSocket('Hello');
+    // },
+    // DateTimeStringTeszt() {
+    //   var date = new Date().toUTCString();
+    //   sendToSocket('DateTimeStringTeszt', [date]);
+    // },
+    // DateTimeTeszt() {
+    //   var date = new Date();
+    //   sendToSocket('DateTimeTeszt', [date]);
+    // },
   },
 };
 </script>

@@ -407,7 +407,7 @@ class ApiService {
       await store.dispatch(FegyelmiUgyStoreTypes.actions.setFegyelmiUgyek, {
         value: Object.freeze([]),
       });
-      var url = settings.baseUrl + 'Api/FegyelmiUgy/GetFegyelmiUgyek';
+      var url = settings.baseUrl + 'Api/GyartasiMegbizas/GetGyartasiMegbizasok';
       let result = await this.http.post({
         url,
         data,

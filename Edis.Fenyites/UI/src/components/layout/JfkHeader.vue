@@ -44,7 +44,6 @@
               role="button"
               v-for="item in fejlecMenupontok"
               :key="item.Id"
-              @click="item.ClickEvent"
               class="list-complete-item jfk-header-item"
               :class="{ active: item.Active }"
             >
@@ -78,9 +77,7 @@
               <a
                 class="nav-link"
                 v-bind:href="
-                  $route.meta.layout == 'fenyites'
-                    ? VirKimutatasFegyelmiUrl
-                    : VirKimutatasJutalomUrl
+                  $route.meta.layout == ''
                 "
                 role="button"
                 target="_blank"
@@ -221,85 +218,13 @@
             </router-link>
           </ul>
 
-          <ul class="d-inline-block px-0" v-if="vanJogosultsaga">
-            <b-dropdown
-              split
-              split-variant="transparent"
-              variant="outline-warning"
-              :disabled="archivEvek.length == 0"
-              class="archiv-dropdown"
-            >
-              <div
-                class="vuebar-element header-archiv-dropdown"
-                v-bar="{
-                  preventParentScroll: true,
-                  scrollThrottle: 30,
-                  resizeRefresh: true,
-                }"
-              >
-                <div>
-                  <b-dropdown-item
-                    class="font-size-12"
-                    href="#"
-                    v-for="ev in archivEvek"
-                    :key="ev"
-                    :to="`/ArchivUgyek/?ev=${ev}`"
-                    >Archív ügyek – {{ ev }}</b-dropdown-item
-                  >
-                </div>
-              </div>
-            </b-dropdown>
-          </ul>
-          <ul class="site-menu d-inline-block px-0" data-plugin="menu">
-            <!--<li class="site-menu-category">General</li>-->
-            <router-link
-              :to="
-                link.isArchive && ugyEve
-                  ? `/ArchivUgyek/?ev=${ugyEve}`
-                  : link.url
-              "
-              tag="li"
-              class="dropdown site-menu-item"
-              active-class="active"
-              :exact="link.isExact != false"
-              v-for="link in fegyelmiLinksArchivUtan"
-              :key="link.url"
-              :class="{
-                active: setArchiveLink && link.isArchive,
-                disabled: link.isDisabled,
-              }"
-            >
-              <a href="javascript:;" class="site-menu-item-link">
-                <i
-                  class="site-menu-icon mr-2"
-                  :class="link.icon"
-                  aria-hidden="true"
-                ></i>
-                <span class="site-menu-title">
-                  {{ link.name
-                  }}{{ link.isArchive && ugyEve ? ' - ' + ugyEve : '' }}
-                </span>
-              </a>
-            </router-link>
-          </ul>
-          <div
-            class="site-menu d-inline-block px-0 fogvatartottkereso"
-            :class="{ aktiv: isFogvKeresesAktiv }"
-            v-if="vanJogosultsaga"
-          >
-            <div class="site-menu-title site-menu-select2">
-              <k-select2-ajax
-                :options="fogvatartottSelect"
-                v-model="selectedFogvatartott"
-                placeholder="Kezdje gépelni a fogvatartott nevét vagy azonosítóját"
-                id="selectedFogvatartott"
-              ></k-select2-ajax>
-            </div>
-          </div>
+          
+         
         </div>
         <ul class="site-menu d-inline-block ml-auto pr-0">
           <li class="dropdown site-menu-item" v-if="vanJogkorGyakorloJoga">
-            <a class="site-menu-item-link" @click="OpenSettings">
+            <!-- <a class="site-menu-item-link" @click="OpenSettings"> -->
+            <a class="site-menu-item-link">
               <i
                 aria-hidden="true"
                 class="site-menu-icon wb-settings mr-0"
@@ -399,7 +324,8 @@
         </div>
         <ul class="site-menu d-inline-block ml-auto pr-0">
           <li class="dropdown site-menu-item" v-if="vanJogkorGyakorloJoga">
-            <a class="site-menu-item-link" @click="OpenSettings">
+            <!-- <a class="site-menu-item-link" @click="OpenSettings"> -->
+            <a class="site-menu-item-link">
               <i
                 aria-hidden="true"
                 class="site-menu-icon wb-settings mr-0"
@@ -472,12 +398,12 @@ export default {
       let fegyelmiLinks = [
         {
           url: '/',
-          name: 'Események',
+          name: 'Gyártásra vár',
           icon: 'wb-users',
         },
         {
           url: '/FegyelmiUgyek/',
-          name: 'Ügyek',
+          name: 'Gyártásban',
           icon: 'fa-calendar',
           isExact: false,
           isDisabled: !this.vanJogosultsaga,
@@ -485,13 +411,13 @@ export default {
       ];
 
       //if (this.userInfo && this.userInfo.VanJfkFegyjutmegtekintoJoga) {
-      fegyelmiLinks.push({
-        url: '/ArchivUgyek/',
-        name: 'Archív ügyek',
-        icon: 'wb-lock',
-        isDisabled: this.archivEvek.length == 0 || !this.vanJogosultsaga,
-        isArchive: true,
-      });
+      // fegyelmiLinks.push({
+      //   url: '/ArchivUgyek/',
+      //   name: 'Archív ügyek',
+      //   icon: 'wb-lock',
+      //   isDisabled: this.archivEvek.length == 0 || !this.vanJogosultsaga,
+      //   isArchive: true,
+      // });
 
       //}
       return fegyelmiLinks;
@@ -587,27 +513,27 @@ export default {
         Id: 1,
         Nev: 'Fegyelmi modul',
         Active: this.$route.meta.layout == 'fenyites',
-        ClickEvent: () => {
-          this.FegyelmiFejlecvaltas();
-        },
+        // ClickEvent: () => {
+        //   this.FegyelmiFejlecvaltas();
+        // },
       });
-      let jutalomMenupont = {
-        Id: 2,
-        Nev: 'Jutalom modul',
-        Active: this.$route.meta.layout == 'jutalom',
-        ClickEvent: () => {
-          this.JutalomFejlecvaltas();
-        },
-      };
-      switch (this.$route.meta.layout) {
-        case 'fenyites':
-          fejlecMenupontok.push(jutalomMenupont);
-          break;
+      // let jutalomMenupont = {
+      //   Id: 2,
+      //   Nev: 'Jutalom modul',
+      //   Active: this.$route.meta.layout == 'jutalom',
+      //   ClickEvent: () => {
+      //     this.JutalomFejlecvaltas();
+      //   },
+      // };
+      // switch (this.$route.meta.layout) {
+      //   case 'fenyites':
+      //     fejlecMenupontok.push(jutalomMenupont);
+      //     break;
 
-        default:
-          fejlecMenupontok.unshift(jutalomMenupont);
-          break;
-      }
+      //   default:
+      //     fejlecMenupontok.unshift(jutalomMenupont);
+      //     break;
+      // }
       return fejlecMenupontok;
     },
     isFogvKeresesAktiv() {

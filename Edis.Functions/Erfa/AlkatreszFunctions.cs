@@ -18,5 +18,11 @@ namespace Edis.Functions.Erfa
             var alkatreszek = Table.ToArray();
             return alkatreszek.Select(s => (AlkatreszekListItemViewModel)s).ToList();
         }
+
+        public List<AlkatreszekListItemViewModel> GetAlkatreszekByPrdId(int prdId)
+        {
+            var alkatreszek = Table.Where(w => w.PrdId == prdId).ToArray();
+            return alkatreszek.Select(s => (AlkatreszekListItemViewModel)s).ToList();
+        }
     }
 }

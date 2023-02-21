@@ -8,5 +8,6 @@ namespace Edis.Functions.Erfa
     public interface IAlkatreszFunctions : IFunctionsBase<AlkatreszekListItemViewModel, AlkatreszView>
     {
         List<AlkatreszekListItemViewModel> GetAlkatreszek();
+        List<AlkatreszekListItemViewModel> GetAlkatreszekByPrdId(int prdId);
     }
 }

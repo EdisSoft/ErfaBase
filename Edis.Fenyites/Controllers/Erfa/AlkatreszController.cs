@@ -3,7 +3,7 @@ using Edis.Functions.Erfa;
 using Edis.IoC.Attributes;
 using System.Web.Mvc;
 
-namespace Edis.Fenyites.Controllers
+namespace Edis.Fenyites.Controllers.Erfa
 {
     [EnableCors]
     public class AlkatreszController : BaseController

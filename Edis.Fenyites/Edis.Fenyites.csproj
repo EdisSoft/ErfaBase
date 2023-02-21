@@ -184,7 +184,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\InjectionConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AlkatreszController.cs" />
+    <Compile Include="Controllers\Erfa\AlkatreszController.cs" />
     <Compile Include="Controllers\Base\BaseController.cs" />
     <Compile Include="Controllers\Base\CompressAttribute.cs" />
     <Compile Include="Controllers\Base\ControllerExtensions.cs" />
@@ -211,6 +211,7 @@
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\TesztController.cs" />
     <Compile Include="App_Code\ListModelBinder.cs" />
+    <Compile Include="Controllers\Erfa\GyartasiMegbizasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -11,11 +11,11 @@ namespace Edis.Functions.Erfa
 {
     public class AlkatreszFunctions : KonasoftBVFonixFunctionsBase<AlkatreszekListItemViewModel, Alkatresz>, IAlkatreszFunctions
     {
-        public DbSet<AlkatreszView> Table => KonasoftBVFonixContext.AlkatreszView;
+        private DbSet<AlkatreszView> Table => KonasoftBVFonixContext.AlkatreszekView;
 
         public List<AlkatreszekListItemViewModel> GetAlkatreszek()
         {
-            var alkatreszek = KonasoftBVFonixContext.AlkatreszView.ToArray();
+            var alkatreszek = Table.ToArray();
             return alkatreszek.Select(s => (AlkatreszekListItemViewModel)s).ToList();
         }
     }

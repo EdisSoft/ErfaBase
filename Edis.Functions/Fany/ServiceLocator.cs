@@ -38,6 +38,7 @@ namespace Edis.Functions.Fany
 
             #region Erfa
             kernel.RegisterInRequestScope<IAlkatreszFunctions, AlkatreszFunctions>();
+            kernel.RegisterInRequestScope<IGyartasiMegbizasFunctions, GyartasiMegbizasFunctions>();
             #endregion
 
             #region JFK

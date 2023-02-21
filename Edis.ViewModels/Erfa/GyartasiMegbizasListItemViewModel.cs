@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Edis.Entities.Erfa;
+using Edis.Utilities;
 
 namespace Edis.ViewModels.Erfa
 {
@@ -20,5 +21,15 @@ namespace Edis.ViewModels.Erfa
         public string Laphiany { get; set; }
         public string Elhiany { get; set; }
         public string Kellekhiany { get; set; }
+
+        public static explicit operator GyartasiMegbizasView(GyartasiMegbizasListItemViewModel model)
+        {
+            return ValueInjecterUtilities.InjectViewModel<GyartasiMegbizasListItemViewModel, GyartasiMegbizasView>(model);
+        }
+
+        public static explicit operator GyartasiMegbizasListItemViewModel(GyartasiMegbizasView model)
+        {
+            return ValueInjecterUtilities.InjectViewModel<GyartasiMegbizasView, GyartasiMegbizasListItemViewModel>(model);
+        }
     }
 }

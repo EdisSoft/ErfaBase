@@ -272,28 +272,29 @@
 
         public List<FegyelmiUgyListItemViewModel> GetFegyelmiUgyek(int intezetId)
         {
-            KonasoftBVFonixContext.Configuration.LazyLoadingEnabled = false;
-            KonasoftBVFonixContext.Database.CommandTimeout = int.MaxValue;
+            //KonasoftBVFonixContext.Configuration.LazyLoadingEnabled = false;
+            //KonasoftBVFonixContext.Database.CommandTimeout = int.MaxValue;
 
-            DataTable dataTable = new DataTable("IdList");
-            dataTable.Columns.Add("Id", typeof(int));
+            //DataTable dataTable = new DataTable("IdList");
+            //dataTable.Columns.Add("Id", typeof(int));
 
-            SqlParameter parameter = new SqlParameter();
-            parameter.ParameterName = "@fegyelmiUgyIds";
-            parameter.SqlDbType = SqlDbType.Structured;
-            parameter.Value = dataTable;
-            parameter.TypeName = "dbo.IdList";
+            //SqlParameter parameter = new SqlParameter();
+            //parameter.ParameterName = "@fegyelmiUgyIds";
+            //parameter.SqlDbType = SqlDbType.Structured;
+            //parameter.Value = dataTable;
+            //parameter.TypeName = "dbo.IdList";
 
-            var query = KonasoftBVFonixContext.Database.SqlQuery<FegyelmiUgyListItemViewModel>
-                     ("Fegyelmi.GetFegyelmiUgyek @IntezetId, @fegyelmiUgyIds, @lezarvaFl, @ugyEve",
-                         new SqlParameter("@IntezetId", intezetId),
-                         parameter,
-                         new SqlParameter("@lezarvaFL", false),
-                         new SqlParameter("@ugyEve", SqlInt32.Null)
-                     ).ToList();
+            //var query = KonasoftBVFonixContext.Database.SqlQuery<FegyelmiUgyListItemViewModel>
+            //         ("Fegyelmi.GetFegyelmiUgyek @IntezetId, @fegyelmiUgyIds, @lezarvaFl, @ugyEve",
+            //             new SqlParameter("@IntezetId", intezetId),
+            //             parameter,
+            //             new SqlParameter("@lezarvaFL", false),
+            //             new SqlParameter("@ugyEve", SqlInt32.Null)
+            //         ).ToList();
 
-            return query;
+            return default;
         }
+
         public List<FegyelmiUgyListItemViewModel> GetFegyelmiUgyekArchiv(int intezetId, int ugyEve)
         {
             KonasoftBVFonixContext.Configuration.LazyLoadingEnabled = false;
@@ -5177,36 +5178,38 @@
 
         public List<AktivitasFolyamModel> GetAktivitasFolyamList(int? intezetId, List<int> fegyelmiUgyIds = null)
         {
-            KonasoftBVFonixContext.Configuration.LazyLoadingEnabled = false;
-            KonasoftBVFonixContext.Database.CommandTimeout = int.MaxValue;
+        //    KonasoftBVFonixContext.Configuration.LazyLoadingEnabled = false;
+        //    KonasoftBVFonixContext.Database.CommandTimeout = int.MaxValue;
 
-            SqlParameter intezetIdParameter;
+        //    SqlParameter intezetIdParameter;
 
-            if (intezetId == null)
-            {
-                intezetIdParameter = new SqlParameter("@IntezetId", SqlInt32.Null);
-            }
-            else
-            {
-                intezetIdParameter = new SqlParameter("@IntezetId", intezetId);
-            }
+        //    if (intezetId == null)
+        //    {
+        //        intezetIdParameter = new SqlParameter("@IntezetId", SqlInt32.Null);
+        //    }
+        //    else
+        //    {
+        //        intezetIdParameter = new SqlParameter("@IntezetId", intezetId);
+        //    }
 
-            DataTable dataTable = new DataTable("IdList");
-            dataTable.Columns.Add("Id", typeof(int));
-            if (fegyelmiUgyIds != null)
-                fegyelmiUgyIds.ForEach(f => dataTable.Rows.Add(f));
+        //    DataTable dataTable = new DataTable("IdList");
+        //    dataTable.Columns.Add("Id", typeof(int));
+        //    if (fegyelmiUgyIds != null)
+        //        fegyelmiUgyIds.ForEach(f => dataTable.Rows.Add(f));
 
-            SqlParameter fegyelmiUgyParameter = new SqlParameter();
-            fegyelmiUgyParameter.ParameterName = "@fegyelmiUgyIds";
-            fegyelmiUgyParameter.SqlDbType = SqlDbType.Structured;
-            fegyelmiUgyParameter.Value = dataTable;
-            fegyelmiUgyParameter.TypeName = "dbo.IdList";
+        //    SqlParameter fegyelmiUgyParameter = new SqlParameter();
+        //    fegyelmiUgyParameter.ParameterName = "@fegyelmiUgyIds";
+        //    fegyelmiUgyParameter.SqlDbType = SqlDbType.Structured;
+        //    fegyelmiUgyParameter.Value = dataTable;
+        //    fegyelmiUgyParameter.TypeName = "dbo.IdList";
 
 
-            return KonasoftBVFonixContext.Database.SqlQuery<AktivitasFolyamModel>
-                      ("Fegyelmi.GetAktivitasFolyamList @IntezetId, @fegyelmiUgyIds",
-                       intezetIdParameter, fegyelmiUgyParameter
-                      ).ToList();
+        //    return KonasoftBVFonixContext.Database.SqlQuery<AktivitasFolyamModel>
+        //              ("Fegyelmi.GetAktivitasFolyamList @IntezetId, @fegyelmiUgyIds",
+        //               intezetIdParameter, fegyelmiUgyParameter
+        //              ).ToList();
+
+            return default;
         }
 
         public MaganelzarasMegkezdesenekRogziteseModel GetMaganelzarasMegkezdesenekRogziteseModalData(List<int> fegyelmiUgyIds, List<int> naplobejegyzesIds)

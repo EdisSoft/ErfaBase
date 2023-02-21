@@ -94,8 +94,8 @@ namespace Edis.Functions.Fany
 
 #if DEBUG
                 var intezetTable = Table
-                    .Include(x => x.CimHelyseg)
-                    .Include(x => x.IntezetiObjektumok.Select(i => i.CimHelyseg))
+                    //.Include(x => x.CimHelyseg)
+                    //.Include(x => x.IntezetiObjektumok.Select(i => i.CimHelyseg))
                     .ToList();
                 return intezetTable;
 #else

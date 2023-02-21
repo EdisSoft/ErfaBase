@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Edis.Entities.Fany
 {
-    [Table("SZEMELYZET_2")]
+    [Table("Felhasznalok")]
     public class Szemelyzet : ExtendedBaseEntity,  IAzonositovalRendelkezo
     {
         [Column("ID")]

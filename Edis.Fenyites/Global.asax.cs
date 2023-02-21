@@ -472,7 +472,7 @@ namespace Edis.Fenyites
 
 #if DEBUG
                     jogosultsagCacheFunctions.JogosultIntezetek = intezetFunctions.Table.ToList();
-                    id = 115;
+                    id = 1;
 
                     Intezet intezet = null;
 

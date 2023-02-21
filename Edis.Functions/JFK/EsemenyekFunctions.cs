@@ -477,36 +477,36 @@ namespace Edis.Functions.JFK.FENY
 
         public List<EsemenyListItemViewModel> GetEsemenyek()
         {
-            KonasoftBVFonixContext.Configuration.LazyLoadingEnabled = false;
-            int intezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+            //KonasoftBVFonixContext.Configuration.LazyLoadingEnabled = false;
+            //int intezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
 
-            var resztvevok = EsemenyResztvevoFunctions.GetEsemenyResztvevokByIntezetId(intezetId);
+            //var resztvevok = EsemenyResztvevoFunctions.GetEsemenyResztvevokByIntezetId(intezetId);
 
-            var egyHonappalEzelott = DateTime.Now.Date.AddMonths(-1);
-            KonasoftBVFonixContext.DisableToroltFlFilter(x => x.Intezet);
+            //var egyHonappalEzelott = DateTime.Now.Date.AddMonths(-1);
+            //KonasoftBVFonixContext.DisableToroltFlFilter(x => x.Intezet);
 
-            var results = Table.Where(w => w.RogzitoIntezetId == intezetId || intezetId == (int)BvIntezet.Bvop)
-                .Include(x => x.RogzitoSzemely)
-                .Include(x => x.RogzitoIntezet)
-                .Include(x => x.Jelleg)
-                .Include(x => x.Napszak)
-                .Include(x => x.Hely)
-                .Where(e => KonasoftBVFonixContext.FegyelmiUgyek.Any(f => (f.EsemenyId == e.Id && (f.Lezarva != true || f.ErvenyessegKezdete > egyHonappalEzelott))))
-                .AsNoTracking()
-                .ToList().Select(x => new EsemenyListItemViewModel()
-                {
-                    EsemenyId = x.Id,
-                    Leiras = x.Leiras,
-                    EsemenyDatuma = x.EsemenyDatuma,
-                    Jelleg = x.Jelleg != null ? x.Jelleg.Nev : null,
-                    Hely = x.Hely != null ? x.Hely.Nev : null,
-                    Napszak = x.Napszak != null ? x.Napszak.Nev : null,
-                    Resztvevok = resztvevok.Where(w => w.EsemenyId == x.Id).OrderBy(o => o.ErintettsegFokaCimId != (int)CimkeEnums.ErintettsegFoka.Elkoveto).ToList(),
-                    RogzitoIntezet = x.RogzitoIntezet.Nev,
-                    RogzitoSzemely = x.RogzitoSzemely.Nev
-                }).ToList();
+            //var results = Table.Where(w => w.RogzitoIntezetId == intezetId || intezetId == (int)BvIntezet.Bvop)
+            //    .Include(x => x.RogzitoSzemely)
+            //    .Include(x => x.RogzitoIntezet)
+            //    .Include(x => x.Jelleg)
+            //    .Include(x => x.Napszak)
+            //    .Include(x => x.Hely)
+            //    .Where(e => KonasoftBVFonixContext.FegyelmiUgyek.Any(f => (f.EsemenyId == e.Id && (f.Lezarva != true || f.ErvenyessegKezdete > egyHonappalEzelott))))
+            //    .AsNoTracking()
+            //    .ToList().Select(x => new EsemenyListItemViewModel()
+            //    {
+            //        EsemenyId = x.Id,
+            //        Leiras = x.Leiras,
+            //        EsemenyDatuma = x.EsemenyDatuma,
+            //        Jelleg = x.Jelleg != null ? x.Jelleg.Nev : null,
+            //        Hely = x.Hely != null ? x.Hely.Nev : null,
+            //        Napszak = x.Napszak != null ? x.Napszak.Nev : null,
+            //        Resztvevok = resztvevok.Where(w => w.EsemenyId == x.Id).OrderBy(o => o.ErintettsegFokaCimId != (int)CimkeEnums.ErintettsegFoka.Elkoveto).ToList(),
+            //        RogzitoIntezet = x.RogzitoIntezet.Nev,
+            //        RogzitoSzemely = x.RogzitoSzemely.Nev
+            //    }).ToList();
 
-            return results;
+            return default;
         }
     }
 }

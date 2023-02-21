@@ -23,6 +23,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Web;
+using Edis.Entities.Erfa;
 //using Edis.Entities.Fonix3;
 
 namespace Edis.Repositories.Contexts
@@ -281,6 +282,14 @@ namespace Edis.Repositories.Contexts
 
 
         #endregion
+		
+		#region Erfa
+		
+		public DbSet<AlkatreszView> AlkatreszekView { get; set; }
+		public DbSet<GyartasiMegbizasView> GyartasiMegbizasokView { get; set; }
+        public DbSet<Alkatresz> Alkatreszek { get; set; }
+		
+		#endregion
 
         #endregion
 

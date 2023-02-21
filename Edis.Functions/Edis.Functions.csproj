@@ -177,6 +177,8 @@
     <Compile Include="Common\INyomtatvanySablonFunctionBase.cs" />
     <Compile Include="Common\NyomtatvanySablonFunctionBase.cs" />
     <Compile Include="Common\RsaHelper.cs" />
+    <Compile Include="Erfa\AlkatreszFunctions.cs" />
+    <Compile Include="Erfa\IAlkatreszFunctions.cs" />
     <Compile Include="JFK\EsemenyekFunctions.cs" />
     <Compile Include="JFK\FENY\FegyelmiEmailFunctions.cs" />
     <Compile Include="JFK\FENY\FegyelmiUgyFunctionsNyomtatvanyok.cs" />

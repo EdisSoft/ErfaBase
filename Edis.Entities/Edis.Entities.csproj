@@ -143,6 +143,9 @@
     <Compile Include="Enums\Kodszotar\RIN\KilepesOka.cs" />
     <Compile Include="Enums\MegjegyzesTipusa.cs" />
     <Compile Include="Enums\RinSzolgaltatas.cs" />
+    <Compile Include="Erfa\Alkatresz.cs" />
+    <Compile Include="Erfa\AlkatreszView.cs" />
+    <Compile Include="Erfa\GyartasiMegbizas.cs" />
     <Compile Include="JFK\FENY\EmailErtesites.cs" />
     <Compile Include="JFK\FENY\MaganelzarasFofelugyelok.cs" />
     <Compile Include="JFK\RsaLoginData.cs" />

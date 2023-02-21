@@ -257,15 +257,15 @@
 
         public List<EsemenyResztvevoAdataiViewModel> GetEsemenyResztvevokByIntezetId(int intezetId)
         {
-            var result = Table.AsNoTracking().Where(x => x.RogzitoIntezetId == intezetId || intezetId == (int)BvIntezet.Bvop)
-                .Join(KonasoftBVFonixContext.FogvatartottakFegyelmiView,
-                resztvevo => resztvevo.FogvatartottId,
-                nezet => nezet.Id,
-                (resztvevo, nezet) => new EsemenyResztvevoAdataiViewModel() { FogvatartottId = nezet.Id, Nev = nezet.SzuletesiCsaladiNev + " " + nezet.SzuletesiUtonev, NyilvantartasiAzonosito = nezet.NyilvantartasiAzonosito, EsemenyId = resztvevo.EsemenyId, ErintettsegFokaCimId = resztvevo.ErintettsegFokaCimkeId })
-                .OrderBy(o => o.Nev)
-                .ToList();
+            //var result = Table.AsNoTracking().Where(x => x.RogzitoIntezetId == intezetId || intezetId == (int)BvIntezet.Bvop)
+            //    .Join(KonasoftBVFonixContext.FogvatartottakFegyelmiView,
+            //    resztvevo => resztvevo.FogvatartottId,
+            //    nezet => nezet.Id,
+            //    (resztvevo, nezet) => new EsemenyResztvevoAdataiViewModel() { FogvatartottId = nezet.Id, Nev = nezet.SzuletesiCsaladiNev + " " + nezet.SzuletesiUtonev, NyilvantartasiAzonosito = nezet.NyilvantartasiAzonosito, EsemenyId = resztvevo.EsemenyId, ErintettsegFokaCimId = resztvevo.ErintettsegFokaCimkeId })
+            //    .OrderBy(o => o.Nev)
+            //    .ToList();
 
-            return result;
+            return default;
         }
 
         public bool WarningTanuVagyEszleloByFegyelmiUgyIds(List<int> fegyelmiUgyIds)

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Edis.Entities.Fany
 {
-    [Table("BV_INTEZET")]
+    [Table("Telephelyek")]
     public class Intezet : ExtendedBaseEntity, IAzonositovalRendelkezo
     {
         #region mezők

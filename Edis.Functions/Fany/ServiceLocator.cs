@@ -6,6 +6,7 @@ using Edis.Functions.Base;
 using Edis.IoC.Interfaces;
 using Edis.IoC;
 using Edis.Repositories;
+using Edis.Functions.Erfa;
 
 namespace Edis.Functions.Fany
 {
@@ -26,16 +27,19 @@ namespace Edis.Functions.Fany
 
             kernel.RegisterInRequestScope<ITranzakcioAdatKontextusFunctions, TranzakcioAdatKontextusFunctions>();
             kernel.RegisterInRequestScope<ICimkeFunctions, CimkeFunctions>();
-           
+
 
             #region Common
             kernel.RegisterInRequestScope<INyomtatvanySablonFunction, NyomtatvanySablonFunction>();
             kernel.RegisterInRequestScope<IFogvatartottNezetFunctions, FogvatartottNezetFunctions>();
             kernel.RegisterInRequestScope<IAdKezeloFunctions, AdKezeloFunctions>();
             #endregion
-           
-          
-           
+
+
+            #region Erfa
+            kernel.RegisterInRequestScope<IAlkatreszFunctions, AlkatreszFunctions>();
+            #endregion
+
             #region JFK
             kernel.RegisterInRequestScope<IFanyFegyelmiUgyFunctions, FanyFegyelmiUgyFunctions>();
             kernel.RegisterInRequestScope<IFegyelmiUgyFunctions, FegyelmiUgyFunctions>();
@@ -52,7 +56,7 @@ namespace Edis.Functions.Fany
             kernel.RegisterInRequestScope<IFenyitesVegrehajtasFunctions, FenyitesVegrehajtasFunctions>();
             kernel.RegisterInRequestScope<IMaganelzarasFofelugyelokFunctions, MaganelzarasFofelugyelokFunctions>();
             #endregion
-         
+
 
         }
     }

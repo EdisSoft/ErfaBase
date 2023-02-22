@@ -65,10 +65,6 @@ export default {
         prdId: prdId,
       };
       eventBus.$emit('Sidebar:ugyReszletek', {
-        state: false,
-      });
-      await timeout(50);
-      eventBus.$emit('Modal:esemeny-rogzites', {
         state: true,
         data: args,
       });
@@ -204,7 +200,7 @@ export default {
               var prjCode ='';
               if (row.PrjCode != null) {
                 prjCode +='<span class="unique-desc">' +
-                row.PrjCode +
+                row.PrjCode + ' - ' + row.PrdID + 
                 '</span>'; };
               return prjCode;
               

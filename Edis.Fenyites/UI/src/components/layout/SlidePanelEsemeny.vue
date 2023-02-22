@@ -214,7 +214,7 @@ export default {
 
     eventBus.$on('Sidebar:' + vm.id, ({ state, data }) => {
       if (state) {
-        this.LoadEsemenyData(data.esemenyId);
+        this.LoadEsemenyData(data.prdId);
       } else {
         this.Hide();
       }
@@ -248,9 +248,9 @@ export default {
     /*FanyCategory: function(event) {
         this.isActive = true;
       },*/
-    LoadEsemenyData: async function(esemenyId) {
+    LoadEsemenyData: async function(prdId) {
       try {
-        var result = await apiService.GetEsemeny({ id: esemenyId });
+        var result = await apiService.GetAlkatreszekByPrdId({ id: prdId });
 
         this.formData.jellegOptions = result.JellegOptions.sort(function(a, b) {
           return ('' + a.text).localeCompare(b.text);
@@ -280,7 +280,7 @@ export default {
           this.formData.values.EsemenyDatuma
         ).format('YYYY.MM.DD HH:mm');
 
-        this.Show(esemenyId);
+        this.Show(prdId);
       } catch (err) {
         NotificationFunctions.AjaxError({
           title: 'Hiba',

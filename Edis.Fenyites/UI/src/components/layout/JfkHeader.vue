@@ -31,7 +31,7 @@
         >
           <img
             class="navbar-brand-logo navbar-brand-logo-normal jfk-logo-margin-top-0 mr-20"
-            src="@/assets/images/topbar/logo.png"
+            src="@/assets/images/topbar/logo2.png"
             title="Noemi"
           />
           <img
@@ -511,7 +511,7 @@ export default {
       let fejlecMenupontok = [];
       fejlecMenupontok.push({
         Id: 1,
-        Nev: 'Fegyelmi modul',
+        Nev: 'Összeállítás tervező',
         Active: this.$route.meta.layout == 'fenyites',
         // ClickEvent: () => {
         //   this.FegyelmiFejlecvaltas();

@@ -73,14 +73,7 @@
           </div>
           <div v-if="fegyelmiUgy">
             <h1 class="white mb-5 slidepanel-title">
-              {{ fegyelmiUgy.UgyIntezetAzon }}/{{ fegyelmiUgy.UgyEve }}/{{
-                fegyelmiUgy.UgySzama
-              }}
-              számú fegyelmi ügy naplója <br />
-              <span>
-                <span v-if="fegyelmiUgy">{{ fegyelmiUgy.Jelleg }}</span
-                >&nbsp;
-              </span>
+              {{ fegyelmiUgy.PrjCode }} {{ fegyelmiUgy.ObsStartDate | toShortDate }}
             </h1>
             <span
               class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
@@ -91,7 +84,8 @@
                 delay: { show: 500, hide: 100 },
                 trigger: 'hover',
               }"
-              >{{ fegyelmiUgy.EsemenyDatuma | toDateTime }}</span
+              v-if="fegyelmiUgy.Kellekhiany"
+              >{{ fegyelmiUgy.Kellekhiany }}</span
             >
             <span
               class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
@@ -102,7 +96,8 @@
                 delay: { show: 500, hide: 100 },
                 trigger: 'hover',
               }"
-              >{{ fegyelmiUgy.FegyelmiUgyTipus }}</span
+              v-if="fegyelmiUgy.OrdCustRequestDate"
+              >{{ fegyelmiUgy.OrdCustRequestDate | toShortDate }}</span
             >
             <span
               class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
@@ -113,7 +108,8 @@
                 delay: { show: 500, hide: 100 },
                 trigger: 'hover',
               }"
-              >{{ fegyelmiUgy.UgyStatusz }}</span
+              v-if="fegyelmiUgy.Lapanyag"
+              >{{ fegyelmiUgy.Lapanyag }}</span
             >
             <span
               class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
@@ -124,9 +120,9 @@
                 delay: { show: 500, hide: 100 },
                 trigger: 'hover',
               }"
-              v-if="getHatarido"
-              >Határidő:
-              {{ getHatarido | toShortDate }}
+              v-if="fegyelmiUgy.Elanyag"
+              >
+              {{ fegyelmiUgy.Elanyag  }}
             </span>
             <span
               class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
@@ -137,165 +133,11 @@
                 delay: { show: 500, hide: 100 },
                 trigger: 'hover',
               }"
-              v-if="fegyelmiUgy.VanJogiKepviselet"
+              v-if="fegyelmiUgy.Kellekek"
             >
-              Jogi képviseletet kért
+              {{fegyelmiUgy.Kellekek}}
             </span>
-            <span
-              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-              v-b-tooltip="{
-                title: 'Felfüggesztési javaslat',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="fegyelmiUgy.FelfuggesztesiJavaslat"
-            >
-              Felfüggesztési javaslat
-            </span>
-            <span
-              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-              v-b-tooltip="{
-                title: 'Felfüggesztve',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="fegyelmiUgy.Felfuggesztve"
-            >
-              Felfüggesztve
-            </span>
-            <span
-              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-              v-b-tooltip="{
-                title: 'Határidő módosítási javaslat',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="fegyelmiUgy.HataridoModositasJavaslat"
-            >
-              Határidő módosítási javaslat
-            </span>
-            <span
-              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-              v-b-tooltip="{
-                title: 'Tárgyalás kitűzésre vár',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="isTargyalasraVar"
-            >
-              Tárgyalás kitűzésre vár
-            </span>
-            <span
-              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-              v-b-tooltip="{
-                title: 'Visszaküldve',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="fegyelmiUgy.Visszakuldve"
-            >
-              Visszaküldve
-            </span>
-            <span
-              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-              v-b-tooltip="{
-                title: 'Szállításra előjegyezve',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="fegyelmiUgy.SzallitasraElojegyezve"
-            >
-              Szállításra előjegyezve
-            </span>
-            <span
-              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-              v-b-tooltip="{
-                title: 'Szakterületi véleményre vár',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="fegyelmiUgy.SzakteruletiVelemenyreVarFL"
-            >
-              Szakterületi véleményre vár
-            </span>
-            <span
-              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-              v-b-tooltip="{
-                title: 'Közvetítői eljárás kezdeményezve',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="fegyelmiUgy.KozvetitoiEljarasKezdemenyezve"
-            >
-              Közvetítői eljárás kezdeményezve
-            </span>
-            <span
-              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-              v-b-tooltip="{
-                title: 'Közvetítői eljárás',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="fegyelmiUgy.KozvetitoiEljarasban"
-            >
-              Közvetítői eljárásban
-            </span>
-            <span
-              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-              v-b-tooltip="{
-                title: 'Elkülönítés',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="fegyelmiUgy.FegyelmiElkulonitesFL"
-            >
-              Elkülönítve
-            </span>
-            <span
-              v-if="fegyelmiUgy.KarteritesAzonosito"
-              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-              v-b-tooltip="{
-                title: 'Kártérítési adatok',
-                html: true,
-                container: '#fogv-reszletek',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              >{{ fegyelmiUgy.KarteritesAzonosito }} -
-              {{ fegyelmiUgy.KarteritesStatusz }}
-            </span>
-            <span
-              class="badge badge-outline badge-danger mr-5 bg-white font-weight-400 shadow-sm"
-              v-b-tooltip="{
-                title: 'Fegyelmi ügy lejárt',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="fegyelmiUgy.Csuszas > 0"
-              >Lejárt: {{ fegyelmiUgy.Csuszas }} napja
-            </span>
+            
           </div>
         </header>
         <div
@@ -310,136 +152,7 @@
               <div
                 class="slidePanel-inner-section border-bottom-0 pt-15 pb-40 pr-5"
               >
-                <div class="media mb-25" id="fogv-reszletek">
-                  <div class="pr-0 pr-sm-20 align-self-center">
-                    <div class="avatar bg-white img-bordered person-avatar">
-                      <k-fogvatartott-kep
-                        :id="fegyelmiUgy.FogvatartottId"
-                      ></k-fogvatartott-kep>
-                    </div>
-                  </div>
-                  <div class="media-body align-self-center">
-                    <h5 class="mt-0 mb-5 text-default font-weight-400">
-                      {{ fegyelmiUgy.AktNyilvantartasiSzam }}
-                      {{ fegyelmiUgy.FogvatartottNev | camelCaseString }}
-                      <!-- <small
-                        >Szül.: 1974.06.27., Miskolc; anyja: Kertes Ilona</small
-                      > -->
-                      <!-- <p class="mt-10 mb-5 font-size-12"> -->
-                      <small>
-                        <span v-if="fegyelmiUgy.SzuletesiDatum">
-                          Született:
-                          {{ fegyelmiUgy.SzuletesiDatum | toShortDate }}
-                          <span v-if="fegyelmiUgy.SzuletesiHely">
-                            {{ fegyelmiUgy.SzuletesiHely }}</span
-                          >
-                        </span>
-                        <span v-if="fegyelmiUgy.AnyjaNeve"
-                          >, anyja neve: {{ fegyelmiUgy.AnyjaNeve }}
-                        </span>
-                      </small>
-                      <!-- </p> -->
-                    </h5>
-                    <p>
-                      <span
-                        v-if="fegyelmiUgy.FogvatartottVegrehajtasiFok"
-                        class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-                        v-b-tooltip="{
-                          title: 'Végrehajtási fokozat',
-                          html: true,
-                          container: '#fogv-reszletek',
-                          delay: { show: 500, hide: 100 },
-                          trigger: 'hover',
-                        }"
-                        >{{ fegyelmiUgy.FogvatartottVegrehajtasiFok }}</span
-                      >
-                      <span
-                        v-if="fegyelmiUgy.NyilvantartottStatusz != null"
-                        class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-                        v-b-tooltip="{
-                          title: 'Nyilvántartási státusz',
-                          html: true,
-                          container: '#fogv-reszletek',
-                          delay: { show: 500, hide: 100 },
-                          trigger: 'hover',
-                        }"
-                        >{{ fegyelmiUgy.NyilvantartottStatusz }}</span
-                      >
-                      <span
-                        v-if="fegyelmiUgy.FogvatartottFogvatartasJellege"
-                        class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-                        v-b-tooltip="{
-                          title: 'Fogvatartás jellege',
-                          html: true,
-                          container: '#fogv-reszletek',
-                          delay: { show: 500, hide: 100 },
-                          trigger: 'hover',
-                        }"
-                        >{{ fegyelmiUgy.FogvatartottFogvatartasJellege }}
-                      </span>
-                      <!-- <span
-                        v-if="fegyelmiUgy.KarteritesAzonosito"
-                        class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-                        v-b-tooltip="{
-                          title: 'Kártérítési adatok',
-                          html: true,
-                          container: '#fogv-reszletek',
-                          delay: { show: 500, hide: 100 },
-                          trigger: 'hover',
-                        }"
-                        >{{ fegyelmiUgy.KarteritesAzonosito }} -
-                        {{ fegyelmiUgy.KarteritesStatusz }}
-                      </span> -->
-                      <span
-                        v-if="fegyelmiUgy.Elhelyezes"
-                        class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
-                        v-b-tooltip="{
-                          title: 'Elhelyezés',
-                          html: true,
-                          container: '#fogv-reszletek',
-                          delay: { show: 500, hide: 100 },
-                          trigger: 'hover',
-                        }"
-                        >{{ fegyelmiUgy.Elhelyezes }}/{{
-                          fegyelmiUgy.Korlet
-                        }}/{{ fegyelmiUgy.Zarka }}</span
-                      >
-                    </p>
-                    <div>
-                      <div class="contextual-progress">
-                        <div class="clearfix">
-                          <div
-                            class="progress-title blue-grey-500 font-weight-400 font-size-12"
-                            v-if="fegyelmiUgy.ToltottIdoSzazalekban"
-                          >
-                            Letöltve - {{ fegyelmiUgy.ToltottIdoSzazalekban }} %
-                          </div>
-                        </div>
-                        <b-progress
-                          class="mb-5"
-                          :value="toltottIdoSzazalekbanInt"
-                          :max="100"
-                          height="5px"
-                          variant="warning"
-                        ></b-progress>
-                        <div class="clearfix">
-                          <div
-                            class="progress-title blue-grey-500 font-size-12"
-                            v-if="fegyelmiUgy.IteletIdoSzovegesen"
-                          >
-                            {{ fegyelmiUgy.IteletIdoSzovegesen }}
-                          </div>
-                          <div
-                            class="progress-label blue-grey-500 font-size-12"
-                            v-if="fegyelmiUgy.TenylegesSzabadulasDatumaSzoveg"
-                          >
-                            {{ fegyelmiUgy.TenylegesSzabadulasDatumaSzoveg }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
                 <div
                   class="nav-tabs-horizontal nav-tabs-animate position-relative"
                   data-plugin="tabs"
@@ -452,66 +165,34 @@
                         <a
                           class="nav-link active pl-1"
                           data-toggle="tab"
-                          href="#naplo"
+                          href="#anyagok"
                           aria-controls="exampleTabsAnimateFadeOne"
                           role="tab"
                           aria-expanded="true"
                           aria-selected="true"
                         >
-                          Fegyelmi napló
+                          Anyagok
                         </a>
                       </li>
                       <li
                         class="nav-item"
                         role="presentation"
-                        v-for="osszevontesemeny in osszevontesemenyek"
-                        :key="osszevontesemeny.FegyelmiUgy.FegyelmiUgyId"
+                        
                       >
                         <a
                           class="nav-link pl-0"
                           data-toggle="tab"
-                          :href="
-                            '#osszevontesemeny_' +
-                              osszevontesemeny.FegyelmiUgy.FegyelmiUgyId
+                          href="#korpusz
                           "
                           aria-controls="exampleTabsAnimateFadeOne"
                           role="tab"
                           aria-expanded="false"
                           aria-selected="false"
                         >
-                          {{ osszevontesemeny.FegyelmiUgy.UgyIntezetAzon }}/{{
-                            osszevontesemeny.FegyelmiUgy.UgyEve
-                          }}/{{ osszevontesemeny.FegyelmiUgy.UgySzama }}
+                          Korpuszok
                         </a>
                       </li>
-                      <li class="nav-item" role="presentation">
-                        <a
-                          class="nav-link pl-0"
-                          data-toggle="tab"
-                          href="#nyomtatvanyok"
-                          aria-controls="exampleTabsAnimateFadeOne"
-                          role="tab"
-                          aria-expanded="false"
-                          aria-selected="false"
-                          @click="IktatottNyomtatvanyokTabClick"
-                        >
-                          Iktatott nyomtatványok listája
-                        </a>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                        <a
-                          class="nav-link pl-0"
-                          data-toggle="tab"
-                          href="#csatolmanyok"
-                          aria-controls="exampleTabsAnimateFadeOne"
-                          role="tab"
-                          aria-expanded="false"
-                          aria-selected="false"
-                          @click="CsatolmanyokTabClick"
-                        >
-                          Csatolmányok
-                        </a>
-                      </li>
+                      
                     </ul>
                     <b-dropdown
                       id="dropdown-dropleft"
@@ -567,7 +248,7 @@
                   <div class="tab-content">
                     <div
                       class="tab-pane fade show active"
-                      id="naplo"
+                      id="anyagok"
                       role="tabpanel"
                     >
                       <div
@@ -577,9 +258,41 @@
                         role="tablist"
                         v-if="!isNaploBejegyzesLoading"
                       >
-                        <component
-                          v-for="naplobejegyzes in naplobejegyzesek"
-                          :key="naplobejegyzes.Id"
+                      <ul class="list-style-none list-group list-group-flush">
+                        <li v-for="(alkatresz, index) in alkatreszek" :key="index" class="d-flex flex-row list-group-item">
+                          <p class="d-flex flex-column justify-content-between flex-grow-1 flex-shrink-1 px-10">
+                            <span>{{ alkatresz.KorpNev }}</span>
+                            <span>{{ alkatresz.PrdInfo2 }}</span>
+                          </p>
+                          <p class="flex-grow-1 flex-shrink-1 px-10"><span
+              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm w-p100"
+              v-b-tooltip="{
+                title: 'Fegyelmi ügy státusza',
+                html: true,
+                container: '#slidepanel-fegyelmi-ugy',
+                delay: { show: 500, hide: 100 },
+                trigger: 'hover',
+              }"
+              v-if="alkatresz.Mennyiseg"
+              >{{ alkatresz.Mennyiseg }}</span
+            ></p>
+                          <p class="flex-grow-1 flex-shrink-1 px-10"><span
+              class="badge badge-outline badge-warning mr-5 bg-white font-weight-400 shadow-sm w-p100"
+              v-b-tooltip="{
+                title: 'Fegyelmi ügy státusza',
+                html: true,
+                container: '#slidepanel-fegyelmi-ugy',
+                delay: { show: 500, hide: 100 },
+                trigger: 'hover',
+              }"
+              v-if="alkatresz.KorpIdo"
+              >{{ alkatresz.KorpIdo }}</span
+            ></p>
+                        </li>
+                      </ul>
+                        <!-- <component
+                          v-for="(alkatresz, index) in alkatreszek"
+                          :key="index"
                           :is="
                             GetNaplobejegyzesKomponensNev(
                               naplobejegyzes.TipusCimkeId
@@ -593,7 +306,7 @@
                           :is="GetNaplobejegyzesKomponensNev(-1)"
                           :fegyelmiUgy="fegyelmiUgy"
                           :esemeny="esemeny"
-                        ></component>
+                        ></component> -->
                       </div>
                       <div v-else>
                         <div class="d-flex justify-content-center mt-4">
@@ -603,7 +316,7 @@
                     </div>
                     <div
                       class="tab-pane fade show"
-                      id="nyomtatvanyok"
+                      id="korpuszok"
                       role="tabpanel"
                     >
                       <div
@@ -611,61 +324,14 @@
                         id="exampleAccordionContinuous"
                         aria-multiselectable="true"
                         role="tablist"
+                        v-if="!isNaploBejegyzesLoading"
                       >
-                        <iktatott-nyomtatvanyok-table
-                          ref="iktatottNyomtatvanyokTable"
-                          :fegyelmiUgy="fegyelmiUgy"
-                        ></iktatott-nyomtatvanyok-table>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                       </div>
-                    </div>
-                    <div
-                      class="tab-pane fade show"
-                      id="csatolmanyok"
-                      role="tabpanel"
-                    >
-                      <k-csatolmanyok
-                        :csatolmanyok="feltoltesek"
-                      ></k-csatolmanyok>
-                    </div>
-                    <div
-                      class="tab-pane fade show"
-                      v-for="osszevontesemeny in osszevontesemenyek"
-                      :key="osszevontesemeny.FegyelmiUgy.FegyelmiUgyId"
-                      :id="
-                        'osszevontesemeny_' +
-                          osszevontesemeny.FegyelmiUgy.FegyelmiUgyId
-                      "
-                      role="tabpanel"
-                    >
-                      <div
-                        class="panel-group panel-group-continuous"
-                        :id="
-                          'pg_osszevont_' +
-                            osszevontesemeny.FegyelmiUgy.FegyelmiUgyId
-                        "
-                        aria-multiselectable="true"
-                        role="tablist"
-                      >
-                        <!-- ide jön a napló -->
-
-                        <component
-                          v-for="naplobejegyzes in osszevontesemeny.Naplo
-                            .naplobejegyzesek"
-                          :key="naplobejegyzes.Id"
-                          :is="
-                            GetNaplobejegyzesKomponensNev(
-                              naplobejegyzes.TipusCimkeId
-                            )
-                          "
-                          :naplobejegyzes="naplobejegyzes"
-                          :fegyelmiUgy="osszevontesemeny.FegyelmiUgy"
-                          :esemeny="osszevontesemeny.Naplo.esemeny"
-                        ></component>
-                        <component
-                          :is="GetNaplobejegyzesKomponensNev(-1)"
-                          :fegyelmiUgy="osszevontesemeny.FegyelmiUgy"
-                          :esemeny="osszevontesemeny.Naplo.esemeny"
-                        ></component>
+                      <div v-else>
+                        <div class="d-flex justify-content-center mt-4">
+                          <b-spinner variant="secondary"></b-spinner>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -716,7 +382,7 @@ export default {
   props: ['id'],
   data: function() {
     return {
-      fegyelmiUgyId: 0,
+      prdId: 0,
       fegyelmiUgyIds: [],
       fegyelmiUgy: null,
       fegyelmiUgyElrendelesModalId: null,
@@ -725,7 +391,7 @@ export default {
       isActive: false,
       isLoading: false,
       isNaploBejegyzesLoading: false,
-      naplobejegyzesek: [],
+      alkatreszek: [],
       esemeny: null,
       osszevontesemenyek: [], //TODO
     };
@@ -756,20 +422,20 @@ export default {
       if (state) {
         data.fegyelmiUgyIds = data.fegyelmiUgyIds || [];
         console.log(
-          `Sidebar fegyelmiUgyId: ${
-            data.fegyelmiUgyId
+          `Sidebar prdId: ${
+            data.prdId
           }, Ids: ${data.fegyelmiUgyIds.join(', ')}`,
           data
         );
         data.fegyelmiUgyIds = data.fegyelmiUgyIds || [];
-        this.fegyelmiUgy = data.fegyelmiUgy;
-        this.fegyelmiUgyId = data.fegyelmiUgyId;
+        this.fegyelmiUgy = data.prd;
+        this.prdId = data.prdId;
         this.fegyelmiUgyIds = data.fegyelmiUgyIds;
-        if (data.fegyelmiUgyIds && !data.fegyelmiUgyId) {
-          this.fegyelmiUgyId = data.fegyelmiUgyIds[0];
+        if (data.fegyelmiUgyIds && !data.prdId) {
+          this.prdId = data.fegyelmiUgyIds[0];
         }
         if (!data.fegyelmiUgyIds || data.fegyelmiUgyIds.length == 0) {
-          this.fegyelmiUgyIds = [data.fegyelmiUgyId];
+          this.fegyelmiUgyIds = [data.prdId];
         }
         let canModalOpen = await FegyelmiUgyFunctions.CanModalOpen(
           data.modalName,
@@ -778,8 +444,8 @@ export default {
         if (!canModalOpen) {
           return;
         }
-        this.LoadFegyelmiUgyAdatok(data.fegyelmiUgyId);
-        this.LoadOsszevontFegyelmiUgyek(this.fegyelmiUgyId);
+        this.LoadFegyelmiUgyAdatok(data.prdId);
+        //this.LoadOsszevontFegyelmiUgyek(this.prdId);
         if (data.modalName || data.functionToRun) {
           this.OpenModal(
             data.modalName,
@@ -794,15 +460,15 @@ export default {
       }
     },
     async OnSideBarRefresh() {
-      console.log('Sidebar:' + this.id + ':refresh', this.fegyelmiUgyId);
-      let id = this.fegyelmiUgyId;
+      console.log('Sidebar:' + this.id + ':refresh', this.prdId);
+      let id = this.prdId;
       await timeout(250);
       this.UpdateFegyelmiUgyAdatok(id);
     },
     async OnDokumentumokRefresh() {
       if (this.$refs.iktatottNyomtatvanyokTable) {
         this.$refs.iktatottNyomtatvanyokTable.GetDokumentumok(
-          this.fegyelmiUgyId
+          this.prdId
         );
       }
     },
@@ -814,7 +480,7 @@ export default {
     ) {
       console.log('OpenModal');
       var args = {
-        fegyelmiUgyId: this.fegyelmiUgyId, // ToDo: hotfix, később kiszedni
+        prdId: this.prdId, // ToDo: hotfix, később kiszedni
         fegyelmiUgyIds: this.fegyelmiUgyIds,
         modalType,
       };
@@ -840,21 +506,20 @@ export default {
     /*FanyCategory: function(event) {
         this.isActive = true;
       },*/
-    LoadFegyelmiUgyAdatok: async function(fegyelmiUgyId) {
+    LoadFegyelmiUgyAdatok: async function(prdId) {
       this.isNaploBejegyzesLoading = true;
       try {
-        this.Show(fegyelmiUgyId);
-        this.naplobejegyzesek = [];
+        this.Show(prdId);
+        this.alkatreszek = [];
         this.esemeny = null;
-        if (this.$refs.iktatottNyomtatvanyokTable) {
-          this.$refs.iktatottNyomtatvanyokTable.GetDokumentumok(fegyelmiUgyId);
-        }
-        let result = await apiService.GetNaploBejegyzesekByFegyelmiUgyId({
-          fegyelmiUgyId,
+        // if (this.$refs.iktatottNyomtatvanyokTable) {
+        //   this.$refs.iktatottNyomtatvanyokTable.GetDokumentumok(prdId);
+        // }
+        let result = await apiService.GetAlkatreszekByPrdId({
+          prdId,
         });
-
-        this.naplobejegyzesek = result.naplobejegyzesek;
-        this.esemeny = result.esemeny;
+        // this.alkatreszek = result.alkatreszek;
+        this.alkatreszek = result.alkatreszek;
 
         this.isNaploBejegyzesLoading = false;
       } catch (err) {
@@ -867,11 +532,11 @@ export default {
         console.log(err);
       }
     },
-    LoadOsszevontFegyelmiUgyek: async function(fegyelmiUgyId) {
+    LoadOsszevontFegyelmiUgyek: async function(prdId) {
       try {
         this.osszevontesemenyek = [];
         let result = await apiService.GetOsszevontFegyelmiUgyekForFegyelmiUgy({
-          fegyelmiUgyId,
+          prdId,
         });
         this.osszevontesemenyek = result;
       } catch (err) {
@@ -883,10 +548,10 @@ export default {
         console.log(err);
       }
     },
-    async GetFegyelmiUgyFromServer(fegyelmiUgyId) {
+    async GetFegyelmiUgyFromServer(prdId) {
       try {
         let result = await apiService.GetFegyelmiUgyListItemViewModelById({
-          fegyelmiUgyId,
+          prdId,
         });
         this.fegyelmiUgy = result;
       } catch (errorObj) {
@@ -902,7 +567,7 @@ export default {
       //this.url = url;
       this.visible = true;
       this.canClose = false;
-      $('a[href="#naplo"]').trigger('click');
+      $('a[href="#anyagok"]').trigger('click');
       this.setStateVuex({ value: true });
       setTimeout(() => {
         this.canClose = true;
@@ -1091,7 +756,7 @@ export default {
         this.fegyelmiUgy = this.fegyelmiUgyek.filter(
           x => x.FegyelmiUgyId == id
         )[0];
-        this.fegyelmiUgyId = id;
+        this.prdId = id;
         //console.log('nem updateFromServer', this.fegyelmiUgy);
       }
       this.LoadOsszevontFegyelmiUgyek(id);
@@ -1158,10 +823,10 @@ export default {
       if (this.fegyelmiUgyIds.length > 1) return true;
       return false;
       //return this.fegyelmiUgyekSelected.some(
-      //  f => f.FegyelmiUgyId == this.fegyelmiUgyId
+      //  f => f.FegyelmiUgyId == this.prdId
       //);
     },
-    //fegyelmiUgyId() {
+    //prdId() {
     //  if (!this.fegyelmiUgy) {
     //    return null;
     //  }
@@ -1184,7 +849,7 @@ export default {
       },
       immediate: true,
     },
-    fegyelmiUgyId: {
+    prdId: {
       handler: function(value) {
         if (value) {
         }

@@ -103,6 +103,9 @@ body {
   font-family: 'OpenSans', sans-serif;
 }
 
+.list-style-none{
+  list-style: none !important;
+}
 .list-complete-item {
   transition: all 1s;
   display: inline-block;
@@ -862,6 +865,10 @@ select {
 
 .list-group-item:hover .divider .dividertext {
   background: #f3f7f9;
+}
+
+.list-group-item{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
 }
 
 .vb > .vb-dragger {

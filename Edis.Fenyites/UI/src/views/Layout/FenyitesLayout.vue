@@ -18,35 +18,15 @@
     >
       <div class="site-footer-legal text-white w-p100">
         © {{ new Date().getFullYear() }}
-        <a href="http://fonix2/jfk" class="text-white">JFK</a>
         Crafted with <i class="text-info wb wb-heart-outline"></i> by
         <a
           class="text-white mr-5 konalink"
           target="_blank"
-          href="https://konasoft.hu"
+          href="#"
         >
-          Konasoft&trade;
+          EDIS&trade;
         </a>
-        <a
-          type="button"
-          target="_blank"
-          style="margin-top: -6px"
-          class="btn btn-icon btn-xs social-facebook"
-          href="https://www.facebook.com/konasoft.hu/"
-        >
-          <i class="icon bd-facebook" aria-hidden="true"></i> </a
-        >&nbsp;
-        <div id="bemutato" class="nav-item d-inline-block">
-          <a
-            type="button"
-            target="_blank"
-            style="margin-top: -6px"
-            class="btn btn-icon btn-xs"
-            href="./JFK.pdf"
-          >
-            <img src="../../assets/images/logos/usermanual.png" class="h-20" />
-          </a>
-        </div>
+        
         <!-- &nbsp;
         <a
           v-if="VirKimutatasUrl"
@@ -59,7 +39,7 @@
           <i class="fa fa-file-excel-o" aria-hidden="true"></i>
         </a> -->
       </div>
-      <div
+      <!-- <div
         id="n2020"
         class="site-footer-right text-white w-p100 justify-content-end d-flex"
         v-if="userInfo.PersonalHelpdeskLoginUrl"
@@ -77,7 +57,7 @@
             /><span class="">Helpdesk</span>
           </a>
         </div>
-      </div>
+      </div> -->
     </footer>
     <!--</div>-->
   </div>

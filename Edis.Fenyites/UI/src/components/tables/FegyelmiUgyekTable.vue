@@ -340,251 +340,148 @@ export default {
         order: [[3, 'desc']],
         bSortClasses: false,
         aoColumns: [
-          {
-            mDataProp: null,
-            sTitle: '',
-            sWidth: 50,
-            bSortable: false,
-            sClass: ' select-checkbox remarkcheckbox',
+        {
+            mDataProp: null, // esemény
+            sTitle: 'Munkaszám',
+            width: '20%',
             mRender: function(data, type, row, meta) {
-              return '';
+              var prjCode ='';
+              if (row.PrjCode != null) {
+                prjCode +='<span class="unique-desc">' +
+                row.PrjCode + ' - ' + row.PrdID + 
+                '</span>'; };
+              return prjCode;
+              
             },
           },
           {
-            mDataProp: null,
-            sTitle: 'Elkövető',
-            sClass: 'dt-td-center',
-            mRender: function(data, type, row, meta) {
-              var cimkek = ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break" data-toggle="m-tooltip" data-original-title="Fogvatartott azonosítószáma és neve">
-               ${row.FogvatartottNev} ${row.AktNyilvantartasiSzam} 
-                </span></br>`;
-
-              cimkek += ` <span class="badge badge-outline badge-default shadow-sm font-weight-400 text-break" data-toggle="m-tooltip" data-original-title="Fogvatartott nyilvántartási státusza">
-              ${row.NyilvantartottStatusz}
-              </span>`;
-
-              if (row.Elhelyezes) {
-                cimkek += ` <span class="badge badge-outline badge-default shadow-sm font-weight-400 text-break" data-toggle="m-tooltip" data-original-title="Fogvatartott elhelyezése">
-                  ${row.Intezet}/${row.Elhelyezes}/${row.Korlet}/${row.Zarka}
-                  </span>`;
-              } else {
-                cimkek += ` <span class="badge badge-outline badge-default shadow-sm font-weight-400 text-break" data-toggle="m-tooltip" data-original-title="Fogvatartott elhelyezése">
-                    ${row.Intezet}
-                    </span>`;
-              }
-              if (row.Megorzeses) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break" data-toggle="m-tooltip" data-original-title="Fogvatartott megőrzéses">
-                  Megőrzéses
-                  </span>`;
-              }
-
-              return cimkek;
-            },
-          },
-
-          {
-            mDataProp: null,
-            sTitle: 'Esemény',
-            sClass: 'dt-td-center',
+            mDataProp: null, // résztvevők
+            sTitle: 'Megrendelés szám',
             mRender: function(data, type, row, meta) {
               var cimkek = '';
 
-              if (row.EsemenyDatuma) {
-                cimkek += ` <span class="badge badge-outline badge-default shadow-sm font-weight-400" data-toggle="m-tooltip" data-original-title="Esemény napja és ideje">${moment(
-                  row.EsemenyDatuma
-                ).format('YYYY.MM.DD. HH:mm')}</span>`;
-              }
-
-              if (row.Jelleg) {
+              if (row.OrdCustRequestDate != null) {
                 cimkek +=
-                  ' <span class="badge badge-outline badge-default shadow-sm font-weight-400 text-break" data-toggle="m-tooltip" data-original-title="Fegyelmi vétség típusa">' +
-                  row.Jelleg +
+                ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény jellege">' +
+                
+                  moment(row.OrdCustRequestDate).format('YYYY.MM.DD. HH:mm'); +
+                '</span>';
+              }
+              if (row.Prdinfo2 != null) {
+                cimkek +=
+                ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény jellege">' +
+                
+                  row.Prdinfo2; +
+                '</span>';
+              }
+              //return cimkek;
+              // var cimkek = row.Resztvevok.map(function(element) {
+              //   if (element.ErintettsegFokaCimId == '65') {
+              //     return (
+              //       ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Elkövető">' +
+              //       capitalize(element.Nev) +
+              //       '</span>'
+              //     );
+              //   } else if (element.ErintettsegFokaCimId == '66') {
+              //     return (
+              //       ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Sértett">' +
+              //       capitalize(element.Nev) +
+              //       '</span>'
+              //     );
+              //   } else {
+              //     return (
+              //       ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Tanú">' +
+              //       capitalize(element.Nev) +
+              //       '</span>'
+              //     );
+              //   }
+              // });
+              var cimkekStr = cimkek.toString().replace(/,/g, '');
+              return cimkekStr;
+            },
+          },
+          {
+            mDataProp: null, // címkék
+            sTitle: 'Terv',
+            mRender: function(data, type, row, meta) {
+              var cimkek = '';
+
+              if (row.Terv != null) {
+                cimkek +=
+                  ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő személy">' +
+                  capitalize(row.Terv) +
                   '</span>';
               }
-
-              return cimkek;
-            },
-          },
-          {
-            mDataProp: null,
-            sTitle: 'Ügy',
-            sClass: 'dt-td-center',
-            mRender: function(data, type, row, meta) {
-              if (type == 'sort') {
-                let azonStr =
-                  row.UgyIntezetAzon +
-                  '_' +
-                  row.UgyEve +
-                  '_' +
-                  (row.UgySzama + '').padStart(6, 0);
-                return azonStr;
-              }
-              var cimkek = '';
-
-              cimkek += `<span class="blue-grey-500 font-weight-700 font-italic">${getUgyszam(
-                row
-              )}</span>`;
-
-              if (row.FegyelmiIntezet && vm.isBvop) {
-                cimkek += ` <span class="badge badge-outline badge-default shadow-sm font-weight-400 text-break" data-toggle="m-tooltip" data-original-title="Ügy intézete">
-                ${row.FegyelmiIntezet}
-                  </span>`;
-              }
-              if (row.DontesDatuma) {
-                cimkek += ` <span class="badge badge-outline badge-default shadow-sm font-weight-400 text-break" data-toggle="m-tooltip" data-original-title="Elrendelés ideje">
-                  ${moment(row.DontesDatuma).format('YYYY.MM.DD.')}
-                  </span>`;
-              }
-              if (row.Kivizsgalo) {
-                cimkek += ` <span class="badge badge-outline badge-default shadow-sm font-weight-400 text-break" data-toggle="m-tooltip" data-original-title="Kivizsgáló személy"> Kiv:
-                  ${capitalize(row.Kivizsgalo)}
-                  </span>`;
-              }
-
-              if (row.Elrendelo) {
-                cimkek += ` <span class="badge badge-outline badge-default shadow-sm font-weight-400 text-break" data-toggle="m-tooltip" data-original-title="Elrendelő személy"> Elr:
-                  ${capitalize(row.Elrendelo)}
-                  </span>`;
-              }
-              if (row.KarteritesAzonosito) {
+              if (row.ObsStartDate != null) {
                 cimkek +=
-                  ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break" data-toggle="m-tooltip" data-original-title="Kártérítési eljárás azonosító">
-                  ` +
-                  row.KarteritesAzonosito +
-                  `
-                  </span>`;
+                  ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő intézet">' +
+                    moment(row.ObsStartDate).format('YYYY.MM.DD. HH:mm'); +
+                  '</span>';
               }
-
+              if (row.Fo != null) {
+                cimkek +=
+                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Napszak">' +
+                  row.Fo +
+                  '</span>';
+              }
+              if (row.Felulet != null) {
+                cimkek +=
+                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény helye">' +
+                  row.Felulet +
+                  '</span>';
+              }
               return cimkek;
             },
           },
           {
             mDataProp: null,
-            sTitle: 'Státusz',
-            sClass: 'dt-td-center',
+            sTitle: 'Rendelkezésre álló készletek',
             //width: '60%',
             mRender: function(data, type, row, meta) {
               var cimkek = '';
 
-              if (
-                row.Hatarido &&
-                row.UgyStatuszId !=
-                  Cimkek.FegyelmiUgyStatusza.KivizsgalasFolyamatban &&
-                row.UgyStatuszId !=
-                  Cimkek.FegyelmiUgyStatusza.ReintegraciosTisztiJogkorben
-              ) {
-                cimkek += `<span class="badge badge-outline badge-default shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Fegyelmi ügy státuszának határideje">Hat:
-                  ${moment(row.Hatarido).format('YYYY.MM.DD.')}
-                  </span>`;
+              if (row.Lapanyag != null) {
+                cimkek +=
+                  ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő személy">' +
+                  capitalize(row.Lapanyag) +
+                  '</span>';
               }
-
-              if (
-                row.KivizsgalasiHatarido &&
-                (row.UgyStatuszId ==
-                  Cimkek.FegyelmiUgyStatusza.KivizsgalasFolyamatban ||
-                  row.UgyStatuszId ==
-                    Cimkek.FegyelmiUgyStatusza.ReintegraciosTisztiJogkorben)
-              ) {
-                cimkek += `<span class="badge badge-outline badge-default shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Fegyelmi ügy státuszának határideje">Hat:
-                  ${moment(row.KivizsgalasiHatarido).format('YYYY.MM.DD.')}
-                  </span>`;
+              if (row.Elanyag != null) {
+                cimkek +=
+                  ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő intézet">' +
+                    row.Elanyag +
+                  '</span>';
               }
-
-              if (row.UgyStatusz) {
-                cimkek += `<span class="badge badge-outline badge-default shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Fegyelmi ügy státusza">
-                  ${row.UgyStatusz}
-                  </span>`;
+              if (row.Kellekek != null) {
+                cimkek +=
+                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Napszak">' +
+                  row.Kellekek +
+                  '</span>';
               }
-
-              if (
-                row.MaganelzarasEllenjavaltHatarido &&
-                new Date(row.MaganelzarasEllenjavaltHatarido) >=
-                  new Date(moment())
-              ) {
-                cimkek += `<span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Magánelzárás ideiglenesen ellenjavallt ${moment(
-                  row.MaganelzarasEllenjavaltHatarido
-                ).format('YYYY.MM.DD')}-ig">
-                  Magánelzárás ellenjavallt
-                  </span>`;
+              if (row.Prioritas != null) {
+                cimkek +=
+                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény helye">' +
+                  row.Prioritas +
+                  '</span>';
               }
-
-              if (row.Csuszas > 0) {
-                cimkek += ` <span class="badge badge-outline badge-danger shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Határidő lejárt"> Lejárt
-                  ${row.Csuszas} napja
-                  </span>`;
+              if (row.Lejart != null) {
+                cimkek +=
+                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény helye">' +
+                  row.Lejart +
+                  '</span>';
               }
-              if (row.VanJogiKepviselet) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Jogi képviselet">
-                  Jogi képviseletet kért
-                  </span>`;
-              }
-              if (row.FelfuggesztesiJavaslat) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Felfüggesztési javaslat">
-                  Felfüggesztési javaslat
-                  </span>`;
-              }
-              if (row.Felfuggesztve) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Felfüggesztve">
-                    Felfüggesztve
-                  </span>`;
-              }
-              if (row.HataridoModositasJavaslat) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Határidő módosítási javaslat">
-                  Határidő módosítási javaslat
-                  </span>`;
-              }
-              if (
-                row.UgyStatuszId == Cimkek.FegyelmiUgyStatusza.IFokuTargyalas &&
-                !row.ElsofokuTargyalasIdopontja
-              ) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Tárgyalás kitűzésre vár">
-                  Tárgyalás kitűzésre vár
-                  </span>`;
-              }
-              if (row.Visszakuldve) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Reintegrációból viszaküldve">
-                  Visszaküldve
-                  </span>`;
-              }
-
-              if (row.SzallitasraElojegyezve) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Szállításra előjegyezve">
-                  Szállításra előjegyezve:
-                  ${moment(row.SzallitasraElojegyezve).format('YYYY.MM.DD.')}
-                  </span>`;
-              }
-              if (row.SzakteruletiVelemenyreVarFL) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Szakterületi véleményre vár">
-                  Szakterületi véleményre vár
-                  </span>`;
-              }
-
-              if (row.KozvetitoiEljarasKezdemenyezve) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Közvetítői eljárás kezdeményezve">
-                  Közvetítői eljárás jóváhagyásra vár
-                  </span>`;
-              }
-              if (row.KozvetitoiEljarasban) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Közvetítői eljárásban">
-                  Közvetítői eljárásban
-                  </span>`;
-              }
-              if (row.FegyelmiElkulonitesFL) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Elkülönítve">
-                  Elkülönítve
-                  </span>`;
-              }
-              if (row.Lezarva && row.HatarozatJogerosFl && row.FenyitesTipus) {
-                cimkek += ` <span class="badge badge-outline badge-info shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Fenyítés típusa">
-                  ${row.FenyitesTipus}
-                  </span>`;
-              }
-              if (row.JogiKepviseletetKer) {
-                cimkek += ` <span class="badge badge-outline badge-warning shadow-sm font-weight-400 text-break mr-5" data-toggle="m-tooltip" data-original-title="Jelölje ki a jogi képviselőt">
-                  Jelölje ki a jogi képviselőt
-                  </span>`;
+              if (row.Kellekhiany != null) {
+                cimkek +=
+                  ' <span class="badge text-break badge-outline badge-danger" data-toggle="m-tooltip" data-original-title="Esemény helye">' +
+                  row.Kellekhiany +
+                  '</span>';
               }
               return cimkek;
+              // return (
+              //   '<span class="unique-desc">' +
+              //   row.Leiras.substring(0, 120) +
+              //   '</span>'
+              // );
             },
           },
           {
@@ -598,7 +495,7 @@ export default {
               //if (row.FoFegyelmiUgyId) {
               //  return '';
               //}
-              var dropdown = FegyelmiUgyFunctions.GetBootstrapFegyelmiUgyMuveletekMenu(
+              var dropdown = FegyelmiUgyFunctions.GetBootstrapEsemenyMuveletekMenu(
                 [data]
               );
               if (!dropdown) {
@@ -678,10 +575,12 @@ export default {
               //     data: args,
               //   });
               // } else {
+                var prdId = data.PrdID;
+              console.log('EsemenyId: ' + prdId);
               eventBus.$emit('Sidebar:fanyFogvatartottAdatok', {});
               vm.UgyReszletekMegtekintes({
-                fegyelmiUgyId: data.FegyelmiUgyId,
-                fegyelmiUgy: data,
+                prdId: prdId,
+                prd: data,
               });
               // }
             });

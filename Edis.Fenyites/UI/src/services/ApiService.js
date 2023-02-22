@@ -293,13 +293,13 @@ class ApiService {
       mock,
     });
   }
-  async GetGyartasiMegbizasok({ mock = true } = {}) {
-    var url = settings.baseUrl + 'Api/GyartasiMegbizas/GetGyartasiMegbizasok';
-    await store.dispatch(EsemenyStoreTypes.actions.setGyartasiMegbizasok, {
+  async GetEsemenyek({ mock = true } = {}) {
+    var url = settings.baseUrl + 'Api/Esemeny/GetEsemenyek';
+    await store.dispatch(EsemenyStoreTypes.actions.setEsemenyek, {
       value: Object.freeze([]),
     });
     let result = await this.http.post({ url, mock });
-    await store.dispatch(EsemenyStoreTypes.actions.setGyartasiMegbizasok, {
+    await store.dispatch(EsemenyStoreTypes.actions.setEsemenyek, {
       value: Object.freeze(result),
     });
     return result;
@@ -312,16 +312,19 @@ class ApiService {
   //     mock,
   //   });
   // }
-  GetEsemeny({ id, mock = true } = {}) {
-    var url = settings.baseUrl + 'Api/Esemeny/GetEsemeny';
+
+  GetAlkatreszekByPrdId({ prdId, mock = true } = {}) {
+    var url = settings.baseUrl + 'Api/Alkatresz/GetAlkatreszekByPrdId';
+    let data = {
+      prdId,
+    };
     return this.http.post({
       url,
-      data: {
-        esemenyId: id,
-      },
+      data,
       mock,
     });
   }
+  
   GetEsemenyReszletek({ id, mock = true } = {}) {
     var url = settings.baseUrl + 'Api/Esemeny/GetEsemenyReszletek';
     return this.http.post({
@@ -395,7 +398,7 @@ class ApiService {
       await store.dispatch(FegyelmiUgyStoreTypes.actions.setFegyelmiUgyek, {
         value: Object.freeze([]),
       });
-      var url = settings.baseUrl + 'Api/FegyelmiUgy/GetFegyelmiUgyek';
+      var url = settings.baseUrl + 'Api/GyartasiMegbizas/GetGyartasiMegbizasok';
       let result = await this.http.post({
         url,
         data,

@@ -124,9 +124,9 @@ const actions = {
     var fegyelmiUgyek = [];
 
     value.forEach((element) => {
-      if (element.Kep) {
-        element.Kep = element.Kep.replace('~/', settings.baseUrl);
-      }
+      // if (element.Kep) {
+      //   element.Kep = element.Kep.replace('~/', settings.baseUrl);
+      // }
       fegyelmiUgyek.push(element);
     });
 

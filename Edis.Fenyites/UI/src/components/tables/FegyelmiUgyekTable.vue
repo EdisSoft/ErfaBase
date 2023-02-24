@@ -49,20 +49,19 @@ export default {
     },
     DrawSelectsOnDT(ids) {
       var selected = ids
-        .map(m => {
+        .map((m) => {
           return `[data-id="${m}"]`;
         })
         .join(',');
 
       var selectedIdsInDt = Array.from(
-        $(this.$refs.datatable.$el)
-          .DataTable()
-          .rows({ selected: true })
-          .data()
-      ).map(m => m.FegyelmiUgyId);
-      let removedFromDt = selectedIdsInDt.filter(f => !ids.some(s => s == f));
+        $(this.$refs.datatable.$el).DataTable().rows({ selected: true }).data()
+      ).map((m) => m.FegyelmiUgyId);
+      let removedFromDt = selectedIdsInDt.filter(
+        (f) => !ids.some((s) => s == f)
+      );
       let notSelected = removedFromDt
-        .map(m => {
+        .map((m) => {
           return `[data-id="${m}"]`;
         })
         .join(',');
@@ -293,15 +292,15 @@ export default {
       ];
       let body = [];
       let footer = null;
-      fegyelmiUgyek.forEach(row => {
+      fegyelmiUgyek.forEach((row) => {
         let excelRow = [];
 
-        exportData.forEach(data => {
+        exportData.forEach((data) => {
           excelRow.push(data.getCellValue(row));
         });
         body.push(excelRow);
       });
-      return { header: exportData.map(m => m.header), body, footer };
+      return { header: exportData.map((m) => m.header), body, footer };
     },
   },
   computed: {
@@ -319,16 +318,16 @@ export default {
       var vm = this;
       let capitalize = vm.$options.filters.camelCaseString;
       var options = {
-        initComplete: function(settings, json) {
+        initComplete: function (settings, json) {
           $(vm.$refs.datatable.$el)
             .DataTable()
-            .on('select', function(e, dt, type, indexes) {
+            .on('select', function (e, dt, type, indexes) {
               var row = dt.rows(indexes).data()[0];
               vm.AddFegyelmiUgySelected({ value: row.FegyelmiUgyId });
             });
           $(vm.$refs.datatable.$el)
             .DataTable()
-            .on('deselect', function(e, dt, type, indexes) {
+            .on('deselect', function (e, dt, type, indexes) {
               var row = dt.rows(indexes).data()[0];
               vm.RemoveFegyelmiUgySelected({ value: row.FegyelmiUgyId });
             });
@@ -340,39 +339,40 @@ export default {
         order: [[3, 'desc']],
         bSortClasses: false,
         aoColumns: [
-        {
+          {
             mDataProp: null, // esemény
             sTitle: 'Munkaszám',
             width: '20%',
-            mRender: function(data, type, row, meta) {
-              var prjCode ='';
+            mRender: function (data, type, row, meta) {
+              var prjCode = '';
               if (row.PrjCode != null) {
-                prjCode +='<span class="unique-desc">' +
-                row.PrjCode + ' - ' + row.PrdID + 
-                '</span>'; };
+                prjCode +=
+                  '<span class="unique-desc">' +
+                  row.PrjCode +
+                  ' - ' +
+                  row.PrdID +
+                  '</span>';
+              }
               return prjCode;
-              
             },
           },
           {
             mDataProp: null, // résztvevők
             sTitle: 'Megrendelés szám',
-            mRender: function(data, type, row, meta) {
+            mRender: function (data, type, row, meta) {
               var cimkek = '';
 
               if (row.OrdCustRequestDate != null) {
                 cimkek +=
-                ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény jellege">' +
-                
-                  moment(row.OrdCustRequestDate).format('YYYY.MM.DD. HH:mm'); +
-                '</span>';
+                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény jellege">' +
+                  moment(row.OrdCustRequestDate).format('YYYY.MM.DD. HH:mm');
+                +'</span>';
               }
               if (row.Prdinfo2 != null) {
                 cimkek +=
-                ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény jellege">' +
-                
-                  row.Prdinfo2; +
-                '</span>';
+                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény jellege">' +
+                  row.Prdinfo2;
+                +'</span>';
               }
               //return cimkek;
               // var cimkek = row.Resztvevok.map(function(element) {
@@ -403,7 +403,7 @@ export default {
           {
             mDataProp: null, // címkék
             sTitle: 'Terv',
-            mRender: function(data, type, row, meta) {
+            mRender: function (data, type, row, meta) {
               var cimkek = '';
 
               if (row.Terv != null) {
@@ -415,8 +415,8 @@ export default {
               if (row.ObsStartDate != null) {
                 cimkek +=
                   ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő intézet">' +
-                    moment(row.ObsStartDate).format('YYYY.MM.DD. HH:mm'); +
-                  '</span>';
+                  moment(row.ObsStartDate).format('YYYY.MM.DD. HH:mm');
+                +'</span>';
               }
               if (row.Fo != null) {
                 cimkek +=
@@ -437,7 +437,7 @@ export default {
             mDataProp: null,
             sTitle: 'Rendelkezésre álló készletek',
             //width: '60%',
-            mRender: function(data, type, row, meta) {
+            mRender: function (data, type, row, meta) {
               var cimkek = '';
 
               if (row.Lapanyag != null) {
@@ -449,7 +449,7 @@ export default {
               if (row.Elanyag != null) {
                 cimkek +=
                   ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő intézet">' +
-                    row.Elanyag +
+                  row.Elanyag +
                   '</span>';
               }
               if (row.Kellekek != null) {
@@ -491,13 +491,12 @@ export default {
             bSortable: false,
             sClass: 'dt-td-center dt-td-noClick',
             sWidth: '55px',
-            mRender: function(data, type, row, meta) {
+            mRender: function (data, type, row, meta) {
               //if (row.FoFegyelmiUgyId) {
               //  return '';
               //}
-              var dropdown = FegyelmiUgyFunctions.GetBootstrapEsemenyMuveletekMenu(
-                [data]
-              );
+              var dropdown =
+                FegyelmiUgyFunctions.GetBootstrapEsemenyMuveletekMenu([data]);
               if (!dropdown) {
                 return '';
               }
@@ -511,7 +510,7 @@ export default {
           <'row'<'col-sm-12'tr>>
           <'row dt-panelfooter'<'col-sm-12 col-md-6 'lB><'col-sm-12 col-md-6 'p>>`,
         //buttons: ['copy', 'excel', 'pdf', 'print'],
-        drawCallback: function(settings) {
+        drawCallback: function (settings) {
           var ugyTable = '#' + settings.sTableId;
           vm.$nextTick(() => {
             vm.DrawSelectsOnDT(vm.selected);
@@ -521,24 +520,24 @@ export default {
             .find('input')
             .attr(
               'placeholder',
-              'Keresés ügyfélre, azonosítóra, ügyszámra, dátumokra'
+              'Keresés ügyfélre, megrendelés számra, dátumokra'
             );
           $(ugyTable)
             .find('[data-toggle="m-tooltip"]')
-            .each(function() {
+            .each(function () {
               $(this).tooltip({
                 container: $(this).closest('td'),
                 delay: { show: 500, hide: 100 },
               });
             });
         },
-        createdRow: function(row, data, rowIndex) {
+        createdRow: function (row, data, rowIndex) {
           $(row).attr('data-id', data.FegyelmiUgyId);
           $(row).css('cursor', 'pointer');
 
           $(row)
             .find('.dt-fegyelmi-ugy-muvelet')
-            .click(function(e) {
+            .click(function (e) {
               let modalId = $(e.target).attr('data-modal-id');
               let modalTipus = $(e.target).attr('data-modal-tipus');
               let functionToRun = $(e.target).attr('data-function-to-run');
@@ -559,7 +558,7 @@ export default {
           }
           $(row)
             .find(selector)
-            .on('click', this, function(e) {
+            .on('click', this, function (e) {
               // if (data.Fany) {
               //   var Id = $(this).attr('data-id');
               //   var args = {};
@@ -575,7 +574,7 @@ export default {
               //     data: args,
               //   });
               // } else {
-                var prdId = data.PrdID;
+              var prdId = data.PrdID;
               console.log('EsemenyId: ' + prdId);
               eventBus.$emit('Sidebar:fanyFogvatartottAdatok', {});
               vm.UgyReszletekMegtekintes({
@@ -599,7 +598,7 @@ export default {
 
             exportOptions: {
               columns: ':visible :not(.noExport)',
-              customizeData: function(data) {
+              customizeData: function (data) {
                 let newData = vm.GetExcelExport();
                 data.header = newData.header;
                 data.body = newData.body;
@@ -629,7 +628,7 @@ export default {
   },
   watch: {
     selected: {
-      handler: async function(curr) {
+      handler: async function (curr) {
         await this.$nextTick();
         this.DrawSelectsOnDT(curr);
       },

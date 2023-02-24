@@ -32,7 +32,7 @@
           <img
             class="navbar-brand-logo navbar-brand-logo-normal jfk-logo-margin-top-0 mr-20"
             src="@/assets/images/topbar/logo2.png"
-            title="Noemi"
+            title="Réka"
           />
           <img
             class="navbar-brand-logo navbar-brand-logo-special mr-20"
@@ -76,9 +76,7 @@
             >
               <a
                 class="nav-link"
-                v-bind:href="
-                  $route.meta.layout == ''
-                "
+                v-bind:href="$route.meta.layout == ''"
                 role="button"
                 target="_blank"
               >
@@ -217,9 +215,6 @@
               </a>
             </router-link>
           </ul>
-
-          
-         
         </div>
         <ul class="site-menu d-inline-block ml-auto pr-0">
           <li class="dropdown site-menu-item" v-if="vanJogkorGyakorloJoga">
@@ -511,7 +506,7 @@ export default {
       let fejlecMenupontok = [];
       fejlecMenupontok.push({
         Id: 1,
-        Nev: 'Összeállítás tervező',
+        Nev: 'Réka',
         Active: this.$route.meta.layout == 'fenyites',
         // ClickEvent: () => {
         //   this.FegyelmiFejlecvaltas();
@@ -556,84 +551,84 @@ export default {
               element: '#firstslide',
               position: 'auto',
               intro:
-                'Üdvözöljük a Fegyelmi modul bemutatójában!  <p class="content">A bemutató oldalak között az „Előző” és „Következő” gombokkal léptethet, vagy bármikor kiléphet a jobb alsó sarokban található „X”-el. Kérjük kattintson a „Következő” gombra, és már kezdhetjük is!</p>',
+                'Üdvözöljük a Réka modul bemutatójában!  <p class="content">A bemutató oldalak között az „Előző” és „Következő” gombokkal léptethet, vagy bármikor kiléphet a jobb alsó sarokban található „X”-el. Kérjük kattintson a „Következő” gombra, és már kezdhetjük is!</p>',
             },
             {
               element: '#JFKLogo',
               position: 'left',
               intro:
-                'JFK <p class="content">A JFK modulban a fogvatartottak fegyelmi eljárásainak teljes körű ügyintézésére van lehetőség. A bal felső sarokban található ikonra kattintva program bármely részéből egyszerűen visszaugorhatunk a kezdőoldalra.</p>',
+                'Réka <p class="content">A modulban a rendeléseket és alkatrész készletadatokat látjuk az inSight rendszerből, melyeket gyártásba adhatunk. A bal felső sarokban található ikonra kattintva program bármely részéből egyszerűen visszaugorhatunk a kezdőoldalra.</p>',
             },
             {
               element: '#jobbfelsosarok',
               position: 'left',
               intro:
-                'Fejléc adatok <p class="content">•	A „Statisztika” gomb egy könnyen áttekinthető Excel kimutatást készít a fegyelmi ügyekről. Önnek egy kattintáson kívül mást nem kell tennie, az adatok az internetböngészőjében, új lapon nyílnak meg. </br> </br>•	Bemutató gombra kattintva bármikor újraindíthatja ezt az isemrtetőt.  </br> </br>•	Ha több bv. intézetben is rendelkezik felhasználói jogosultságokkal, ezek között az intézetnévre kattintva tud váltani. </br> </br>•	A jobb felső sarokban az éppen bejelentkezett felhasználó neve látszik. </p>',
+                'Fejléc adatok <p class="content">•	A „Statisztika” gomb egy könnyen áttekinthető Excel kimutatást készít a rendelési állományról. </br> </br>•	Bemutató gombra kattintva bármikor újraindítható ez az isemrtető.  </br> </br>•	Ha több telephelyen is rendelkezünk felhasználói jogosultságokkal, ezek között az telephelyre kattintva tudunk váltani. </br> </br>•	A jobb felső sarokban az éppen bejelentkezett felhasználó neve látszik. </p>',
             },
             {
               element: '#fomenu',
               hintPosition: 'right',
               intro:
-                'A JFK négy menüpontja<p class="content">•	Események: Rendkívüli események rögzítésére,fegyelmi eljárás kezdeményezésére szolgáló felület. </br>•Ügyek: Itt lehet a fegyelmi folyamatát adminisztrálni.</br>•Archív ügyek: Lezárt, vagy elévült fegyelmi ügyek, évenkénti bontásban.</br>•Kifutó illetve régi ügyek a Fany-ból: A FANY-ban indított korábbi fegyelmi ügyeket tudja intézni.</p>',
+                'A modul két menüpontja<p class="content">•	Gyártásra vár: ... szolgáló felület. </br>•Gyártásban: Itt lehet ... adminisztrálni.</p>',
             },
             {
               element: '#aktivitasfolyam',
               position: 'right',
               intro:
-                'Információs folyamok <p class="content">•	Határidős feladatok: Itt jelennek meg azok az ügyek, amelyek határideje már elmúlt vagy 3 napon belül esedékes. A program a fegyelmi ügy előrehaladása során mindig a jogszabályok alapján számítja a határidőket. Egy ügyre kattintva elérheti annak adatlapját.</br> </br>• Aktivitás folyam: Ezen a hasábon jelennek meg a legutóbb megváltozott fegyelmi ügyek. A legfrissebb változás a lista tetejére kerül, és minden ügyben látható az is, hogy mi történt benne (pl. kezdeményezés, meghallgatás). Egy ügyre kattintva elérheti annak adatlapját.</p>',
+                'Információs folyamok <p class="content">•	Határidős feladatok: Itt jelennek meg azok a megrendelések, amelyek határideje már elmúlt vagy 3 napon belül esedékes. Egy gyártási megrendelésre kattintva elérhetjük annak adatlapját.</br> </br>• Aktivitás folyam: Ezen a hasábon jelennek meg a legutóbb inSightban megváltozott Megrendelések. A legfrissebb változás a lista tetejére kerül, és minden rendelésnél látható az is, hogy mi történt benne (pl. Határidő módosítás, kiadás gyártásba). Egy tételre kattintva elérhetjük annak adatlapját.</p>',
             },
             {
               element: '#statisztika',
               position: 'right',
               intro:
-                'Gyors statisztika <p class="content">Hét fontos számadatot követhet nyomon. Egy számra kattintva a képernyő közepén az annak megfelelő ügyek kerülnek kilistázásra, a számadat körül pedig egy narancssárga keret jelzi az aktív szűrést. Ha meg szeretné szüntetni a szűrést egyszerűen kattintson ismét a kijelölt számra.</p>',
+                'Gyors statisztika <p class="content">Hét fontos számadatot követhetünk nyomon. Egy számra kattintva a képernyő közepén az annak megfelelő megrendelések kerülnek listázásra, a számadat körül pedig egy narancssárga keret jelzi az aktív szűrést. Ha meg szeretnénk szüntetni a szűrést egyszerűen kattintsunk ismét a kijelölt számra.</p>',
             },
             {
               element: '.szurok .list-complete-item',
               position: 'auto',
               intro:
-                'Címkék <p class="content">Intézetek, ügytípusok és státuszok szerinti szűrést teszi lehetővé – választhat egyet vagy többet is, a találatok száma a címke jobb felső sarkában látható.' +
-                '</br></br>Ha rákattint egy címkére, három dolog történik:' +
+                'Címkék <p class="content">Telephelyek, megrendelések és státuszok szerinti szűrést teszi lehetővé – választhatunk egyet vagy többet is, a találatok száma a címke jobb felső sarkában látható.' +
+                '</br></br>Ha rákattintunk egy címkére, három dolog történik:' +
                 '</br>• Csak azok az adatsorok látszanak, amikre a címke állítása igaz,' +
                 '</br>• Megváltozik a címke háttérszíne, ez jelzi az aktív szűrőt,' +
                 '</br>• A többi címke közül csak azok látszanak, amelyek a már szűrt adatok között is előfordulnak.' +
-                '</br></br>Egy aktív címkére kattintva megszűntetheti annak kijelölését, ekkor annak háttérszíne visszaváltozik.</p> ',
+                '</br></br>Egy aktív címkére kattintva megszűntethetjük annak kijelölését, ekkor annak háttérszíne visszaváltozik.</p> ',
             },
             {
               element: '#FegyemiUgyekDataTable_filter input',
               position: 'right',
               intro:
-                'Táblázat kereső <p class="content">Keresőmező mindig az alatta levő adattáblában keres. Ahogy elkezd gépelni, a program azonnal szűri a táblázatot, és csak azokat a sorokat mutatja, amelyekben a keresett szó, szótöredék, számadat megtalálható. Egyszerre akár több kereső szó is megadható, ezeket elég csak szóközzel elválasztani (például: „Szeged jelenlevő”). Ha meg akarja szüntetni a keresést, azt a szöveg kitörlésével, vagy a kereső mezőben megjelenő „X”-re kattintva teheti meg.</p>',
+                'Táblázat kereső <p class="content">Keresőmező mindig az alatta levő adattáblában keres. Ahogy elkezdünk gépelni, a program azonnal szűri a táblázatot, és csak azokat a sorokat mutatja, amelyekben a keresett szó, szótöredék, számadat megtalálható. Egyszerre akár több kereső szó is megadható, ezeket elég csak szóközzel elválasztani (például: „E21 alkatrész hiány”). Ha meg akarjuk szüntetni a keresést, azt a szöveg kitörlésével, vagy a kereső mezőben megjelenő „X”-re kattintva tehetjük meg.</p>',
             },
             {
               element: '#FegyemiUgyekDataTable_info',
               position: 'right',
               intro:
-                'Találatok <p class="content">Az egy oldalon megjelenő találatok számát a táblázat alatt állíthatja (5-10-25-50-mind).</p>',
+                'Találatok <p class="content">Az egy oldalon megjelenő találatok számát a táblázat alatt állíthatjuk (5-10-25-50-mind).</p>',
             },
             {
               element: '#FegyemiUgyekDataTable tr',
               position: 'right',
               intro:
-                'Táblázat <p class="content">A képernyő közepén a fegyelmi események/ügyek alapadatait összefoglaló adattábla található. A táblázat oszlopaiban szövegesen és címkékkel jelennek meg az adatok, ha egy címke fölé mozgatja az egérmutatót, megjelenik az adat típusa is. Egy sorra kattintva események nézetben a felviteli űrlap, ügyek nézetben a fegyelmi ügy adatlapja töltődik be. A fegyelmi ügyek táblájában a sorok bal szélén egy jelölőnégyzet látható. Ezekkel tömeges kijelölést hajthat végre, és egy kattintással intézkedhet több ügyben is (pl. megtagadásról vagy kivizsgálás elrendeléséről).</p>',
+                'Táblázat <p class="content">A képernyő közepén a gyártási megrendelések alapadatait összefoglaló adattábla található. A táblázat oszlopaiban szövegesen és címkékkel jelennek meg az adatok, ha egy címke fölé mozgatjuk az egérmutatót, megjelenik az adat típusa is. Egy sorra kattintva, a jobb oldali beúszón megjelennek az alkatrész adatok. A sorok bal szélén egy jelölőnégyzet látható, ezekkel tömeges kijelölést hajthatunk végre, és egy kattintással intézkedhetünk több megrendelésben is (pl. kiadhatjuk gyártásba).</p>',
             },
             {
               element: '#FegyemiUgyekDataTable .introJsDokumentumok',
               position: 'left',
               intro:
-                'Egy fegyelmi ügynél elérhető funkciók <p class="content">A fegyelmi ügy sorának jobb szélén található menüben mindig az adott ügy státuszának megfelelő tevékenységek jelennek meg. A megjelenő lehetőségek mindig igazodnak az ügy státuszához és a bejelentkező felhasználó jogosultságához.</p>',
+                'Soroknál elérhető funkciók <p class="content">A rendelés sorának jobb szélén található menüben mindig az adott státusznak megfelelő tevékenységek jelennek meg.</p>',
             },
             {
               element: '#n2020',
               position: 'left',
               intro:
-                'N2020 <p class="content">Ha észrevétele van, vagy hibát tapasztal itt van lehetősége üzenni a fejlesztőknek. A felugró ablakban láthatók azok a beszélgetések, melyekben érintett, ezekre kattintva átnézheti a korábbi hozzászólásokat, vagy újat írhat.</p>',
+                'Helpdesk <p class="content">Észrevétel, vagy hiba esetén tudunk üzenni a fejlesztőknek. A felugró ablakban láthatók azok a beszélgetések, melyekben érintettek vagyunk, ezekre kattintva átnézhetjük a korábbi hozzászólásokat, vagy újat írhatunk.</p>',
             },
             {
               element: '#bemutato',
               position: 'left',
               intro:
-                'Felhasználói kézikönyv <p class="content">Ebben a letölthető PDF-ben olvashat bővebben a program használatával kapcsolatban</p>',
+                'Felhasználói kézikönyv <p class="content">Ebben a letölthető PDF-ben olvashatunk bővebben a program használatával kapcsolatban</p>',
             },
           ];
           break;
@@ -643,215 +638,84 @@ export default {
               element: '#firstslide',
               position: 'auto',
               intro:
-                'Üdvözöljük a Fegyelmi modul bemutatójában!  <p class="content">A bemutató oldalak között az „Előző” és „Következő” gombokkal léptethet, vagy bármikor kiléphet a jobb alsó sarokban található „X”-el. Kérjük kattintson a „Következő” gombra, és már kezdhetjük is!</p>',
+                'Üdvözöljük a Réka modul bemutatójában!  <p class="content">A bemutató oldalak között az „Előző” és „Következő” gombokkal léptethet, vagy bármikor kiléphet a jobb alsó sarokban található „X”-el. Kérjük kattintson a „Következő” gombra, és már kezdhetjük is!</p>',
             },
             {
               element: '#JFKLogo',
               position: 'left',
               intro:
-                'JFK <p class="content">A JFK modulban a fogvatartottak fegyelmi eljárásainak teljes körű ügyintézésére van lehetőség. A bal felső sarokban található ikonra kattintva program bármely részéből egyszerűen visszaugorhatunk a kezdőoldalra.</p>',
+                'Réka <p class="content">A modulban a rendeléseket és alkatrész készletadatokat látjuk az inSight rendszerből, melyeket gyártásba adhatunk. A bal felső sarokban található ikonra kattintva program bármely részéből egyszerűen visszaugorhatunk a kezdőoldalra.</p>',
             },
             {
               element: '#jobbfelsosarok',
               position: 'left',
               intro:
-                'Fejléc adatok <p class="content">•	A „Statisztika” gomb egy könnyen áttekinthető Excel kimutatást készít a fegyelmi ügyekről. Önnek egy kattintáson kívül mást nem kell tennie, az adatok az internetböngészőjében, új lapon nyílnak meg. </br> </br>•	Bemutató gombra kattintva bármikor újraindíthatja ezt az isemrtetőt.  </br> </br>•	Ha több bv. intézetben is rendelkezik felhasználói jogosultságokkal, ezek között az intézetnévre kattintva tud váltani. </br> </br>•	A jobb felső sarokban az éppen bejelentkezett felhasználó neve látszik. </p>',
+                'Fejléc adatok <p class="content">•	A „Statisztika” gomb egy könnyen áttekinthető Excel kimutatást készít a rendelési állományról. </br> </br>•	Bemutató gombra kattintva bármikor újraindítható ez az isemrtető.  </br> </br>•	Ha több telephelyen is rendelkezünk felhasználói jogosultságokkal, ezek között az telephelyre kattintva tudunk váltani. </br> </br>•	A jobb felső sarokban az éppen bejelentkezett felhasználó neve látszik. </p>',
             },
             {
               element: '#fomenu',
-              position: 'left',
+              hintPosition: 'right',
               intro:
-                'A JFK négy menüpontja<p class="content">•	Események: Rendkívüli események rögzítésére,fegyelmi eljárás kezdeményezésére szolgáló felület. </br>•Ügyek: Itt lehet a fegyelmi folyamatát adminisztrálni.</br>•Archív ügyek: Lezárt, vagy elévült fegyelmi ügyek, évenkénti bontásban.</br>•Kifutó illetve régi ügyek a Fany-ból: A FANY-ban indított korábbi fegyelmi ügyeket tudja intézni.</p>',
+                'A modul két menüpontja<p class="content">•	Gyártásra vár: ... szolgáló felület. </br>•Gyártásban: Itt lehet ... adminisztrálni.</p>',
             },
             {
               element: '#aktivitasfolyam',
               position: 'right',
               intro:
-                'Információs folyamok <p class="content">•	Határidős feladatok: Itt jelennek meg azok az ügyek, amelyek határideje már elmúlt vagy 3 napon belül esedékes. A program a fegyelmi ügy előrehaladása során mindig a jogszabályok alapján számítja a határidőket. Egy ügyre kattintva elérheti annak adatlapját.</br> </br>• Aktivitás folyam: Ezen a hasábon jelennek meg a legutóbb megváltozott fegyelmi ügyek. A legfrissebb változás a lista tetejére kerül, és minden ügyben látható az is, hogy mi történt benne (pl. kezdeményezés, meghallgatás). Egy ügyre kattintva elérheti annak adatlapját.</p>',
+                'Információs folyamok <p class="content">•	Határidős feladatok: Itt jelennek meg azok a megrendelések, amelyek határideje már elmúlt vagy 3 napon belül esedékes. Egy gyártási megrendelésre kattintva elérhetjük annak adatlapját.</br> </br>• Aktivitás folyam: Ezen a hasábon jelennek meg a legutóbb inSightban megváltozott Megrendelések. A legfrissebb változás a lista tetejére kerül, és minden rendelésnél látható az is, hogy mi történt benne (pl. Határidő módosítás, kiadás gyártásba). Egy tételre kattintva elérhetjük annak adatlapját.</p>',
             },
             {
               element: '#statisztika',
               position: 'right',
               intro:
-                'Gyors statisztika <p class="content">Fegyelmi jogosultság függvényében látható. Hét fontos számadatot követhet nyomon. Egy számra kattintva a képernyő közepén az annak megfelelő ügyek kerülnek kilistázásra, a számadat körül pedig egy narancssárga keret jelzi az aktív szűrést. Ha meg szeretné szüntetni a szűrést egyszerűen kattintson ismét a kijelölt számra.</p>',
+                'Gyors statisztika <p class="content">Hét fontos számadatot követhetünk nyomon. Egy számra kattintva a képernyő közepén az annak megfelelő megrendelések kerülnek listázásra, a számadat körül pedig egy narancssárga keret jelzi az aktív szűrést. Ha meg szeretnénk szüntetni a szűrést egyszerűen kattintsunk ismét a kijelölt számra.</p>',
             },
             {
-              element: '.szurok  .list-complete-item',
-              position: 'left',
-              intro:
-                'Címkék <p class="content">Fegyelmi vétségek szerinti szűrést teszi lehetővé – választhat egyet vagy többet is, a találatok száma a címke jobb felső sarkában látható.</p> ',
-            },
-            {
-              element: '#FegyemiEsemenyekDataTable_filter input',
-              position: 'right',
-              intro:
-                'Táblázat kereső <p class="content">Keresőmező mindig az alatta levő adattáblában keres. Ahogy elkezd gépelni, a program azonnal szűri a táblázatot, és csak azokat a sorokat mutatja, amelyekben a keresett szó, szótöredék, számadat megtalálható. Egyszerre akár több kereső szó is megadható, ezeket elég csak szóközzel elválasztani (például: „Szeged jelenlevő”). Ha meg akarja szüntetni a keresést, azt a szöveg kitörlésével, vagy a kereső mezőben megjelenő „X”-re kattintva teheti meg.</p>',
-            },
-            {
-              element: '#FegyemiEsemenyekDataTable_info',
-              position: 'right',
-              intro:
-                'Találatok <p class="content">Az egy oldalon megjelenő találatok számát a táblázat alatt állíthatja (5-10-25-50-mind).</p>',
-            },
-            {
-              element: '#FegyemiEsemenyekDataTable tr',
-              position: 'right',
-              intro:
-                'Táblázat <p class="content">A képernyő közepén a fegyelmi események/ügyek alapadatait összefoglaló adattábla található. A táblázat oszlopaiban szövegesen és címkékkel jelennek meg az adatok, ha egy címke fölé mozgatja az egérmutatót, megjelenik az adat típusa is. Egy sorra kattintva események nézetben a felviteli űrlap, ügyek nézetben a fegyelmi ügy adatlapja töltődik be.</p>',
-            },
-            {
-              element: '#uj-esemeny-btn',
-              position: 'right',
-              intro:
-                'Esemény rögzítése <p class="content">Itt lehet rögzíteni az észlelt rendkívüli esemény körülményeit.</p>',
-            },
-            {
-              element: '#n2020',
-              position: 'left',
-              intro:
-                'N2020 <p class="content">Ha észrevétele van, vagy hibát tapasztal itt van lehetősége üzenni a fejlesztőknek. A felugró ablakban láthatók azok a beszélgetések, melyekben érintett, ezekre kattintva átnézheti a korábbi hozzászólásokat, vagy újat írhat.</p>',
-            },
-            {
-              element: '#bemutato',
-              position: 'left',
-              intro:
-                'Felhasználói kézikönyv <p class="content">Ebben a letölthető PDF-ben olvashat bővebben a program használatával kapcsolatban</p>',
-            },
-          ];
-          break;
-        case 'Fenyites':
-          introSteps = [
-            {
-              element: '#firstslide',
+              element: '.szurok .list-complete-item',
               position: 'auto',
               intro:
-                'Üdvözöljük a Fegyelmi modul bemutatójában!  <p class="content">A bemutató oldalak között az „Előző” és „Következő” gombokkal léptethet, vagy bármikor kiléphet a jobb alsó sarokban található „X”-el. Kérjük kattintson a „Következő” gombra, és már kezdhetjük is!</p>',
-            },
-            {
-              element: '#JFKLogo',
-              position: 'left',
-              intro:
-                'JFK <p class="content">A JFK modulban a fogvatartottak fegyelmi eljárásainak teljes körű ügyintézésére van lehetőség. A bal felső sarokban található ikonra kattintva program bármely részéből egyszerűen visszaugorhatunk a kezdőoldalra.</p>',
-            },
-            {
-              element: '#jobbfelsosarok',
-              position: 'left',
-              intro:
-                'Fejléc adatok <p class="content">•	A „Statisztika” gomb egy könnyen áttekinthető Excel kimutatást készít a fegyelmi ügyekről. Önnek egy kattintáson kívül mást nem kell tennie, az adatok az internetböngészőjében, új lapon nyílnak meg. </br> </br>•	Bemutató gombra kattintva bármikor újraindíthatja ezt az isemrtetőt.  </br> </br>•	Ha több bv. intézetben is rendelkezik felhasználói jogosultságokkal, ezek között az intézetnévre kattintva tud váltani. </br> </br>•	A jobb felső sarokban az éppen bejelentkezett felhasználó neve látszik. </p>',
-            },
-            {
-              element: '#fomenu',
-              position: 'left',
-              intro:
-                'A JFK négy menüpontja<p class="content">•	Események: Rendkívüli események rögzítésére,fegyelmi eljárás kezdeményezésére szolgáló felület. </br>•Ügyek: Itt lehet a fegyelmi folyamatát adminisztrálni.</br>•Archív ügyek: Lezárt, vagy elévült fegyelmi ügyek, évenkénti bontásban.</br>•Kifutó illetve régi ügyek a Fany-ból: A FANY-ban indított korábbi fegyelmi ügyeket tudja intézni.</p>',
-            },
-            {
-              element: '#felelosLista',
-              position: 'left',
-              intro:
-                'Aktivitás folyam <p class="content">Ezen a hasábon jelennek meg a Fany-ban indított fegyelmi ügyek változásai. A legfrissebb változás a lista tetejére kerül, és minden ügyben látható az is, hogy mi történt benne (pl. kezdeményezés, meghallgatás). Egy ügyre kattintva elérheti a Fany kapcsolódó funkcióit.</p>',
-            },
-            {
-              element: '#fenyitesJobbPanel',
-              position: 'left',
-              intro:
-                'Gyors statisztika <p class="content">Hét fontos számadatot követhet nyomon. Egy számra kattintva a képernyő közepén az annak megfelelő ügyek kerülnek kilistázásra, a számadat körül pedig egy kék keret jelzi az aktív szűrést. Ha meg szeretné szüntetni a szűrést egyszerűen kattintson ismét a kijelölt számra.</p>',
-            },
-            {
-              element: '#FenyitesDataTable_filter input',
-              position: 'right',
-              intro:
-                'Táblázat kereső <p class="content">Keresőmező mindig az alatta levő adattáblában keres. Ahogy elkezd gépelni, a program azonnal szűri a táblázatot, és csak azokat a sorokat mutatja, amelyekben a keresett szó, szótöredék, számadat megtalálható. Egyszerre akár több kereső szó is megadható, ezeket elég csak szóközzel elválasztani (például: „Szeged jelenlevő”). Ha meg akarja szüntetni a keresést, azt a szöveg kitörlésével, vagy a kereső mezőben megjelenő „X”-re kattintva teheti meg.</p>',
-            },
-            {
-              element: '#FenyitesDataTable_info',
-              position: 'right',
-              intro:
-                'Találatok <p class="content">Az egy oldalon megjelenő találatok számát a táblázat alatt állíthatja (5-10-25-50-mind).</p>',
-            },
-            {
-              element: '#FenyitesDataTable tr',
-              position: 'right',
-              intro:
-                'Táblázat <p class="content">A képernyő közepén a fegyelmi események/ügyek alapadatait összefoglaló adattábla található. A táblázat oszlopaiban szövegesen és címkékkel jelennek meg az adatok, ha egy címke fölé mozgatja az egérmutatót, megjelenik az adat típusa is. Egy sorra kattintva események nézetben a felviteli űrlap, ügyek nézetben a fegyelmi ügy adatlapja töltődik be.</p>',
-            },
-          ];
-          break;
-
-        case 'ArchivUgyek':
-          introSteps = [
-            {
-              element: '#firstslide',
-              position: 'auto',
-              intro:
-                'Üdvözöljük a Fegyelmi modul bemutatójában!  <p class="content">A bemutató oldalak között az „Előző” és „Következő” gombokkal léptethet, vagy bármikor kiléphet a jobb alsó sarokban található „X”-el. Kérjük kattintson a „Következő” gombra, és már kezdhetjük is!</p>',
-            },
-            {
-              element: '#JFKLogo',
-              position: 'left',
-              intro:
-                'JFK <p class="content">A JFK modulban a fogvatartottak fegyelmi eljárásainak teljes körű ügyintézésére van lehetőség. A bal felső sarokban található ikonra kattintva program bármely részéből egyszerűen visszaugorhatunk a kezdőoldalra.</p>',
-            },
-            {
-              element: '#jobbfelsosarok',
-              position: 'left',
-              intro:
-                'Fejléc adatok <p class="content">•	A „Statisztika” gomb egy könnyen áttekinthető Excel kimutatást készít a fegyelmi ügyekről. Önnek egy kattintáson kívül mást nem kell tennie, az adatok az internetböngészőjében, új lapon nyílnak meg. </br> </br>•	Bemutató gombra kattintva bármikor újraindíthatja ezt az isemrtetőt.  </br> </br>•	Ha több bv. intézetben is rendelkezik felhasználói jogosultságokkal, ezek között az intézetnévre kattintva tud váltani. </br> </br>•	A jobb felső sarokban az éppen bejelentkezett felhasználó neve látszik. </p>',
-            },
-            {
-              element: '#fomenu',
-              position: 'auto',
-              intro:
-                'A JFK négy menüpontja<p class="content">•	Események: Rendkívüli események rögzítésére,fegyelmi eljárás kezdeményezésére szolgáló felület. </br>•Ügyek: Itt lehet a fegyelmi folyamatát adminisztrálni.</br>•Archív ügyek: Lezárt, vagy elévült fegyelmi ügyek, évenkénti bontásban.</br>•Kifutó illetve régi ügyek a Fany-ból: A FANY-ban indított korábbi fegyelmi ügyeket tudja intézni.</p>',
-            },
-            {
-              element: '#aktivitasfolyam',
-              position: 'right',
-              intro:
-                'Információs folyamok <p class="content">•	Határidős feladatok: Itt jelennek meg azok az ügyek, amelyek határideje már elmúlt vagy 3 napon belül esedékes. A program a fegyelmi ügy előrehaladása során mindig a jogszabályok alapján számítja a határidőket. Egy ügyre kattintva elérheti annak adatlapját.</br> </br>• Aktivitás folyam: Ezen a hasábon jelennek meg a legutóbb megváltozott fegyelmi ügyek. A legfrissebb változás a lista tetejére kerül, és minden ügyben látható az is, hogy mi történt benne (pl. kezdeményezés, meghallgatás). Egy ügyre kattintva elérheti annak adatlapját.</p>',
-            },
-            {
-              element: '#statisztika',
-              position: 'right',
-              intro:
-                'Gyors statisztika <p class="content">Hét fontos számadatot követhet nyomon. Egy számra kattintva a képernyő közepén az annak megfelelő ügyek kerülnek kilistázásra, a számadat körül pedig egy narancssárga keret jelzi az aktív szűrést. Ha meg szeretné szüntetni a szűrést egyszerűen kattintson ismét a kijelölt számra.</p>',
-            },
-            {
-              element: '.szurok  .list-complete-item',
-              position: 'auto',
-              intro:
-                'Címkék <p class="content">Fegyelmi ügy státusz és fenyítési nemek szerinti szűrést teszi lehetővé – választhat egyet vagy többet is, a találatok száma a címke jobb felső sarkában látható.</p> ',
+                'Címkék <p class="content">Telephelyek, megrendelések és státuszok szerinti szűrést teszi lehetővé – választhatunk egyet vagy többet is, a találatok száma a címke jobb felső sarkában látható.' +
+                '</br></br>Ha rákattintunk egy címkére, három dolog történik:' +
+                '</br>• Csak azok az adatsorok látszanak, amikre a címke állítása igaz,' +
+                '</br>• Megváltozik a címke háttérszíne, ez jelzi az aktív szűrőt,' +
+                '</br>• A többi címke közül csak azok látszanak, amelyek a már szűrt adatok között is előfordulnak.' +
+                '</br></br>Egy aktív címkére kattintva megszűntethetjük annak kijelölését, ekkor annak háttérszíne visszaváltozik.</p> ',
             },
             {
               element: '#FegyemiUgyekDataTable_filter input',
               position: 'right',
               intro:
-                'Táblázat kereső <p class="content">Keresőmező mindig az alatta levő adattáblában keres. Ahogy elkezd gépelni, a program azonnal szűri a táblázatot, és csak azokat a sorokat mutatja, amelyekben a keresett szó, szótöredék, számadat megtalálható. Egyszerre akár több kereső szó is megadható, ezeket elég csak szóközzel elválasztani (például: „Szeged jelenlevő”). Ha meg akarja szüntetni a keresést, azt a szöveg kitörlésével, vagy a kereső mezőben megjelenő „X”-re kattintva teheti meg.</p>',
+                'Táblázat kereső <p class="content">Keresőmező mindig az alatta levő adattáblában keres. Ahogy elkezdünk gépelni, a program azonnal szűri a táblázatot, és csak azokat a sorokat mutatja, amelyekben a keresett szó, szótöredék, számadat megtalálható. Egyszerre akár több kereső szó is megadható, ezeket elég csak szóközzel elválasztani (például: „E21 alkatrész hiány”). Ha meg akarjuk szüntetni a keresést, azt a szöveg kitörlésével, vagy a kereső mezőben megjelenő „X”-re kattintva tehetjük meg.</p>',
             },
             {
               element: '#FegyemiUgyekDataTable_info',
               position: 'right',
               intro:
-                'Találatok <p class="content">Az egy oldalon megjelenő találatok számát a táblázat alatt állíthatja (5-10-25-50-mind).</p>',
+                'Találatok <p class="content">Az egy oldalon megjelenő találatok számát a táblázat alatt állíthatjuk (5-10-25-50-mind).</p>',
             },
             {
               element: '#FegyemiUgyekDataTable tr',
               position: 'right',
               intro:
-                'Táblázat <p class="content">A képernyő közepén a fegyelmi események/ügyek alapadatait összefoglaló adattábla található. A táblázat oszlopaiban szövegesen és címkékkel jelennek meg az adatok, ha egy címke fölé mozgatja az egérmutatót, megjelenik az adat típusa is. Egy sorra kattintva események nézetben a felviteli űrlap, ügyek nézetben a fegyelmi ügy adatlapja töltődik be.</p>',
+                'Táblázat <p class="content">A képernyő közepén a gyártási megrendelések alapadatait összefoglaló adattábla található. A táblázat oszlopaiban szövegesen és címkékkel jelennek meg az adatok, ha egy címke fölé mozgatjuk az egérmutatót, megjelenik az adat típusa is. Egy sorra kattintva, a jobb oldali beúszón megjelennek az alkatrész adatok. A sorok bal szélén egy jelölőnégyzet látható, ezekkel tömeges kijelölést hajthatunk végre, és egy kattintással intézkedhetünk több megrendelésben is (pl. kiadhatjuk gyártásba).</p>',
             },
-
+            {
+              element: '#FegyemiUgyekDataTable .introJsDokumentumok',
+              position: 'left',
+              intro:
+                'Soroknál elérhető funkciók <p class="content">A rendelés sorának jobb szélén található menüben mindig az adott státusznak megfelelő tevékenységek jelennek meg.</p>',
+            },
             {
               element: '#n2020',
               position: 'left',
               intro:
-                'N2020 <p class="content">Ha észrevétele van, vagy hibát tapasztal itt van lehetősége üzenni a fejlesztőknek. A felugró ablakban láthatók azok a beszélgetések, melyekben érintett, ezekre kattintva átnézheti a korábbi hozzászólásokat, vagy újat írhat.</p>',
+                'Helpdesk <p class="content">Észrevétel, vagy hiba esetén tudunk üzenni a fejlesztőknek. A felugró ablakban láthatók azok a beszélgetések, melyekben érintettek vagyunk, ezekre kattintva átnézhetjük a korábbi hozzászólásokat, vagy újat írhatunk.</p>',
             },
             {
               element: '#bemutato',
               position: 'left',
               intro:
-                'Felhasználói kézikönyv <p class="content">Ebben a letölthető PDF-ben olvashat bővebben a program használatával kapcsolatban</p>',
+                'Felhasználói kézikönyv <p class="content">Ebben a letölthető PDF-ben olvashatunk bővebben a program használatával kapcsolatban</p>',
             },
           ];
           break;

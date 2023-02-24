@@ -1105,17 +1105,17 @@ class FegyelmiUgy {
      */
     opcionalisUgyek.push({
       Id: muveletId++,
-      Text: 'Fegyelmi lap',
+      Text: 'Kiadás gyártásba',
       ColorClass: 'text-dark',
-      FunctionToRun: 'FegyelmiLapNyomtatas',
+      FunctionToRun: 'KiadasGyartasba',
       Sorrend: 1000,
     });
 
     opcionalisUgyek.push({
       Id: muveletId++,
-      Text: 'Jegyzőkönyv aláírás megtagadásáról',
+      Text: 'Felvétel a kiadás listára',
       ColorClass: 'text-dark',
-      FunctionToRun: 'AlairasMegtagadasaNyomtatas',
+      FunctionToRun: 'FelvetelKiadasListara',
       Sorrend: 1000,
     });
 
@@ -1598,7 +1598,7 @@ class FegyelmiUgy {
         !elem.FenyitesTipusCimkeId &&
         elem.UgyStatuszId != Cimkek.FegyelmiUgyStatusza.Osszevonva
       ) {
-        elem.FenyitesTipus = 'Nincs fenyítés kiszabva';
+        elem.FenyitesTipus = 'Kiadható gyártásba';
         elem.FenyitesTipusCimkeId = -1;
       }
 

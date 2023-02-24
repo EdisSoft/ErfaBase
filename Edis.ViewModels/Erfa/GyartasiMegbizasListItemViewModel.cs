@@ -1,5 +1,6 @@
 ﻿using Edis.Entities.Erfa;
 using Edis.Utilities;
+using System;
 
 namespace Edis.ViewModels.Erfa
 {
@@ -7,10 +8,11 @@ namespace Edis.ViewModels.Erfa
     {
         public int PrdID { get; set; }
         public string PrjCode { get; set; }
-        public string OrdCustRequestDate { get; set; }
+        public string Szabszam { get; set; }
+        public DateTime OrdCustRequestDate { get; set; }
         public string Prdinfo2 { get; set; }
         public string Terv { get; set; }
-        public string ObsStartDate { get; set; }
+        public DateTime ObsStartDate { get; set; }
         public string Felulet { get; set; }
         public string Fo { get; set; }
         public string Lapanyag { get; set; }
@@ -29,6 +31,7 @@ namespace Edis.ViewModels.Erfa
 
         public static explicit operator GyartasiMegbizasListItemViewModel(GyartasiMegbizasView model)
         {
+            //var a = ValueInjecterUtilities.InjectViewModel<GyartasiMegbizasView, GyartasiMegbizasListItemViewModel>(model);
             return ValueInjecterUtilities.InjectViewModel<GyartasiMegbizasView, GyartasiMegbizasListItemViewModel>(model);
         }
     }

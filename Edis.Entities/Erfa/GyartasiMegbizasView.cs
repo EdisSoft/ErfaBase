@@ -17,8 +17,8 @@ namespace Edis.Entities.Erfa
         [Column("szabszam")]
         public string Szabszam { get; set; }
 
-        [Column("OrdCustRequestDate")]
-        public DateTime ordCustRequestDate { get; set; }
+        [Column("ordCustRequestDate")]
+        public DateTime OrdCustRequestDate { get; set; }
 
         [Column("prdinfo2")]
         public string Prdinfo2 { get; set; }

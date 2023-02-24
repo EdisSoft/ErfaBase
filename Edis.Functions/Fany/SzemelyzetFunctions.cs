@@ -178,13 +178,13 @@ namespace Edis.Functions.Fany
             return users;
         }
 
-        public Szemelyzet SzemelyzetLekeresVagyLetrehozas(string sidStr, string userName, int? intezetId = null)
+        public Szemelyzet SzemelyzetLekeresVagyLetrehozas(string sidStr, string userName, int? telephelyId = null)
         {
             bool uj;
-            return SzemelyzetLekeresVagyLetrehozas(sidStr, userName, true, intezetId, out uj);
+            return SzemelyzetLekeresVagyLetrehozas(sidStr, userName, true, telephelyId, out uj);
         }
 
-        public Szemelyzet SzemelyzetLekeresVagyLetrehozas(string sidStr, string userName, bool frissitesAdAlapjan, int? intezetId, out bool ujLetrehozva)
+        public Szemelyzet SzemelyzetLekeresVagyLetrehozas(string sidStr, string userName, bool frissitesAdAlapjan, int? telephelyId, out bool ujLetrehozva)
         {
             ujLetrehozva = false;
             if (string.IsNullOrEmpty(sidStr)) return null;
@@ -193,30 +193,19 @@ namespace Edis.Functions.Fany
             UserPrincipal up = ActiveDirectoryFunctions.BetoltesUserPrincipal(sidStr);
             if (up == null)
             {
-                Szemelyzet sz = FindBySid(sidStr, intezetId);
+                Szemelyzet sz = FindBySid(sidStr, telephelyId);
                 return sz;
             }
 
-            string hadrendiSzam = ActiveDirectoryFunctions.KeresHadrendiSzam(sidStr);
-            string rendfokozat = ActiveDirectoryFunctions.KeresRendfokozat(sidStr);
             string beosztas = ActiveDirectoryFunctions.KeresBeosztas(sidStr);
-            string beosztasiFokozat = ActiveDirectoryFunctions.KeresBeosztasiFokozat(sidStr);
 
-            if (intezetId == null)
-                intezetId = JogosultsagCacheFunctions.AktualisIntezet.Id;
+            if (telephelyId == null)
+                telephelyId = JogosultsagCacheFunctions.AktualisIntezet.Id;
 
             int rendfokozatKszId = 0;
             int beosztasKszId = 0;
             int beosztasiFokozatKszId = 0;
 
-            if (!String.IsNullOrEmpty(rendfokozat))
-            {
-                IList<Kodszotar> rendfokozatok =
-                    KonasoftBVFonixContext.Kodszotar.Where(x => x.KodszotarCsoportId == 299).ToList();
-                Kodszotar rendfokozatKsz = rendfokozatok.FirstOrDefault(r => r.Nev.ToLower() == rendfokozat.ToLower() || r.RovidNev.ToLower() == rendfokozat.ToLower());
-                if (rendfokozatKsz != null)
-                    rendfokozatKszId = rendfokozatKsz.Id;
-            }
             if (!String.IsNullOrEmpty(beosztas))
             {
                 IList<Kodszotar> beosztasok =
@@ -225,32 +214,16 @@ namespace Edis.Functions.Fany
                 if (beosztasKsz != null)
                     beosztasKszId = beosztasKsz.Id;
             }
-            if (!String.IsNullOrEmpty(beosztasiFokozat))
-            {
-                IList<Kodszotar> beosztasiFokozatok =
-                    KonasoftBVFonixContext.Kodszotar.Where(x => x.KodszotarCsoportId == 380).ToList();
-                Kodszotar beosztasiFokozatKsz = beosztasiFokozatok.FirstOrDefault(r => r.Nev.ToLower() == beosztasiFokozat.ToLower() || r.RovidNev.ToLower() == beosztasiFokozat.ToLower());
-                if (beosztasiFokozatKsz != null)
-                    beosztasiFokozatKszId = beosztasiFokozatKsz.Id;
-            }
 
             adSzemelyzet = new Szemelyzet();
             adSzemelyzet.Nev = new string((up.DisplayName?.ToUpper() ?? up.SamAccountName?.ToUpper() ?? userName ?? "NÉVTELEN").Take(200).ToArray());
             adSzemelyzet.AdSid = sidStr;
-            if (String.IsNullOrEmpty(hadrendiSzam))
-            {
-                adSzemelyzet.Azonosito = sidStr.Substring(0, 2) + sidStr.Substring(sidStr.Length - 5, 5);
-            }
-            else
-            {
-                adSzemelyzet.Azonosito = new string(hadrendiSzam.Take(50).ToArray());
-            }
-            adSzemelyzet.IntezetId = intezetId;
+            adSzemelyzet.IntezetId = telephelyId;
             adSzemelyzet.RendfokozatKszId = rendfokozatKszId;
             adSzemelyzet.BeosztasKszId = beosztasKszId;
             adSzemelyzet.BesorolasKszId = beosztasiFokozatKszId;
 
-            Szemelyzet szemelyzet = FindBySid(sidStr, intezetId);
+            Szemelyzet szemelyzet = FindBySid(sidStr, telephelyId);
             if (szemelyzet == null)
             {
                 ujLetrehozva = true;
@@ -295,22 +268,22 @@ namespace Edis.Functions.Fany
         }
 
 
-        public Szemelyzet FindBySid(string sid, int? intezetId)
+        public Szemelyzet FindBySid(string sid, int? telephelyId)
         {
-            if (!intezetId.HasValue)
-                intezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+            if (!telephelyId.HasValue)
+                telephelyId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
 
-            return Table.SingleOrDefault(x => x.AdSid == sid && x.IntezetId == intezetId);
+            return Table.SingleOrDefault(x => x.AdSid == sid && x.IntezetId == telephelyId);
         }
 
 
 
-        public IQueryable<Szemelyzet> GetSzemelyzetTagokBySid(string[] sids, int? intezetId)
+        public IQueryable<Szemelyzet> GetSzemelyzetTagokBySid(string[] sids, int? telephelyId)
         {
-            if (!intezetId.HasValue)
-                intezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+            if (!telephelyId.HasValue)
+                telephelyId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
 
-            return Table.Where(x => sids.Contains(x.AdSid) && x.IntezetId == intezetId);
+            return Table.Where(x => sids.Contains(x.AdSid) && x.IntezetId == telephelyId);
         }
 
 
@@ -361,10 +334,10 @@ namespace Edis.Functions.Fany
             return returnValue;
         }
 
-        public List<SzemelyzetModel> GetAllSzemelyzet(int intezetId)
+        public List<SzemelyzetModel> GetAllSzemelyzet(int telephelyId)
         {
             var result = Table
-                .Where(x => x.Id != 0 && x.Nev != null && x.IntezetId == intezetId)
+                .Where(x => x.Id != 0 && x.Nev != null && x.IntezetId == telephelyId)
                 .ToList()
                 .Select(x => (SzemelyzetModel)x)
                 .ToList();
@@ -380,19 +353,19 @@ namespace Edis.Functions.Fany
                         ).ToList().GroupBy(x => x.Sid).Select(x => x.First()).ToList();
         }
 
-        public Szemelyzet SzemelyzetLekeresVagyLetrehozasNevvel(string sidStr, string nev, int? intezetId = null)
+        public Szemelyzet SzemelyzetLekeresVagyLetrehozasNevvel(string sidStr, string nev, int? telephelyId = null)
         {
             bool uj;
             Szemelyzet user = null;
             try
             {
-                user = FindBySid(sidStr, intezetId);
+                user = FindBySid(sidStr, telephelyId);
             }
             catch (Exception) { }
 
             if (user == null)
             {
-                user = SzemelyzetLekeresVagyLetrehozas(sidStr, nev, true, intezetId, out uj);
+                user = SzemelyzetLekeresVagyLetrehozas(sidStr, nev, true, telephelyId, out uj);
                 if (uj)
                 {
                     user.Nev = nev;

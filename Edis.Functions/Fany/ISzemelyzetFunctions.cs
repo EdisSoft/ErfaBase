@@ -32,8 +32,7 @@ namespace Edis.Functions.Fany
         List<AdFegyelmiUserItem> GetIntezetiAlkalmazottak();
         List<AdFegyelmiSzakvezetoUserItem> GetFegyelmiSzakteruletiVezetok(string term);
         Szemelyzet SzemelyzetLekeresVagyLetrehozas(string sidStr, string userName, int? intezetId = null);
-
-        Szemelyzet SzemelyzetLekeresVagyLetrehozas(string sidStr, string userName, bool frissitesAdAlapjan, int? intezetId, out bool ujLetrehozas);
+        Szemelyzet SzemelyzetLekeresVagyLetrehozas(string sidStr, string userName, bool frissitesAdAlapjan, int? telephelyId, out bool ujLetrehozas);
         List<SzemelyzetModel> GetAllSzemelyzet(int intezetId);
         AdFegyelmiUserItem GetAdFegyelmiUser(SzemelyzetModel szemelyzet);
         List<AdFegyelmiUserItem> GetFegyelmiFofelugyelokAlkalmazottak();

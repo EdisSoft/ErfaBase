@@ -31,7 +31,7 @@ namespace Edis.ViewModels.JFK.FENY
         public string RogzitoSzemely { get; set; }
         public string RogzitoSzemelyRendfokozat { get; set; }
 
-        public int RogzitoIntezetId { get; set; }
+        public int RogzitoTelephelyId { get; set; }
 
 		public DateTime ErvenyessegKezd { get; set; }
 

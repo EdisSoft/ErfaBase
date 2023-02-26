@@ -27,13 +27,13 @@ namespace Edis.Fenyites.Controllers.Base
         {
             var kontext = new AlkalmazasKontextusFunctions().Kontextus;
             var szemelyzetfunc = new SzemelyzetFunctions();
-            var fegyelmiUgyFunctions = new FegyelmiUgyFunctions();
+            var fegyelmiUgyFunctions = new RekaFunctions();
             var szemelyzet = szemelyzetfunc.FindById(kontext.SzemelyzetId);
             var jogosultsagCacheFunctions = new JogosultsagCacheFunctions();
             var jogosultIntezetek = jogosultsagCacheFunctions.JogosultIntezetek;
-            var intezet = jogosultIntezetek.SingleOrDefault(f => f.Id == kontext.RogzitoIntezetId);
+            var intezet = jogosultIntezetek.SingleOrDefault(f => f.Id == kontext.RogzitoTelephelyId);
 
-            //var archivUgyekEvei = fegyelmiUgyFunctions.GetArchivEvek(kontext.RogzitoIntezetId);
+            //var archivUgyekEvei = fegyelmiUgyFunctions.GetArchivEvek(kontext.RogzitoTelephelyId);
             var archivUgyekEvei = new List<int>();
             for (int i = 1995; i <= DateTime.Now.Year; i++)
             {
@@ -94,7 +94,7 @@ namespace Edis.Fenyites.Controllers.Base
                                                           Jogosultsagok.Fegyelmi_fofelugyelo.ToString().ToLower(),
                                                           Jogosultsagok.Fegyelmi_reintegracios_tiszt.ToString().ToLower()};
 #else
-             userData.Jogosultsagok = jogosultsagCacheFunctions.UserJogosultsagok.Where(x => x.Value.Contains(kontext.RogzitoIntezetId)).Select(x => x.Key).ToList();
+             userData.Jogosultsagok = jogosultsagCacheFunctions.UserJogosultsagok.Where(x => x.Value.Contains(kontext.RogzitoTelephelyId)).Select(x => x.Key).ToList();
 #endif
             if (!string.IsNullOrWhiteSpace(kontext.PersonalHelpdeskRSA))
             {

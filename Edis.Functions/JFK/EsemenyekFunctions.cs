@@ -83,12 +83,6 @@ namespace Edis.Functions.JFK.FENY
             return result;
         }
 
-        public List<EsemenyViewModel> GetEsemenyekByIntezetId(int intezetId)
-        {
-            var esemenyek = Table.AsNoTracking().Where(w => w.RogzitoIntezetId == intezetId).ToList().Select(x => (EsemenyViewModel)x).ToList();
-            return esemenyek;
-        }
-
         public EsemenyViewModel GetEsemenyById(int id)
         {
             KonasoftBVFonixContext.Configuration.LazyLoadingEnabled = false;
@@ -134,10 +128,10 @@ namespace Edis.Functions.JFK.FENY
                         EszleloId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.EszleloId, null, null).Id,
                     };
 
-                    if(AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid== Edis.Functions.JFK.FegyelmiUgyFunctions.AdUserSid) // _BVOP-FONIXAPP hívás külsõ alkalmazásból
+                    if(AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid== Edis.Functions.JFK.RekaFunctions.AdUserSid) // _BVOP-FONIXAPP hívás külsõ alkalmazásból
                     {
                         entity.KeziRogzitoAdatok = true;
-                        entity.RogzitoIntezetId = model.IntezetId.Value;
+                        entity.RogzitoTelephelyId = model.IntezetId.Value;
                         entity.EszleloId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.EszleloId, null, model.IntezetId).Id;
                         entity.RogzitoSzemelyId = entity.EszleloId;
                     }
@@ -436,7 +430,7 @@ namespace Edis.Functions.JFK.FENY
 
 
             // selectek feltöltése            
-            //var users = SzemelyzetFunctions.GetAllSzemelyzet(AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId);            
+            //var users = SzemelyzetFunctions.GetAllSzemelyzet(AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId);            
             //model.EszleloOptions = users.Select(x => new KSelect2ItemModel() { id = x.AdSid.ToString(), text = x.Nev + ' ' + x.RendfokozatKszId }).ToList();
 
             model.EszleloOptions = fegyelmiUsers.Select(x => new KSelect2ItemModel() { id = x.Sid.ToString(), text = x.Displayname + " " + x.Rendfokozat }).ToList();
@@ -478,14 +472,14 @@ namespace Edis.Functions.JFK.FENY
         public List<EsemenyListItemViewModel> GetEsemenyek()
         {
             //KonasoftBVFonixContext.Configuration.LazyLoadingEnabled = false;
-            //int intezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+            //int intezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId;
 
             //var resztvevok = EsemenyResztvevoFunctions.GetEsemenyResztvevokByIntezetId(intezetId);
 
             //var egyHonappalEzelott = DateTime.Now.Date.AddMonths(-1);
             //KonasoftBVFonixContext.DisableToroltFlFilter(x => x.Intezet);
 
-            //var results = Table.Where(w => w.RogzitoIntezetId == intezetId || intezetId == (int)BvIntezet.Bvop)
+            //var results = Table.Where(w => w.RogzitoTelephelyId == intezetId || intezetId == (int)BvIntezet.Bvop)
             //    .Include(x => x.RogzitoSzemely)
             //    .Include(x => x.RogzitoIntezet)
             //    .Include(x => x.Jelleg)

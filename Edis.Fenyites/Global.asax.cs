@@ -35,8 +35,6 @@ namespace Edis.Fenyites
     {
         private static int timeout = 30000;
         private Timer timerFenyitesVegrehajtasok;
-        private Timer timerAutomatikusFelfuggesztes;
-        private Timer timerAutomatikusJutalomVegrehajtasok;
         //private Timer timerTeszt;
         private readonly object lockObject = new object();
         private static Object _lockObj = new Object();
@@ -54,342 +52,263 @@ namespace Edis.Fenyites
             //Teszt Timer beállítása
             //timerTeszt = new Timer(TesztTimerElapsed, null, 30 * 60 * 1000, 30 * 60 * 1000);
 
-            // Timer indítása
-            //Log.Info("kezdődik: " + DateTime.Now.ToLongTimeString());
-            //Task.Delay(TimeSpan.FromMilliseconds(timeout)).ContinueWith(task => NotifyClient());
-            //this.timer = new Timer(Worker, null, 1000, 5 * 60 * 1000); //5 min
-
-            //string timeFenyitesVegrehajtasok = ConfigurationManager.AppSettings["DataUpdateTimeFenyitesVegrehajtasok"];
-            //if (timeFenyitesVegrehajtasok != null)
-            //{
-            //    DateTime now = DateTime.Now;
-            //    string[] numbers = timeFenyitesVegrehajtasok.Split(':');
-            //    DateTime todayRun = new DateTime(now.Year, now.Month, now.Day, Convert.ToInt32(numbers[0]), Convert.ToInt32(numbers[1]), 0);
-            //    int msDelay = 0;
-            //    if (now < todayRun)
-            //        msDelay = (int)(todayRun - now).TotalMilliseconds;
-            //    else
-            //        msDelay = (int)(todayRun.AddDays(1) - now).TotalMilliseconds;
-
-            //    timerFenyitesVegrehajtasok = new Timer(UpdateFenyitesVegrehajtasok, null, msDelay, 24 * 60 * 60 * 1000); // 24 óra
-
-            //    Log.Debug("delay start: " + msDelay);
-            //    Log.Info("updater set to: " + timeFenyitesVegrehajtasok);
-            //}
-
-            //string timeAutomatikusFelfuggesztes = ConfigurationManager.AppSettings["DataUpdateTimeAutomatikusFelfuggesztes"];
-            //if (timeAutomatikusFelfuggesztes != null)
-            //{
-            //    DateTime now = DateTime.Now;
-            //    string[] numbers = timeAutomatikusFelfuggesztes.Split(':');
-            //    DateTime todayRun = new DateTime(now.Year, now.Month, now.Day, Convert.ToInt32(numbers[0]), Convert.ToInt32(numbers[1]), 0);
-            //    int msDelay = 0;
-            //    if (now < todayRun)
-            //        msDelay = (int)(todayRun - now).TotalMilliseconds;
-            //    else
-            //        msDelay = (int)(todayRun.AddDays(1) - now).TotalMilliseconds;
-
-            //    timerAutomatikusFelfuggesztes = new Timer(UpdateAutomatikusFelfuggesztes, null, msDelay, 24 * 60 * 60 * 1000); // 24 óra
-
-            //    Log.Debug("delay start AutomatikusFelfuggesztes: " + msDelay);
-            //    Log.Info("updater set to AutomatikusFelfuggesztes: " + timeAutomatikusFelfuggesztes);
-            //}
-
-            //#if DEBUG
-            //        var jutalomFn = new F3JutalomFunctions();
-            //        jutalomFn.AutomatikusJutalomLezaras();
-            //        Log.Debug("UpdateFenyitesVegrehajtasok AutomatikusJutalomLezaras update kész");
-            //        jutalomFn.AutomatikusJutalomVegrehajtas();
-            //#endif
+            //Timer indítása
+            Log.Info("kezdődik: " + DateTime.Now.ToLongTimeString());
+            Task.Delay(TimeSpan.FromMilliseconds(timeout)).ContinueWith(task => NotifyClient());
+            this.timer = new Timer(Worker, null, 1000, 30 * 60 * 1000); //30 min
         }
 
-        //public void TesztTimerElapsed(object o)
+        public void Worker(object o) { 
+
+
+        string DailyRunTime = ConfigurationManager.AppSettings["DailyRunTime"];
+        //if (timeFenyitesVegrehajtasok != null)
         //{
-        //    Log.Info("TesztTimerElapsed, timerAutomatikusFelfuggesztes: " + timerAutomatikusFelfuggesztes != null ? "Él" : "Nem él");
-        //    Log.Info("TesztTimerElapsed, timerFenyitesVegrehajtasok: " + timerFenyitesVegrehajtasok != null ? "Él" : "Nem él");
+        //    DateTime now = DateTime.Now;
+        //    string[] numbers = timeFenyitesVegrehajtasok.Split(':');
+        //    DateTime todayRun = new DateTime(now.Year, now.Month, now.Day, Convert.ToInt32(numbers[0]), Convert.ToInt32(numbers[1]), 0);
+        //    int msDelay = 0;
+        //    if (now < todayRun)
+        //        msDelay = (int)(todayRun - now).TotalMilliseconds;
+        //    else
+        //        msDelay = (int)(todayRun.AddDays(1) - now).TotalMilliseconds;
+
+        //    timerFenyitesVegrehajtasok = new Timer(UpdateFenyitesVegrehajtasok, null, msDelay, 24 * 60 * 60 * 1000); // 24 óra
+
+        //    Log.Debug("delay start: " + msDelay);
+        //    Log.Info("updater set to: " + timeFenyitesVegrehajtasok);
         //}
+    }
 
-        //public void UpdateFenyitesVegrehajtasok(object o)
-        //{
-        //    Log.Info("UpdateFenyitesVegrehajtasok lock obj. előtt");
-        //    lock (this.lockObject)
-        //    {
-        //        Log.Debug("UpdateFenyitesVegrehajtasok start");
+    //public void TesztTimerElapsed(object o)
+    //{
+    //    Log.Info("TesztTimerElapsed, timerAutomatikusFelfuggesztes: " + timerAutomatikusFelfuggesztes != null ? "Él" : "Nem él");
+    //    Log.Info("TesztTimerElapsed, timerFenyitesVegrehajtasok: " + timerFenyitesVegrehajtasok != null ? "Él" : "Nem él");
+    //}
 
-        //        var jutalomFn = new F3JutalomFunctions();
-        //        jutalomFn.AutomatikusJutalomLezaras();
-        //        Log.Debug("UpdateFenyitesVegrehajtasok AutomatikusJutalomLezaras update kész");
-        //        jutalomFn.AutomatikusJutalomVegrehajtas();
-        //        Log.Debug("UpdateFenyitesVegrehajtasok AutomatikusJutalomVegrehajtas update kész");
+    //public void UpdateFenyitesVegrehajtasok(object o)
+    //{
+    //    Log.Info("UpdateFenyitesVegrehajtasok lock obj. előtt");
+    //    lock (this.lockObject)
+    //    {
+    //        Log.Debug("UpdateFenyitesVegrehajtasok start");
 
-        //        FegyelmiUgyFunctions fegyelmiUgyFunctions = new FegyelmiUgyFunctions();
+    //        var jutalomFn = new F3JutalomFunctions();
+    //        jutalomFn.AutomatikusJutalomLezaras();
+    //        Log.Debug("UpdateFenyitesVegrehajtasok AutomatikusJutalomLezaras update kész");
+    //        jutalomFn.AutomatikusJutalomVegrehajtas();
+    //        Log.Debug("UpdateFenyitesVegrehajtasok AutomatikusJutalomVegrehajtas update kész");
 
-        //        fegyelmiUgyFunctions.UpdateFenyitesVegrahajtvaTipusuUgyek(o);
-        //        fegyelmiUgyFunctions.UpdateSzabadultFogvatartottUgyek(o);
-                
-        //        Log.Debug("StatuszHuszonotEvnelRegebbiUgyek update előtt");
-        //        fegyelmiUgyFunctions.UpdateStatuszHuszonotEvnelRegebbiUgyek(o);
-        //        Log.Debug("StatuszHuszonotEvnelRegebbiUgyek update kész");
+    //        FegyelmiUgyFunctions fegyelmiUgyFunctions = new FegyelmiUgyFunctions();
 
-        //        Log.Debug("UpdateFenyitesVegrehajtasok update kész");
-        //        List<ElkulonitesEmailData> elkulonitesEmailDatas = fegyelmiUgyFunctions.FegyelmiUgyElkulonitesErtesitoAdatok();
-        //        Log.Debug("UpdateFenyitesVegrehajtasok elkulonitesEmailDatas kész");
-        //        List<RendezvenyErtesitesEmailData> rendezvenyEmailDatas = fegyelmiUgyFunctions.FegyelmiUgyRendezvenyErtesitesEmailAdatok();
-        //        Log.Debug("UpdateFenyitesVegrehajtasok rendezvenyEmailDatas kész");
-        //        List<TargyiErtesitesEmailData> targyiKorlatozasEmailDatas = fegyelmiUgyFunctions.FegyelmiUgyTargyiErtesitesEmailAdatok();
-        //        Log.Debug("UpdateFenyitesVegrehajtasok targyiKorlatozasEmailDatas kész");
-        //        List<TargyiErtesitesEmailData> tobbletszolgaltatasEmailDatas = fegyelmiUgyFunctions.FegyelmiUgyTobbletszolgaltatasEmailAdatok();
-        //        Log.Debug("UpdateFenyitesVegrehajtasok tobbletszolgaltatasEmailDatas kész");
-        //        List<MaganelzarasFofelugyeloEmailData> maganelzarasFofelugyeloEmailData = fegyelmiUgyFunctions.MaganelzarasFofelugyelokEmailAdatok();
-        //        Log.Debug("UpdateFenyitesVegrehajtasok maganelzarasFofelugyeloEmailData kész");
-        //        List<VegszallitottFogvatartottEmailData> vegszallitottFogvatartottEmailDatas = fegyelmiUgyFunctions.VegszallitottFogvatartottEmailAdatok();
-        //        Log.Debug("UpdateFenyitesVegrehajtasok vegszallitottFogvatartottEmailDatas kész");
+    //        fegyelmiUgyFunctions.UpdateFenyitesVegrahajtvaTipusuUgyek(o);
+    //        fegyelmiUgyFunctions.UpdateSzabadultFogvatartottUgyek(o);
 
-        //        EmailFunctions emailFunctions = new EmailFunctions();
+    //        Log.Debug("StatuszHuszonotEvnelRegebbiUgyek update előtt");
+    //        fegyelmiUgyFunctions.UpdateStatuszHuszonotEvnelRegebbiUgyek(o);
+    //        Log.Debug("StatuszHuszonotEvnelRegebbiUgyek update kész");
 
-        //        var elkulonitesFilename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/ElkulonitesFigyelmeztetesTemplate.cshtml");
-        //        string elkulonitesFileContent = File.ReadAllText(elkulonitesFilename);
+    //        Log.Debug("UpdateFenyitesVegrehajtasok update kész");
+    //        List<ElkulonitesEmailData> elkulonitesEmailDatas = fegyelmiUgyFunctions.FegyelmiUgyElkulonitesErtesitoAdatok();
+    //        Log.Debug("UpdateFenyitesVegrehajtasok elkulonitesEmailDatas kész");
+    //        List<RendezvenyErtesitesEmailData> rendezvenyEmailDatas = fegyelmiUgyFunctions.FegyelmiUgyRendezvenyErtesitesEmailAdatok();
+    //        Log.Debug("UpdateFenyitesVegrehajtasok rendezvenyEmailDatas kész");
+    //        List<TargyiErtesitesEmailData> targyiKorlatozasEmailDatas = fegyelmiUgyFunctions.FegyelmiUgyTargyiErtesitesEmailAdatok();
+    //        Log.Debug("UpdateFenyitesVegrehajtasok targyiKorlatozasEmailDatas kész");
+    //        List<TargyiErtesitesEmailData> tobbletszolgaltatasEmailDatas = fegyelmiUgyFunctions.FegyelmiUgyTobbletszolgaltatasEmailAdatok();
+    //        Log.Debug("UpdateFenyitesVegrehajtasok tobbletszolgaltatasEmailDatas kész");
+    //        List<MaganelzarasFofelugyeloEmailData> maganelzarasFofelugyeloEmailData = fegyelmiUgyFunctions.MaganelzarasFofelugyelokEmailAdatok();
+    //        Log.Debug("UpdateFenyitesVegrehajtasok maganelzarasFofelugyeloEmailData kész");
+    //        List<VegszallitottFogvatartottEmailData> vegszallitottFogvatartottEmailDatas = fegyelmiUgyFunctions.VegszallitottFogvatartottEmailAdatok();
+    //        Log.Debug("UpdateFenyitesVegrehajtasok vegszallitottFogvatartottEmailDatas kész");
 
-        //        var rendezvenyFilename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/RendezvenyKorlatozasTemplate.cshtml");
-        //        string rendezvenyFileContent = File.ReadAllText(rendezvenyFilename);
+    //        EmailFunctions emailFunctions = new EmailFunctions();
 
-        //        var targyiKorlatozasFilename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/TargyiKorlatozasTemplate.cshtml");
-        //        string targyiKorlatozasFileContent = File.ReadAllText(targyiKorlatozasFilename);
+    //        var elkulonitesFilename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/ElkulonitesFigyelmeztetesTemplate.cshtml");
+    //        string elkulonitesFileContent = File.ReadAllText(elkulonitesFilename);
 
-        //        var tobbletszolgaltatasFilename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/TobbletszolgaltatasTemplate.cshtml");
-        //        string tobbletszolgaltatasFileContent = File.ReadAllText(tobbletszolgaltatasFilename);
+    //        var rendezvenyFilename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/RendezvenyKorlatozasTemplate.cshtml");
+    //        string rendezvenyFileContent = File.ReadAllText(rendezvenyFilename);
 
-        //        var maganelzarasFofelugyeloFilename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/MaganelzarasFofelugyeloErtesitesTemplate.cshtml");
-        //        string maganelzarasFofelugyeloFileContent = File.ReadAllText(maganelzarasFofelugyeloFilename);
+    //        var targyiKorlatozasFilename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/TargyiKorlatozasTemplate.cshtml");
+    //        string targyiKorlatozasFileContent = File.ReadAllText(targyiKorlatozasFilename);
 
-        //        var vegszallitottFogvatartottFilename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/VegszallitottakTemplate.cshtml");
-        //        string vegszallitottFogvatartottFileContent = File.ReadAllText(vegszallitottFogvatartottFilename);
+    //        var tobbletszolgaltatasFilename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/TobbletszolgaltatasTemplate.cshtml");
+    //        string tobbletszolgaltatasFileContent = File.ReadAllText(tobbletszolgaltatasFilename);
 
-        //        string url = ConfigurationManager.AppSettings["AlkalmazasUrl"];
+    //        var maganelzarasFofelugyeloFilename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/MaganelzarasFofelugyeloErtesitesTemplate.cshtml");
+    //        string maganelzarasFofelugyeloFileContent = File.ReadAllText(maganelzarasFofelugyeloFilename);
 
-        //        foreach (var email in elkulonitesEmailDatas)
-        //        {
-        //            email.AlkalmazasUrl = url;
-        //            var content = Engine.Razor.RunCompile(elkulonitesFileContent, "elkulonites", null, email);
-        //            emailFunctions.SendEmailHTML(email.EmailAddresses, "Elkülönítés értesítés", content);
+    //        var vegszallitottFogvatartottFilename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/VegszallitottakTemplate.cshtml");
+    //        string vegszallitottFogvatartottFileContent = File.ReadAllText(vegszallitottFogvatartottFilename);
 
-        //            fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
-        //            {
-        //                ErtesitesTipus = "Elkülönítés értesítés",
-        //                Ertesitettek = email.EmailAddresses,
-        //                FegyelmiUgyszamok = email.Fegyelmi.Ugyszam,
-        //                ErvenyessegKezdete = DateTime.Now,
-        //                KeziRogzitoAdatok = true,
-        //                LetrehozasDatuma = DateTime.Now,
-        //                RogzitoIntezetId = 135,
-        //                RogzitoSzemelyId = 12
-        //            });
+    //        string url = ConfigurationManager.AppSettings["AlkalmazasUrl"];
 
-        //            fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
-        //        }
+    //        foreach (var email in elkulonitesEmailDatas)
+    //        {
+    //            email.AlkalmazasUrl = url;
+    //            var content = Engine.Razor.RunCompile(elkulonitesFileContent, "elkulonites", null, email);
+    //            emailFunctions.SendEmailHTML(email.EmailAddresses, "Elkülönítés értesítés", content);
 
-        //        foreach (var email in rendezvenyEmailDatas)
-        //        {
-        //            email.AlkalmazasUrl = url;
-        //            var content = Engine.Razor.RunCompile(rendezvenyFileContent, "rendezveny", null, email);
-        //            emailFunctions.SendEmailHTML(email.EmailAddresses, "Fegyelmi fenyítés végrehajtása", content);
-        //            if (email.KorlatozottFegyelmiList.Count > 0)
-        //                fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
-        //                {
-        //                    ErtesitesTipus = "Rendezvény eltiltás értesítés",
-        //                    Ertesitettek = email.EmailAddresses,
-        //                    FegyelmiUgyszamok = string.Join(";", email.KorlatozottFegyelmiList.Select(x => x.Ugyszam)),
-        //                    ErvenyessegKezdete = DateTime.Now,
-        //                    KeziRogzitoAdatok = true,
-        //                    LetrehozasDatuma = DateTime.Now,
-        //                    RogzitoIntezetId = 135,
-        //                    RogzitoSzemelyId = 12
-        //                });
-        //            if (email.EngedelyezettFegyelmiList.Count > 0)
-        //                fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
-        //                {
-        //                    ErtesitesTipus = "Rendezvény engedélyezés értesítés",
-        //                    Ertesitettek = email.EmailAddresses,
-        //                    FegyelmiUgyszamok = string.Join(";", email.EngedelyezettFegyelmiList.Select(x => x.Ugyszam)),
-        //                    ErvenyessegKezdete = DateTime.Now,
-        //                    KeziRogzitoAdatok = true,
-        //                    LetrehozasDatuma = DateTime.Now,
-        //                    RogzitoIntezetId = 135,
-        //                    RogzitoSzemelyId = 12
-        //                });
+    //            fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
+    //            {
+    //                ErtesitesTipus = "Elkülönítés értesítés",
+    //                Ertesitettek = email.EmailAddresses,
+    //                FegyelmiUgyszamok = email.Fegyelmi.Ugyszam,
+    //                ErvenyessegKezdete = DateTime.Now,
+    //                KeziRogzitoAdatok = true,
+    //                LetrehozasDatuma = DateTime.Now,
+    //                TelephelyId = 135,
+    //                RogzitoSzemelyId = 12
+    //            });
 
-        //            fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
-        //        }
+    //            fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
+    //        }
 
-        //        foreach (var email in targyiKorlatozasEmailDatas)
-        //        {
-        //            email.AlkalmazasUrl = url;
-        //            var content = Engine.Razor.RunCompile(targyiKorlatozasFileContent, "targyi", null, email);
-        //            emailFunctions.SendEmailHTML(email.EmailAddresses, "Fegyelmi fenyítés végrehajtása", content);
-        //            if (email.KorlatozottFegyelmiList.Count > 0)
-        //                fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
-        //                {
-        //                    ErtesitesTipus = "Tárgyi korlátozás értesítés",
-        //                    Ertesitettek = email.EmailAddresses,
-        //                    FegyelmiUgyszamok = string.Join(";", email.KorlatozottFegyelmiList.Select(x => x.Ugyszam)),
-        //                    ErvenyessegKezdete = DateTime.Now,
-        //                    KeziRogzitoAdatok = true,
-        //                    LetrehozasDatuma = DateTime.Now,
-        //                    RogzitoIntezetId = 135,
-        //                    RogzitoSzemelyId = 12
-        //                });
-        //            if (email.EngedelyezettFegyelmiList.Count > 0)
-        //                fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
-        //                {
-        //                    ErtesitesTipus = "Tárgyi korlátozás megszüntetés értesítés",
-        //                    Ertesitettek = email.EmailAddresses,
-        //                    FegyelmiUgyszamok = string.Join(";", email.EngedelyezettFegyelmiList.Select(x => x.Ugyszam)),
-        //                    ErvenyessegKezdete = DateTime.Now,
-        //                    KeziRogzitoAdatok = true,
-        //                    LetrehozasDatuma = DateTime.Now,
-        //                    RogzitoIntezetId = 135,
-        //                    RogzitoSzemelyId = 12
-        //                });
+    //        foreach (var email in rendezvenyEmailDatas)
+    //        {
+    //            email.AlkalmazasUrl = url;
+    //            var content = Engine.Razor.RunCompile(rendezvenyFileContent, "rendezveny", null, email);
+    //            emailFunctions.SendEmailHTML(email.EmailAddresses, "Fegyelmi fenyítés végrehajtása", content);
+    //            if (email.KorlatozottFegyelmiList.Count > 0)
+    //                fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
+    //                {
+    //                    ErtesitesTipus = "Rendezvény eltiltás értesítés",
+    //                    Ertesitettek = email.EmailAddresses,
+    //                    FegyelmiUgyszamok = string.Join(";", email.KorlatozottFegyelmiList.Select(x => x.Ugyszam)),
+    //                    ErvenyessegKezdete = DateTime.Now,
+    //                    KeziRogzitoAdatok = true,
+    //                    LetrehozasDatuma = DateTime.Now,
+    //                    TelephelyId = 135,
+    //                    RogzitoSzemelyId = 12
+    //                });
+    //            if (email.EngedelyezettFegyelmiList.Count > 0)
+    //                fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
+    //                {
+    //                    ErtesitesTipus = "Rendezvény engedélyezés értesítés",
+    //                    Ertesitettek = email.EmailAddresses,
+    //                    FegyelmiUgyszamok = string.Join(";", email.EngedelyezettFegyelmiList.Select(x => x.Ugyszam)),
+    //                    ErvenyessegKezdete = DateTime.Now,
+    //                    KeziRogzitoAdatok = true,
+    //                    LetrehozasDatuma = DateTime.Now,
+    //                    TelephelyId = 135,
+    //                    RogzitoSzemelyId = 12
+    //                });
 
-        //            fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
-        //        }
+    //            fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
+    //        }
 
-        //        foreach (var email in tobbletszolgaltatasEmailDatas)
-        //        {
-        //            email.AlkalmazasUrl = url;
-        //            var content = Engine.Razor.RunCompile(tobbletszolgaltatasFileContent, "tobbletszolgaltatas", null, email);
-        //            emailFunctions.SendEmailHTML(email.EmailAddresses, "Fegyelmi fenyítés végrehajtása", content);
+    //        foreach (var email in targyiKorlatozasEmailDatas)
+    //        {
+    //            email.AlkalmazasUrl = url;
+    //            var content = Engine.Razor.RunCompile(targyiKorlatozasFileContent, "targyi", null, email);
+    //            emailFunctions.SendEmailHTML(email.EmailAddresses, "Fegyelmi fenyítés végrehajtása", content);
+    //            if (email.KorlatozottFegyelmiList.Count > 0)
+    //                fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
+    //                {
+    //                    ErtesitesTipus = "Tárgyi korlátozás értesítés",
+    //                    Ertesitettek = email.EmailAddresses,
+    //                    FegyelmiUgyszamok = string.Join(";", email.KorlatozottFegyelmiList.Select(x => x.Ugyszam)),
+    //                    ErvenyessegKezdete = DateTime.Now,
+    //                    KeziRogzitoAdatok = true,
+    //                    LetrehozasDatuma = DateTime.Now,
+    //                    TelephelyId = 135,
+    //                    RogzitoSzemelyId = 12
+    //                });
+    //            if (email.EngedelyezettFegyelmiList.Count > 0)
+    //                fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
+    //                {
+    //                    ErtesitesTipus = "Tárgyi korlátozás megszüntetés értesítés",
+    //                    Ertesitettek = email.EmailAddresses,
+    //                    FegyelmiUgyszamok = string.Join(";", email.EngedelyezettFegyelmiList.Select(x => x.Ugyszam)),
+    //                    ErvenyessegKezdete = DateTime.Now,
+    //                    KeziRogzitoAdatok = true,
+    //                    LetrehozasDatuma = DateTime.Now,
+    //                    TelephelyId = 135,
+    //                    RogzitoSzemelyId = 12
+    //                });
 
-        //            if (email.KorlatozottFegyelmiList.Count > 0)
-        //                fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
-        //                {
-        //                    ErtesitesTipus = "Többletszolgáltatás megvonás értesítés",
-        //                    Ertesitettek = email.EmailAddresses,
-        //                    FegyelmiUgyszamok = string.Join(";", email.KorlatozottFegyelmiList.Select(x => x.Ugyszam)),
-        //                    ErvenyessegKezdete = DateTime.Now,
-        //                    KeziRogzitoAdatok = true,
-        //                    LetrehozasDatuma = DateTime.Now,
-        //                    RogzitoIntezetId = 135,
-        //                    RogzitoSzemelyId = 12
-        //                });
-        //            if (email.EngedelyezettFegyelmiList.Count > 0)
-        //                fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
-        //                {
-        //                    ErtesitesTipus = "Többletszolgáltatás engedélyezés értesítés",
-        //                    Ertesitettek = email.EmailAddresses,
-        //                    FegyelmiUgyszamok = string.Join(";", email.EngedelyezettFegyelmiList.Select(x => x.Ugyszam)),
-        //                    ErvenyessegKezdete = DateTime.Now,
-        //                    KeziRogzitoAdatok = true,
-        //                    LetrehozasDatuma = DateTime.Now,
-        //                    RogzitoIntezetId = 135,
-        //                    RogzitoSzemelyId = 12
-        //                });
+    //            fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
+    //        }
 
-        //            fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
-        //        }
+    //        foreach (var email in tobbletszolgaltatasEmailDatas)
+    //        {
+    //            email.AlkalmazasUrl = url;
+    //            var content = Engine.Razor.RunCompile(tobbletszolgaltatasFileContent, "tobbletszolgaltatas", null, email);
+    //            emailFunctions.SendEmailHTML(email.EmailAddresses, "Fegyelmi fenyítés végrehajtása", content);
 
-        //        foreach (var email in maganelzarasFofelugyeloEmailData)
-        //        {
-        //            email.AlkalmazasUrl = url;
-        //            var content = Engine.Razor.RunCompile(maganelzarasFofelugyeloFileContent, "maganelzarasFofelugyelo", null, email);
-        //            emailFunctions.SendEmailHTML(email.EmailAddresses, "Magánelzárás elrendelés értesítés", content);
+    //            if (email.KorlatozottFegyelmiList.Count > 0)
+    //                fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
+    //                {
+    //                    ErtesitesTipus = "Többletszolgáltatás megvonás értesítés",
+    //                    Ertesitettek = email.EmailAddresses,
+    //                    FegyelmiUgyszamok = string.Join(";", email.KorlatozottFegyelmiList.Select(x => x.Ugyszam)),
+    //                    ErvenyessegKezdete = DateTime.Now,
+    //                    KeziRogzitoAdatok = true,
+    //                    LetrehozasDatuma = DateTime.Now,
+    //                    TelephelyId = 135,
+    //                    RogzitoSzemelyId = 12
+    //                });
+    //            if (email.EngedelyezettFegyelmiList.Count > 0)
+    //                fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
+    //                {
+    //                    ErtesitesTipus = "Többletszolgáltatás engedélyezés értesítés",
+    //                    Ertesitettek = email.EmailAddresses,
+    //                    FegyelmiUgyszamok = string.Join(";", email.EngedelyezettFegyelmiList.Select(x => x.Ugyszam)),
+    //                    ErvenyessegKezdete = DateTime.Now,
+    //                    KeziRogzitoAdatok = true,
+    //                    LetrehozasDatuma = DateTime.Now,
+    //                    TelephelyId = 135,
+    //                    RogzitoSzemelyId = 12
+    //                });
 
-        //            fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
-        //            {
-        //                ErtesitesTipus = "Magánelzárás elrendelés értesítés",
-        //                Ertesitettek = email.EmailAddresses,
-        //                FegyelmiUgyszamok = email.Fegyelmi.Ugyszam,
-        //                ErvenyessegKezdete = DateTime.Now,
-        //                KeziRogzitoAdatok = true,
-        //                LetrehozasDatuma = DateTime.Now,
-        //                RogzitoIntezetId = 135,
-        //                RogzitoSzemelyId = 12
-        //            });
-        //            fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
-        //        }
+    //            fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
+    //        }
 
-        //        foreach (var email in vegszallitottFogvatartottEmailDatas)
-        //        {
-        //            email.AlkalmazasUrl = url;
-        //            var content = Engine.Razor.RunCompile(vegszallitottFogvatartottFileContent, "vegszallitott", null, email);
-        //            emailFunctions.SendEmailHTML(email.EmailAddresses, "Végszállított fogvatartottak magánelzárásának végrehajtása", content);
+    //        foreach (var email in maganelzarasFofelugyeloEmailData)
+    //        {
+    //            email.AlkalmazasUrl = url;
+    //            var content = Engine.Razor.RunCompile(maganelzarasFofelugyeloFileContent, "maganelzarasFofelugyelo", null, email);
+    //            emailFunctions.SendEmailHTML(email.EmailAddresses, "Magánelzárás elrendelés értesítés", content);
 
-        //            fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
-        //            {
-        //                ErtesitesTipus = "Végszállított fogvatartottak magánelzárásának végrehajtása",
-        //                Ertesitettek = email.EmailAddresses,
-        //                FegyelmiUgyszamok = string.Join(";", email.FegyelmiList.Select(x => x.Ugyszam)),
-        //                ErvenyessegKezdete = DateTime.Now,
-        //                KeziRogzitoAdatok = true,
-        //                LetrehozasDatuma = DateTime.Now,
-        //                RogzitoIntezetId = 135,
-        //                RogzitoSzemelyId = 12
-        //            });
+    //            fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
+    //            {
+    //                ErtesitesTipus = "Magánelzárás elrendelés értesítés",
+    //                Ertesitettek = email.EmailAddresses,
+    //                FegyelmiUgyszamok = email.Fegyelmi.Ugyszam,
+    //                ErvenyessegKezdete = DateTime.Now,
+    //                KeziRogzitoAdatok = true,
+    //                LetrehozasDatuma = DateTime.Now,
+    //                TelephelyId = 135,
+    //                RogzitoSzemelyId = 12
+    //            });
+    //            fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
+    //        }
 
-        //            fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
-        //        }
-        //    }
-        //}
+    //        foreach (var email in vegszallitottFogvatartottEmailDatas)
+    //        {
+    //            email.AlkalmazasUrl = url;
+    //            var content = Engine.Razor.RunCompile(vegszallitottFogvatartottFileContent, "vegszallitott", null, email);
+    //            emailFunctions.SendEmailHTML(email.EmailAddresses, "Végszállított fogvatartottak magánelzárásának végrehajtása", content);
 
-        //public void UpdateAutomatikusFelfuggesztes(object o)
-        //{
-        //    Log.Info("AutomatikusFelfuggesztes lock obj. előtt");
-        //    lock (this.lockObject)
-        //    {
-        //        FegyelmiUgyFunctions fegyelmiUgyFunctions = new FegyelmiUgyFunctions();
-        //        List<FelfuggesztesEmailData> emailDatas = fegyelmiUgyFunctions.UpdateAutomatikusFelfuggesztesTipusuUgyek(o);
-        //        EmailFunctions emailFunctions = new EmailFunctions();
+    //            fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
+    //            {
+    //                ErtesitesTipus = "Végszállított fogvatartottak magánelzárásának végrehajtása",
+    //                Ertesitettek = email.EmailAddresses,
+    //                FegyelmiUgyszamok = string.Join(";", email.FegyelmiList.Select(x => x.Ugyszam)),
+    //                ErvenyessegKezdete = DateTime.Now,
+    //                KeziRogzitoAdatok = true,
+    //                LetrehozasDatuma = DateTime.Now,
+    //                TelephelyId = 135,
+    //                RogzitoSzemelyId = 12
+    //            });
 
-        //        var filename = System.Web.Hosting.HostingEnvironment.MapPath("~/Views/EmailTemplates/UgyfelfuggesztesMegszuntetesTemplate.cshtml");
-        //        string FileContent = File.ReadAllText(filename);
+    //            fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
+    //        }
+    //    }
+    //}
 
-        //        string url = ConfigurationManager.AppSettings["AlkalmazasUrl"];
-
-        //        foreach (var email in emailDatas)
-        //        {
-        //            email.AlkalmazasUrl = url;
-        //            var content = Engine.Razor.RunCompile(FileContent, "templateKey", null, email);
-        //            try
-        //            {
-        //                emailFunctions.SendEmailHTML(email.EmailAddresses, "Automatikus fegyelmi eljárás felfüggesztések és megszakítások", content);
-        //                Log.Info("Email küldés, címek: " + email.EmailAddresses + "felfüggesztett ügyek: " + email.FelfuggesztettFegyelmiList.Count + "aktívra állított ügyek: " + email.AktivraAllitottFegyelmiList.Count);
-        //                if (email.FelfuggesztettFegyelmiList != null && email.FelfuggesztettFegyelmiList.Count > 0)
-        //                    fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
-        //                    {
-        //                        ErtesitesTipus = "Fegyelmi ügy felfüggesztés értesítés",
-        //                        Ertesitettek = email.EmailAddresses,
-        //                        FegyelmiUgyszamok = string.Join(";", email.FelfuggesztettFegyelmiList.Select(x => x.Ugyszam)),
-        //                        ErvenyessegKezdete = DateTime.Now,
-        //                        KeziRogzitoAdatok = true,
-        //                        LetrehozasDatuma = DateTime.Now,
-        //                        RogzitoIntezetId = 135,
-        //                        RogzitoSzemelyId = 12
-        //                    });
-        //                if (email.AktivraAllitottFegyelmiList != null && email.AktivraAllitottFegyelmiList.Count > 0)
-        //                    fegyelmiUgyFunctions.KonasoftBVFonixContext.EmailErtesitesek.Add(new Entities.JFK.FENY.EmailErtesites()
-        //                    {
-        //                        ErtesitesTipus = "Fegyelmi ügy felfüggesztés megszüntetés értesítés",
-        //                        Ertesitettek = email.EmailAddresses,
-        //                        FegyelmiUgyszamok = string.Join(";", email.AktivraAllitottFegyelmiList.Select(x => x.Ugyszam)),
-        //                        ErvenyessegKezdete = DateTime.Now,
-        //                        KeziRogzitoAdatok = true,
-        //                        LetrehozasDatuma = DateTime.Now,
-        //                        RogzitoIntezetId = 135,
-        //                        RogzitoSzemelyId = 12
-        //                    });
-
-        //                fegyelmiUgyFunctions.KonasoftBVFonixContext.BaseSaveChanges();
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                Log.Error("Email küldés hiba, címek: " + email.EmailAddresses, ex);
-        //            }
-        //        }
-        //    }
-        //}
-
-
-        private void RegisterAllListTypesModelBinder()
+    private void RegisterAllListTypesModelBinder()
         {
             ModelBinders.Binders.Add(typeof(List<sbyte>), new ListModelBinder());
             ModelBinders.Binders.Add(typeof(List<short>), new ListModelBinder());
@@ -586,18 +505,18 @@ namespace Edis.Fenyites
             IActiveDirectoryFunctions activeDirectoryFunctions = InjectionKernel.Instance.GetInstance<IActiveDirectoryFunctions>();
 
 
-            var noemi2020url = System.Configuration.ConfigurationManager.AppSettings["Noemi2020url"];
+            //var noemi2020url = System.Configuration.ConfigurationManager.AppSettings["Noemi2020url"];
 
-            if (string.IsNullOrWhiteSpace(noemi2020url))
-            {
-                Log.Debug("exotoolbarUrl is missing or empty!");
-                return;
-            }
+            //if (string.IsNullOrWhiteSpace(noemi2020url))
+            //{
+            //    Log.Debug("exotoolbarUrl is missing or empty!");
+            //    return;
+            //}
 
-#if DEBUG
-            Log.Debug("Debug mode, no exotoolbarUrl!");
-            return;
-#endif
+//#if DEBUG
+//            Log.Debug("Debug mode, no exotoolbarUrl!");
+//            return;
+//#endif
 
             string sid = windowsIdentity.User.Value;
             string email;

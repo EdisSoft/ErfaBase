@@ -136,7 +136,7 @@ namespace Edis.Functions.Fany
             {
                 JogosultsagCacheFunctions.AktualisIntezet = JogosultsagCacheFunctions.JogosultIntezetek.FirstOrDefault(i => i.Azonosito == kapottAzonosito);
                 if (JogosultsagCacheFunctions.AktualisIntezet != null)
-                    AlkalmazasKontextus.Kontextus.RogzitoIntezetId = JogosultsagCacheFunctions.AktualisIntezet.Id;
+                    AlkalmazasKontextus.Kontextus.RogzitoTelephelyId = JogosultsagCacheFunctions.AktualisIntezet.Id;
             }
             if (JogosultsagCacheFunctions.AktualisIntezet != null) return;
             int? intezetId = (JogosultsagCacheFunctions.JogosultIntezetek.Any()) ? JogosultsagCacheFunctions.JogosultIntezetek.First().Id : (int?)null;
@@ -183,7 +183,7 @@ namespace Edis.Functions.Fany
                 //        //AktualisIntezet = IntezetTarolo.Table.Where(x => x.Azonosito == "200").FirstOrDefault();
 
                 //        JogosultsagCacheFunctions.AktualisIntezet = IntezetTarolo.Table.Where(x => x.Id == legtobbetHasznalt.Key.Value).FirstOrDefault();
-                //        AlkalmazasKontextus.Kontextus.RogzitoIntezetId = JogosultsagCacheFunctions.AktualisIntezet.Id;
+                //        AlkalmazasKontextus.Kontextus.RogzitoTelephelyId = JogosultsagCacheFunctions.AktualisIntezet.Id;
                 //        //-LogGenerator.LogToFile("AktualisIntezet:" + AktualisIntezet.ToString(), 1);
                 //    }
 
@@ -193,7 +193,7 @@ namespace Edis.Functions.Fany
                 JogosultsagCacheFunctions.AktualisIntezet = JogosultsagCacheFunctions.JogosultIntezetek.FirstOrDefault();
                 if (JogosultsagCacheFunctions.AktualisIntezet != null)
                 {
-                    AlkalmazasKontextus.Kontextus.RogzitoIntezetId = JogosultsagCacheFunctions.AktualisIntezet.Id;
+                    AlkalmazasKontextus.Kontextus.RogzitoTelephelyId = JogosultsagCacheFunctions.AktualisIntezet.Id;
 
                 }
                 //-LogGenerator.LogToFile("AktualisIntezet:" + AktualisIntezet.ToString(), 1);
@@ -212,7 +212,7 @@ namespace Edis.Functions.Fany
         public bool VanJogosultsaga(string jogosultsagAzonosito)
         {
             var sid = AlkalmazasKontextus.Kontextus.AdUserIdentity;
-            var muveletTargyBvIntId = AlkalmazasKontextus.Kontextus.RogzitoIntezetId;
+            var muveletTargyBvIntId = AlkalmazasKontextus.Kontextus.RogzitoTelephelyId;
             return VanJogosultsaga(sid, jogosultsagAzonosito, (int?)muveletTargyBvIntId);
         }
 
@@ -230,7 +230,7 @@ namespace Edis.Functions.Fany
             //        if (JogosultsagCacheFunctions.Inicializalatlan())
             //        {
             //            Belepes(sid, AlkalmazasKontextus.Kontextus.ClientHostName);
-            //            muveletTargyBvIntId = AlkalmazasKontextus.Kontextus.RogzitoIntezetId;
+            //            muveletTargyBvIntId = AlkalmazasKontextus.Kontextus.RogzitoTelephelyId;
             //        }
             //        jogosultsagInformacio = JogosultsagCacheFunctions.KeresesJogosultsagInformacioCacheben(sid.User.Value,
             //                                                                                      jogosultsagAzonosito,
@@ -255,7 +255,7 @@ namespace Edis.Functions.Fany
             {
                 if (JogosultsagCacheFunctions.UserJogosultsagok.ContainsKey(jogosultsagAzonosito))
                 {
-                    vanJogosultsag = JogosultsagCacheFunctions.UserJogosultsagok[jogosultsagAzonosito].Contains(AlkalmazasKontextus.Kontextus.RogzitoIntezetId);
+                    vanJogosultsag = JogosultsagCacheFunctions.UserJogosultsagok[jogosultsagAzonosito].Contains(AlkalmazasKontextus.Kontextus.RogzitoTelephelyId);
                 }
             }
 #endif
@@ -379,7 +379,7 @@ namespace Edis.Functions.Fany
                 // User AD csoporttagságai                
 #endif
                 var kontextus = AlkalmazasKontextus.Kontextus ?? new AlkalmazasKontextus();
-                kontextus.RogzitoIntezetId = JogosultsagCacheFunctions.AktualisIntezet.Id;
+                kontextus.RogzitoTelephelyId = JogosultsagCacheFunctions.AktualisIntezet.Id;
 
                 AlkalmazasKontextus.Kontextus = kontextus;
                 List<GroupPrincipal> groupPrincipalLista = ADTarolo.ListazasUserGroupPrincipal(sid.User.Value);
@@ -391,14 +391,14 @@ namespace Edis.Functions.Fany
                 kontextus.SzemelyzetNev = szemelyzet.Nev;
 
                 var trKontextus = new TranzakcioAdatkontextus();
-                trKontextus.RogzitoIntezetId = JogosultsagCacheFunctions.AktualisIntezet.Id;
+                trKontextus.RogzitoTelephelyId = JogosultsagCacheFunctions.AktualisIntezet.Id;
                 trKontextus.SzemelyzetId = szemelyzet.Id;
                 //TranzakcioAdatKontextus.Kontextus.SzemelyzetId = szemelyzet.Id;
-                //TranzakcioAdatKontextus.Kontextus.RogzitoIntezetId = JogosultsagCacheFunctions.AktualisIntezet.Id;
+                //TranzakcioAdatKontextus.Kontextus.RogzitoTelephelyId = JogosultsagCacheFunctions.AktualisIntezet.Id;
 
                 TranzakcioAdatKontextus.Kontextus = trKontextus;
 
-                //-LogGenerator.LogToFile("RogzitoIntezetId: " + AlkalmazasKontextus.RogzitoIntezetId.ToString(), 1);
+                //-LogGenerator.LogToFile("RogzitoTelephelyId: " + AlkalmazasKontextus.RogzitoTelephelyId.ToString(), 1);
 
                 // Jogosultság cache feltöltése, belépési jogosultságok logolása
 
@@ -408,7 +408,7 @@ namespace Edis.Functions.Fany
                 // Üzenetküldés a belépésről
                 //AlkalmazasUzenetKezeles.UzenetKuldesSzemelynek(AlkalmazasKontextus.SzemelyzetId,
                 //                               AlkalmazasKontextus.SzemelyzetId,
-                //                               AlkalmazasKontextus.RogzitoIntezetId, 1,
+                //                               AlkalmazasKontextus.RogzitoTelephelyId, 1,
                 //                               "Belépés:"+sid.Name+";"+szemelyzet.Nev,
                 //                               uzenet);
             }
@@ -427,7 +427,7 @@ namespace Edis.Functions.Fany
                 var sidStr = sid.User.Value;
 
                 var kontextus = AlkalmazasKontextus.Kontextus ?? new AlkalmazasKontextus();
-                kontextus.RogzitoIntezetId = intezetId;
+                kontextus.RogzitoTelephelyId = intezetId;
                 kontextus.AdUserIdentity = sid;
                 JogosultsagCacheFunctions.AktualisIntezet = intezetLista.Single(f => f.Id == intezetId);
                 var szemelyzet = InjectionKernel.Instance.GetInstance<ISzemelyzetFunctions>().SzemelyzetLekeresVagyLetrehozas(sidStr, sid.Name, intezetId);
@@ -438,7 +438,7 @@ namespace Edis.Functions.Fany
               
                 var trKontextus = new TranzakcioAdatkontextus
                 {
-                    RogzitoIntezetId = intezetId,
+                    RogzitoTelephelyId = intezetId,
                     SzemelyzetId = szemelyzet.Id,
                     RogzitoSzemelyLoginNev = kontextus.SzemelyzetLoginNev,
                     RogzitoSzemelyNev = szemelyzet.Nev,
@@ -465,7 +465,7 @@ namespace Edis.Functions.Fany
                 var sidStr = user.Sid.Value;
 
                 var kontextus = AlkalmazasKontextus.Kontextus ?? new AlkalmazasKontextus();
-                kontextus.RogzitoIntezetId = intezetId;
+                kontextus.RogzitoTelephelyId = intezetId;
                 //kontextus.AdUserIdentity = user.;
                 JogosultsagCacheFunctions.AktualisIntezet = intezetLista.Single(f => f.Id == intezetId);
                 var szemelyzet = SzemelyzetTarolo.SzemelyzetLekeresVagyLetrehozas(sidStr, user.Name, intezetId);
@@ -476,7 +476,7 @@ namespace Edis.Functions.Fany
                 
                 var trKontextus = new TranzakcioAdatkontextus
                 {
-                    RogzitoIntezetId = intezetId,
+                    RogzitoTelephelyId = intezetId,
                     SzemelyzetId = szemelyzet.Id,
                     RogzitoSzemelyLoginNev = kontextus.SzemelyzetLoginNev,
                     RogzitoSzemelyNev = szemelyzet.Nev,
@@ -640,7 +640,7 @@ namespace Edis.Functions.Fany
         public List<GroupPrincipal> ListazasGroupPrincipal()
         {
             var jogosultsagInformacio = VanJogosultsaga(Jogosultsagok.ARIndex.ToString());
-            var intezetId = AlkalmazasKontextus.Kontextus.RogzitoIntezetId;
+            var intezetId = AlkalmazasKontextus.Kontextus.RogzitoTelephelyId;
             var ouString = (intezetId != null) ? IntezetTarolo.Table.Where(x => x.Id == (int)intezetId).FirstOrDefault().Azonosito2 : null;
             var groupLista = ADTarolo.ListazasGroupPrincipal(ouString);
             return groupLista;

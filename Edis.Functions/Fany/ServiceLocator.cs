@@ -43,7 +43,7 @@ namespace Edis.Functions.Fany
 
             #region JFK
             kernel.RegisterInRequestScope<IFanyFegyelmiUgyFunctions, FanyFegyelmiUgyFunctions>();
-            kernel.RegisterInRequestScope<IFegyelmiUgyFunctions, FegyelmiUgyFunctions>();
+            kernel.RegisterInRequestScope<IFegyelmiUgyFunctions, RekaFunctions>();
             kernel.RegisterInRequestScope<IFenyitesDashboardFunctions, FenyitesDashboardFunctions>();
             kernel.RegisterInRequestScope<IIktatottNyomtatvanyokFunctions, IktatottNyomtatvanyokFunctions>();
             kernel.RegisterInRequestScope<IIktatottDokumentumokFunctions, IktatottDokumentumokFunctions>();

@@ -23,7 +23,7 @@ namespace Edis.Fenyites.Controllers
             var log = "Személy:" + AlkalmazasKontextusFunctions.Kontextus.SzemelyzetNev + "\n ";
             log+= "Személy Id:" + AlkalmazasKontextusFunctions.Kontextus.SzemelyzetId + "\n ";
             log+= "Személy sid:" + AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid + "\n ";
-            log+= "IntezetId:" + AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId + "\n ";
+            log+= "IntezetId:" + AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId + "\n ";
             log+= "Log:" + data;
             Log.Info(log);
             return Json(new { success=true });

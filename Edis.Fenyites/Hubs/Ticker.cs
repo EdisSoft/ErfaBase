@@ -36,7 +36,7 @@ namespace Edis.Fenyites.Hubs
         {
             Clients = clients;
             FenyitesDashboardFunctions.OnFegyelmiUgyValtozasFany += OnFegyelmiUgyValtozasFany;
-            FegyelmiUgyFunctions.OnFegyelmiUgyValtozas += OnFegyelmiUgyValtozas;
+            RekaFunctions.OnFegyelmiUgyValtozas += OnFegyelmiUgyValtozas;
             EsemenyekFunctions.OnEsemenyValtozas += OnFegyelmiUgyValtozas;
             //F3JutalomFunctions.OnJutalomUgyValtozas += OnJutalomUgyValtozas;
         }
@@ -146,7 +146,7 @@ namespace Edis.Fenyites.Hubs
                     fegyelmiUgyIds.AddRange(ujUgyIdList);
                     fegyelmiUgyIds.AddRange(valtozottUgyIdList);
                     List<FegyelmiUgyListItemViewModel> fegyelmiUgyek = new List<FegyelmiUgyListItemViewModel>();
-                    using (FegyelmiUgyFunctions fegyelmiUgyFunctions = new FegyelmiUgyFunctions())
+                    using (RekaFunctions fegyelmiUgyFunctions = new RekaFunctions())
                     {
                         fegyelmiUgyek = fegyelmiUgyFunctions.GetFegyelmiUgyekByIds(fegyelmiUgyIds);
                     }
@@ -183,7 +183,7 @@ namespace Edis.Fenyites.Hubs
                     List<int> fegyelmiUgyIds = new List<int>();
                     fegyelmiUgyIds.AddRange(megszuntUgyIdList);
                     List<FegyelmiUgyListItemViewModel> fegyelmiUgyek = new List<FegyelmiUgyListItemViewModel>();
-                    using (FegyelmiUgyFunctions fegyelmiUgyFunctions = new FegyelmiUgyFunctions())
+                    using (RekaFunctions fegyelmiUgyFunctions = new RekaFunctions())
                     {
                         fegyelmiUgyek = fegyelmiUgyFunctions.GetFegyelmiUgyekByIds(fegyelmiUgyIds);
                     }
@@ -252,7 +252,7 @@ namespace Edis.Fenyites.Hubs
             try
             {                
                 List<AktivitasFolyamModel> getAktivitasList = new List<AktivitasFolyamModel>();
-                using (FegyelmiUgyFunctions fegyelmiUgyFunctions = new FegyelmiUgyFunctions())
+                using (RekaFunctions fegyelmiUgyFunctions = new RekaFunctions())
                 {
                     getAktivitasList = fegyelmiUgyFunctions.GetAktivitasFolyamList(null,valtozottUgyIdList);
                 }
@@ -319,7 +319,7 @@ namespace Edis.Fenyites.Hubs
                 fegyelmiUgyIds.AddRange(ujFegyelmiUgyek);
                 fegyelmiUgyIds.AddRange(megvaltozottFegyelmiUgyek);
                 List<FegyelmiUgyListItemViewModel> result = new List<FegyelmiUgyListItemViewModel>();
-                using (FegyelmiUgyFunctions fegyelmiUgyFunctions = new FegyelmiUgyFunctions())
+                using (RekaFunctions fegyelmiUgyFunctions = new RekaFunctions())
                 {
                     result = fegyelmiUgyFunctions.GetFegyelmiUgyekByIds(fegyelmiUgyIds);
                 }

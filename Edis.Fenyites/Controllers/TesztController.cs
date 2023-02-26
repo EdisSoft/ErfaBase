@@ -42,7 +42,7 @@ namespace Edis.Fenyites.Controllers
 
         public JsonResult EmailData()
         {
-            var fegyelmiUgyFunctions = new FegyelmiUgyFunctions();
+            var fegyelmiUgyFunctions = new RekaFunctions();
 
             List<ElkulonitesEmailData> elkulonitesEmailDatas = fegyelmiUgyFunctions.FegyelmiUgyElkulonitesErtesitoAdatok();
             List<RendezvenyErtesitesEmailData> rendezvenyEmailDatas = fegyelmiUgyFunctions.FegyelmiUgyRendezvenyErtesitesEmailAdatok();

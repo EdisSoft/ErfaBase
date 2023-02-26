@@ -110,7 +110,7 @@ namespace Edis.Fenyites.Controllers
             var currentEszlelo = SzemelyzetFunctions.GetAdFegyelmiUser(currentEszleloSzemelyzet);
             List<AdFegyelmiUserItem> egyszemelyesNemModosithatoLista = new List<AdFegyelmiUserItem>();
             egyszemelyesNemModosithatoLista.Add(currentEszlelo);
-            int intezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+            int intezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId;
             var fegyelmiUgy = FegyelmiUgyFunctions.FindById(fegyelmiUgyIds.First());
             var reintegraciosTiszt = FegyelmiUgyFunctions.GetReintegraciosTiszt(fegyelmiUgy.FogvatartottId);
             var esemenyEszeloId = EsemenyekFunctions.FindById(fegyelmiUgy.EsemenyId).EszleloId;
@@ -1222,7 +1222,7 @@ namespace Edis.Fenyites.Controllers
                            Jogosultsagok.Jfk_fegyjutmegtekinto)]
         public JsonResult GetaktivitasFolyamList()
         {
-            var model = FegyelmiUgyFunctions.GetAktivitasFolyamList(AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId, null);
+            var model = FegyelmiUgyFunctions.GetAktivitasFolyamList(AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId, null);
             return Json(model);
         }
 

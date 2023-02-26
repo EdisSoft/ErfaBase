@@ -21,13 +21,13 @@ namespace Edis.Entities.Base
         public bool KeziRogzitoAdatok { get; set; }
 
         [Column("ROGZITO_INTEZET_ID")]
-        public int RogzitoIntezetId { get; set; }
+        public int RogzitoTelephelyId { get; set; }
 
         [Column("ERVENYESSEG_KEZD")]
         public DateTime ErvenyessegKezdete { get; set; }
 
-        [ForeignKey(nameof(RogzitoIntezetId))]
-        public virtual Intezet RogzitoIntezet { get; set; }
+        [ForeignKey(nameof(RogzitoTelephelyId))]
+        public virtual Intezet RogzitoTelephely { get; set; }
 
         [ForeignKey(nameof(RogzitoSzemelyId))]
         public virtual Szemelyzet RogzitoSzemely { get; set; }

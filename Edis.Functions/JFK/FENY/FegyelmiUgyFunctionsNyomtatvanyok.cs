@@ -37,7 +37,7 @@
     using static Edis.Entities.Enums.Cimke.CimkeEnums;
     using static Edis.Entities.Enums.Cimke.Fegyelmi.CimkeEnums;
 
-    public partial class FegyelmiUgyFunctions : KonasoftBVFonixFunctionsBase<FegyelmiUgyViewModel, FegyelmiUgy>, IFegyelmiUgyFunctions
+    public partial class RekaFunctions : KonasoftBVFonixFunctionsBase<FegyelmiUgyViewModel, FegyelmiUgy>, IFegyelmiUgyFunctions
     {
 
 
@@ -3083,19 +3083,19 @@
                     //naplo = NaploFunctions.FindById(esemenyId);
 
                     var esemeny = KonasoftBVFonixContext.Esemenyek
-                        .Include(x => x.RogzitoIntezet)
-                        .Include(x => x.RogzitoIntezet.CimHelyseg)
+                        .Include(x => x.RogzitoTelephely)
+                        .Include(x => x.RogzitoTelephely.CimHelyseg)
                         .Include(x => x.Hely)
                         .Single(x => x.Id == esemenyId);
 
                     List<FegyelmiUgy> fegyelmiUgyek = new List<FegyelmiUgy>();
                     if (fegyelmiUgyId != null)
                     {
-                        var fegyelmiUgy = new FegyelmiUgyFunctions().Table.FirstOrDefault(x => x.Id == fegyelmiUgyId.Value);
+                        var fegyelmiUgy = new RekaFunctions().Table.FirstOrDefault(x => x.Id == fegyelmiUgyId.Value);
                         fegyelmiUgyek.Add(fegyelmiUgy);
                     }
                     else
-                        fegyelmiUgyek = new FegyelmiUgyFunctions().GetFegyelmiUgyekByEsemenyId(esemenyId);
+                        fegyelmiUgyek = new RekaFunctions().GetFegyelmiUgyekByEsemenyId(esemenyId);
 
                     //List<OsszefoglaloJelentesNyomtatasModel> results = GetOsszefoglalojelentesNyomtatasAdat(naplo.FegyelmiUgyId);
                     //fegyelmiUgy = GetFegyelmiUgyEntityById(naplo.FegyelmiUgyId);
@@ -3131,10 +3131,10 @@
 
                             result = new KarjelentoLapDocxNyomtatasModel()
                             {
-                                IntezetNev = esemeny.RogzitoIntezet.Nev,
-                                IntezetCim = $"{esemeny.RogzitoIntezet.CimIranyitoszam} {esemeny.RogzitoIntezet.CimHelyseg.Nev}, {esemeny.RogzitoIntezet.CimUtca} {esemeny.RogzitoIntezet.CimHazszam}",
+                                IntezetNev = esemeny.RogzitoTelephely.Nev,
+                                IntezetCim = $"{esemeny.RogzitoTelephely.CimIranyitoszam} {esemeny.RogzitoTelephely.CimHelyseg.Nev}, {esemeny.RogzitoTelephely.CimUtca} {esemeny.RogzitoTelephely.CimHazszam}",
                                 Ugyszam = fegyelmiUgy.UgySorszamaIntezetAzon + "/" + fegyelmiUgy.UgySorszamaEv + "/" + fegyelmiUgy.UgySorszama,
-                                KaresetHelye = esemeny.RogzitoIntezet.Nev,
+                                KaresetHelye = esemeny.RogzitoTelephely.Nev,
                                 KaresetIdeje = $"{esemeny.EsemenyDatuma.ToShortDateString()}",
                                 FogvatartottNeve = $"{fogvatartott.FogvatartottSzemelyesAdatai.SzuletesiCsaladiNev} {fogvatartott.FogvatartottSzemelyesAdatai.SzuletesiUtonev}",
                                 Nytsz = $"{fogvatartott.NyilvantartasiAzonosito}",
@@ -3144,8 +3144,8 @@
                                 Lakcim = $"{fogvatartott.FogvatartottSzemelyesAdatai.AllandoLakcimIranyitoszam} {fogvatartott.FogvatartottSzemelyesAdatai.AllandoLakcimHelysegnev}, " +
                                     $"{fogvatartott.FogvatartottSzemelyesAdatai.AllandoLakcimUtca} {fogvatartott.FogvatartottSzemelyesAdatai.AllandoLakcimHazszam}",
                                 KaresetLeirasa = esemeny.Leiras,
-                                BejelentoKeltezes = $"{esemeny.RogzitoIntezet.CimHelyseg.Nev}, {esemeny.LetrehozasDatuma.ToShortDateString()}",
-                                AtvevoKeltezes = $"{esemeny.RogzitoIntezet.CimHelyseg.Nev}, {esemeny.LetrehozasDatuma.ToShortDateString()}"
+                                BejelentoKeltezes = $"{esemeny.RogzitoTelephely.CimHelyseg.Nev}, {esemeny.LetrehozasDatuma.ToShortDateString()}",
+                                AtvevoKeltezes = $"{esemeny.RogzitoTelephely.CimHelyseg.Nev}, {esemeny.LetrehozasDatuma.ToShortDateString()}"
                             };
                             
 

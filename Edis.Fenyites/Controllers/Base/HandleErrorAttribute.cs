@@ -201,7 +201,7 @@ namespace Edis.Fenyites.Controllers.Base
             string ErrorText = string.Format("Hely:{0}\r\nSzemelyzetId:{1}\r\nIntezetId:{2}\r\nIpAddress:{3}\r\nSessionId:{4}\r\nhttpMethod:{5}\r\nValtozok:{6}\r\nStackTrace:{7}\r\n",
                Where,
                appsettingsFunctions.Kontextus.SzemelyzetId,
-               appsettingsFunctions.Kontextus.RogzitoIntezetId,
+               appsettingsFunctions.Kontextus.RogzitoTelephelyId,
                ip,
                sessionId,
                httpMethod,

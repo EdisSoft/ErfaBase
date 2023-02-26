@@ -4,7 +4,7 @@
       v-show="visible"
       v-click-outside="Hide"
       class="slidePanel slidePanel-right slidePanel-show w-p15 w-p50"
-      style="overflow-y: auto;"
+      style="overflow-y: auto"
       id="slidepanel-fegyelmi-ugy"
     >
       <div class="slidePanel-content">
@@ -59,7 +59,7 @@
             class="slidePanel-actions"
             aria-label="actions"
             role="group"
-            style="min-height: 40px;"
+            style="min-height: 40px"
           >
             <b-button
               type="button"
@@ -73,7 +73,8 @@
           </div>
           <div v-if="fegyelmiUgy">
             <h1 class="white mb-5 slidepanel-title">
-              {{ fegyelmiUgy.PrjCode }} {{ fegyelmiUgy.ObsStartDate | toShortDate }}
+              {{ fegyelmiUgy.PrjCode + ': ' + fegyelmiUgy.Szabszam }}
+              {{ fegyelmiUgy.ObsStartDate | toShortDate }}
             </h1>
             <span
               class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
@@ -90,7 +91,7 @@
             <span
               class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
               v-b-tooltip="{
-                title: 'Fegyelmi ügy típusa',
+                title: 'Határidő',
                 html: true,
                 container: '#slidepanel-fegyelmi-ugy',
                 delay: { show: 500, hide: 100 },
@@ -121,8 +122,8 @@
                 trigger: 'hover',
               }"
               v-if="fegyelmiUgy.Elanyag"
-              >
-              {{ fegyelmiUgy.Elanyag  }}
+            >
+              {{ fegyelmiUgy.Elanyag }}
             </span>
             <span
               class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
@@ -135,9 +136,8 @@
               }"
               v-if="fegyelmiUgy.Kellekek"
             >
-              {{fegyelmiUgy.Kellekek}}
+              {{ fegyelmiUgy.Kellekek }}
             </span>
-            
           </div>
         </header>
         <div
@@ -152,7 +152,6 @@
               <div
                 class="slidePanel-inner-section border-bottom-0 pt-15 pb-40 pr-5"
               >
-                
                 <div
                   class="nav-tabs-horizontal nav-tabs-animate position-relative"
                   data-plugin="tabs"
@@ -174,11 +173,7 @@
                           Anyagok
                         </a>
                       </li>
-                      <li
-                        class="nav-item"
-                        role="presentation"
-                        
-                      >
+                      <li class="nav-item" role="presentation">
                         <a
                           class="nav-link pl-0"
                           data-toggle="tab"
@@ -192,7 +187,6 @@
                           Korpuszok
                         </a>
                       </li>
-                      
                     </ul>
                     <b-dropdown
                       id="dropdown-dropleft"
@@ -219,7 +213,7 @@
                         "
                         :disabled="
                           !opcionalisUgyek.ModalIdToOpen &&
-                            !opcionalisUgyek.FunctionToRun
+                          !opcionalisUgyek.FunctionToRun
                         "
                         ><span>{{
                           opcionalisUgyek.Text
@@ -238,7 +232,7 @@
                         "
                         :disabled="
                           !fixUgyek.ModalIdToOpen &&
-                            !opcionalisUgyek.FunctionToRun
+                          !opcionalisUgyek.FunctionToRun
                         "
                       >
                         {{ fixUgyek.Text }}</b-dropdown-item-button
@@ -258,38 +252,84 @@
                         role="tablist"
                         v-if="!isNaploBejegyzesLoading"
                       >
-                      <ul class="list-style-none list-group list-group-flush">
-                        <li v-for="(alkatresz, index) in alkatreszek" :key="index" class="d-flex flex-row list-group-item">
-                          <p class="d-flex flex-column justify-content-between flex-grow-1 flex-shrink-1 px-10">
-                            <span>{{ alkatresz.KorpNev }}</span>
-                            <span>{{ alkatresz.PrdInfo2 }}</span>
-                          </p>
-                          <p class="flex-grow-1 flex-shrink-1 px-10"><span
-              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm w-p100"
-              v-b-tooltip="{
-                title: 'Fegyelmi ügy státusza',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="alkatresz.Mennyiseg"
-              >{{ alkatresz.Mennyiseg }}</span
-            ></p>
-                          <p class="flex-grow-1 flex-shrink-1 px-10"><span
-              class="badge badge-outline badge-warning mr-5 bg-white font-weight-400 shadow-sm w-p100"
-              v-b-tooltip="{
-                title: 'Fegyelmi ügy státusza',
-                html: true,
-                container: '#slidepanel-fegyelmi-ugy',
-                delay: { show: 500, hide: 100 },
-                trigger: 'hover',
-              }"
-              v-if="alkatresz.KorpIdo"
-              >{{ alkatresz.KorpIdo }}</span
-            ></p>
-                        </li>
-                      </ul>
+                        <ul class="list-style-none list-group list-group-flush">
+                          <li
+                            v-for="(alkatresz, index) in alkatreszek"
+                            :key="index"
+                            class="d-flex flex-row list-group-item"
+                          >
+                            <p
+                              class="d-flex flex-column justify-content-between flex-grow-1 flex-shrink-1 px-10"
+                            >
+                              <span>{{ alkatresz.ItmItemNumber }}</span>
+                              <span>{{ alkatresz.ItmDescription }}</span>
+                            </p>
+                            <p class="flex-grow-1 flex-shrink-1 px-10">
+                              <span
+                                class="badge badge-outline badge-warning mr-5 bg-white font-weight-400 shadow-sm w-p100"
+                                v-b-tooltip="{
+                                  title: 'Alkatrész típus',
+                                  html: true,
+                                  container: '#slidepanel-fegyelmi-ugy',
+                                  delay: { show: 500, hide: 100 },
+                                  trigger: 'hover',
+                                }"
+                                v-if="alkatresz.IcgCode"
+                                >{{
+                                  alkatresz.IcgCode + ': ' + alkatresz.Icg2Code
+                                }}
+                              </span>
+                            </p>
+                            <p class="flex-grow-1 flex-shrink-1 px-10">
+                              <span
+                                class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm w-p100"
+                                v-b-tooltip="{
+                                  title: 'Szükséges mennyiség',
+                                  html: true,
+                                  container: '#slidepanel-fegyelmi-ugy',
+                                  delay: { show: 500, hide: 100 },
+                                  trigger: 'hover',
+                                }"
+                                v-if="alkatresz.OriReqQty"
+                                >{{
+                                  alkatresz.OriReqQty +
+                                  ' ' +
+                                  alkatresz.PrimaryUOMCode
+                                }}
+                              </span>
+                            </p>
+                            <p class="flex-grow-1 flex-shrink-1 px-10">
+                              <span
+                                class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm w-p100"
+                                v-b-tooltip="{
+                                  title: 'Tábla mennyiség',
+                                  html: true,
+                                  container: '#slidepanel-fegyelmi-ugy',
+                                  delay: { show: 500, hide: 100 },
+                                  trigger: 'hover',
+                                }"
+                                v-if="alkatresz.TablaDb"
+                                >{{ alkatresz.TablaDb + ' tábla' }}
+                              </span>
+                            </p>
+                            <p class="flex-grow-1 flex-shrink-1 px-10">
+                              <span
+                                class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm w-p100"
+                                v-b-tooltip="{
+                                  title: 'Vastagság, és színkód',
+                                  html: true,
+                                  container: '#slidepanel-fegyelmi-ugy',
+                                  delay: { show: 500, hide: 100 },
+                                  trigger: 'hover',
+                                }"
+                                v-if="alkatresz.ItmavValue"
+                                >{{
+                                  alkatresz.DimZ + 'mm, ' + alkatresz.ItmavValue
+                                }}
+                              </span>
+                            </p>
+                          </li>
+                        </ul>
                         <!-- <component
                           v-for="(alkatresz, index) in alkatreszek"
                           :key="index"
@@ -326,7 +366,17 @@
                         role="tablist"
                         v-if="!isNaploBejegyzesLoading"
                       >
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing
+                          elit, sed do eiusmod tempor incididunt ut labore et
+                          dolore magna aliqua. Ut enim ad minim veniam, quis
+                          nostrud exercitation ullamco laboris nisi ut aliquip
+                          ex ea commodo consequat. Duis aute irure dolor in
+                          reprehenderit in voluptate velit esse cillum dolore eu
+                          fugiat nulla pariatur. Excepteur sint occaecat
+                          cupidatat non proident, sunt in culpa qui officia
+                          deserunt mollit anim id est laborum.
+                        </p>
                       </div>
                       <div v-else>
                         <div class="d-flex justify-content-center mt-4">
@@ -380,7 +430,7 @@ import { timeout } from '../../utils/common';
 export default {
   name: 'k-slide-panel-fegyelmi-ugy-reszletek',
   props: ['id'],
-  data: function() {
+  data: function () {
     return {
       prdId: 0,
       fegyelmiUgyIds: [],
@@ -396,7 +446,7 @@ export default {
       osszevontesemenyek: [], //TODO
     };
   },
-  mounted: function() {
+  mounted: function () {
     eventBus.$on('Sidebar:' + this.id, this.OnSidebarOpen);
     eventBus.$on('Sidebar:' + this.id + ':refresh', this.OnSideBarRefresh);
     eventBus.$on(
@@ -422,9 +472,9 @@ export default {
       if (state) {
         data.fegyelmiUgyIds = data.fegyelmiUgyIds || [];
         console.log(
-          `Sidebar prdId: ${
-            data.prdId
-          }, Ids: ${data.fegyelmiUgyIds.join(', ')}`,
+          `Sidebar prdId: ${data.prdId}, Ids: ${data.fegyelmiUgyIds.join(
+            ', '
+          )}`,
           data
         );
         data.fegyelmiUgyIds = data.fegyelmiUgyIds || [];
@@ -467,9 +517,7 @@ export default {
     },
     async OnDokumentumokRefresh() {
       if (this.$refs.iktatottNyomtatvanyokTable) {
-        this.$refs.iktatottNyomtatvanyokTable.GetDokumentumok(
-          this.prdId
-        );
+        this.$refs.iktatottNyomtatvanyokTable.GetDokumentumok(this.prdId);
       }
     },
     async OpenModal(
@@ -506,7 +554,7 @@ export default {
     /*FanyCategory: function(event) {
         this.isActive = true;
       },*/
-    LoadFegyelmiUgyAdatok: async function(prdId) {
+    LoadFegyelmiUgyAdatok: async function (prdId) {
       this.isNaploBejegyzesLoading = true;
       try {
         this.Show(prdId);
@@ -532,7 +580,7 @@ export default {
         console.log(err);
       }
     },
-    LoadOsszevontFegyelmiUgyek: async function(prdId) {
+    LoadOsszevontFegyelmiUgyek: async function (prdId) {
       try {
         this.osszevontesemenyek = [];
         let result = await apiService.GetOsszevontFegyelmiUgyekForFegyelmiUgy({
@@ -563,7 +611,7 @@ export default {
         console.log(errorObj);
       }
     },
-    Show: function() {
+    Show: function () {
       //this.url = url;
       this.visible = true;
       this.canClose = false;
@@ -573,7 +621,7 @@ export default {
         this.canClose = true;
       }, 350);
     },
-    Hide: function() {
+    Hide: function () {
       //debugger;
       if (!this.canClose) {
         return;
@@ -588,10 +636,10 @@ export default {
         this.$v.$reset();
       }
     },
-    StartLoader: function() {
+    StartLoader: function () {
       this.isLoading = true;
     },
-    EndLoader: function() {
+    EndLoader: function () {
       this.isLoading = false;
     },
     OpenFegyelmiUgyElrendelesModal(id) {
@@ -754,17 +802,17 @@ export default {
         this.GetFegyelmiUgyFromServer(id);
       } else {
         this.fegyelmiUgy = this.fegyelmiUgyek.filter(
-          x => x.FegyelmiUgyId == id
+          (x) => x.FegyelmiUgyId == id
         )[0];
         this.prdId = id;
         //console.log('nem updateFromServer', this.fegyelmiUgy);
       }
       this.LoadOsszevontFegyelmiUgyek(id);
     },
-    IktatottNyomtatvanyokTabClick: function() {
+    IktatottNyomtatvanyokTabClick: function () {
       this.OnDokumentumokRefresh();
     },
-    CsatolmanyokTabClick: function() {},
+    CsatolmanyokTabClick: function () {},
   },
   computed: {
     ...mapGetters({
@@ -807,9 +855,10 @@ export default {
       if (!this.fegyelmiUgy) {
         return null;
       }
-      let fegyelmiUgyMuveletekObj = FegyelmiUgyFunctions.GetFegyelmiUgyMuveletekAsObject(
-        [this.fegyelmiUgy]
-      );
+      let fegyelmiUgyMuveletekObj =
+        FegyelmiUgyFunctions.GetFegyelmiUgyMuveletekAsObject([
+          this.fegyelmiUgy,
+        ]);
       return fegyelmiUgyMuveletekObj;
     },
     feltoltesek() {
@@ -842,7 +891,7 @@ export default {
   },
   watch: {
     isActive: {
-      handler: function(value) {
+      handler: function (value) {
         if (value) {
           //this.StartLoader();
         }
@@ -850,14 +899,14 @@ export default {
       immediate: true,
     },
     prdId: {
-      handler: function(value) {
+      handler: function (value) {
         if (value) {
         }
       },
       immediate: true,
     },
   },
-  destroyed: function() {},
+  destroyed: function () {},
 };
 </script>
 <style scoped>

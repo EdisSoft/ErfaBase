@@ -87,7 +87,7 @@ namespace Edis.Fenyites.Controllers
             int? intezetId = null;
             if (kellIntezet.GetValueOrDefault(false) == true)
             {
-                intezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+                intezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId;
             }
             List<KSelect2ItemModel> queryResult = EsemenyekFunctions.FindFogvatartottakForSelect(term, intezetId);
             List<KSelect2ItemModel> result = new List<KSelect2ItemModel>();

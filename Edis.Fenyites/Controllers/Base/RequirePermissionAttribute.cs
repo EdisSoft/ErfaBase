@@ -72,7 +72,7 @@ namespace Edis.Fenyites.Controllers.Base
 
                     //if (returnType == typeof(JsonResult) || context.HttpContext.Request.IsAjaxRequest())
                     //{
-                    Log.Info($"Nincs jogosultsága szemelyId: {AlkalmazasKontextusFunctions.Kontextus.SzemelyzetId} intezetId: {AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId} url: {context.HttpContext.Request.RawUrl}");
+                    Log.Info($"Nincs jogosultsága szemelyId: {AlkalmazasKontextusFunctions.Kontextus.SzemelyzetId} intezetId: {AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId} url: {context.HttpContext.Request.RawUrl}");
 
 
                     context.Result = new RedirectToRouteResult(new RouteValueDictionary(new

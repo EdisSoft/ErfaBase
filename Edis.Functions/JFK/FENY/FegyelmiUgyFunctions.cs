@@ -37,7 +37,7 @@
 
     //using Edis.ViewModels.JFK.FENY.Email.VegszallitottFogvatartottEmail;
 
-    public partial class FegyelmiUgyFunctions : KonasoftBVFonixFunctionsBase<FegyelmiUgyViewModel, FegyelmiUgy>, IFegyelmiUgyFunctions
+    public partial class RekaFunctions : KonasoftBVFonixFunctionsBase<FegyelmiUgyViewModel, FegyelmiUgy>, IFegyelmiUgyFunctions
     {
         public delegate void FegyelmiUgyValtozasEvent(List<int> ujUgyIdList, List<int> valtozottUgyIdList, List<int> megszuntUgyIdList);
         public static event FegyelmiUgyValtozasEvent OnFegyelmiUgyValtozas;
@@ -1369,7 +1369,7 @@
                             AlairtaFl = !model.PanasszalElt,
                             Vegleges = model.IsVegleges,
                             JegyzokonyvTartalma = $"{model.Leiras}{szandekossagSzoveg}",
-                            RogzitoIntezetId = aktIntezet,
+                            RogzitoTelephelyId = aktIntezet,
                             TipusCimkeId = (int)FegyelmiNaploTipus.HatarozatRogzitese,
                             DonteshozoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(WindowsIdentity.GetCurrent().User.Value, null, null).Id,
                             FenyitesTipusCimkeId = model.FenyitesTipusaCimkeId,
@@ -1405,7 +1405,7 @@
 
                 //    new F3VegrehajtasiListaFunctions().CreateBFBElojegyzes(
                 //        AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                //        AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                //        AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                 //        fegyelmiUgy.FogvatartottId);
                 //}
             }
@@ -1443,7 +1443,7 @@
                             }
                             naploBejegyzes.JegyzokonyvVezetoSzemelyId = jegyzokonyvVezetoSid;
                             naploBejegyzes.MeghallgatoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.MeghallgatoSid, null, null).Id;
-                            naploBejegyzes.KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+                            naploBejegyzes.KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId;
                             naploBejegyzes.TovabbiJelenlevok = model.TovabbiSzemelyekList == null ? null : string.Join(", ", model.TovabbiSzemelyekList);
                             naploBejegyzes.AlairtaFl = model.AlairtaFl;
                             naploBejegyzes.InkognitoFl = model.InkognitoFl;
@@ -1475,7 +1475,7 @@
                                 JegyzokonyvTartalma = model.Leiras,
                                 JegyzokonyvVezetoSzemelyId = jegyzokonyvVezetoSid,
                                 MeghallgatoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.MeghallgatoSid, null, null).Id,
-                                KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                                KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                                 TipusCimkeId = tipus,
                                 TovabbiJelenlevok = model.TovabbiSzemelyekList == null ? null : string.Join(", ", model.TovabbiSzemelyekList),
                                 AlairtaFl = model.AlairtaFl,
@@ -1533,7 +1533,7 @@
                             naploBejegyzes.JegyzokonyvTartalma = model.Leiras;
                             naploBejegyzes.JegyzokonyvVezetoSzemelyId = null;
                             naploBejegyzes.MeghallgatoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.MeghallgatoSid, null, null).Id;
-                            naploBejegyzes.KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+                            naploBejegyzes.KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId;
                             naploBejegyzes.TipusCimkeId = (int)FegyelmiNaploTipus.SzemelyiAllomanyiTanuMeghallgatasa;
                             naploBejegyzes.TovabbiJelenlevok = null;
                             naploBejegyzes.AlairtaFl = model.AlairtaFl;
@@ -1574,7 +1574,7 @@
                                 JegyzokonyvTartalma = model.Leiras,
                                 JegyzokonyvVezetoSzemelyId = null,
                                 MeghallgatoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.MeghallgatoSid, null, null).Id,
-                                KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                                KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                                 TipusCimkeId = (int)FegyelmiNaploTipus.SzemelyiAllomanyiTanuMeghallgatasa,
                                 TovabbiJelenlevok = null,
                                 InkognitoFl = true,
@@ -1625,7 +1625,7 @@
                             naploBejegyzes.JegyzokonyvTartalma = model.Leiras;
                             naploBejegyzes.JegyzokonyvVezetoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.JegyzokonyvVezetoSid, null, null).Id;
                             naploBejegyzes.DonteshozoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.FegyelmiJogkorGyakorlojaSid, null, null).Id;
-                            naploBejegyzes.KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+                            naploBejegyzes.KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId;
                             naploBejegyzes.TovabbiJelenlevok = model.TovabbiSzemelyekList == null ? null : string.Join(", ", model.TovabbiSzemelyekList);
                             naploBejegyzes.AlairtaFl = model.AlairtaFl;
                             NaploFunctions.Modify(naploBejegyzes);
@@ -1647,7 +1647,7 @@
                                 JegyzokonyvTartalma = model.Leiras,
                                 JegyzokonyvVezetoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.JegyzokonyvVezetoSid, null, null).Id,
                                 DonteshozoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.FegyelmiJogkorGyakorlojaSid, null, null).Id,
-                                KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                                KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                                 AlairtaFl = model.AlairtaFl,
                                 TipusCimkeId = (int)FegyelmiNaploTipus.TargyalasiJegyzokonyv,
                                 TovabbiJelenlevok = model.TovabbiSzemelyekList == null ? null : string.Join(", ", model.TovabbiSzemelyekList)
@@ -1936,7 +1936,6 @@
                                 AlairtaFl = model.Alairta,
                                 IsFogvatartottElfogadta = model.Alairta,
                                 JegyzokonyvTartalma = model.Indoklas,
-                                RogzitoIntezetId = aktIntezet,
                                 TipusCimkeId = (int)FegyelmiNaploTipus.Kioktatas,
                                 FenyitesKiszabasDatuma = model.FenyitesKiszabasIdeje,
                                 FegyelmiVetsegTipusaCimkeId = model.FegyelmiVetsegTipusaCimkeId,
@@ -2074,7 +2073,6 @@
                                 FogvatartottId = fegyelmiUgy.FogvatartottId,
                                 AlairtaFl = isAlairta,
                                 IsFogvatartottElfogadta = isFogvatartottElfogadta,
-                                RogzitoIntezetId = aktIntezet,
                                 TipusCimkeId = naploTipusaCimkeId,
                                 JegyzokonyvTartalma = $"{model.Indoklas}{szandekossagSzoveg}",
                                 FenyitesKiszabasDatuma = model.FenyitesKiszabasIdeje,
@@ -2127,7 +2125,7 @@
 
                             naplo.AlairtaFl = isAlairta;
                             naplo.IsFogvatartottElfogadta = isFogvatartottElfogadta;
-                            naplo.RogzitoIntezetId = aktIntezet;
+                            naplo.RogzitoTelephelyId = aktIntezet;
                             naplo.JegyzokonyvTartalma = $"{model.Indoklas}{szandekossagSzoveg}";
                             naplo.FenyitesKiszabasDatuma = model.FenyitesKiszabasIdeje;
                             naplo.FegyelmiVetsegTipusaCimkeId = model.FegyelmiVetsegTipusaCimkeId;
@@ -2202,7 +2200,6 @@
                             IsFogvatartottElfogadta = true,
                             JegyzokonyvTartalma = model.Indoklas,
                             VisszakuldesOkaCimkeId = model.VisszakuldesOka.Value,
-                            RogzitoIntezetId = aktIntezet,
                             TipusCimkeId = (int)FegyelmiNaploTipus.Visszakuldes,
                             DonteshozoSzemelyId = AlkalmazasKontextusFunctions.Kontextus.SzemelyzetId
                         };
@@ -2239,7 +2236,7 @@
         {
 
             if (intezet == null) 
-                intezet = KonasoftBVFonixContext.Intezet.Single(x => x.Id == AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId);
+                intezet = KonasoftBVFonixContext.Intezet.Single(x => x.Id == AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId);
 
             var esemeny = new EsemenyekFunctions().GetEsemenyById(esemenyId);
 
@@ -2281,7 +2278,6 @@
                     if (AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid == AdUserSid) // _BVOP-FONIXAPP hívás külsõ alkalmazásból
                     {
                         entity.KeziRogzitoAdatok = true;
-                        entity.RogzitoIntezetId = esemeny.RogzitoIntezetId;
                         entity.RogzitoSzemelyId = esemeny.EszleloId;
                     }
 
@@ -2298,7 +2294,6 @@
                     if (AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid == AdUserSid) // _BVOP-FONIXAPP hívás külsõ alkalmazásból
                     {
                         naplo.KeziRogzitoAdatok = true;
-                        naplo.RogzitoIntezetId = esemeny.RogzitoIntezetId;
                         naplo.RogzitoSzemelyId = esemeny.EszleloId;
                     }
 
@@ -2366,7 +2361,7 @@
             List<int> fegyelmiUgyek = new List<int>();
             if(intezetId==null)
             {
-                intezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+                intezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId;
             }
             var intezet = KonasoftBVFonixContext.Intezet.Single(x => x.Id == intezetId);
             foreach (int fogvatartottId in fogvatartottIds)
@@ -3148,7 +3143,6 @@
                                 FogvatartottId = fegyelmiUgy.FogvatartottId,
                                 AlairtaFl = model.IsAlairta,
                                 JegyzokonyvTartalma = model.Leiras,
-                                RogzitoIntezetId = aktIntezet,
                                 TipusCimkeId = (int)FegyelmiNaploTipus.OsszefoglaloJelentes
                             };
                             KonasoftBVFonixContext.Naplo.Add(naploEnitity);
@@ -3216,7 +3210,7 @@
 
             if (KonasoftBVFonixContext.FegyelmiUgyek.Any(fegy => fegy.FogvatartottId == fegyelmiUgy.FogvatartottId
                                && fegy.StatuszCimkeId == (int)CimkeEnums.FegyelmiUgyStatusz.I_FokuTargyalas
-                               && fegy.IntezetId == AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId
+                               && fegy.IntezetId == AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId
                                && fegy.Id != fegyelmiUgyId && fegy.FoFegyelmiUgyId != null && fegy.FoFegyelmiUgyId != fegyelmiUgyId))
             {
                 throw new WarningException("Másik fegyelmi ügyhöz már van ügy összevonva, nem lehet egyszerre két fő ügy elsőfokú tárgyalás státusszal");
@@ -3229,7 +3223,7 @@
                          join jellegKsz in KonasoftBVFonixContext.Cimkek on esemeny.JellegCimkeId equals jellegKsz.Id
                          where fegy.FogvatartottId == fegyelmiUgy.FogvatartottId
                               && fegy.StatuszCimkeId == (int)CimkeEnums.FegyelmiUgyStatusz.I_FokuTargyalas
-                              && fegy.IntezetId == AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId
+                              && fegy.IntezetId == AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId
                               && fegy.Id != fegyelmiUgyId
                          select new FegyelmiUgyOsszevonasListItem()
                          {
@@ -3268,7 +3262,7 @@
 
             if (KonasoftBVFonixContext.FegyelmiUgyek.Any(fegy => fegy.FogvatartottId == fegyelmiUgy.FogvatartottId
                                && fegy.StatuszCimkeId == (int)CimkeEnums.FegyelmiUgyStatusz.I_FokuTargyalas
-                               && fegy.IntezetId == AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId
+                               && fegy.IntezetId == AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId
                                && fegy.Id != fegyelmiUgyId && fegy.FoFegyelmiUgyId != null && fegy.FoFegyelmiUgyId != fegyelmiUgyId))
             {
                 throw new WarningException("Másik fegyelmi ügyhöz már van ügy összevonva, nem lehet egyszerre két fő ügy elsőfokú tárgyalás státusszal");
@@ -3451,7 +3445,6 @@
                     {
                         FegyelmiUgyId = model.FegyelmiUgyId,
                         FogvatartottId = fegyelmiUgy.FogvatartottId,
-                        RogzitoIntezetId = aktIntezet,
                         ElsofokuTargyalasIdopontja = model.TargyalasIdopontja,
                         HatarozatHozoJogkoreCimkeId = Int32.Parse(model.HatarozatHozoSzemelyCimkeId),
                         TipusCimkeId = (int)FegyelmiNaploTipus.TargyalasElokeszitese,
@@ -3498,7 +3491,6 @@
                     {
                         FegyelmiUgyId = model.FegyelmiUgyId,
                         FogvatartottId = fegyelmiUgy.FogvatartottId,
-                        RogzitoIntezetId = aktIntezet,
                         ElsofokuTargyalasIdopontja = model.TargyalasIdopontja,
                         HatarozatHozoJogkoreCimkeId = Int32.Parse(model.HatarozatHozoSzemelyCimkeId),
                         TipusCimkeId = (int)FegyelmiNaploTipus.MasodfokuTargyalasElokeszites,
@@ -3621,7 +3613,6 @@
                                 FogvatartottId = fegyelmiUgy.FogvatartottId,
                                 Vegleges = model.IsRogzites,
                                 JegyzokonyvTartalma = model.Leiras,
-                                RogzitoIntezetId = aktIntezet,
                                 TorvenyszekId = model.TorvenyszekId,
                                 TipusCimkeId = (int)FegyelmiNaploTipus.KirendeltVedoKerese,
 
@@ -3650,7 +3641,6 @@
                             }
 
                             naplo.JegyzokonyvTartalma = model.Leiras;
-                            naplo.RogzitoIntezetId = aktIntezet;
                             naplo.TorvenyszekId = model.TorvenyszekId;
                             naplo.Vegleges = naplo.Vegleges == true ? naplo.Vegleges : model.IsRogzites;
 
@@ -3722,7 +3712,6 @@
                                 FegyelmiUgyId = fegyelmiUgyId,
                                 FogvatartottId = fegyelmiUgy.FogvatartottId,
                                 JegyzokonyvTartalma = model.Leiras,
-                                RogzitoIntezetId = aktIntezet,
                                 Vegleges = model.IsRogzites,
                                 VedoCime = model.VedoCime,
                                 VedoNeve = model.VedoNeve,
@@ -3755,7 +3744,6 @@
                             }
 
                             naplo.JegyzokonyvTartalma = model.Leiras;
-                            naplo.RogzitoIntezetId = aktIntezet;
                             naplo.VedoCime = model.VedoCime;
                             naplo.VedoNeve = model.VedoNeve;
                             naplo.VedoElerhetosege = model.VedoElerhetosege;
@@ -4298,7 +4286,7 @@
                             naploBejegyzes.JegyzokonyvTartalma = model.Leiras;
                             naploBejegyzes.JegyzokonyvVezetoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.JegyzokonyvVezetoSid, null, null).Id;
                             naploBejegyzes.DonteshozoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.FegyelmiJogkorGyakorlojaSid, null, null).Id;
-                            naploBejegyzes.KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+                            naploBejegyzes.KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId;
                             naploBejegyzes.TovabbiJelenlevok = model.TovabbiSzemelyekList == null ? null : string.Join(", ", model.TovabbiSzemelyekList);
                             NaploFunctions.Modify(naploBejegyzes);
 
@@ -4321,7 +4309,7 @@
                                 JegyzokonyvTartalma = model.Leiras,
                                 JegyzokonyvVezetoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.JegyzokonyvVezetoSid, null, null).Id,
                                 DonteshozoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.FegyelmiJogkorGyakorlojaSid, null, null).Id,
-                                KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                                KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                                 TipusCimkeId = (int)FegyelmiNaploTipus.II_fokuTargyalasiJegyzokonyv,
                                 TovabbiJelenlevok = model.TovabbiSzemelyekList == null ? null : string.Join(", ", model.TovabbiSzemelyekList)
                             };
@@ -4460,7 +4448,6 @@
                                 FegyelmiUgyId = fegyelmiUgyId,
                                 FogvatartottId = fegyelmiUgy.FogvatartottId,
                                 JegyzokonyvTartalma = model.Leiras,
-                                RogzitoIntezetId = aktIntezet,
                                 TipusCimkeId = (int)FegyelmiNaploTipus.SzakteruletiVelemenyKerese,
                                 TovabbiJelenlevok = cimzettekBeosztassal,
                                 Hatarido = model.Hatarido
@@ -4642,7 +4629,7 @@
                             naploBejegyzes.Szembesitett2FogvatartottId = szembesitettFogvatarott2;
                             naploBejegyzes.JegyzokonyvVezetoSzemelyId = jegyzokonyvVezetoSid;
                             naploBejegyzes.MeghallgatoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.MeghallgatoSid, null, null).Id;
-                            naploBejegyzes.KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+                            naploBejegyzes.KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId;
                             naploBejegyzes.TovabbiJelenlevok = model.TovabbiSzemelyekList == null ? null : string.Join(", ", model.TovabbiSzemelyekList);
                             naploBejegyzes.AlairtaFl = model.AlairtaFl;
                             NaploFunctions.Modify(naploBejegyzes);
@@ -4675,7 +4662,7 @@
                                 JegyzokonyvTartalma = model.Leiras,
                                 JegyzokonyvVezetoSzemelyId = jegyzokonyvVezetoSid,
                                 MeghallgatoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(model.MeghallgatoSid, null, null).Id,
-                                KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                                KihallgatasIntezetId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                                 TipusCimkeId = tipus,
                                 TovabbiJelenlevok = model.TovabbiSzemelyekList == null ? null : string.Join(", ", model.TovabbiSzemelyekList),
                                 AlairtaFl = model.AlairtaFl,
@@ -4730,7 +4717,6 @@
                         {
                             FegyelmiUgyId = fegyelmiUgyId,
                             FogvatartottId = fegyelmiUgy.FogvatartottId,
-                            RogzitoIntezetId = aktIntezet,
                             TipusCimkeId = (int)FegyelmiNaploTipus.JogiKepviseletVisszavonasa,
                         };
                         KonasoftBVFonixContext.Naplo.Add(naploEnitity);
@@ -5043,7 +5029,6 @@
                             FogvatartottId = fegyelmiUgy.FogvatartottId,
                             Vegleges = model.FenyitesTipusaCimkeId == (int)FenyitesTipusok.HatalyonKivulHelyezes ? true : false,
                             JegyzokonyvTartalma = $"{model.Leiras}{szandekossagSzoveg}",
-                            RogzitoIntezetId = aktIntezet,
                             TipusCimkeId = (int)FegyelmiNaploTipus.HatarozatMasodfokon,
                             DonteshozoSzemelyId = model.TorvenyszekId.HasValue ? (int?)null : SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(WindowsIdentity.GetCurrent().User.Value, null, null).Id,
                             TorvenyszekId = model.TorvenyszekId,
@@ -5075,7 +5060,6 @@
                             FegyelmiUgyId = ujFegyelmiUgyId,
                             FogvatartottId = fegyelmiUgy.FogvatartottId,
                             Vegleges = false,
-                            RogzitoIntezetId = aktIntezet,
                             TipusCimkeId = (int)FegyelmiNaploTipus.UjEljarasLefolytatasa,
                             DonteshozoSzemelyId = SzemelyzetFunctions.SzemelyzetLekeresVagyLetrehozas(WindowsIdentity.GetCurrent().User.Value, null, null).Id,
                             ElozmenyUgyAzonosito = $"{fegyelmiUgy.UgySorszamaIntezetAzon}/{fegyelmiUgy.UgySorszamaEv}/{fegyelmiUgy.UgySorszama}"
@@ -5101,7 +5085,7 @@
                 //    // Főnix3 BFB előjegyzés
                 //    new F3VegrehajtasiListaFunctions().CreateBFBElojegyzes(
                 //        AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                //        AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                //        AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                 //        fegyelmiUgy.FogvatartottId);
                 //}
             }
@@ -5221,7 +5205,7 @@
 
             MaganelzarasMegkezdesenekRogziteseModel model = new MaganelzarasMegkezdesenekRogziteseModel();
 
-            IEnumerable<IdLabelWithChildren> objektumok = GetElhelyezesek(AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId, true, true);
+            IEnumerable<IdLabelWithChildren> objektumok = GetElhelyezesek(AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId, true, true);
             model.ZarkabaHelyezesOptions = objektumok.ToList();
             model.fegyelmiUgyIds = fegyelmiUgyIds;
             model.naplobejegyzesIds = naplobejegyzesIds;
@@ -5401,7 +5385,6 @@
                         FogvatartottId = fegyelmiUgy.FogvatartottId,
                         JegyzokonyvTartalma = elhelyezesStr,
                         EgyebAdatokJson = model.ZarkabaHelyezes,
-                        RogzitoIntezetId = aktIntezet,
                         TipusCimkeId = (int)FegyelmiNaploTipus.MaganelzarasMegkezdese,
                         Hatarido = model.BehelyezesTenylegesIdeje,
                         MaganelzarasVegeDatum = model.MaganelzarasVegeDatum,
@@ -5432,7 +5415,7 @@
                         //{
                         //    new FegyelmiSzervizClient().VegrehajtMaganelzaras(
                         //        AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                        //        AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                        //        AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                         //        fId,
                         //        zarkaId,
                         //        agyId,
@@ -5628,7 +5611,7 @@
         {
             var ugyek = (from fegyelmi in Table
                          join fogv in KonasoftBVFonixContext.Fogvatartottak on fegyelmi.FogvatartottId equals fogv.Id
-                         where fegyelmi.TOROLT_FL != true && fegyelmi.Lezarva == true && (fegyelmi.RogzitoIntezetId == intezetId || fogv.AktualisIntezetId == intezetId || intezetId == (int)BvIntezet.Bvop)
+                         where fegyelmi.TOROLT_FL != true && fegyelmi.Lezarva == true && (fegyelmi.RogzitoTelephelyId == intezetId || fogv.AktualisIntezetId == intezetId || intezetId == (int)BvIntezet.Bvop)
                          select fegyelmi.UgySorszamaEv).Distinct().OrderByDescending(o => o).ToList();
 
             return ugyek;
@@ -5643,7 +5626,7 @@
 
             MaganelzarasVegrehajtvaModel model = new MaganelzarasVegrehajtvaModel();
 
-            IEnumerable<IdLabelWithChildren> objektumok = GetElhelyezesek(AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId, false);
+            IEnumerable<IdLabelWithChildren> objektumok = GetElhelyezesek(AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId, false);
             model.ZarkabaHelyezesOptions = objektumok.ToList();
             model.FegyelmiUgyIds = fegyelmiUgyIds;
             model.NaplobejegyzesIds = naplobejegyzesIds;
@@ -5745,7 +5728,6 @@
                             FogvatartottId = fegyelmiUgy.FogvatartottId,
                             JegyzokonyvTartalma = elhelyezesStr,
                             EgyebAdatokJson = model.ZarkabaHelyezes,
-                            RogzitoIntezetId = aktIntezet,
                             TipusCimkeId = (int)FegyelmiNaploTipus.MaganelzarasVegrehajtva,
                             Hatarido = model.KihelyezesTenylegesIdeje,
                             Vegleges = true,
@@ -5780,7 +5762,7 @@
                             //{
                             //    new FegyelmiSzervizClient().MegszuntetMaganelzarasEsZarkabaBehelyez(
                             //        AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                            //        AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                            //        AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                             //        fId,
                             //        zarkaId,
                             //        agyId,
@@ -5800,7 +5782,7 @@
                             //{
                             //    new BFBSzervizClient().ZarkabolKihelyezes(
                             //        AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                            //        AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                            //        AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                             //        fId,
                             //        model.KihelyezesTenylegesIdeje);
                             //}
@@ -5826,7 +5808,7 @@
                             //{
                             //    new BFBSzervizClient().ZarkabolKihelyezes(
                             //        AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                            //        AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                            //        AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                             //        fId,
                             //        model.KihelyezesTenylegesIdeje);
                             //}
@@ -5918,7 +5900,6 @@
                         FegyelmiUgyId = fegyelmiUgyId,
                         FogvatartottId = fegyelmiUgy.FogvatartottId,
                         JegyzokonyvTartalma = model.Leiras,
-                        RogzitoIntezetId = aktIntezet,
                         Vegleges = true,
                         TipusCimkeId = (int)FegyelmiNaploTipus.FenyitesNemVegrehajthato,
                     };
@@ -6020,7 +6001,6 @@
                         FegyelmiUgyId = fegyelmiUgyId,
                         FogvatartottId = fegyelmiUgy.FogvatartottId,
                         JegyzokonyvTartalma = model.Leiras,
-                        RogzitoIntezetId = aktIntezet,
                         Vegleges = true,
                         TipusCimkeId = (int)FegyelmiNaploTipus.MaganelzarasIdeiglenesenEllenjavallt,
                         Hatarido = model.Hatarido
@@ -6328,7 +6308,7 @@
 
             MaganelzarasMegszakitasanakRogziteseModel model = new MaganelzarasMegszakitasanakRogziteseModel();
 
-            IEnumerable<IdLabelWithChildren> objektumok = GetElhelyezesek(AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId, false);
+            IEnumerable<IdLabelWithChildren> objektumok = GetElhelyezesek(AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId, false);
             model.VisszahelyezesZarkabaOptions = objektumok.ToList();
             model.fegyelmiUgyIds = fegyelmiUgyIds;
             model.naplobejegyzesIds = naplobejegyzesIds;
@@ -6427,7 +6407,7 @@
                             FogvatartottId = fegyelmiUgy.FogvatartottId,
                             JegyzokonyvTartalma = elhelyezesStr,
                             EgyebAdatokJson = model.VisszahelyezesZarkaba,
-                            RogzitoIntezetId = aktIntezet,
+                            RogzitoTelephelyId = aktIntezet,
                             TipusCimkeId = (int)FegyelmiNaploTipus.MaganelzarasMegszakitasa,
                             Hatarido = model.MaganzarkabolKihelyezesTenylegesIdeje,
                             Indoklas = model.Indoklas
@@ -6470,7 +6450,7 @@
                             //{
                             //    new FegyelmiSzervizClient().MegszuntetMaganelzarasEsZarkabaBehelyez(
                             //        AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                            //        AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                            //        AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                             //        fId,
                             //        zarkaId,
                             //        agyId,
@@ -6490,7 +6470,7 @@
                             //{
                             //    new BFBSzervizClient().ZarkabolKihelyezes(
                             //        AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                            //        AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                            //        AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                             //        fId,
                             //        model.MaganzarkabolKihelyezesTenylegesIdeje);
                             //}
@@ -6579,7 +6559,6 @@
                         FegyelmiUgyId = fegyelmiUgyId,
                         FogvatartottId = fegyelmiUgy.FogvatartottId,
                         GaranciaTeljesultFl = model.IsTeljesult,
-                        RogzitoIntezetId = aktIntezet,
                         TipusCimkeId = (int)FegyelmiNaploTipus.GaranciaTeljesulesenekRogzitese,
                     };
                     KonasoftBVFonixContext.Naplo.Add(naploEnitity);
@@ -6900,7 +6879,6 @@
                         FogvatartottId = fegyelmiUgy.FogvatartottId,
                         Hatarido = model.Datum,
                         JegyzokonyvTartalma = model.Leiras,
-                        RogzitoIntezetId = aktIntezet,
                         TipusCimkeId = (int)FegyelmiNaploTipus.KozvetitoiEljarasHataridoModositas,
                     };
                     KonasoftBVFonixContext.Naplo.Add(naploEnitity);
@@ -7057,7 +7035,6 @@
                         {
                             FegyelmiUgyId = fegyelmiUgyId,
                             FogvatartottId = fegyelmiUgy.FogvatartottId,
-                            RogzitoIntezetId = aktIntezet,
                             Hatarido = torvenyiHatarido,
                             TipusCimkeId = (int)FegyelmiNaploTipus.FelfuggesztesMegszuntetese,
                         };
@@ -7236,7 +7213,7 @@
             var jogkorGyakorlokUsersList = new List<AdFegyelmiUserItem>();
             model.ElrendeloOptions = jogkorGyakorloUsers.Select(x => new KSelect2ItemModel() { id = x.Sid, text = x.Displayname + (x.Rendfokozat == null ? "" : (" " + x.Rendfokozat)) }).ToList();
             var fegyelmiUgy = FindById(fegyelmiUgyId);
-            IEnumerable<IdLabelWithChildren> objektumok = GetElhelyezesek(AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId, false, false, fegyelmiUgy.FogvatartottId);
+            IEnumerable<IdLabelWithChildren> objektumok = GetElhelyezesek(AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId, false, false, fegyelmiUgy.FogvatartottId);
 
             //megnézzük van-e már a elkülönítés elrendelve a naplóból
             if (isElkulonitve != null)
@@ -7345,7 +7322,6 @@
                         var naploEntity = new Naplo()
                         {
                             FegyelmiUgyId = fegyelmiUgyId,
-                            RogzitoIntezetId = aktIntezet,
                             TipusCimkeId = (int)FegyelmiNaploTipus.Elkulonites,
                             EgyebAdatokJson = model.ZarkabaHelyezes,
                             ElkulonitesOka = model.ElkulonitesOka,
@@ -7370,7 +7346,7 @@
                                     //{
                                     //    new FegyelmiSzervizClient().FegyelmiElkulonitesZarkabaHelyezes(
                                     //       AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                                    //       AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                                    //       AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                                     //       fegyelmiUgy.FogvatartottId,
                                     //       zarkaId,
                                     //       agyId,
@@ -7405,7 +7381,7 @@
                                     //{
                                     //    new FegyelmiSzervizClient().FegyelmiElkulonitesZarkabaHelyezes(
                                     //        AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                                    //        AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                                    //        AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                                     //        fegyelmiUgy.FogvatartottId,
                                     //        zarkaId,
                                     //        agyId,
@@ -7458,7 +7434,6 @@
                             var naploEntity = new Naplo()
                             {
                                 FegyelmiUgyId = fegyelmiUgyId,
-                                RogzitoIntezetId = aktIntezet,
                                 TipusCimkeId = (int)FegyelmiNaploTipus.Elkulonites,
                                 ElkulonitesFelulvizsgalvaFL = model.IsFelulvizsgalva,
                                 JegyzokonyvTartalma = elhelyezesStr,
@@ -7485,7 +7460,7 @@
                                         //{
                                         //    new FegyelmiSzervizClient().FegyelmiElkulonitesZarkabaHelyezes(
                                         //       AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                                        //       AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                                        //       AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                                         //       fegyelmiUgy.FogvatartottId,
                                         //       zarkaId,
                                         //       agyId,
@@ -7521,7 +7496,7 @@
                                         //{
                                         //    new FegyelmiSzervizClient().MegszuntetElkulonitesEsZarkabaBehelyez(
                                         //    AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                                        //    AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                                        //    AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                                         //    fegyelmiUgy.FogvatartottId,
                                         //    zarkaId,
                                         //    agyId,
@@ -7543,7 +7518,7 @@
                                         //{
                                         //    new FegyelmiSzervizClient().FegyelmiElkulonitesZarkabaHelyezes(
                                         //    AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                                        //    AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                                        //    AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                                         //    fegyelmiUgy.FogvatartottId,
                                         //    zarkaId,
                                         //    agyId,
@@ -7590,7 +7565,7 @@
                                         //{
                                         //    new FegyelmiSzervizClient().MegszuntetElkulonitesEsZarkabaBehelyez(
                                         //       AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                                        //       AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                                        //       AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                                         //       fegyelmiUgy.FogvatartottId,
                                         //       zarkaId,
                                         //       agyId,
@@ -7620,7 +7595,6 @@
                             var naploEntity = new Naplo()
                             {
                                 FegyelmiUgyId = fegyelmiUgyId,
-                                RogzitoIntezetId = aktIntezet,
                                 TipusCimkeId = (int)FegyelmiNaploTipus.Elkulonites,
                                 ElkulonitesFelulvizsgalvaFL = model.IsFelulvizsgalva,
                                 ElkulonitesOka = model.ElkulonitesOka,
@@ -7641,7 +7615,7 @@
                             // teszt
                             //new F3VegrehajtasiListaFunctions().BefogadoBizottsagiUlesElojegyzes(
                             //        AlkalmazasKontextusFunctions.Kontextus.SzemelyzetSid,
-                            //        AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId,
+                            //        AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId,
                             //        fegyelmiUgy.FogvatartottId,
                             //        DateTime.Now,
                             //        fegyelmiUgyId);

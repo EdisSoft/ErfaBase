@@ -12,7 +12,7 @@ namespace Edis.ViewModels.Erfa
         public DateTime OrdCustRequestDate { get; set; }
         public string Prdinfo2 { get; set; }
         public string Terv { get; set; }
-        public DateTime ObsStartDate { get; set; }
+        public DateTime? ObsStartDate { get; set; }
         public string Felulet { get; set; }
         public string Fo { get; set; }
         public string Lapanyag { get; set; }

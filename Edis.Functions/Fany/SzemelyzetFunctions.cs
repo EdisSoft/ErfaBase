@@ -271,7 +271,7 @@ namespace Edis.Functions.Fany
         public Szemelyzet FindBySid(string sid, int? telephelyId)
         {
             if (!telephelyId.HasValue)
-                telephelyId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+                telephelyId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId;
 
             return Table.SingleOrDefault(x => x.AdSid == sid && x.IntezetId == telephelyId);
         }
@@ -281,7 +281,7 @@ namespace Edis.Functions.Fany
         public IQueryable<Szemelyzet> GetSzemelyzetTagokBySid(string[] sids, int? telephelyId)
         {
             if (!telephelyId.HasValue)
-                telephelyId = AlkalmazasKontextusFunctions.Kontextus.RogzitoIntezetId;
+                telephelyId = AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId;
 
             return Table.Where(x => sids.Contains(x.AdSid) && x.IntezetId == telephelyId);
         }
@@ -318,13 +318,13 @@ namespace Edis.Functions.Fany
 
             }
 
-            var returnValue = Table.SingleOrDefault(e => e.Azonosito == azonosito && e.IntezetId == appsettingsFunctions.Kontextus.RogzitoIntezetId);
+            var returnValue = Table.SingleOrDefault(e => e.Azonosito == azonosito && e.IntezetId == appsettingsFunctions.Kontextus.RogzitoTelephelyId);
             if (returnValue == null)
             {
                 IList<Szemelyzet> returnValueList = Table.Where(x => x.Azonosito == azonosito).ToList(); //Dal.Kereses("Azonosito", azonosito, UjInjectalas<Szemelyzet>, false);
-                if (returnValueList.Any(r => r.IntezetId == appsettingsFunctions.Kontextus.RogzitoIntezetId))
+                if (returnValueList.Any(r => r.IntezetId == appsettingsFunctions.Kontextus.RogzitoTelephelyId))
                 {
-                    returnValue = returnValueList.FirstOrDefault(r => r.IntezetId == appsettingsFunctions.Kontextus.RogzitoIntezetId);
+                    returnValue = returnValueList.FirstOrDefault(r => r.IntezetId == appsettingsFunctions.Kontextus.RogzitoTelephelyId);
                     //if (returnValue == null)
                     //    returnValue = returnValueList.First();
                     //-AdatKontextus.Szemelyzetek.Add(returnValue);

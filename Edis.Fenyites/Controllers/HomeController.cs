@@ -58,7 +58,7 @@ namespace Edis.Fenyites.Controllers
 
             var kontext = AlkalmazasKontextusFunctions.Kontextus;
 
-            var intezet = IntezetFunctions.FindById(kontext.RogzitoIntezetId);
+            var intezet = IntezetFunctions.FindById(kontext.RogzitoTelephelyId);
 
             var UserData = GetUserData();
             var KonalyticsData = new

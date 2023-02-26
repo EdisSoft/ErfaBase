@@ -257,7 +257,7 @@
 
         public List<EsemenyResztvevoAdataiViewModel> GetEsemenyResztvevokByIntezetId(int intezetId)
         {
-            //var result = Table.AsNoTracking().Where(x => x.RogzitoIntezetId == intezetId || intezetId == (int)BvIntezet.Bvop)
+            //var result = Table.AsNoTracking().Where(x => x.RogzitoTelephelyId == intezetId || intezetId == (int)BvIntezet.Bvop)
             //    .Join(KonasoftBVFonixContext.FogvatartottakFegyelmiView,
             //    resztvevo => resztvevo.FogvatartottId,
             //    nezet => nezet.Id,

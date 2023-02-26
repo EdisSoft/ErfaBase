@@ -22,7 +22,7 @@ namespace Edis.Functions.Erfa
         public List<AlkatreszekListItemViewModel> GetAlkatreszekByPrdId(int prdId)
         {
             var alkatreszek = Table.Where(w => w.PrdId == prdId).ToArray();
-            return alkatreszek.Select(s => (AlkatreszekListItemViewModel)s).ToList();
+            return alkatreszek.Select(s => (AlkatreszekListItemViewModel)s).OrderBy(s=>s.ItmItemNumber).ToList();
         }
     }
 }

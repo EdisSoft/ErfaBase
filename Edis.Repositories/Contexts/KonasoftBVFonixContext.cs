@@ -324,12 +324,12 @@ namespace Edis.Repositories.Contexts
 
                     if (HttpContext.Current == null)
                     {
-                        entity.RogzitoIntezetId = rogzitoIntezetId;
+                        entity.RogzitoTelephelyId = rogzitoIntezetId;
                         entity.RogzitoSzemelyId = rogzitoSzemelyId;
                     }
                     else
                     {
-                        entity.RogzitoIntezetId = appsettingsFunctions.Kontextus.RogzitoIntezetId;
+                        entity.RogzitoTelephelyId = appsettingsFunctions.Kontextus.RogzitoTelephelyId;
                         entity.RogzitoSzemelyId = appsettingsFunctions.Kontextus.SzemelyzetId;
                     }
                     if (entity.RogzitoSzemelyId == 0)
@@ -338,11 +338,11 @@ namespace Edis.Repositories.Contexts
                         else
                             entity.RogzitoSzemelyId = int.Parse(ConfigurationManager.AppSettings["ServiceRogzitoSzemelyId"]);
 
-                    if (entity.RogzitoIntezetId == 0)
+                    if (entity.RogzitoTelephelyId == 0)
                         if (ConfigurationManager.AppSettings["ServiceRogzitoIntezetId"] == null)
                             throw new Exception($"Rögzítő intézet id nem lehet 0, adat mentésekor! Kontextus: {appsettingsFunctions.Kontextus?.ToString() ?? "null"}");
                         else
-                            entity.RogzitoIntezetId = int.Parse(ConfigurationManager.AppSettings["ServiceRogzitoIntezetId"]);
+                            entity.RogzitoTelephelyId = int.Parse(ConfigurationManager.AppSettings["ServiceRogzitoIntezetId"]);
                 }
                 else
                 {
@@ -351,11 +351,11 @@ namespace Edis.Repositories.Contexts
                             throw new Exception($"Rögzítő személy id nem lehet 0, adat mentésekor!");
                         else
                             entity.RogzitoSzemelyId = int.Parse(ConfigurationManager.AppSettings["ServiceRogzitoSzemelyId"]);
-                    if (entity.RogzitoIntezetId == 0)
+                    if (entity.RogzitoTelephelyId == 0)
                         if (ConfigurationManager.AppSettings["ServiceRogzitoIntezetId"] == null)
                             throw new Exception($"Rögzítő intézet id nem lehet 0, adat mentésekor!");
                         else
-                            entity.RogzitoIntezetId = int.Parse(ConfigurationManager.AppSettings["ServiceRogzitoIntezetId"]);
+                            entity.RogzitoTelephelyId = int.Parse(ConfigurationManager.AppSettings["ServiceRogzitoIntezetId"]);
                 }
 
                 if (entity is KeziJavitoEntity)
@@ -388,7 +388,7 @@ namespace Edis.Repositories.Contexts
                 NotFilteredBaseEntity entity = (NotFilteredBaseEntity)entry.Entity;
                 ITranzakcioAdatKontextusFunctions appsettingsFunctions = new TranzakcioAdatKontextusFunctions();
 
-                entity.RogzitoIntezetId = appsettingsFunctions.Kontextus.RogzitoIntezetId;
+                entity.RogzitoIntezetId = appsettingsFunctions.Kontextus.RogzitoTelephelyId;
                 entity.RogzitoSzemelyId = appsettingsFunctions.Kontextus.SzemelyzetId;
                 if (entity.RogzitoSzemelyId == 0)
                     if (ConfigurationManager.AppSettings["ServiceRogzitoSzemelyId"] == null)
@@ -681,7 +681,7 @@ namespace Edis.Repositories.Contexts
             tranzakcio.Id = this.Set<Tranzakcio>().Max(x => x.Id) + 1;
             ITranzakcioAdatKontextusFunctions appsettingsFunctions = InjectionKernel.Instance.GetInstance<ITranzakcioAdatKontextusFunctions>();
 
-            tranzakcio.RogzitoIntezetId = appsettingsFunctions.Kontextus.RogzitoIntezetId;
+            tranzakcio.RogzitoIntezetId = appsettingsFunctions.Kontextus.RogzitoTelephelyId;
             tranzakcio.RogzitoSzemelyId = appsettingsFunctions.Kontextus.SzemelyzetId;
 
             this.Set<Tranzakcio>().Add(tranzakcio);

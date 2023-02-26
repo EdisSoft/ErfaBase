@@ -21,7 +21,6 @@ namespace Edis.Functions.JFK.FENY
     {
         List<KSelect2ItemModel> GetFogvatartottak();
         List<KSelect2ItemModel> FindFogvatartottakForSelect(string pattern, int? intezetId);
-        List<EsemenyViewModel> GetEsemenyekByIntezetId(int intezetId);
         List<int> CreateEsemeny(EsemenyMentesViewModel model);
         List<int> ModifyEsemeny(EsemenyMentesViewModel model);
         EsemenyMentesViewModel GetEsemeny(int? esemenyId);

@@ -14,12 +14,12 @@ namespace Edis.Entities.Fany
 
         public string SzemelyzetNev { get; set; }
         public string SzemelyzetLoginNev { get; set; }
-        public int RogzitoIntezetId { get; set; }
-        public int RogzitesAdatbazisaIntezetId { get; set; }
+        public int RogzitoTelephelyId { get; set; }
+        public int RogzitesAdatbazisaTelephelyId { get; set; }
         public int AlkalmazasFunkcioId { get; set; }
         public int AlkalmazasNaploId { get; set; }
         public int TranzakcioId { get; set; }
-        public int? GlobalisJogosultsagIntezetId { get; set; }
+        public int? GlobalisJogosultsagTelephelyId { get; set; }
 
         public bool LeszakadvaKozpontrol { get; set; }
 

@@ -42,9 +42,7 @@
               >
                 <k-live-hatarido
                   :key="
-                    fenyites.FegyelmiUgyId
-                      ? fenyites.FegyelmiUgyId
-                      : fenyites.Id
+                    fenyites.PrdID
                   "
                   class="list-group-item"
                   v-for="fenyites in HataridosUgyek"
@@ -357,9 +355,9 @@ export default {
       if (isFegyelmi) {
         list = this.fenyitesekVuex.filter(
           (x) =>
-            x.StatuszId != Cimkek.FegyelmiUgyStatusza.Osszevonva &&
-            x.Hatarido &&
-            new Date(x.Hatarido).getTime() < hatarDatum.getTime()
+            x.Lejart != null &&
+            x.OrdCustRequestDate &&
+            new Date(x.OrdCustRequestDate).getTime() < hatarDatum.getTime()
         );
       } else {
         list = this.jutalmakVuex.filter(

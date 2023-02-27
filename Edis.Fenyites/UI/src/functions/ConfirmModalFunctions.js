@@ -234,6 +234,37 @@ class ConfirmModal {
       }
     }
   }
+  async KiadasGyartasba(jutalomIds) {
+    let success = await NotificationFunctions.ConfirmModal(
+      'Biztosan kiadja a kijelölt megbízásokat a gyártásba?',
+      {
+        title: 'Megerősítés',
+      }
+    );
+    if (success) {
+      try {
+        // Valamit csinálni
+        console.log(jutalomIds);
+        JutalmiUgyFunctions.CloseModalsAndPanels();
+
+        // @ts-ignore
+        NotificationFunctions.SuccessAlert(
+          'Gyártásba kiadás',
+          'Sikeres művelet.'
+        );
+        store.dispatch(JutalomUgyStoreTypes.actions.setJutalomUgyekSelected, {
+          value: [],
+        });
+      } catch (error) {
+        console.log(error);
+        NotificationFunctions.AjaxError({
+          title: 'Hiba',
+          text: 'Nem sikerült a gyártásba kiadás.',
+          errorObj: error,
+        });
+      }
+    }
+  }
 }
 
 export const ConfirmModalFunctions = new ConfirmModal();

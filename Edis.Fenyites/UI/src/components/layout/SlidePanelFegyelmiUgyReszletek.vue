@@ -447,6 +447,7 @@ export default {
     };
   },
   mounted: function () {
+    console.log('Sidebar:' + this.id);
     eventBus.$on('Sidebar:' + this.id, this.OnSidebarOpen);
     eventBus.$on('Sidebar:' + this.id + ':refresh', this.OnSideBarRefresh);
     eventBus.$on(
@@ -469,6 +470,7 @@ export default {
       setStateVuex: AppStoreTypes.actions.setSlidePanelFegyelmiUgyReszletekOpen,
     }),
     async OnSidebarOpen({ state, data }) {
+      console.log(state, data);
       if (state) {
         data.fegyelmiUgyIds = data.fegyelmiUgyIds || [];
         console.log(

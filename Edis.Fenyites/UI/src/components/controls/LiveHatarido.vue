@@ -1,13 +1,13 @@
 <template>
   <li class="px-0 mb-0 pointer" :class="{ lejart: diff <= 0 }">
     <div class="media d-flex align-items-center">
-      <div class="pr-5">
+      <!-- <div class="pr-5">
         <a class="avatar" href="javascript:void(0)">
           <k-fogvatartott-kep
             :id="ugy.FogvatartottId"
           ></k-fogvatartott-kep> 
         </a>
-      </div>
+      </div> -->
       <div class="media-body">
         <div class="pl-0 add-data" :class="{ 'nem-lejart': diff > 0 }">
           <p class="mb-0 text-right">
@@ -19,13 +19,13 @@
           </p>
         </div>
         <p class="blue-grey-700 mt-0 mb-0 font-size-12 text-break fogv-nev text-capitalize">
-          {{ ugy.FogvatartottNev }}
+          {{ ugy.PrjCode }}
         </p>
         <p class="mt-0 mb-5">
-          <span v-if="ugy.AktNyilvantartasiSzam" class="badge badge-outline mt-1 mr-1 badge-default font-weight-400 text-break">
-            {{ ugy.AktNyilvantartasiSzam }}
+          <span v-if="ugy.Szabszam" class="badge badge-outline mt-1 mr-1 badge-default font-weight-400 text-break">
+            {{ ugy.Szabszam }}
           </span>
-          <span v-else class="badge badge-outline mt-1 mr-1 badge-default font-weight-400 text-break">
+          <!-- <span v-else class="badge badge-outline mt-1 mr-1 badge-default font-weight-400 text-break">
             {{ ugy.NyilvantartasiSzam }}
           </span>
           <span v-if="ugy.FegyelmiIntezet" class="badge badge-outline mt-1 mr-1 badge-default font-weight-400 text-break">
@@ -40,9 +40,9 @@
           <span class="badge badge-outline mt-1 badge-default font-weight-400 text-break"
                 v-if="isBvop && ugy.IntezetRovidNev">
             {{ ugy.IntezetRovidNev }}
-          </span>
+          </span> -->
         </p>
-        <p v-if="ugy.UgyStatusz" class="blue-grey-700 mt-0 mb-0 font-size-11 text-break">
+        <!-- <p v-if="ugy.UgyStatusz" class="blue-grey-700 mt-0 mb-0 font-size-11 text-break">
           {{ ugy.UgyStatusz }}
         </p>
         <p v-else class="blue-grey-700 mt-0 mb-0 font-size-11 text-break">
@@ -66,11 +66,11 @@
         <p v-else-if="ugy.JavaslatTevo"
            class="blue-grey-700 mt-0 mb-0 font-size-11">
           Jav:
-          <span class="text-capitalize">{{ ugy.JavaslatTevo }}</span>
+          <span class="text-capitalize">{{ ugy.JavaslatTevo }}</span> -->
           <!--<span v-if="ugy.KivizsgaloRendfokozat != 'Nincs megadva'">
             {{ ugy.KivizsgaloRendfokozat }}
           </span>-->
-        </p>
+        <!-- </p> -->
       </div>
     </div>
   </li>
@@ -130,7 +130,7 @@ export default {
 
       if (vm.currentSettimeout) clearTimeout(vm.currentSettimeout);
 
-      vm.diff = dateDiffInDays(moment().format(), this.ugy.Hatarido);
+      vm.diff = dateDiffInDays(moment().format(), this.ugy.OrdCustRequestDate);
 
       vm.currentSettimeout = setTimeout(function() {
         vm.CalculateTimeText();

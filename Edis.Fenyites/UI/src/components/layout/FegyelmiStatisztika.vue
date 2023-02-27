@@ -103,7 +103,7 @@ export default {
       let sajatUgyek = {
         isSelected: this.fegyelmiUgyekSzuro == StatisztikaSzurok.Sajat,
         szuro: StatisztikaSzurok.Sajat,
-        title: 'Feladataim',
+        title: 'Megrendelés vár a döntésemre',
         array: sajatUgyekArr,
       };
       let vegrehajtasAlattArr = FegyelmiUgyFunctions.GetVegrehajtasAlattiUgyek(
@@ -113,7 +113,7 @@ export default {
         isSelected:
           this.fegyelmiUgyekSzuro == StatisztikaSzurok.VegrehajtasAlatt,
         szuro: StatisztikaSzurok.VegrehajtasAlatt,
-        title: 'Végrehajtás alatt',
+        title: 'Lapanyag hiány',
         array: vegrehajtasAlattArr,
       };
       let kesesbenArr = FegyelmiUgyFunctions.GetKesesbenlevoUgyek(
@@ -151,7 +151,7 @@ export default {
         isSelected:
           this.fegyelmiUgyekSzuro == StatisztikaSzurok.VegrehajtasraVaro,
         szuro: StatisztikaSzurok.VegrehajtasraVaro,
-        title: 'Végrehajtásra váró',
+        title: 'Élanyag hiány',
         array: vegrehajtasraVaroArr,
       };
       return [

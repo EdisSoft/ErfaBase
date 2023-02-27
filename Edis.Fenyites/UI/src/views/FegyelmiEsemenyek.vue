@@ -546,11 +546,9 @@ export default {
     },
     fegyelmiUgyekSelectedKey: {
       async handler() {
-        console.log(this.fegyelmiUgyekSelected);
         let prdIds = this.fegyelmiUgyekSelected.map((m) => m.PrdID);
         try {
           let result = await apiService.GetGyartasiMegbizasok({ prdIds });
-          result[+new Date() % 2 == 0 ? 5 : 0].Kellekhiany = 'Van';
           await store.dispatch(FegyelmiUgyStoreTypes.actions.setFegyelmiUgyek, {
             value: Object.freeze(result),
           });

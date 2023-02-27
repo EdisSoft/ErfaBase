@@ -8,5 +8,6 @@ namespace Edis.Functions.Erfa
     public interface IGyartasiMegbizasFunctions : IFunctionsBase<GyartasiMegbizasListItemViewModel, GyartasiMegbizasView>
     {
         List<GyartasiMegbizasListItemViewModel> GetGyartasiMegbizasok();
+        List<GyartasiMegbizasListItemViewModel> AddAlkatreszKeszletekToGyartasiMegbizasok(List<GyartasiMegbizasListItemViewModel> gyartasiMegbizasok, List<AlkatreszKeszletekHelperModel> alkatreszKeszletek);
     }
 }

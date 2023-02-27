@@ -145,6 +145,7 @@
     <Compile Include="Enums\MegjegyzesTipusa.cs" />
     <Compile Include="Enums\RinSzolgaltatas.cs" />
     <Compile Include="Erfa\Alkatresz.cs" />
+    <Compile Include="Erfa\AlkatreszKeszletView.cs" />
     <Compile Include="Erfa\AlkatreszView.cs" />
     <Compile Include="Erfa\GyartasiMegbizasView.cs" />
     <Compile Include="JFK\FENY\EmailErtesites.cs" />

@@ -109,6 +109,8 @@
     <Compile Include="Common\SocketAuthenticationViewModel.cs" />
     <Compile Include="Common\FogvatartottNezetModel.cs" />
     <Compile Include="Erfa\AlkatreszekListItemViewModel.cs" />
+    <Compile Include="Erfa\AlkatreszIgenyekListItemViewModel.cs" />
+    <Compile Include="Erfa\AlkatreszKeszletekByIcgCodeListItemViewModel.cs" />
     <Compile Include="Erfa\GyartasiMegbizasListItemViewModel.cs" />
     <Compile Include="Fany\FogvatartottSzemelyesAdataiViewModel.cs" />
     <Compile Include="Fany\FogvatartottViewModel.cs" />

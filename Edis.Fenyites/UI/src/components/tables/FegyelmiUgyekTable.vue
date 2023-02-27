@@ -42,6 +42,7 @@ export default {
         FegyelmiUgyStoreTypes.actions.removeFegyelmiUgySelected,
     }),
     UgyReszletekMegtekintes(args) {
+      console.log(args);
       eventBus.$emit('Sidebar:ugyReszletek', {
         state: true,
         data: args,

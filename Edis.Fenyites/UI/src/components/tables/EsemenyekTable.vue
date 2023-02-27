@@ -547,17 +547,17 @@ export default {
           $(row).css('cursor', 'pointer');
 
           $(row)
-            .find('.dt-fegyelmi-ugy-muvelet')
+            .find('.dt-fegyelmi-esemeny-muvelet')
             .click(function (e) {
               let modalId = $(e.target).attr('data-modal-id');
               let modalTipus = $(e.target).attr('data-modal-tipus');
               let functionToRun = $(e.target).attr('data-function-to-run');
               vm.UgyReszletekMegtekintes({
-                fegyelmiUgyId: data.PrdID,
+                prdId: data.PrdID,
                 modalName: modalId,
                 modalType: modalTipus,
                 functionToRun: functionToRun,
-                fegyelmiUgy: data,
+                prd: data,
               });
             });
           var selector = 'td:not(:last-child):not(:first-child)';

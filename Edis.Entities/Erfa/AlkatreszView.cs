@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Edis.Entities.Erfa
 {               
-    [Table("cache.vAlkatreszek")]
+    [Table("erfa.vAlkatreszek")]
     public class AlkatreszView
     {
-        [Column("ID")]
+        [Column("Id")]
         [Key]
         public int Id { get; set; }
 
@@ -19,9 +19,6 @@ namespace Edis.Entities.Erfa
 
         [Column("itmDescription")]
         public string ItmDescription { get; set; }
-
-        [Column("itmpCode")]
-        public string ItmpCode { get; set; }
 
         [Column("PrimaryUOMCode")]
         public string PrimaryUOMCode { get; set; }
@@ -47,14 +44,14 @@ namespace Edis.Entities.Erfa
         [Column("szinjelzes")]
         public string Szinjelzes { get; set; }
 
-        [Column("Pozíció")]
-        public string Pozicio { get; set; }
-
         [Column("dimZ")]
         public float? DimZ { get; set; }
 
         [Column("itmavValue")]
         public string ItmavValue { get; set; }
+
+        [Column("ottimokod")]
+        public string OttimoKod { get; set; }
 
         [Column("Tábla db")]
         public int? TablaDb { get; set; }

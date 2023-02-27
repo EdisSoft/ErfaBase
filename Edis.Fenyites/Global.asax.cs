@@ -559,13 +559,13 @@ namespace Edis.Fenyites
             if (ConfigurationManager.AppSettings["TrackRequestLog"].ToLower() != "true")
                 return;
 
-            try
-            {
-                MiniProfiler.Start();
-            }
-            catch (Exception)
-            {
-            }
+            //try
+            //{
+            //    MiniProfiler.Start();
+            //}
+            //catch (Exception)
+            //{
+            //}
         }
 
         protected void Application_EndRequest(object sender, EventArgs e)

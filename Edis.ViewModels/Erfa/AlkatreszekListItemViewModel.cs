@@ -10,7 +10,6 @@ namespace Edis.ViewModels.Erfa
         public int PrdId { get; set; }
         public string ItmItemNumber { get; set; }
         public string ItmDescription { get; set; }
-        public string ItmpCode { get; set; }
         public string PrimaryUOMCode { get; set; }
         public Single OriReqQty { get; set; }
         public float? IssuedQty { get; set; }
@@ -20,9 +19,9 @@ namespace Edis.ViewModels.Erfa
         public string Icg2Code { get; set; }
         public bool szabjuk { get; set; }
         public string Szinjelzes { get; set; }
-        public string Pozicio { get; set; }
         public float? DimZ { get; set; }
         public string ItmavValue { get; set; }
+        public string OttimoKod { get; set; }
         public int? TablaDb { get; set; }
         public float? UtolsoTablaKihozatal { get; set; }
         public float? BruttoMennyiseg { get; set; }

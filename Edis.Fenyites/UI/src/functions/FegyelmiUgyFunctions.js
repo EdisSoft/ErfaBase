@@ -1306,14 +1306,14 @@ class FegyelmiUgy {
   GetKesesbenlevoUgyek(fegyelmiUgyek) {
     let now = moment().startOf('d').toDate();
     return fegyelmiUgyek.filter(
-      (f) => f.Hatarido && now > new Date(f.Hatarido)
+      (f) => f.OrdCustRequestDate && now > new Date(f.OrdCustRequestDate)
     );
   }
   GetHetenEsedekesUgyek(fegyelmiUgyek) {
     let now = new Date();
     let sameWeek = isSameWeek;
     return fegyelmiUgyek.filter(
-      (f) => f.Hatarido && sameWeek(now, new Date(f.Hatarido))
+      (f) => f.OrdCustRequestDate && sameWeek(now, new Date(f.OrdCustRequestDate))
     );
   }
   GetSzallitasraElojegyezveUgyek(fegyelmiUgyek) {

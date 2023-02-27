@@ -55,12 +55,12 @@ const getters = {
     return fegyelmiUgyek;
   },
   [_types.getters.getFegyelmiUgyById]: (state) => (id) => {
-    var fegyelmiUgy = state.fegyelmiUgyek.find((f) => f.FegyelmiUgyId == id);
+    var fegyelmiUgy = state.fegyelmiUgyek.find((f) => f.PrdID == id);
     return fegyelmiUgy;
   },
   [_types.getters.getFegyelmiUgyekSelected]: (state) => {
     var fegyelmiUgyek = state.fegyelmiUgyek.filter((f) =>
-      state.fegyelmiUgyekSelected.some((s) => s == f.FegyelmiUgyId)
+      state.fegyelmiUgyekSelected.some((s) => s == f.PrdID)
     );
     return fegyelmiUgyek;
   },

@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="page-header py-10 px-15 d-flex align-items-center">
-      <h1 class="page-title text-dark mr-15 font-weight-normal">Megrendelések</h1>
+      <h1 class="page-title text-dark mr-15 font-weight-normal">
+        Megrendelések
+      </h1>
       <span
         class="rounded-pill text-default border border-default font-size-12 px-10 py-5"
       >
@@ -321,7 +323,12 @@ export default {
       return list.find((x) => x.id == value) != null;
     },
     UgyReszletekMegtekintes(fegyelmiUgyId, modalName, modalType, fegyelmiUgy) {
-      var args = { fegyelmiUgyId, modalName, modalType, fegyelmiUgy };
+      var args = {
+        prdId: fegyelmiUgyId,
+        modalName,
+        modalType,
+        prd: fegyelmiUgy,
+      };
       eventBus.$emit('Sidebar:ugyReszletek', {
         state: true,
         data: args,

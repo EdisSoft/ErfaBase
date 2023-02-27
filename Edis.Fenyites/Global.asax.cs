@@ -383,13 +383,15 @@ namespace Edis.Fenyites
                 if (jogosultsagCacheFunctions.JogosultIntezetek.Count == 0)
                 {
                     jogosultsagFunctions.JogosultsagNelkuliIntezetBeallitas(windowsIdentity);
-                    id = jogosultsagCacheFunctions.JogosultIntezetek.First().Id;
+                    Log.Debug("Session start 1");
+                    id = jogosultsagCacheFunctions.JogosultIntezetek.FirstOrDefault()?.Id ?? 1;
+                    Log.Debug("Session start 2");
                 }
                 else
                 {
                     string cookieName = "fegyelmiIntezetId";
 
-#if DEBUG
+//#if DEBUG
                     jogosultsagCacheFunctions.JogosultIntezetek = intezetFunctions.Table.ToList();
                     id = 1;
 
@@ -413,67 +415,67 @@ namespace Edis.Fenyites
                         Response.SetCookie(cookie);
                     }
 
-#else
-                    bool teljesMegtekintoJogotKap = false;
+//#else
+//                    bool teljesMegtekintoJogotKap = false;
 
-                    var userjogosultsagok = jogosultsagCacheFunctions.UserJogosultsagok;
+//                    var userjogosultsagok = jogosultsagCacheFunctions.UserJogosultsagok;
 
-                    if (jogosultsagCacheFunctions.JogosultIntezetek.Any(x => x.Id == 135))
-                    {
-                        List<string> fegyelmiJogok = new List<string>() { Jogosultsagok.Fegyelmi_egyeb_szakterulet.ToString().ToLower(),
-                                                                        Jogosultsagok.Fegyelmi_jogkor_gyakorloja.ToString().ToLower(),
-                                                                        Jogosultsagok.Fegyelmi_reintegracios_tiszt.ToString().ToLower(),
-                                                                        Jogosultsagok.Jfk_fegyjutmegtekinto.ToString().ToLower()
-                                                                      };
+//                    if (jogosultsagCacheFunctions.JogosultIntezetek.Any(x => x.Id == 135))
+//                    {
+//                        List<string> fegyelmiJogok = new List<string>() { Jogosultsagok.Fegyelmi_egyeb_szakterulet.ToString().ToLower(),
+//                                                                        Jogosultsagok.Fegyelmi_jogkor_gyakorloja.ToString().ToLower(),
+//                                                                        Jogosultsagok.Fegyelmi_reintegracios_tiszt.ToString().ToLower(),
+//                                                                        Jogosultsagok.Jfk_fegyjutmegtekinto.ToString().ToLower()
+//                                                                      };
 
-                        // bvop szerkesztő jog kikapcsolás
-                        foreach (var jog in fegyelmiJogok)
-                        {
-                            if (userjogosultsagok.ContainsKey(jog))
-                            {
-                                if (userjogosultsagok[jog].Contains(135))
-                                {
-                                    userjogosultsagok[jog] = new HashSet<int>(userjogosultsagok[jog].Where(x => x != 135));
-                                    teljesMegtekintoJogotKap = true;
-                                }
-                            }
-                        }
-                    }
+//                        // bvop szerkesztő jog kikapcsolás
+//                        foreach (var jog in fegyelmiJogok)
+//                        {
+//                            if (userjogosultsagok.ContainsKey(jog))
+//                            {
+//                                if (userjogosultsagok[jog].Contains(135))
+//                                {
+//                                    userjogosultsagok[jog] = new HashSet<int>(userjogosultsagok[jog].Where(x => x != 135));
+//                                    teljesMegtekintoJogotKap = true;
+//                                }
+//                            }
+//                        }
+//                    }
 
-                    // teljes intézeti megtekintő jog bekapcsolás
-                    if (teljesMegtekintoJogotKap)
-                    {
-                        jogosultsagCacheFunctions.JogosultIntezetek = intezetFunctions.Table.ToList();
-                        userjogosultsagok[Jogosultsagok.Jfk_fegyjutmegtekinto.ToString().ToLower()] = new HashSet<int>(jogosultsagCacheFunctions.JogosultIntezetek.Select(x => x.Id).ToList());
+//                    // teljes intézeti megtekintő jog bekapcsolás
+//                    if (teljesMegtekintoJogotKap)
+//                    {
+//                        jogosultsagCacheFunctions.JogosultIntezetek = intezetFunctions.Table.ToList();
+//                        userjogosultsagok[Jogosultsagok.Jfk_fegyjutmegtekinto.ToString().ToLower()] = new HashSet<int>(jogosultsagCacheFunctions.JogosultIntezetek.Select(x => x.Id).ToList());
 
-                        id = 135;
-                    }
-                    else
-                    {
-                        id = jogosultsagCacheFunctions.JogosultIntezetek.First().Id;
-                    }
+//                        id = 135;
+//                    }
+//                    else
+//                    {
+//                        id = jogosultsagCacheFunctions.JogosultIntezetek.First().Id;
+//                    }
 
-                    jogosultsagCacheFunctions.UserJogosultsagok = userjogosultsagok;
+//                    jogosultsagCacheFunctions.UserJogosultsagok = userjogosultsagok;
 
-                    Intezet intezet = null;
+//                    Intezet intezet = null;
 
-                    // ha van intézet cookie beállítva
-                    if (Request.Cookies[cookieName] != null)
-                    {
-                        var intezetId = Request.Cookies[cookieName].Value;
-                        intezet = jogosultsagCacheFunctions.JogosultIntezetek.SingleOrDefault(x => x.Id.ToString() == intezetId);
-                        // ha még jogosult a cookieban lévő intézethez
-                        if (intezet != null)
-                        {
-                            id = intezet.Id;
-                        }
-                    }
+//                    // ha van intézet cookie beállítva
+//                    if (Request.Cookies[cookieName] != null)
+//                    {
+//                        var intezetId = Request.Cookies[cookieName].Value;
+//                        intezet = jogosultsagCacheFunctions.JogosultIntezetek.SingleOrDefault(x => x.Id.ToString() == intezetId);
+//                        // ha még jogosult a cookieban lévő intézethez
+//                        if (intezet != null)
+//                        {
+//                            id = intezet.Id;
+//                        }
+//                    }
 
-                    var cookie = new HttpCookie(cookieName, id.ToString());
-                    Response.SetCookie(cookie);
+//                    var cookie = new HttpCookie(cookieName, id.ToString());
+//                    Response.SetCookie(cookie);
 
 
-#endif
+//#endif
 
                 }
                 lock (_lockObj)

@@ -545,6 +545,9 @@ export default {
         createdRow: function (row, data, rowIndex) {
           $(row).attr('data-id', data.PrdID);
           $(row).css('cursor', 'pointer');
+          if (data.Kellekhiany) {
+            $(row).addClass('row-warning');
+          }
 
           $(row)
             .find('.dt-fegyelmi-esemeny-muvelet')

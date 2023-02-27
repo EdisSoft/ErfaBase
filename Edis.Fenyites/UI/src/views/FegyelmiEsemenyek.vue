@@ -208,6 +208,7 @@ import { selectDatatable } from '../utils/common';
 // import { sendToSocket, GetSocketConnectionId } from '../utils/socketConnection';
 import { NotificationFunctions } from '../functions/notificationFunctions';
 import Intezetek from '../data/enums/intezetek';
+import store from '../store';
 
 export default {
   name: 'fegyelmiUgyek',
@@ -549,7 +550,10 @@ export default {
         let prdIds = this.fegyelmiUgyekSelected.map((m) => m.PrdID);
         try {
           let result = await apiService.GetGyartasiMegbizasok({ prdIds });
-          console.log(result);
+          result[+new Date() % 2 == 0 ? 5 : 0].Kellekhiany = 'Van';
+          await store.dispatch(FegyelmiUgyStoreTypes.actions.setFegyelmiUgyek, {
+            value: Object.freeze(result),
+          });
         } catch (error) {
           console.log(error);
         }

@@ -136,7 +136,7 @@ class ApiService {
         store.dispatch(UserStoreTypes.actions.setUserInfo, {
           value: result.UserData,
         });
-        
+
         return result;
       })
       .then(() => {
@@ -176,8 +176,6 @@ class ApiService {
         value: result.AlkalmazasBeallitasok.FonixUrl,
       });
     }
-
-    
 
     return result;
   }
@@ -324,7 +322,7 @@ class ApiService {
       mock,
     });
   }
-  
+
   GetEsemenyReszletek({ id, mock = true } = {}) {
     var url = settings.baseUrl + 'Api/Esemeny/GetEsemenyReszletek';
     return this.http.post({
@@ -3524,6 +3522,14 @@ class ApiService {
     var url = settings.baseUrl + 'Api/Jutalom/VanNyitottFegyelmiVagyJutalom';
 
     let data = { fogvatartasIds };
+
+    let result = await this.http.post({ url, data, mock });
+    return result;
+  }
+  async GetGyartasiMegbizasok({ prdIds, mock = true } = {}) {
+    var url = settings.baseUrl + 'Api/GyartasiMegbizas/GetGyartasiMegbizasok';
+
+    let data = { prdIds };
 
     let result = await this.http.post({ url, data, mock });
     return result;

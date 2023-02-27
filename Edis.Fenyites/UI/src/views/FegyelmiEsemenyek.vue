@@ -27,6 +27,7 @@
               <div
                 class="panel-body badge-container-selected-wrapper p-sm-10 p-xl-20"
               >
+                {{ fegyelmiUgyekSelectedKey }}
                 <transition name="fade" tag="div">
                   <div
                     class="pb-2 pb-sm-0 badge-container-selected"
@@ -465,6 +466,12 @@ export default {
         (e) => e.FoFegyelmiUgyId != null
       );
     },
+    fegyelmiUgyekSelectedKey() {
+      return this.fegyelmiUgyekSelected.reduce(
+        (acc, item) => acc + item.PrdID,
+        0
+      );
+    },
   },
   components: {
     //FegyelmiUgyekTable: FegyelmiUgyekTable,
@@ -535,6 +542,18 @@ export default {
         });
       },
       immediate: true,
+    },
+    fegyelmiUgyekSelectedKey: {
+      async handler() {
+        console.log(this.fegyelmiUgyekSelected);
+        let prdIds = this.fegyelmiUgyekSelected.map((m) => m.PrdID);
+        try {
+          let result = await apiService.GetGyartasiMegbizasok({ prdIds });
+          console.log(result);
+        } catch (error) {
+          console.log(error);
+        }
+      },
     },
   },
   mixins: [Defer()],

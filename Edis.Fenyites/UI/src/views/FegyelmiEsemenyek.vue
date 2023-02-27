@@ -27,6 +27,7 @@
               <div
                 class="panel-body badge-container-selected-wrapper p-sm-10 p-xl-20"
               >
+                {{ fegyelmiUgyekSelectedKey }}
                 <transition name="fade" tag="div">
                   <div
                     class="pb-2 pb-sm-0 badge-container-selected"
@@ -207,6 +208,7 @@ import { selectDatatable } from '../utils/common';
 // import { sendToSocket, GetSocketConnectionId } from '../utils/socketConnection';
 import { NotificationFunctions } from '../functions/notificationFunctions';
 import Intezetek from '../data/enums/intezetek';
+import store from '../store';
 
 export default {
   name: 'fegyelmiUgyek',
@@ -465,6 +467,12 @@ export default {
         (e) => e.FoFegyelmiUgyId != null
       );
     },
+    fegyelmiUgyekSelectedKey() {
+      return this.fegyelmiUgyekSelected.reduce(
+        (acc, item) => acc + item.PrdID,
+        0
+      );
+    },
   },
   components: {
     //FegyelmiUgyekTable: FegyelmiUgyekTable,
@@ -535,6 +543,19 @@ export default {
         });
       },
       immediate: true,
+    },
+    fegyelmiUgyekSelectedKey: {
+      async handler() {
+        let prdIds = this.fegyelmiUgyekSelected.map((m) => m.PrdID);
+        try {
+          let result = await apiService.GetGyartasiMegbizasok({ prdIds });
+          await store.dispatch(FegyelmiUgyStoreTypes.actions.setFegyelmiUgyek, {
+            value: Object.freeze(result),
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      },
     },
   },
   mixins: [Defer()],

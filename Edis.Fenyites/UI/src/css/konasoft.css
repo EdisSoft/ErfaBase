@@ -103,7 +103,7 @@ body {
   font-family: 'OpenSans', sans-serif;
 }
 
-.list-style-none{
+.list-style-none {
   list-style: none !important;
 }
 .list-complete-item {
@@ -115,8 +115,7 @@ body {
 .list-complete-enter,
 .list-complete-leave-to
 
-/* .list-complete-leave-active below version 2.1.8 */
- {
+/* .list-complete-leave-active below version 2.1.8 */ {
   opacity: 0;
   transform: translateY(30px);
 }
@@ -474,8 +473,7 @@ iframe {
 .slide-fade-enter,
 .slide-fade-leave-to
 
-/* .slide-fade-leave-active for <2.1.8 */
- {
+/* .slide-fade-leave-active for <2.1.8 */ {
   transform: matrix3d(-0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1);
   opacity: 0;
 }
@@ -867,7 +865,7 @@ select {
   background: #f3f7f9;
 }
 
-.list-group-item{
+.list-group-item {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
 }
 
@@ -1026,6 +1024,10 @@ select {
 table.dataTable tbody tr.selected {
   color: inherit !important;
   background-color: #f2f2f2 !important;
+}
+table.dataTable tbody tr.row-warning {
+  color: inherit !important;
+  background-color: #ffe2e2 !important;
 }
 
 .page-login:before {
@@ -2851,8 +2853,7 @@ td.select-checkbox.remarkcheckbox {
 .fade-enter,
 .fade-leave-to
 
-/* .fade-leave-active below version 2.1.8 */
- {
+/* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
 
@@ -3090,7 +3091,7 @@ mark {
   border-radius: 24px;
   transform: translateY(5px);
 }
-.fogvatartottkereso.aktiv{
+.fogvatartottkereso.aktiv {
   border: 2px solid #8349f5;
 }
 .fogvatartottkereso .selection .select2-selection--single {

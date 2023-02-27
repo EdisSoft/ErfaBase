@@ -337,15 +337,16 @@ export default {
           selector: 'td:first-child',
         },
         order: [[3, 'desc']],
+        pageLength: 50,
         bSortClasses: false,
         aoColumns: [
-        {
+          {
             mDataProp: null,
             sTitle: '',
             sWidth: 50,
             bSortable: false,
             sClass: ' select-checkbox remarkcheckbox',
-            mRender: function(data, type, row, meta) {
+            mRender: function (data, type, row, meta) {
               return '';
             },
           },

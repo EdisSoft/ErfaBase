@@ -337,14 +337,15 @@ export default {
         },
         order: [[3, 'desc']],
         bSortClasses: false,
+        pageLength: 50,
         aoColumns: [
-        {
+          {
             mDataProp: null,
             sTitle: '',
             sWidth: 50,
             bSortable: false,
             sClass: ' select-checkbox remarkcheckbox',
-            mRender: function(data, type, row, meta) {
+            mRender: function (data, type, row, meta) {
               return '';
             },
           },
@@ -493,7 +494,6 @@ export default {
               // );
             },
           },
-          
         ],
         responsive: false,
         deferRender: true,

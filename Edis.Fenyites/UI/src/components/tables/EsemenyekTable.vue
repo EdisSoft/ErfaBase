@@ -358,11 +358,9 @@ export default {
               var prjCode = '';
               if (row.PrjCode != null) {
                 prjCode +=
-                  '<span class="unique-desc">' +
+                  '<span class="unique-desc"><b><i>' +
                   row.PrjCode +
-                  ' - ' +
-                  row.PrdID +
-                  '</span>';
+                  '</i></b></span>';
               }
               return prjCode;
             },
@@ -375,15 +373,22 @@ export default {
 
               if (row.OrdCustRequestDate != null) {
                 cimkek +=
-                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény jellege">' +
-                  moment(row.OrdCustRequestDate).format('YYYY.MM.DD. HH:mm');
-                +'</span>';
+                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Határidő">' +
+                  'Hat: ' +
+                  moment(row.OrdCustRequestDate).format('YYYY.MM.DD') +
+                  '</span><br/>';
+              }
+              if (row.Szabszam != null) {
+                cimkek +=
+                  '<span class="unique-desc" data-toggle="m-tooltip" data-original-title="Munkaszám">' +
+                  row.Szabszam +
+                  '</span>';
               }
               if (row.Prdinfo2 != null) {
                 cimkek +=
-                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény jellege">' +
-                  row.Prdinfo2;
-                +'</span>';
+                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Termék">' +
+                  capitalize(row.Prdinfo2) +
+                  '</span>';
               }
               //return cimkek;
               // var cimkek = row.Resztvevok.map(function(element) {
@@ -423,10 +428,13 @@ export default {
                   capitalize(row.Terv) +
                   '</span>';
               }
-              if (row.ObsStartDate != null) {
+              if (
+                row.ObsStartDate != null &&
+                moment(row.ObsStartDate).format('YYYY') > '2020'
+              ) {
                 cimkek +=
-                  ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő intézet">' +
-                  moment(row.ObsStartDate).format('YYYY.MM.DD. HH:mm');
+                  ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Kezdés">' +
+                  moment(row.ObsStartDate).format('YYYY.MM.DD');
                 +'</span>';
               }
               if (row.Fo != null) {

@@ -245,20 +245,20 @@ namespace Edis.Functions.Fany
 
 
             //}
-#if DEBUG
+//#if DEBUG
             bool vanJogosultsag = true;
-#else
+//#else
             
-            bool vanJogosultsag = false;
-            jogosultsagAzonosito = jogosultsagAzonosito.ToLower();
-            if (JogosultsagCacheFunctions.UserJogosultsagok != null)
-            {
-                if (JogosultsagCacheFunctions.UserJogosultsagok.ContainsKey(jogosultsagAzonosito))
-                {
-                    vanJogosultsag = JogosultsagCacheFunctions.UserJogosultsagok[jogosultsagAzonosito].Contains(AlkalmazasKontextus.Kontextus.RogzitoTelephelyId);
-                }
-            }
-#endif
+//            bool vanJogosultsag = false;
+//            jogosultsagAzonosito = jogosultsagAzonosito.ToLower();
+//            if (JogosultsagCacheFunctions.UserJogosultsagok != null)
+//            {
+//                if (JogosultsagCacheFunctions.UserJogosultsagok.ContainsKey(jogosultsagAzonosito))
+//                {
+//                    vanJogosultsag = JogosultsagCacheFunctions.UserJogosultsagok[jogosultsagAzonosito].Contains(AlkalmazasKontextus.Kontextus.RogzitoTelephelyId);
+//                }
+//            }
+//#endif
             //Log.Debug(String.Format("Vanjogosultsaga szemelyzetId: {0}, jogosultság: {1}, eredmény: {2}", AlkalmazasKontextus.Kontextus.SzemelyzetId, jogosultsagAzonosito, vanJogosultsag));
 
 
@@ -269,20 +269,20 @@ namespace Edis.Functions.Fany
         public bool VanJogosultsaga(Jogosultsagok jogosultsagAzonosito, int bvIntId)
         {
 
-#if DEBUG
+//#if DEBUG
             bool vanJogosultsag = true;
-#else
+//#else
 
-            bool vanJogosultsag = false;
-            var jogosultsagAzonositoStr = jogosultsagAzonosito.ToString().ToLower();
-            if (JogosultsagCacheFunctions.UserJogosultsagok != null)
-            {
-                if (JogosultsagCacheFunctions.UserJogosultsagok.ContainsKey(jogosultsagAzonositoStr))
-                {
-                    vanJogosultsag = JogosultsagCacheFunctions.UserJogosultsagok[jogosultsagAzonositoStr].Contains(bvIntId);
-                }
-            }
-#endif
+//            bool vanJogosultsag = false;
+//            var jogosultsagAzonositoStr = jogosultsagAzonosito.ToString().ToLower();
+//            if (JogosultsagCacheFunctions.UserJogosultsagok != null)
+//            {
+//                if (JogosultsagCacheFunctions.UserJogosultsagok.ContainsKey(jogosultsagAzonositoStr))
+//                {
+//                    vanJogosultsag = JogosultsagCacheFunctions.UserJogosultsagok[jogosultsagAzonositoStr].Contains(bvIntId);
+//                }
+//            }
+//#endif
             //Log.Debug(String.Format("Vanjogosultsaga szemelyzetId: {0}, jogosultság: {1}, eredmény: {2}", AlkalmazasKontextus.Kontextus.SzemelyzetId, jogosultsagAzonosito, vanJogosultsag));
 
 
@@ -294,41 +294,41 @@ namespace Edis.Functions.Fany
         public bool VanJogosultsaga(string sid, Jogosultsagok jogosultsagAzonosito, int? bvIntId)
         {
             var vanJogosultsaga = false;
-#if DEBUG 
+//#if DEBUG 
             vanJogosultsaga = true;
-#else
-            int intezetId;
-            string azonosito;
-            if (bvIntId.HasValue)
-            {
-                var intezet = IntezetFunctions.FindById(bvIntId.Value);
-                intezetId = intezet.Id;
-                azonosito = intezet.Azonosito2.ToUpper();
-            } 
-            else
-            {
-                intezetId = JogosultsagCacheFunctions.AktualisIntezet.Id;
-                azonosito = JogosultsagCacheFunctions.AktualisIntezet.Azonosito2.ToUpper();
-            }
-            var jogosultsagAzonositoStr = jogosultsagAzonosito.ToString();
-            if (JogosultsagCacheFunctions.Inicializalatlan())
-            {
-                JogosultsagCacheFunctions.Torol();
-            }
-            var informacio = JogosultsagCacheFunctions.KeresesJogosultsagInformacioCacheben(sid, jogosultsagAzonositoStr, bvIntId);
-            if (informacio == null)
-            {
-                var adGroupList = this.FelhasznaloAdGroupLista(sid);
-                var groupName = $"{azonosito}-FN-{jogosultsagAzonositoStr.Replace('_', '-')}";
-                var group = adGroupList.FirstOrDefault(x => x.Name == groupName);
-                vanJogosultsaga = group != null;
-                JogosultsagCacheFunctions.HozzaadJogosultsagInformacioCachehez(new JogosultsagInformacio(sid, group?.Sid?.ToString() ?? "", "", jogosultsagAzonositoStr, intezetId, vanJogosultsaga, false));
-            }
-            else
-            {
-                vanJogosultsaga = informacio.VanJogosultsaga;
-            }
-#endif
+//#else
+//            int intezetId;
+//            string azonosito;
+//            if (bvIntId.HasValue)
+//            {
+//                var intezet = IntezetFunctions.FindById(bvIntId.Value);
+//                intezetId = intezet.Id;
+//                azonosito = intezet.Azonosito2.ToUpper();
+//            } 
+//            else
+//            {
+//                intezetId = JogosultsagCacheFunctions.AktualisIntezet.Id;
+//                azonosito = JogosultsagCacheFunctions.AktualisIntezet.Azonosito2.ToUpper();
+//            }
+//            var jogosultsagAzonositoStr = jogosultsagAzonosito.ToString();
+//            if (JogosultsagCacheFunctions.Inicializalatlan())
+//            {
+//                JogosultsagCacheFunctions.Torol();
+//            }
+//            var informacio = JogosultsagCacheFunctions.KeresesJogosultsagInformacioCacheben(sid, jogosultsagAzonositoStr, bvIntId);
+//            if (informacio == null)
+//            {
+//                var adGroupList = this.FelhasznaloAdGroupLista(sid);
+//                var groupName = $"{azonosito}-FN-{jogosultsagAzonositoStr.Replace('_', '-')}";
+//                var group = adGroupList.FirstOrDefault(x => x.Name == groupName);
+//                vanJogosultsaga = group != null;
+//                JogosultsagCacheFunctions.HozzaadJogosultsagInformacioCachehez(new JogosultsagInformacio(sid, group?.Sid?.ToString() ?? "", "", jogosultsagAzonositoStr, intezetId, vanJogosultsaga, false));
+//            }
+//            else
+//            {
+//                vanJogosultsaga = informacio.VanJogosultsaga;
+//            }
+//#endif
             return vanJogosultsaga;
         }
 
@@ -362,7 +362,7 @@ namespace Edis.Functions.Fany
             {
                 var sidStr = sid.User.Value;
                 //-LogGenerator.LogToFile("Belepes: " + sidStr, 1);
-#if !DEBUG
+//#if !DEBUG
                 // User host-jának ellenőrzése
                 clientHostName = clientHostName.Contains(".")
                                       ? clientHostName.Substring(0, clientHostName.IndexOf('.'))
@@ -377,7 +377,7 @@ namespace Edis.Functions.Fany
 
 
                 // User AD csoporttagságai                
-#endif
+//#endif
                 var kontextus = AlkalmazasKontextus.Kontextus ?? new AlkalmazasKontextus();
                 kontextus.RogzitoTelephelyId = JogosultsagCacheFunctions.AktualisIntezet.Id;
 
@@ -496,15 +496,15 @@ namespace Edis.Functions.Fany
         public List<Intezet> IntezetListaLegyujtes(string sid)
         {
             List<Intezet> intezetLista = new List<Intezet>();
-#if DEBUG
+//#if DEBUG
             var groupLista = FelhasznaloAdGroupLista(sid);
             List<DebugGroupPrincipal> debugGroupLista = groupLista.Cast<DebugGroupPrincipal>().ToList();
             return IntezetListaLegyujtesDebug(debugGroupLista);
-#else
-            var groupLista = FelhasznaloAdGroupLista(sid);
-            return IntezetListaLegyujtes(groupLista);
-#endif
-            return intezetLista;
+//#else
+//            var groupLista = FelhasznaloAdGroupLista(sid);
+//            return IntezetListaLegyujtes(groupLista);
+//#endif
+//            return intezetLista;
         }
 
         List<Intezet> tmpIntezetek;
@@ -1035,17 +1035,17 @@ namespace Edis.Functions.Fany
         {
             var user = ActiveDirectoryFunctions.GetUserFromSamAccountName(userName);
 
-#if RELEASE
-            var jogSzuresEnabled = WebConfigurationManager.AppSettings["jogosultsagSzuresEnabled"] == "true";
-            if (jogSzuresEnabled)
-            {
-                var feluldefinialtJogosultsagok = new F3JogosultsagFeluldefinialasFunctions().GetFeluldefinialtUserJogosultsagok(user.Sid.ToString());
-                if (feluldefinialtJogosultsagok.Any())
-                {
-                    return feluldefinialtJogosultsagok;
-                }
-            }
-#endif
+//#if RELEASE
+//            var jogSzuresEnabled = WebConfigurationManager.AppSettings["jogosultsagSzuresEnabled"] == "true";
+//            if (jogSzuresEnabled)
+//            {
+//                var feluldefinialtJogosultsagok = new F3JogosultsagFeluldefinialasFunctions().GetFeluldefinialtUserJogosultsagok(user.Sid.ToString());
+//                if (feluldefinialtJogosultsagok.Any())
+//                {
+//                    return feluldefinialtJogosultsagok;
+//                }
+//            }
+//#endif
 
             var userGroups = ActiveDirectoryFunctions.GetUserGroups(user.Sid.Value);
             return GetUserJogosultsagok(userGroups);

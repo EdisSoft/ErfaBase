@@ -87,15 +87,15 @@ namespace Edis.Fenyites.Controllers.Base
             userData.Jogkor = jogkorJson;
             //userData.Szakterulet = szakteruletJson;
 
-#if DEBUG
+//#if DEBUG
             userData.Jogosultsagok = new List<string>() { Jogosultsagok.Jfk_fegyjutmegtekinto.ToString().ToLower(),
                                                           Jogosultsagok.Fegyelmi_egyeb_szakterulet.ToString().ToLower(),
                                                           Jogosultsagok.Fegyelmi_jogkor_gyakorloja.ToString().ToLower(),
                                                           Jogosultsagok.Fegyelmi_fofelugyelo.ToString().ToLower(),
                                                           Jogosultsagok.Fegyelmi_reintegracios_tiszt.ToString().ToLower()};
-#else
-             userData.Jogosultsagok = jogosultsagCacheFunctions.UserJogosultsagok.Where(x => x.Value.Contains(kontext.RogzitoTelephelyId)).Select(x => x.Key).ToList();
-#endif
+//#else
+//             userData.Jogosultsagok = jogosultsagCacheFunctions.UserJogosultsagok.Where(x => x.Value.Contains(kontext.RogzitoTelephelyId)).Select(x => x.Key).ToList();
+//#endif
             if (!string.IsNullOrWhiteSpace(kontext.PersonalHelpdeskRSA))
             {
                 userData.PersonalHelpdeskLoginUrl = ConfigurationManager.AppSettings["PersonalHelpdeskUrl"] +

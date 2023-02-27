@@ -83,7 +83,7 @@ namespace Edis.Functions.Fany
 
             fegyelmiUsers = fegyelmiUsers.GroupBy(x => x.Sid).Select(x => x.First()).ToList();
 
-#if !DEBUG
+//#if !DEBUG
             var userDic = fegyelmiUsers.ToDictionary(x => x.Sid);
             //var excludedSidList= KonasoftBVFonixContext.DebugSidek.Select(x => x.Sid).ToList();
             //foreach (var sid in excludedSidList)
@@ -92,7 +92,7 @@ namespace Edis.Functions.Fany
             //        userDic.Remove(sid);
             //}
             fegyelmiUsers = userDic.Values.ToList();
-#endif
+//#endif
 
             return fegyelmiUsers;
         }
@@ -116,7 +116,7 @@ namespace Edis.Functions.Fany
                         new SqlParameter("@AdGroupName", JogosultsagCacheFunctions.AktualisIntezet.Azonosito2 + "-FN-Fegyelmi-egyeb-szakterulet")
                     ).ToList().GroupBy(x => x.Sid).Select(x => x.First()).ToList();
 
-#if !DEBUG
+//#if !DEBUG
             var userDic = users.ToDictionary(x => x.Sid);
             //var excludedSidList = KonasoftBVFonixContext.DebugSidek.Select(x => x.Sid).ToList();
             //foreach (var sid in excludedSidList)
@@ -125,7 +125,7 @@ namespace Edis.Functions.Fany
             //        userDic.Remove(sid);
             //}
             users = userDic.Values.ToList();
-#endif
+//#endif
             return users;
         }
 
@@ -136,7 +136,7 @@ namespace Edis.Functions.Fany
                         new SqlParameter("@AdGroupName", JogosultsagCacheFunctions.AktualisIntezet.Azonosito2 + "-FN-Fegyelmi-reintegracios-tiszt")
                     ).ToList().GroupBy(x => x.Sid).Select(x => x.First()).ToList();
 
-#if !DEBUG
+//#if !DEBUG
             var userDic = users.ToDictionary(x => x.Sid);
             //var excludedSidList = KonasoftBVFonixContext.DebugSidek.Select(x => x.Sid).ToList();
             //foreach (var sid in excludedSidList)
@@ -145,7 +145,7 @@ namespace Edis.Functions.Fany
             //        userDic.Remove(sid);
             //}
             users = userDic.Values.ToList();
-#endif
+//#endif
             return users;
         }
 
@@ -165,7 +165,7 @@ namespace Edis.Functions.Fany
                             new SqlParameter("@AdGroupName", JogosultsagCacheFunctions.AktualisIntezet.Azonosito2 + "-FN-Fegyelmi-jogkor-gyakorloja")
                         ).ToList().GroupBy(x => x.Sid).Select(x => x.First()).ToList();
 
-#if !DEBUG
+//#if !DEBUG
             var userDic = users.ToDictionary(x => x.Sid);
             //var excludedSidList = KonasoftBVFonixContext.DebugSidek.Select(x => x.Sid).ToList();
             //foreach (var sid in excludedSidList)
@@ -174,7 +174,7 @@ namespace Edis.Functions.Fany
             //        userDic.Remove(sid);
             //}
             users = userDic.Values.ToList();
-#endif
+//#endif
             return users;
         }
 

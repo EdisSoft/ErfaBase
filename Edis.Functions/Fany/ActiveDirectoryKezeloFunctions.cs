@@ -477,7 +477,7 @@ namespace Edis.Functions.Fany
                     return _groupPrincipalList;
                 else
                 {
-#if DEBUG
+//#if DEBUG
 
                     _groupPrincipalList = new List<GroupPrincipal>
                            {
@@ -668,55 +668,55 @@ namespace Edis.Functions.Fany
                                        Sid = new SecurityIdentifier("S-1-5-32-545")
                                    }
                            };
-#else
-                    using (HostingEnvironment.Impersonate())
-                    {
-                        //-LogGenerator.LogToFile("ListazasUserGroupPrincipal START: " + sid);       
-                        var userPrincipal = BetoltesUserPrincipal(sid);
-                        List<string> groupList = new List<string>();
-                        var groupPrincipalDict = new Dictionary<string, GroupPrincipal>();
+//#else
+//                    using (HostingEnvironment.Impersonate())
+//                    {
+//                        //-LogGenerator.LogToFile("ListazasUserGroupPrincipal START: " + sid);       
+//                        var userPrincipal = BetoltesUserPrincipal(sid);
+//                        List<string> groupList = new List<string>();
+//                        var groupPrincipalDict = new Dictionary<string, GroupPrincipal>();
 
-                        //-LogGenerator.LogToFile("ListazasUserGroupPrincipal LetrehozasDirectoryEntry: " + sid);       
-                        var search = new DirectorySearcher
-                        {
-                            SearchRoot = LetrehozasDirectoryEntry(null),
-                            Filter = "(sAMAccountName=" + userPrincipal.SamAccountName + ")"
-                        };
-                        search.PropertiesToLoad.Add("memberOf");
+//                        //-LogGenerator.LogToFile("ListazasUserGroupPrincipal LetrehozasDirectoryEntry: " + sid);       
+//                        var search = new DirectorySearcher
+//                        {
+//                            SearchRoot = LetrehozasDirectoryEntry(null),
+//                            Filter = "(sAMAccountName=" + userPrincipal.SamAccountName + ")"
+//                        };
+//                        search.PropertiesToLoad.Add("memberOf");
 
-                        //-LogGenerator.LogToFile("ListazasUserGroupPrincipal FindOne: " + sid);       
-                        SearchResult talalat = search.FindOne();
-                        if (talalat == null)
-                        {
-                            return null;
-                        }
+//                        //-LogGenerator.LogToFile("ListazasUserGroupPrincipal FindOne: " + sid);       
+//                        SearchResult talalat = search.FindOne();
+//                        if (talalat == null)
+//                        {
+//                            return null;
+//                        }
 
-                        //-LogGenerator.LogToFile("ListazasUserGroupPrincipal CsoportTagsagokHozzadasa: " + sid); 
-                        CsoportTagsagokHozzadasa(talalat, groupPrincipalDict, groupList);
-                        while (groupList.Any())
-                        {
-                            string dn = groupList.First();
-                            groupList.Remove(dn);
-                            var groupPrincipalSablon = new GroupPrincipal(LetrehozasPrincipalContext(dn));
-                            using (var kereso = new PrincipalSearcher(groupPrincipalSablon))
-                            {
-                                var group = (GroupPrincipal)kereso.FindOne();
-                                groupPrincipalDict[group.DistinguishedName] = group;
-                            }
+//                        //-LogGenerator.LogToFile("ListazasUserGroupPrincipal CsoportTagsagokHozzadasa: " + sid); 
+//                        CsoportTagsagokHozzadasa(talalat, groupPrincipalDict, groupList);
+//                        while (groupList.Any())
+//                        {
+//                            string dn = groupList.First();
+//                            groupList.Remove(dn);
+//                            var groupPrincipalSablon = new GroupPrincipal(LetrehozasPrincipalContext(dn));
+//                            using (var kereso = new PrincipalSearcher(groupPrincipalSablon))
+//                            {
+//                                var group = (GroupPrincipal)kereso.FindOne();
+//                                groupPrincipalDict[group.DistinguishedName] = group;
+//                            }
 
-                            //search = new DirectorySearcher
-                            //             {
-                            //                 SearchRoot = LetrehozasDirectoryEntry(dn)
-                            //             };
-                            //search.PropertiesToLoad.Add("memberOf");
-                            //talalat = search.FindOne();
-                            //CsoportTagsagokHozzadasa(talalat, groupPrincipalDict, groupList);
-                        }
-                        _groupPrincipalList = groupPrincipalDict.Values.ToList();
-                        //-LogGenerator.LogToFile("ListazasUserGroupPrincipal END: " + sid);       
-                    }
+//                            //search = new DirectorySearcher
+//                            //             {
+//                            //                 SearchRoot = LetrehozasDirectoryEntry(dn)
+//                            //             };
+//                            //search.PropertiesToLoad.Add("memberOf");
+//                            //talalat = search.FindOne();
+//                            //CsoportTagsagokHozzadasa(talalat, groupPrincipalDict, groupList);
+//                        }
+//                        _groupPrincipalList = groupPrincipalDict.Values.ToList();
+//                        //-LogGenerator.LogToFile("ListazasUserGroupPrincipal END: " + sid);       
+//                    }
 
-#endif
+//#endif
                 }
                 return _groupPrincipalList;
             }

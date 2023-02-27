@@ -9,5 +9,8 @@ namespace Edis.Functions.Erfa
     {
         List<AlkatreszekListItemViewModel> GetAlkatreszek();
         List<AlkatreszekListItemViewModel> GetAlkatreszekByPrdId(int prdId);
+        List<AlkatreszKeszletekListItemViewModel> GetAlkatreszKeszletek();
+        List<AlkatreszKeszletekListItemViewModel> GetAlkatreszKeszletekByPrdIds(List<int> prdIds);
+        List<AlkatreszKeszletekHelperModel> FormatAlkatreszKeszletek(List<AlkatreszKeszletekListItemViewModel> alkatreszKeszletek, List<int> prdIds);
     }
 }

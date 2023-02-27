@@ -16,5 +16,21 @@ namespace Edis.Functions.Erfa
             var gyartasiMegbizasok = Table.ToArray();
             return gyartasiMegbizasok.Select(s => (GyartasiMegbizasListItemViewModel)s).ToList();
         }
+
+        public List<GyartasiMegbizasListItemViewModel> AddAlkatreszKeszletekToGyartasiMegbizasok(List<GyartasiMegbizasListItemViewModel> gyartasiMegbizasok, List<AlkatreszKeszletekHelperModel> alkatreszKeszletek)
+        {
+            foreach (var gyartasiMegbizas in gyartasiMegbizasok)
+            {
+                var alkatreszKeszlet = alkatreszKeszletek.Where(w => w.PrdId == gyartasiMegbizas.PrdID).FirstOrDefault();
+                if(alkatreszKeszlet != null)
+                {
+                    gyartasiMegbizas.Lapanyag = alkatreszKeszlet.LapAnyag;
+                    gyartasiMegbizas.Elanyag = alkatreszKeszlet.ElAnyag;
+                    gyartasiMegbizas.Kellekek = alkatreszKeszlet.Kellek;
+                }
+            }
+
+            return gyartasiMegbizasok;
+        }
     }
 }

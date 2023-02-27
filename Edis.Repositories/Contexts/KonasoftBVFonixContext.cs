@@ -286,6 +286,7 @@ namespace Edis.Repositories.Contexts
 		#region Erfa
 		
 		public DbSet<AlkatreszView> AlkatreszekView { get; set; }
+		public DbSet<AlkatreszKeszletView> AlkatreszKeszletekView { get; set; }
 		public DbSet<GyartasiMegbizasView> GyartasiMegbizasokView { get; set; }
         public DbSet<Alkatresz> Alkatreszek { get; set; }
 		

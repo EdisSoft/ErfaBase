@@ -53,10 +53,9 @@ export default {
           return `[data-id="${m}"]`;
         })
         .join(',');
-
       var selectedIdsInDt = Array.from(
         $(this.$refs.datatable.$el).DataTable().rows({ selected: true }).data()
-      ).map((m) => m.FegyelmiUgyId);
+      ).map((m) => m.PrdID);
       let removedFromDt = selectedIdsInDt.filter(
         (f) => !ids.some((s) => s == f)
       );
@@ -339,6 +338,16 @@ export default {
         order: [[3, 'desc']],
         bSortClasses: false,
         aoColumns: [
+        {
+            mDataProp: null,
+            sTitle: '',
+            sWidth: 50,
+            bSortable: false,
+            sClass: ' select-checkbox remarkcheckbox',
+            mRender: function(data, type, row, meta) {
+              return '';
+            },
+          },
           {
             mDataProp: null, // esemény
             sTitle: 'Munkaszám',
@@ -484,25 +493,7 @@ export default {
               // );
             },
           },
-          {
-            mDataProp: null,
-            sTitle: '',
-            bSearchable: false,
-            bSortable: false,
-            sClass: 'dt-td-center dt-td-noClick',
-            sWidth: '55px',
-            mRender: function (data, type, row, meta) {
-              //if (row.FoFegyelmiUgyId) {
-              //  return '';
-              //}
-              var dropdown =
-                FegyelmiUgyFunctions.GetBootstrapEsemenyMuveletekMenu([data]);
-              if (!dropdown) {
-                return '';
-              }
-              return dropdown;
-            },
-          },
+          
         ],
         responsive: false,
         deferRender: true,
@@ -532,7 +523,7 @@ export default {
             });
         },
         createdRow: function (row, data, rowIndex) {
-          $(row).attr('data-id', data.FegyelmiUgyId);
+          $(row).attr('data-id', data.PrdID);
           $(row).css('cursor', 'pointer');
 
           $(row)
@@ -542,7 +533,7 @@ export default {
               let modalTipus = $(e.target).attr('data-modal-tipus');
               let functionToRun = $(e.target).attr('data-function-to-run');
               vm.UgyReszletekMegtekintes({
-                fegyelmiUgyId: data.FegyelmiUgyId,
+                fegyelmiUgyId: data.PrdID,
                 modalName: modalId,
                 modalType: modalTipus,
                 functionToRun: functionToRun,

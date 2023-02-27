@@ -397,7 +397,7 @@ export default {
           icon: 'wb-users',
         },
         {
-          url: '/FegyelmiUgyek/',
+          url: '/Gyartasban/',
           name: 'Gyártásban',
           icon: 'fa-calendar',
           isExact: false,

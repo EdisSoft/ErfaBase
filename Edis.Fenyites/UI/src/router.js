@@ -26,7 +26,7 @@ var router = new Router({
       meta: { layout: 'fenyites', navbar: true },
     },
     {
-      path: '/FegyelmiUgyek/',
+      path: '/Gyartasban/',
       name: 'FegyelmiUgyek',
       component: FegyelmiUgyek,
       meta: { layout: 'fenyites', navbar: true },

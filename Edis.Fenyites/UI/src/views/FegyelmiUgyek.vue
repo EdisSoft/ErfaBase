@@ -5,7 +5,7 @@
       <span
         class="rounded-pill text-default border border-default font-size-12 px-10 py-5"
       >
-        Fogvatartottak ellen kezdeményezett és elrendelt fegyelmi ügyek listája
+        Azok a megrendelések, melyek gyártásban vannak.
       </span>
     </div>
 

@@ -41,14 +41,14 @@
                             >
                               <span
                                 v-for="fegyelmiUgy in fegyelmiUgyekSelected"
-                                :key="fegyelmiUgy.FegyelmiUgyId"
+                                :key="fegyelmiUgy.PrdID"
                                 class="list-complete-item badge badge-outline mr-2 my-1 pointer badge-ugy-selected blue-grey-500 font-italic py-0"
                               >
                                 <span
                                   class="checkbox-custom checkbox-default mr-2 my-0 py-1 px-0"
                                   @click="
                                     RemoveFegyelmiUgySelected({
-                                      value: fegyelmiUgy.FegyelmiUgyId,
+                                      value: fegyelmiUgy.PrdID,
                                     })
                                   "
                                 >
@@ -63,7 +63,7 @@
                                   class="ml-4"
                                   @click="
                                     UgyReszletekMegtekintes(
-                                      fegyelmiUgy.FegyelmiUgyId,
+                                      fegyelmiUgy.PrdID,
                                       null,
                                       null,
                                       fegyelmiUgy

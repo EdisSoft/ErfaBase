@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="page-header py-10 px-15 d-flex align-items-center">
-      <h1 class="page-title text-dark mr-15 font-weight-normal">Ügyek</h1>
+      <h1 class="page-title text-dark mr-15 font-weight-normal">Gyártásban</h1>
       <span
         class="rounded-pill text-default border border-default font-size-12 px-10 py-5"
       >
-        Azok a megrendelések, melyek gyártásban vannak.
+        Gyártásban futó megrendelések
       </span>
     </div>
 

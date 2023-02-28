@@ -27,7 +27,6 @@
               <div
                 class="panel-body badge-container-selected-wrapper p-sm-10 p-xl-20"
               >
-                {{ fegyelmiUgyekSelectedKey }}
                 <transition name="fade" tag="div">
                   <div
                     class="pb-2 pb-sm-0 badge-container-selected"
@@ -209,6 +208,9 @@ import { selectDatatable } from '../utils/common';
 import { NotificationFunctions } from '../functions/notificationFunctions';
 import Intezetek from '../data/enums/intezetek';
 import store from '../store';
+import cloneDeep from 'lodash/cloneDeep';
+import groupBy from 'lodash/groupBy';
+import keyBy from 'lodash/keyBy';
 
 export default {
   name: 'fegyelmiUgyek',
@@ -386,12 +388,23 @@ export default {
         UserStoreTypes.getters.vanReintegraciosTisztJoga,
       isModalOpen: AppStoreTypes.getters.isModalOpen,
       fegyelmiUgyekSzuro: FegyelmiUgyStoreTypes.getters.getFegyelmiUgyekSzuro,
+      alkatreszKeszletek: FegyelmiUgyStoreTypes.getters.getAlkatreszKeszletek,
+      alkatreszek: FegyelmiUgyStoreTypes.getters.getAlkatreszek,
     }),
     fegyelmiUgyekModositott() {
       let fegyelmiUgyek = this.fegyelmiUgyek;
       let fegyelmiUgyekModositott =
         FegyelmiUgyFunctions.FegyelmiUgyTovabbiMezokKitoltese(fegyelmiUgyek);
-      return fegyelmiUgyekModositott;
+
+      let fegyelmiUgyekSelected = this.fegyelmiUgyekSelected;
+      let alkatreszKeszletek = keyBy(
+        cloneDeep(this.alkatreszKeszletek),
+        'Ottimokod'
+      );
+      let alkatreszek = groupBy(this.alkatreszek, 'PrdId');
+      fegyelmiUgyekModositott.forEach((row) => {});
+      console.trace({ fegyelmiUgyekSelected, alkatreszKeszletek, alkatreszek });
+      return cloneDeep(fegyelmiUgyekModositott);
     },
     fegyelmiUgyekSelectedDropdown() {
       let fegyelmiUgyMuveletekObj =
@@ -548,10 +561,10 @@ export default {
       async handler() {
         let prdIds = this.fegyelmiUgyekSelected.map((m) => m.PrdID);
         try {
-          let result = await apiService.GetGyartasiMegbizasok({ prdIds });
-          await store.dispatch(FegyelmiUgyStoreTypes.actions.setFegyelmiUgyek, {
-            value: Object.freeze(result),
-          });
+          // let result = await apiService.GetGyartasiMegbizasok({ prdIds });
+          // await store.dispatch(FegyelmiUgyStoreTypes.actions.setFegyelmiUgyek, {
+          //   value: Object.freeze(result),
+          // });
         } catch (error) {
           console.log(error);
         }

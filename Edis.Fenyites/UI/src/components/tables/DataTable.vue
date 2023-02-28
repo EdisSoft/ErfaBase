@@ -12,7 +12,7 @@ import { close } from 'fs';
 export default {
   name: 'k-datatable',
   props: ['options', 'dataList', 'dataKey'],
-  data: function() {
+  data: function () {
     return {
       eventTrackingTimeOut: null,
       defaultOptions: {
@@ -20,11 +20,11 @@ export default {
       },
     };
   },
-  mounted: function() {
+  mounted: function () {
     var vm = this;
     var table = $(this.$el).dataTable(this.options);
 
-    table.on('search.dt', function() {
+    table.on('search.dt', function () {
       if (vm.eventTrackingTimeOut) {
         clearTimeout(vm.eventTrackingTimeOut);
         vm.eventTrackingTimeOut = null;
@@ -33,25 +33,22 @@ export default {
       var searchTerm = table.DataTable().search();
 
       if (searchTerm) {
-        vm.eventTrackingTimeOut = setTimeout(function() {}, 2000);
+        vm.eventTrackingTimeOut = setTimeout(function () {}, 2000);
       }
     });
 
-    setTimeout(function() {
+    setTimeout(function () {
       table.DataTable().rows.add(vm.dataList);
       table.DataTable().draw();
     }, 200);
 
-    $(this.$el).on('click', 'tr', function() {
-      var data = table
-        .api()
-        .row(this)
-        .data();
+    $(this.$el).on('click', 'tr', function () {
+      var data = table.api().row(this).data();
       vm.$emit('rowClick', data);
     });
   },
   watch: {
-    dataList: function(dataList, prev) {
+    dataList: function (dataList, prev) {
       var table = $(this.$el);
       var key = this.dataKey;
 
@@ -92,7 +89,7 @@ export default {
     },
   },
   methods: {
-    chunkArray: function(myArray, chunk_size) {
+    chunkArray: function (myArray, chunk_size) {
       var index = 0;
       var arrayLength = myArray.length;
       var tempArray = [];
@@ -106,10 +103,8 @@ export default {
       return tempArray;
     },
   },
-  destroyed: function() {
-    $(this.$el)
-      .DataTable()
-      .destroy();
+  destroyed: function () {
+    $(this.$el).DataTable().destroy();
   },
 };
 </script>

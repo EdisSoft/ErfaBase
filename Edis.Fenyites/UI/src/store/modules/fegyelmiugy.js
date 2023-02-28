@@ -11,6 +11,8 @@ export const FegyelmiUgyStoreTypes = {
     getFegyelmiUgyekSelectedIds: 'fegyelmiugy/getFegyelmiUgyekSelectedIds',
     getFegyelmiUgyekSzuro: 'fegyelmiugy/getFegyelmiUgyekSzuro',
     getAktivitasFolyam: 'fegyelmiugy/getAktivitasFolyam',
+    getAlkatreszKeszletek: 'fegyelmiugy/getAlkatreszKeszletek',
+    getAlkatreszek: 'fegyelmiugy/getAlkatreszek',
   },
   actions: {
     addFegyelmiUgyek: 'fegyelmiugy/addFegyelmiUgyek',
@@ -24,6 +26,8 @@ export const FegyelmiUgyStoreTypes = {
     addAktivitasFolyam: 'fegyelmiugy/addAktivitasFolyam',
     refreshAktivitasFolyam: 'fegyelmiugy/refreshAktivitasFolyam',
     modifyFegyelmiUgyek: 'fegyelmiugy/modifyFegyelmiUgyek',
+    setAlkatreszKeszletek: 'fegyelmiugy/setAlkatreszKeszletek',
+    setAlkatreszek: 'fegyelmiugy/setAlkatreszek',
   },
   mutations: {
     SET_FEGYELMIUGYEK: 'fegyelmiugy/SET_FEGYELMIUGYEK',
@@ -34,6 +38,8 @@ export const FegyelmiUgyStoreTypes = {
     ADD_FEGYELMI_UGY: 'fegyelmiugy/ADD_FEGYELMI_UGY',
     SET_FEGYELMI_UGYEK_SZURO: 'fegyelmiugy/SET_FEGYELMI_UGYEK_SZURO',
     SET_AKTIVITASFOLYAM: 'fegyelmiugy/SET_AKTIVITASFOLYAM',
+    SET_ALKATRESZ_KESZLETEK: 'fegyelmiugy/SET_ALKATRESZ_KESZLETEK',
+    SET_ALKATRESZEK: 'fegyelmiugy/SET_ALKATRESZEK',
   },
 };
 
@@ -44,6 +50,8 @@ const state = {
   fegyelmiUgyek: def,
   fegyelmiUgyekSzuro: -1,
   aktivitasfolyam: Object.freeze([]),
+  alkatreszKeszletek: Object.freeze([]),
+  alkatreszek: Object.freeze([]),
 };
 export var fegyelmiListStatusz = {
   inited: false,
@@ -73,6 +81,14 @@ const getters = {
   [_types.getters.getAktivitasFolyam]: (state) => {
     var aktivitasfolyam = state.aktivitasfolyam;
     return aktivitasfolyam;
+  },
+  [_types.getters.getAlkatreszKeszletek]: (state) => {
+    var rows = state.getAlkatreszKeszletek;
+    return rows;
+  },
+  [_types.getters.getAlkatreszek]: (state) => {
+    var rows = state.getAlkatreszek;
+    return rows;
   },
 };
 
@@ -196,6 +212,12 @@ const actions = {
 
     commit(_types.mutations.SET_AKTIVITASFOLYAM, aktivitasfolyam);
   },
+  [_types.actions.setAlkatreszKeszletek]({ commit }, { value }) {
+    commit(_types.mutations.SET_ALKATRESZ_KESZLETEK, [...value]);
+  },
+  [_types.actions.setAlkatreszek]({ commit }, { value }) {
+    commit(_types.mutations.SET_ALKATRESZEK, [...value]);
+  },
 };
 
 const mutations = {
@@ -233,6 +255,12 @@ const mutations = {
   },
   [_types.mutations.SET_AKTIVITASFOLYAM](state, value) {
     state.aktivitasfolyam = Object.freeze(value);
+  },
+  [_types.mutations.SET_ALKATRESZ_KESZLETEK](state, value) {
+    state.alkatreszKeszletek = Object.freeze(value);
+  },
+  [_types.mutations.SET_ALKATRESZEK](state, value) {
+    state.alkatreszek = Object.freeze(value);
   },
 };
 

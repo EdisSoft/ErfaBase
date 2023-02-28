@@ -176,7 +176,8 @@ class ApiService {
         value: result.AlkalmazasBeallitasok.FonixUrl,
       });
     }
-
+    this.GetAlkatreszKeszletek();
+    this.GetAlkatreszek();
     return result;
   }
   // GetFenyitesek({ mock = true } = {}) {
@@ -3532,6 +3533,22 @@ class ApiService {
     let data = { prdIds };
 
     let result = await this.http.post({ url, data, mock });
+    return result;
+  }
+  async GetAlkatreszKeszletek({ mock = true } = {}) {
+    var url = settings.baseUrl + 'Api/Alkatresz/GetAlkatreszKeszletek';
+    let result = await this.http.post({ url, mock });
+    await store.dispatch(FegyelmiUgyStoreTypes.actions.setAlkatreszKeszletek, {
+      value: result,
+    });
+    return result;
+  }
+  async GetAlkatreszek({ mock = true } = {}) {
+    var url = settings.baseUrl + 'Api/Alkatresz/GetAlkatreszek';
+    let result = await this.http.post({ url, mock });
+    await store.dispatch(FegyelmiUgyStoreTypes.actions.setAlkatreszek, {
+      value: result,
+    });
     return result;
   }
 }

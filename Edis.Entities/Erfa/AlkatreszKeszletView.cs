@@ -24,6 +24,6 @@ namespace Edis.Entities.Erfa
         //public int? TablaDb { get; set; }
 
         [Column("SzabadMennyiseg")]
-        public decimal SzabadMennyiseg { get; set; }
+        public Single SzabadMennyiseg { get; set; }
     }
 }

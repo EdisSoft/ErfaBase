@@ -1,9 +1,7 @@
 <template>
   <div class="page-aside-right">
     <div class="page-header py-10 px-15 d-flex align-items-center">
-      <h1 class="page-title text-dark mr-15 font-weight-normal">
-        &nbsp;
-      </h1>
+      <h1 class="page-title text-dark mr-15 font-weight-normal">&nbsp;</h1>
     </div>
     <div class="card">
       <div
@@ -63,10 +61,10 @@ export default {
         FegyelmiUgyStoreTypes.actions.setFegyelmiUgyekSzuro,
     }),
     SelectStatisztika(value) {
-      if (this.$route.name != 'FegyelmiUgyek') {
+      if (this.$route.name != 'Gyartasban') {
         setTimeout(() => {
-          this.$router.push('/FegyelmiUgyek/');
-        }, 150);
+          this.$router.push('/Gyartasban/');
+        }, 350);
       }
       this.SetFegyelmiUgyekSzuro({ value });
     },
@@ -106,9 +104,8 @@ export default {
         title: 'Megrendelés vár a döntésemre',
         array: sajatUgyekArr,
       };
-      let vegrehajtasAlattArr = FegyelmiUgyFunctions.GetVegrehajtasAlattiUgyek(
-        fegyelmiUgyek
-      );
+      let vegrehajtasAlattArr =
+        FegyelmiUgyFunctions.GetVegrehajtasAlattiUgyek(fegyelmiUgyek);
       let vegrehajtasAlatt = {
         isSelected:
           this.fegyelmiUgyekSzuro == StatisztikaSzurok.VegrehajtasAlatt,
@@ -116,27 +113,24 @@ export default {
         title: 'Lapanyag hiány',
         array: vegrehajtasAlattArr,
       };
-      let kesesbenArr = FegyelmiUgyFunctions.GetKesesbenlevoUgyek(
-        fegyelmiUgyek
-      );
+      let kesesbenArr =
+        FegyelmiUgyFunctions.GetKesesbenlevoUgyek(fegyelmiUgyek);
       let kesesben = {
         isSelected: this.fegyelmiUgyekSzuro == StatisztikaSzurok.Kesesben,
         szuro: StatisztikaSzurok.Kesesben,
         title: 'Késésben',
         array: kesesbenArr,
       };
-      let hetenEsedekesArr = FegyelmiUgyFunctions.GetHetenEsedekesUgyek(
-        fegyelmiUgyek
-      );
+      let hetenEsedekesArr =
+        FegyelmiUgyFunctions.GetHetenEsedekesUgyek(fegyelmiUgyek);
       let hetenEsedekes = {
         isSelected: this.fegyelmiUgyekSzuro == StatisztikaSzurok.HetenEsedekes,
         szuro: StatisztikaSzurok.HetenEsedekes,
         title: 'Héten esedékes',
         array: hetenEsedekesArr,
       };
-      let szallitasraElojegyezveArr = FegyelmiUgyFunctions.GetSzallitasraElojegyezveUgyek(
-        fegyelmiUgyek
-      );
+      let szallitasraElojegyezveArr =
+        FegyelmiUgyFunctions.GetSzallitasraElojegyezveUgyek(fegyelmiUgyek);
       let szallitasraElojegyezve = {
         isSelected:
           this.fegyelmiUgyekSzuro == StatisztikaSzurok.SzallitasraElojegyezve,
@@ -144,9 +138,8 @@ export default {
         title: 'Szállításra előjegyezve',
         array: szallitasraElojegyezveArr,
       };
-      let vegrehajtasraVaroArr = FegyelmiUgyFunctions.GetVegrehajtasraVaroUgyek(
-        fegyelmiUgyek
-      );
+      let vegrehajtasraVaroArr =
+        FegyelmiUgyFunctions.GetVegrehajtasraVaroUgyek(fegyelmiUgyek);
       let vegrehajtasraVaro = {
         isSelected:
           this.fegyelmiUgyekSzuro == StatisztikaSzurok.VegrehajtasraVaro,

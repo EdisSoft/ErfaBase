@@ -19,12 +19,9 @@ import moment from 'moment';
 import { getUgyszam } from '../../utils/fenyitesUtils';
 import { FegyelmiUgyFunctions } from '../../functions/FegyelmiUgyFunctions';
 import { eventBus } from '../../main';
-import { FenyitesStoreTypes } from '../../store/modules/fenyites';
 import { FegyelmiUgyStoreTypes } from '../../store/modules/fegyelmiugy';
-import Cimkek from '../../data/enums/Cimkek';
 import { UserStoreTypes } from '../../store/modules/user';
 import Intezetek from '../../data/enums/intezetek';
-import IFrameUrls from '../../data/enums/iframeUrls';
 import { excelExportCellBool } from '../../utils/common';
 
 export default {

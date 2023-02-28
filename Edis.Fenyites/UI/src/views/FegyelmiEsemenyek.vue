@@ -403,30 +403,46 @@ export default {
         'Ottimokod'
       );
       let alkatreszek = groupBy(this.alkatreszek, 'PrdId');
+
+      for (let i = 0; i < fegyelmiUgyekSelected.length; i++) {
+        const selected = fegyelmiUgyekSelected[i];
+        let szuksegesAlkatreszek = alkatreszek[selected.PrdID] || [];
+        for (let i = 0; i < szuksegesAlkatreszek.length; i++) {
+          const alkatresz = szuksegesAlkatreszek[i];
+          let keszlet = alkatreszKeszletek[alkatresz.OttimoKod];
+          if (keszlet) {
+            if (alkatresz.IcgCode == 'Élanyag') {
+              let db = alkatresz.OriReqQty;
+              keszlet.SzabadMennyiseg -= db;
+            }
+            if (alkatresz.IcgCode == 'Lapanyag') {
+              let db = alkatresz.TablaDb;
+              keszlet.SzabadMennyiseg -= db;
+            }
+          }
+        }
+      }
+
       for (let z = 0; z < fegyelmiUgyekModositott.length; z++) {
         const row = fegyelmiUgyekModositott[z];
-        let szuksegesAlkatreszek = alkatreszek[row.PrdID] || [];
         row.LapanyagMax = 0;
         row.LapanyagAkt = 0;
         row.ElanyagMax = 0;
         row.ElanyagAkt = 0;
         row.KellekMax = 0;
         row.KellekAkt = 0;
+        let szuksegesAlkatreszek = alkatreszek[row.PrdID] || [];
         for (let i = 0; i < szuksegesAlkatreszek.length; i++) {
           const alkatresz = szuksegesAlkatreszek[i];
-          let keszlet = alkatreszKeszletek[alkatresz.OttimoKod];
-          if (keszlet) {
-            if (alkatresz.IcgCode == 'Élanyag') {
-              row.ElanyagMax++;
-              row.ElanyagAkt++;
-            }
-            if (alkatresz.IcgCode == 'Lapanyag') {
-              row.LapanyagMax++;
-              row.LapanyagAkt++;
-            }
+          if (alkatresz.IcgCode == 'Élanyag') {
+            row.ElanyagMax++;
+          }
+          if (alkatresz.IcgCode == 'Lapanyag') {
+            row.LapanyagMax++;
           }
         }
       }
+
       for (let z = 0; z < fegyelmiUgyekModositott.length; z++) {
         const row = fegyelmiUgyekModositott[z];
 
@@ -439,28 +455,24 @@ export default {
           if (keszlet) {
             if (alkatresz.IcgCode == 'Élanyag') {
               let db = alkatresz.OriReqQty;
-              if (db < keszlet.SzabadMennyiseg && kivalasztva) {
-                keszlet.SzabadMennyiseg -= db;
-                row.ElanyagAkt--;
+              if (kivalasztva) {
+                row.ElanyagAkt = row.ElanyagMax;
+              } else if (db < keszlet.SzabadMennyiseg) {
+                row.ElanyagAkt++;
               }
             }
             if (alkatresz.IcgCode == 'Lapanyag') {
               let db = alkatresz.TablaDb;
-              if (db < keszlet.SzabadMennyiseg && kivalasztva) {
-                keszlet.SzabadMennyiseg -= db;
-                row.LapanyagAkt--;
+              if (kivalasztva) {
+                row.LapanyagAkt = row.LapanyagMax;
+              } else if (db < keszlet.SzabadMennyiseg) {
+                row.LapanyagAkt++;
               }
             }
           }
         }
       }
 
-      console.log({
-        fegyelmiUgyekSelected,
-        fegyelmiUgyekModositott,
-        alkatreszKeszletek,
-        alkatreszek,
-      });
       return fegyelmiUgyekModositott;
     },
     fegyelmiUgyekSelectedDropdown() {

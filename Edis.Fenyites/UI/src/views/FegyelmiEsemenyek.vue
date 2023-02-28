@@ -397,22 +397,71 @@ export default {
         FegyelmiUgyFunctions.FegyelmiUgyTovabbiMezokKitoltese(fegyelmiUgyek);
 
       let fegyelmiUgyekSelected = this.fegyelmiUgyekSelected;
+      let fegyelmiUgyekSelectedDict = keyBy(fegyelmiUgyekSelected, 'PrdID');
       let alkatreszKeszletek = keyBy(
         cloneDeep(this.alkatreszKeszletek),
         'Ottimokod'
       );
       let alkatreszek = groupBy(this.alkatreszek, 'PrdId');
-      fegyelmiUgyekModositott.forEach((row) => {
+      for (let z = 0; z < fegyelmiUgyekModositott.length; z++) {
+        const row = fegyelmiUgyekModositott[z];
         let szuksegesAlkatreszek = alkatreszek[row.PrdID] || [];
-        szuksegesAlkatreszek.forEach((ar) => {});
-      });
+        row.LapanyagMax = 0;
+        row.LapanyagAkt = 0;
+        row.ElanyagMax = 0;
+        row.ElanyagAkt = 0;
+        row.KellekMax = 0;
+        row.KellekAkt = 0;
+        for (let i = 0; i < szuksegesAlkatreszek.length; i++) {
+          const alkatresz = szuksegesAlkatreszek[i];
+          let keszlet = alkatreszKeszletek[alkatresz.OttimoKod];
+          if (keszlet) {
+            if (alkatresz.IcgCode == 'Élanyag') {
+              row.ElanyagMax++;
+              row.ElanyagAkt++;
+            }
+            if (alkatresz.IcgCode == 'Lapanyag') {
+              row.LapanyagMax++;
+              row.LapanyagAkt++;
+            }
+          }
+        }
+      }
+      for (let z = 0; z < fegyelmiUgyekModositott.length; z++) {
+        const row = fegyelmiUgyekModositott[z];
+
+        let szuksegesAlkatreszek = alkatreszek[row.PrdID] || [];
+        let kivalasztva = fegyelmiUgyekSelectedDict[row.PrdID] != null;
+
+        for (let i = 0; i < szuksegesAlkatreszek.length; i++) {
+          const alkatresz = szuksegesAlkatreszek[i];
+          let keszlet = alkatreszKeszletek[alkatresz.OttimoKod];
+          if (keszlet) {
+            if (alkatresz.IcgCode == 'Élanyag') {
+              let db = alkatresz.OriReqQty;
+              if (db < keszlet.SzabadMennyiseg && kivalasztva) {
+                keszlet.SzabadMennyiseg -= db;
+                row.ElanyagAkt--;
+              }
+            }
+            if (alkatresz.IcgCode == 'Lapanyag') {
+              let db = alkatresz.TablaDb;
+              if (db < keszlet.SzabadMennyiseg && kivalasztva) {
+                keszlet.SzabadMennyiseg -= db;
+                row.LapanyagAkt--;
+              }
+            }
+          }
+        }
+      }
+
       console.log({
         fegyelmiUgyekSelected,
-        fegyelmiUgyek,
+        fegyelmiUgyekModositott,
         alkatreszKeszletek,
         alkatreszek,
       });
-      return cloneDeep(fegyelmiUgyekModositott);
+      return fegyelmiUgyekModositott;
     },
     fegyelmiUgyekSelectedDropdown() {
       let fegyelmiUgyMuveletekObj =

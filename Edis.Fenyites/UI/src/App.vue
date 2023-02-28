@@ -220,6 +220,12 @@ export default {
     eventBus.$on('IntezetValasztas', () => {
       this.AdatokFrissitese();
     });
+    eventBus.$on('alkatreszek-frissitese', () => {
+      apiService.GetAlkatreszek();
+    });
+    eventBus.$on('alkatresz-keszletek-frissites', () => {
+      apiService.GetAlkatreszKeszletek();
+    });
   },
   methods: {
     async GetAdatok() {

@@ -462,7 +462,7 @@ export default {
             //width: '60%',
             mRender: function (data, type, row, meta) {
               var cimkek = '';
-
+              cimkek += '<div>';
               if (row.Lapanyag != null) {
                 cimkek +=
                   ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő személy">' +
@@ -499,6 +499,15 @@ export default {
                   row.Kellekhiany +
                   '</span>';
               }
+              cimkek += '</div>';
+              cimkek += `
+                    Lapanyag: ${row.LapanyagAkt}/${row.LapanyagMax}
+                    <br/>
+                    Élanyag : ${row.ElanyagAkt}/${row.ElanyagMax}
+                    <br/>
+                    Kellék : ${row.KellekMax}/${row.KellekAkt}
+                    `;
+
               return cimkek;
               // return (
               //   '<span class="unique-desc">' +

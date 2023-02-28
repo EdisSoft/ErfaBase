@@ -7,16 +7,16 @@ namespace Edis.Entities.Erfa
     [Table("erfa.vAlkatreszKeszletek")]
     public class AlkatreszKeszletView
     {
-        [Column("prdID")]        
+        [Column("prdID")]
         public int PrdId { get; set; }
 
-        [Key]
         [Column("icgCode")]
         public string IcgCode { get; set; }
 
+        [Key]
         [Column("ottimokod")]
-        public string OttimoKod { get; set; }
-
+        public string Ottimokod { get; set; }
+        
         [Column("oriReqQty")]
         public double OriReqQty { get; set; }
 

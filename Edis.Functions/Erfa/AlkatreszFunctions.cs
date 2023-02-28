@@ -30,13 +30,13 @@ namespace Edis.Functions.Erfa
 
         public List<AlkatreszKeszletekListItemViewModel> GetAlkatreszKeszletek()
         {
-            var alkatreszKeszletek = AlkatreszKeszletek.Where(w => w.IcgCode != null).ToArray();
+            var alkatreszKeszletek = AlkatreszKeszletek.Where(w => w.Ottimokod != null && (w.IcgCode == "Lapanyag" || w.IcgCode == "Élanyag" || w.IcgCode == "Kellék")).ToArray();
             return alkatreszKeszletek.Select(s => (AlkatreszKeszletekListItemViewModel)s).ToList();
         }
 
         public List<AlkatreszKeszletekListItemViewModel> GetAlkatreszKeszletekByPrdIds(List<int> prdIds)
         {
-            var alkatreszKeszletek = AlkatreszKeszletek.Where(w => w.IcgCode != null && prdIds.Contains(w.PrdId)).ToArray();
+            var alkatreszKeszletek = AlkatreszKeszletek.Where(w => w.Ottimokod != null && prdIds.Contains(w.PrdId) && (w.IcgCode == "Lapanyag" || w.IcgCode == "Élanyag" || w.IcgCode == "Kellék")).ToArray();
             return alkatreszKeszletek.Select(s => (AlkatreszKeszletekListItemViewModel)s).ToList();
         }
 

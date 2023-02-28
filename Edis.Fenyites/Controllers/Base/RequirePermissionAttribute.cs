@@ -33,7 +33,7 @@ namespace Edis.Fenyites.Controllers.Base
 
             if (this._permissions.Count == 0)
                 return;
-#if DEBUG
+//#if DEBUG
             var securityIdentifier = WindowsIdentity.GetCurrent().User;
             if (securityIdentifier != null)
             {
@@ -49,54 +49,54 @@ namespace Edis.Fenyites.Controllers.Base
                 returnurl = context.HttpContext.Request.UrlReferrer == null ? context.HttpContext.Request.ApplicationPath : context.HttpContext.Request.UrlReferrer.AbsolutePath + context.HttpContext.Request.UrlReferrer.Query
             }));
             return;
-#endif
-            foreach (var jogosultsag in _permissions)
-            {
-                if (!_permissions.Any(x => JogosultsagKezeloFunctions.VanJogosultsaga(x)))
-                {
+//#endif
+//            foreach (var jogosultsag in _permissions)
+//            {
+//                if (!_permissions.Any(x => JogosultsagKezeloFunctions.VanJogosultsaga(x)))
+//                {
 
-                    //string actionName = context.RouteData.Values["action"].ToString();
-                    //Type controllerType = context.Controller.GetType();
-                    //MethodInfo method = null;
-                    //if (context.HttpContext.Request.HttpMethod == "POST")
-                    //{
-                    //    method = controllerType.GetMethods().FirstOrDefault(x => String.Equals(x.Name, actionName, StringComparison.CurrentCultureIgnoreCase) && x.GetCustomAttributes(typeof(HttpPostAttribute), false).Length > 0);
-                    //    if (method == null)
-                    //        method = controllerType.GetMethods().First(x => String.Equals(x.Name, actionName, StringComparison.CurrentCultureIgnoreCase));
-                    //}
-                    //else
-                    //{
-                    //    method = controllerType.GetMethods().First(x => String.Equals(x.Name, actionName, StringComparison.CurrentCultureIgnoreCase));
-                    //}
-                    //var returnType = method.ReturnType;
+//                    //string actionName = context.RouteData.Values["action"].ToString();
+//                    //Type controllerType = context.Controller.GetType();
+//                    //MethodInfo method = null;
+//                    //if (context.HttpContext.Request.HttpMethod == "POST")
+//                    //{
+//                    //    method = controllerType.GetMethods().FirstOrDefault(x => String.Equals(x.Name, actionName, StringComparison.CurrentCultureIgnoreCase) && x.GetCustomAttributes(typeof(HttpPostAttribute), false).Length > 0);
+//                    //    if (method == null)
+//                    //        method = controllerType.GetMethods().First(x => String.Equals(x.Name, actionName, StringComparison.CurrentCultureIgnoreCase));
+//                    //}
+//                    //else
+//                    //{
+//                    //    method = controllerType.GetMethods().First(x => String.Equals(x.Name, actionName, StringComparison.CurrentCultureIgnoreCase));
+//                    //}
+//                    //var returnType = method.ReturnType;
 
-                    //if (returnType == typeof(JsonResult) || context.HttpContext.Request.IsAjaxRequest())
-                    //{
-                    Log.Info($"Nincs jogosultsága szemelyId: {AlkalmazasKontextusFunctions.Kontextus.SzemelyzetId} intezetId: {AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId} url: {context.HttpContext.Request.RawUrl}");
-
-
-                    context.Result = new RedirectToRouteResult(new RouteValueDictionary(new
-                    {
-                        action = nameof(ErrorController.NoPermissionJson),
-                        controller = typeof(ErrorController).ControllerName(),
-                        //returnurl = context.HttpContext.Request.UrlReferrer == null ? context.HttpContext.Request.ApplicationPath : context.HttpContext.Request.UrlReferrer.AbsolutePath + context.HttpContext.Request.UrlReferrer.Query
-                    }));
-                    //}
-                    //else //if (returnType == typeof(ActionResult) || (returnType).IsSubclassOf(typeof(ActionResult)))
-                    //{
-                    //    context.Result = new RedirectToRouteResult(new RouteValueDictionary(new
-                    //    {
-                    //        action = nameof(ErrorController.NoPermission),
-                    //        controller = typeof(ErrorController).ControllerName(),
-                    //        //returnurl = context.HttpContext.Request.UrlReferrer == null ? context.HttpContext.Request.ApplicationPath : context.HttpContext.Request.UrlReferrer.AbsolutePath + context.HttpContext.Request.UrlReferrer.Query
-                    //    }));
-                    //}
+//                    //if (returnType == typeof(JsonResult) || context.HttpContext.Request.IsAjaxRequest())
+//                    //{
+//                    Log.Info($"Nincs jogosultsága szemelyId: {AlkalmazasKontextusFunctions.Kontextus.SzemelyzetId} intezetId: {AlkalmazasKontextusFunctions.Kontextus.RogzitoTelephelyId} url: {context.HttpContext.Request.RawUrl}");
 
 
-                    new EnableCorsAttribute().AddHttpHeaderToTheResponse(context.HttpContext);
-                    return;
-                }
-            }
+//                    context.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+//                    {
+//                        action = nameof(ErrorController.NoPermissionJson),
+//                        controller = typeof(ErrorController).ControllerName(),
+//                        //returnurl = context.HttpContext.Request.UrlReferrer == null ? context.HttpContext.Request.ApplicationPath : context.HttpContext.Request.UrlReferrer.AbsolutePath + context.HttpContext.Request.UrlReferrer.Query
+//                    }));
+//                    //}
+//                    //else //if (returnType == typeof(ActionResult) || (returnType).IsSubclassOf(typeof(ActionResult)))
+//                    //{
+//                    //    context.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+//                    //    {
+//                    //        action = nameof(ErrorController.NoPermission),
+//                    //        controller = typeof(ErrorController).ControllerName(),
+//                    //        //returnurl = context.HttpContext.Request.UrlReferrer == null ? context.HttpContext.Request.ApplicationPath : context.HttpContext.Request.UrlReferrer.AbsolutePath + context.HttpContext.Request.UrlReferrer.Query
+//                    //    }));
+//                    //}
+
+
+//                    new EnableCorsAttribute().AddHttpHeaderToTheResponse(context.HttpContext);
+//                    return;
+//                }
+//            }
         }
 
         public RequirePermissionAttribute(params Jogosultsagok[] permissions)

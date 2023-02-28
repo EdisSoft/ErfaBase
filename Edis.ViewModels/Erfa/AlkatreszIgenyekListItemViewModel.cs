@@ -10,12 +10,10 @@ namespace Edis.ViewModels.Erfa
 {
     public class AlkatreszKeszletekListItemViewModel
     {
-        public int PrdId { get; set; }
-        public string IcgCode { get; set; }
+        //public int PrdId { get; set; }
         public string Ottimokod { get; set; }
-        public int TablaDb { get; set; }
-        public double OriReqQty { get; set; }
-        public decimal SzabadMennyiseg { get; set; }
+        public string IcgCode { get; set; }
+        public double SzabadMennyiseg { get; set; }
 
         public static explicit operator AlkatreszKeszletView(AlkatreszKeszletekListItemViewModel model)
         {

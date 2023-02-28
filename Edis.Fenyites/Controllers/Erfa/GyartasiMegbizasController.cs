@@ -24,12 +24,13 @@ namespace Edis.Fenyites.Controllers.Erfa
         [HttpPost]
         public JsonResult GetGyartasiMegbizasok(List<int> prdIds)
         {
-            var alkatreszKeszletek = AlkatreszFunctions.GetAlkatreszKeszletek();
+            //var alkatreszKeszletek = AlkatreszFunctions.GetAlkatreszKeszletek();
 
-            var formattedAlkatreszKeszletek = AlkatreszFunctions.FormatAlkatreszKeszletek(alkatreszKeszletek, prdIds);
-            
-            var simpleGyartasiMegbizasok = GyartasiMegbizasFunctions.GetGyartasiMegbizasok();
-            var gyartasiMegbizasok = GyartasiMegbizasFunctions.AddAlkatreszKeszletekToGyartasiMegbizasok(simpleGyartasiMegbizasok, formattedAlkatreszKeszletek);
+            //var formattedAlkatreszKeszletek = AlkatreszFunctions.FormatAlkatreszKeszletek(alkatreszKeszletek, prdIds);
+
+            //var simpleGyartasiMegbizasok = GyartasiMegbizasFunctions.GetGyartasiMegbizasok();
+            //var gyartasiMegbizasok = GyartasiMegbizasFunctions.AddAlkatreszKeszletekToGyartasiMegbizasok(simpleGyartasiMegbizasok, formattedAlkatreszKeszletek);
+            var gyartasiMegbizasok = GyartasiMegbizasFunctions.GetGyartasiMegbizasok();
             return Json(gyartasiMegbizasok);
         }
     }

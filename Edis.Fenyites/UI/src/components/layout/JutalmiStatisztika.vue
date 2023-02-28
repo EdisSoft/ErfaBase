@@ -1,9 +1,7 @@
 <template>
   <div class="page-aside-right">
     <div class="page-header py-10 px-15 d-flex align-items-center">
-      <h1 class="page-title text-dark mr-15 font-weight-normal">
-        &nbsp;
-      </h1>
+      <h1 class="page-title text-dark mr-15 font-weight-normal">&nbsp;</h1>
     </div>
     <div class="card">
       <div
@@ -123,18 +121,16 @@ export default {
         title: 'Késésben',
         array: kesesbenArr,
       };
-      let hetenEsedekesArr = FegyelmiUgyFunctions.GetHetenEsedekesUgyek(
-        jutalomUgyek
-      );
+      let hetenEsedekesArr =
+        FegyelmiUgyFunctions.GetHetenEsedekesUgyek(jutalomUgyek);
       let hetenEsedekes = {
         isSelected: this.jutalomUgyekSzuro == StatisztikaSzurok.HetenEsedekes,
         szuro: StatisztikaSzurok.HetenEsedekes,
         title: 'Héten esedékes',
         array: hetenEsedekesArr,
       };
-      let szallitasraElojegyezveArr = FegyelmiUgyFunctions.GetSzallitasraElojegyezveUgyek(
-        jutalomUgyek
-      );
+      let szallitasraElojegyezveArr =
+        FegyelmiUgyFunctions.GetSzallitasraElojegyezveUgyek(jutalomUgyek);
       let szallitasraElojegyezve = {
         isSelected:
           this.jutalomUgyekSzuro == StatisztikaSzurok.SzallitasraElojegyezve,

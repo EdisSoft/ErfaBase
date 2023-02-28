@@ -4,7 +4,7 @@
     {
         public int PrdId { get; set; }
         public int LapAnyagIgeny { get; set; } = 0;
-        public decimal LapAnyagSzabad { get; set; } = 0;
+        public double LapAnyagSzabad { get; set; } = 0;
         public double ElAnyagIgeny { get; set; } = 0;
         public double ElAnyagSzabad { get; set; } = 0;
         public double KellekIgeny { get; set; } = 0;

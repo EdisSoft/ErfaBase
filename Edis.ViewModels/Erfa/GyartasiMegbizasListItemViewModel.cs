@@ -23,6 +23,7 @@ namespace Edis.ViewModels.Erfa
         public string Laphiany { get; set; }
         public string Elhiany { get; set; }
         public string Kellekhiany { get; set; }
+        public string GyartasbaKiadhato { get; set; }
 
         public static explicit operator GyartasiMegbizasView(GyartasiMegbizasListItemViewModel model)
         {

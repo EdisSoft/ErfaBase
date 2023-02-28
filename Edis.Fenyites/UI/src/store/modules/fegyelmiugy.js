@@ -83,11 +83,11 @@ const getters = {
     return aktivitasfolyam;
   },
   [_types.getters.getAlkatreszKeszletek]: (state) => {
-    var rows = state.getAlkatreszKeszletek;
+    var rows = state.alkatreszKeszletek;
     return rows;
   },
   [_types.getters.getAlkatreszek]: (state) => {
-    var rows = state.getAlkatreszek;
+    var rows = state.alkatreszek;
     return rows;
   },
 };

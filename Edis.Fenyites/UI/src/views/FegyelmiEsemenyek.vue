@@ -402,8 +402,16 @@ export default {
         'Ottimokod'
       );
       let alkatreszek = groupBy(this.alkatreszek, 'PrdId');
-      fegyelmiUgyekModositott.forEach((row) => {});
-      console.trace({ fegyelmiUgyekSelected, alkatreszKeszletek, alkatreszek });
+      fegyelmiUgyekModositott.forEach((row) => {
+        let szuksegesAlkatreszek = alkatreszek[row.PrdID] || [];
+        szuksegesAlkatreszek.forEach((ar) => {});
+      });
+      console.log({
+        fegyelmiUgyekSelected,
+        fegyelmiUgyek,
+        alkatreszKeszletek,
+        alkatreszek,
+      });
       return cloneDeep(fegyelmiUgyekModositott);
     },
     fegyelmiUgyekSelectedDropdown() {

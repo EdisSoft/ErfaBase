@@ -323,13 +323,17 @@ export default {
             .DataTable()
             .on('select', function (e, dt, type, indexes) {
               var row = dt.rows(indexes).data()[0];
-              vm.AddFegyelmiUgySelected({ value: row.PrdID });
+              if (!vm.selected.includes(row.PrdID)) {
+                vm.AddFegyelmiUgySelected({ value: row.PrdID });
+              }
             });
           $(vm.$refs.datatable.$el)
             .DataTable()
             .on('deselect', function (e, dt, type, indexes) {
               var row = dt.rows(indexes).data()[0];
-              vm.RemoveFegyelmiUgySelected({ value: row.PrdID });
+              if (vm.selected.includes(row.PrdID)) {
+                vm.RemoveFegyelmiUgySelected({ value: row.PrdID });
+              }
             });
         },
         select: {

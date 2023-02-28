@@ -3539,7 +3539,7 @@ class ApiService {
     var url = settings.baseUrl + 'Api/Alkatresz/GetAlkatreszKeszletek';
     let result = await this.http.post({ url, mock });
     await store.dispatch(FegyelmiUgyStoreTypes.actions.setAlkatreszKeszletek, {
-      value: result,
+      value: result.alkatreszKeszletek,
     });
     return result;
   }
@@ -3547,7 +3547,7 @@ class ApiService {
     var url = settings.baseUrl + 'Api/Alkatresz/GetAlkatreszek';
     let result = await this.http.post({ url, mock });
     await store.dispatch(FegyelmiUgyStoreTypes.actions.setAlkatreszek, {
-      value: result,
+      value: result.alkatreszek,
     });
     return result;
   }

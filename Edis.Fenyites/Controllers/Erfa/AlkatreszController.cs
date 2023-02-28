@@ -13,7 +13,7 @@ namespace Edis.Fenyites.Controllers.Erfa
              
         public JsonResult GetAlkatreszek()
         {
-            var alkatreszek = AlkatreszFunctions.GetAlkatreszek();             
+            var alkatreszek = AlkatreszFunctions.GetAlkatreszek();    
             return Json(new { alkatreszek });
         }
 

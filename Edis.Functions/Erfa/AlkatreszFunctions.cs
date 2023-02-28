@@ -18,7 +18,7 @@ namespace Edis.Functions.Erfa
 
         public List<AlkatreszekListItemViewModel> GetAlkatreszek()
         {
-            var alkatreszek = Alkatreszek.ToArray();
+            var alkatreszek = Alkatreszek.ToList();
             return alkatreszek.Select(s => (AlkatreszekListItemViewModel)s).ToList();
         }
 

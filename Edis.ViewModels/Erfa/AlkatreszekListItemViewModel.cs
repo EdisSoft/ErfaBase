@@ -6,7 +6,7 @@ namespace Edis.ViewModels.Erfa
 {
     public class AlkatreszekListItemViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public int PrdId { get; set; }
         public string ItmItemNumber { get; set; }
         public string ItmDescription { get; set; }

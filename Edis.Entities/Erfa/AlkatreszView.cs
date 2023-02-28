@@ -9,7 +9,7 @@ namespace Edis.Entities.Erfa
     {
         [Column("Id")]
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Column("prdID")]
         public int PrdId { get; set; }

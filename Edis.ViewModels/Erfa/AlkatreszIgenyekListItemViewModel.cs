@@ -13,7 +13,7 @@ namespace Edis.ViewModels.Erfa
         //public int PrdId { get; set; }
         public string Ottimokod { get; set; }
         public string IcgCode { get; set; }
-        public double SzabadMennyiseg { get; set; }
+        public Single SzabadMennyiseg { get; set; }
 
         public static explicit operator AlkatreszKeszletView(AlkatreszKeszletekListItemViewModel model)
         {

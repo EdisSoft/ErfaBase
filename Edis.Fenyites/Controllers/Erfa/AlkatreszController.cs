@@ -17,7 +17,7 @@ namespace Edis.Fenyites.Controllers.Erfa
             return Json(new { alkatreszek });
         }
 
-        [HttpPost]
+        //[HttpPost]
         public JsonResult GetAlkatreszKeszletek()
         {
             var alkatreszKeszletek = AlkatreszFunctions.GetAlkatreszKeszletek();

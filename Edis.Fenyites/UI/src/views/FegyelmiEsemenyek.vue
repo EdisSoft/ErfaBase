@@ -425,20 +425,28 @@ export default {
 
       for (let z = 0; z < fegyelmiUgyekModositott.length; z++) {
         const row = fegyelmiUgyekModositott[z];
-        row.LapanyagMax = 0;
-        row.LapanyagAkt = 0;
-        row.ElanyagMax = 0;
-        row.ElanyagAkt = 0;
-        row.KellekMax = 0;
-        row.KellekAkt = 0;
+        row.LapReq = 0;
+        row.LapSt = 0;
+        row.LapHiany = '';
+        row.LapHianyFl = 0;
+        row.ElReq = 0;
+        row.ElSt = 0;
+        row.ElHiany = '';
+        row.ElHianyFl = 0;
+        row.KellekReq = 0;
+        row.KellekSt = 0;
+        row.KellekHiany = '';
+        row.KellekHianyFl = 0;
+        row.MindenAlapanyagMegvan = '';
+        row.MindenAlapanyagMegvanFl = 0;
         let szuksegesAlkatreszek = alkatreszek[row.PrdID] || [];
         for (let i = 0; i < szuksegesAlkatreszek.length; i++) {
           const alkatresz = szuksegesAlkatreszek[i];
           if (alkatresz.IcgCode == 'Élanyag') {
-            row.ElanyagMax++;
+            row.ElReq++;
           }
           if (alkatresz.IcgCode == 'Lapanyag') {
-            row.LapanyagMax++;
+            row.LapReq++;
           }
         }
       }
@@ -456,20 +464,37 @@ export default {
             if (alkatresz.IcgCode == 'Élanyag') {
               let db = alkatresz.OriReqQty;
               if (kivalasztva) {
-                row.ElanyagAkt = row.ElanyagMax;
+                row.ElSt = row.ElReq;
               } else if (db < keszlet.SzabadMennyiseg) {
-                row.ElanyagAkt++;
+                row.ElSt++;
               }
             }
             if (alkatresz.IcgCode == 'Lapanyag') {
               let db = alkatresz.TablaDb;
               if (kivalasztva) {
-                row.LapanyagAkt = row.LapanyagMax;
+                row.LapSt = row.LapReq;
               } else if (db < keszlet.SzabadMennyiseg) {
-                row.LapanyagAkt++;
+                row.LapSt++;
               }
             }
           }
+        }
+        if (row.LapSt < row.LapReq) {
+          row.LapHiany = 'Lapanyag hiány';
+          row.LapHianyFl = 1;
+        }
+        if (row.ElSt < row.ElReq) {
+          row.ElHiany = 'Élanyag hiány';
+          row.ElHianyFl = 1;
+        }
+        if (row.KellekekStock < row.KellekekReq) {
+          row.KellekHiany = 'Laphiány';
+          row.KellekHianyFl = 1;
+        }
+
+        if (row.LapHianyFl + row.ElHianyFl + row.KellekHianyFl == 0) {
+          row.MindenAlapanyagMegvan = 'Gyártásba kiadható';
+          row.MindenAlapanyagMegvanFl = 1;
         }
       }
 

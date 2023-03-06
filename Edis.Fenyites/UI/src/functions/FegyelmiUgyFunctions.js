@@ -1317,8 +1317,8 @@ class FegyelmiUgy {
         f.OrdCustRequestDate && sameWeek(now, new Date(f.OrdCustRequestDate))
     );
   }
-  GetSzallitasraElojegyezveUgyek(fegyelmiUgyek) {
-    return fegyelmiUgyek.filter((f) => f.SzallitasraElojegyezve);
+  GetLapanyagHiany(fegyelmiUgyek) {
+    return fegyelmiUgyek.filter((f) => f.LapHianyFl);
   }
   async CanModalOpen(modalName, { fegyelmiUgyIds }) {
     switch (modalName) {
@@ -1482,8 +1482,8 @@ class FegyelmiUgy {
         return fegyelmiUgyek;
       case StatisztikaSzurok.Sajat:
         return this.GetSajatUgyeim(fegyelmiUgyek, user);
-      case StatisztikaSzurok.SzallitasraElojegyezve:
-        return this.GetSzallitasraElojegyezveUgyek(fegyelmiUgyek);
+      case StatisztikaSzurok.LapanyagHiany:
+        return this.GetLapanyagHiany(fegyelmiUgyek);
       case StatisztikaSzurok.VegrehajtasAlatt:
         return this.GetVegrehajtasAlattiUgyek(fegyelmiUgyek);
       case StatisztikaSzurok.VegrehajtasraVaro:
@@ -1613,33 +1613,33 @@ class FegyelmiUgy {
   }
   GetRendelesekSzuroBadgek() {
     let props = [
+      // {
+      //   propId: 'UgyStatuszId',
+      //   propNev: 'UgyStatusz',
+      //   order: 2,
+      //   mapObj: 'fo',
+      //   class: 'badge-outline badge-success',
+      //   tooltip: 'Ügy státusza',
+      // },
+      // {
+      //   propId: 'TargyalasKituzesreVarId',
+      //   propNev: 'TargyalasKituzesreVar',
+      //   order: 3,
+      //   mapObj: 'fo',
+      //   class: 'badge-outline badge-warning text-default',
+      //   tooltip: 'Tárgyalás kitűzésre vár',
+      // },
+      // {
+      //   propId: 'FelfuggesztveSzovegId',
+      //   propNev: 'FelfuggesztveSzoveg',
+      //   order: 4,
+      //   mapObj: 'fo',
+      //   class: 'badge-outline badge-warning text-default',
+      //   tooltip: 'Felfüggesztve',
+      // },
       {
-        propId: 'UgyStatuszId',
-        propNev: 'UgyStatusz',
-        order: 2,
-        mapObj: 'fo',
-        class: 'badge-outline badge-success',
-        tooltip: 'Ügy státusza',
-      },
-      {
-        propId: 'TargyalasKituzesreVarId',
-        propNev: 'TargyalasKituzesreVar',
-        order: 3,
-        mapObj: 'fo',
-        class: 'badge-outline badge-warning text-default',
-        tooltip: 'Tárgyalás kitűzésre vár',
-      },
-      {
-        propId: 'FelfuggesztveSzovegId',
-        propNev: 'FelfuggesztveSzoveg',
-        order: 4,
-        mapObj: 'fo',
-        class: 'badge-outline badge-warning text-default',
-        tooltip: 'Felfüggesztve',
-      },
-      {
-        propId: 'FenyitesTipusCimkeId',
-        propNev: 'FenyitesTipus',
+        propId: 'MindenAlapanyagMegvanFl',
+        propNev: 'MindenAlapanyagMegvan',
         order: 5,
         mapObj: 'fo',
         class: 'badge-outline badge-info text-default',

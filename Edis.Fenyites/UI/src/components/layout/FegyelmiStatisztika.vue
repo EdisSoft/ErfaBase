@@ -104,15 +104,6 @@ export default {
         title: 'Megrendelés vár a döntésemre',
         array: sajatUgyekArr,
       };
-      let vegrehajtasAlattArr =
-        FegyelmiUgyFunctions.GetVegrehajtasAlattiUgyek(fegyelmiUgyek);
-      let vegrehajtasAlatt = {
-        isSelected:
-          this.fegyelmiUgyekSzuro == StatisztikaSzurok.VegrehajtasAlatt,
-        szuro: StatisztikaSzurok.VegrehajtasAlatt,
-        title: 'Lapanyag hiány',
-        array: vegrehajtasAlattArr,
-      };
       let kesesbenArr =
         FegyelmiUgyFunctions.GetKesesbenlevoUgyek(fegyelmiUgyek);
       let kesesben = {
@@ -129,14 +120,22 @@ export default {
         title: 'Héten esedékes',
         array: hetenEsedekesArr,
       };
-      let szallitasraElojegyezveArr =
-        FegyelmiUgyFunctions.GetSzallitasraElojegyezveUgyek(fegyelmiUgyek);
-      let szallitasraElojegyezve = {
+      let vegrehajtasAlattArr =
+        FegyelmiUgyFunctions.GetVegrehajtasAlattiUgyek(fegyelmiUgyek);
+      let vegrehajtasAlatt = {
         isSelected:
-          this.fegyelmiUgyekSzuro == StatisztikaSzurok.SzallitasraElojegyezve,
-        szuro: StatisztikaSzurok.SzallitasraElojegyezve,
-        title: 'Kellék hiány',
-        array: szallitasraElojegyezveArr,
+          this.fegyelmiUgyekSzuro == StatisztikaSzurok.VegrehajtasAlatt,
+        szuro: StatisztikaSzurok.VegrehajtasAlatt,
+        title: 'Élanyag hiány',
+        array: vegrehajtasAlattArr,
+      };
+      let lapanyagHianyArr =
+        FegyelmiUgyFunctions.GetLapanyagHiany(fegyelmiUgyek);
+      let lapanyagHiany = {
+        isSelected: this.fegyelmiUgyekSzuro == StatisztikaSzurok.LapanyagHiany,
+        szuro: StatisztikaSzurok.LapanyagHiany,
+        title: 'Lapanyag hiány',
+        array: lapanyagHianyArr,
       };
       let vegrehajtasraVaroArr =
         FegyelmiUgyFunctions.GetVegrehajtasraVaroUgyek(fegyelmiUgyek);
@@ -144,7 +143,7 @@ export default {
         isSelected:
           this.fegyelmiUgyekSzuro == StatisztikaSzurok.VegrehajtasraVaro,
         szuro: StatisztikaSzurok.VegrehajtasraVaro,
-        title: 'Élanyag hiány',
+        title: 'Kellék hiány',
         array: vegrehajtasraVaroArr,
       };
       return [
@@ -154,7 +153,7 @@ export default {
         hetenEsedekes,
         vegrehajtasraVaro,
         vegrehajtasAlatt,
-        szallitasraElojegyezve,
+        lapanyagHiany,
       ];
     },
   },

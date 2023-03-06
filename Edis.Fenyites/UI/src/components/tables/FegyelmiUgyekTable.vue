@@ -488,10 +488,10 @@ export default {
                   row.Lejart +
                   '</span>';
               }
-              if (row.Kellekhiany != null) {
+              if (row.KellekHiany != null) {
                 cimkek +=
                   ' <span class="badge text-break badge-outline badge-danger" data-toggle="m-tooltip" data-original-title="Esemény helye">' +
-                  row.Kellekhiany +
+                  row.KellekHiany +
                   '</span>';
               }
               return cimkek;

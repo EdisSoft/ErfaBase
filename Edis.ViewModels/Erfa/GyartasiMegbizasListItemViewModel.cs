@@ -15,14 +15,8 @@ namespace Edis.ViewModels.Erfa
         public DateTime? ObsStartDate { get; set; }
         public string Felulet { get; set; }
         public string Fo { get; set; }
-        public string Lapanyag { get; set; }
-        public string Elanyag { get; set; }
-        public string Kellekek { get; set; }
         public string Prioritas { get; set; }
         public string Lejart { get; set; }
-        public string Laphiany { get; set; }
-        public string Elhiany { get; set; }
-        public string Kellekhiany { get; set; }
         public string GyartasbaKiadhato { get; set; }
 
         public static explicit operator GyartasiMegbizasView(GyartasiMegbizasListItemViewModel model)

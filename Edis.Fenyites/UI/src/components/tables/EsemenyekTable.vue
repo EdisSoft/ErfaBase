@@ -188,8 +188,8 @@ export default {
         {
           header: 'Fenyítés típusa',
           getCellValue(row) {
-            if (row.HatarozatJogerosFl && row.FenyitesTipus) {
-              return row.FenyitesTipus;
+            if (row.LapHiany == 'Lapanyag hiány') {
+              return row.LapHiany;
             } else {
               return '';
             }
@@ -459,51 +459,49 @@ export default {
             //width: '60%',
             mRender: function (data, type, row, meta) {
               var cimkek = '';
-              cimkek += '<div>';
-              if (row.Lapanyag != null) {
-                cimkek +=
-                  ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő személy">' +
-                  capitalize(row.Lapanyag) +
-                  '</span>';
-              }
-              if (row.Elanyag != null) {
-                cimkek +=
-                  ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő intézet">' +
-                  row.Elanyag +
-                  '</span>';
-              }
-              if (row.Kellekek != null) {
-                cimkek +=
-                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Napszak">' +
-                  row.Kellekek +
-                  '</span>';
-              }
-              if (row.Prioritas != null) {
-                cimkek +=
-                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény helye">' +
-                  row.Prioritas +
-                  '</span>';
-              }
-              if (row.Lejart != null) {
-                cimkek +=
-                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény helye">' +
-                  row.Lejart +
-                  '</span>';
-              }
-              if (row.Kellekhiany != null) {
-                cimkek +=
-                  ' <span class="badge text-break badge-outline badge-danger" data-toggle="m-tooltip" data-original-title="Esemény helye">' +
-                  row.Kellekhiany +
-                  '</span>';
-              }
-              cimkek += '</div>';
+              // cimkek += '<div>';
+              // if (row.Lapanyag != null) {
+              //   cimkek +=
+              //     ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő személy">' +
+              //     capitalize(row.Lapanyag) +
+              //     '</span>';
+              // }
+              // if (row.Elanyag != null) {
+              //   cimkek +=
+              //     ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő intézet">' +
+              //     row.Elanyag +
+              //     '</span>';
+              // }
+              // if (row.Kellekek != null) {
+              //   cimkek +=
+              //     ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Napszak">' +
+              //     row.Kellekek +
+              //     '</span>';
+              // }
+              // if (row.Prioritas != null) {
+              //   cimkek +=
+              //     ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény helye">' +
+              //     row.Prioritas +
+              //     '</span>';
+              // }
+              // cimkek += '</div>';
               cimkek += `
-                    Lapanyag: ${row.LapanyagAkt}/${row.LapanyagMax}
+                    Lapanyag: ${row.LapSt}/${row.LapReq}
                     <br/>
-                    Élanyag : ${row.ElanyagAkt}/${row.ElanyagMax}
+                    Élanyag : ${row.ElSt}/${row.ElReq}
                     <br/>
-                    Kellék : ${row.KellekMax}/${row.KellekAkt}
+                    Kellék : ${row.KellekSt}/${row.KellekReq}
                     `;
+              //row.LapHiany = 'Lapanyag hiány';
+              //row.ElHiany = 'Élanyag hiány';
+              //row.KellekHiany = 'Laphiány';
+              //row.MindenAlapanyagMegvan = 'Gyártásba kiadható';
+              if (row.MindenAlapanyagMegvan != null) {
+                cimkek +=
+                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Gyártható">' +
+                  row.MindenAlapanyagMegvan +
+                  '</span>';
+              }
 
               return cimkek;
               // return (
@@ -563,7 +561,7 @@ export default {
         createdRow: function (row, data, rowIndex) {
           $(row).attr('data-id', data.PrdID);
           $(row).css('cursor', 'pointer');
-          if (data.Kellekhiany) {
+          if (data.KellekHiany) {
             $(row).addClass('row-warning');
           }
 

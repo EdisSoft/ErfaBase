@@ -12,7 +12,7 @@ const StatisztikaSzurok = Object.freeze({
   /**  4*/
   HetenEsedekes: 4,
   /**  5*/
-  SzallitasraElojegyezve: 5,
+  LapanyagHiany: 5,
   /**  6*/
   VegrehajtasraVaro: 6,
 });

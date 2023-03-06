@@ -85,8 +85,8 @@
                 delay: { show: 500, hide: 100 },
                 trigger: 'hover',
               }"
-              v-if="fegyelmiUgy.Kellekhiany"
-              >{{ fegyelmiUgy.Kellekhiany }}</span
+              v-if="fegyelmiUgy.KellekHiany"
+              >{{ fegyelmiUgy.KellekHiany }}</span
             >
             <span
               class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
@@ -745,126 +745,6 @@ export default {
     },
     GetNaplobejegyzesKomponensNev(ugyTipus) {
       switch (parseInt(ugyTipus)) {
-        case -1:
-          return 'esemeny-felvetel-naplobejegyzes';
-        case Cimkek.NaploTipus.UgyKezdemenyezese:
-          return 'ugy-kezdemenyezes-naplobejegyzes';
-        case Cimkek.NaploTipus.UgyMegtagadasa:
-          return 'ugy-megtagadasa-naplobejegyzes';
-        case Cimkek.NaploTipus.ElrendelemAzEljarasLefolytatasat:
-          return 'ugy-elrendelese-naplobejegyzes';
-        case Cimkek.NaploTipus.ReintegraciosTisztiJogkorbeUtalom:
-          return 'ugy-reintegracios-jogkorbe-utalas-naplobejegyzes';
-        case Cimkek.NaploTipus.FogvatartottJogiKepviseletetKer:
-          return 'jogi-kepviselet-naplobejegyzes';
-        case Cimkek.NaploTipus.Feddes:
-          return 'feddes-naplobejegyzes';
-        case Cimkek.NaploTipus.Kioktatas:
-          return 'kioktatas-naplobejegyzes';
-        case Cimkek.NaploTipus.Visszakuldes:
-          return 'visszakuldes-naplobejegyzes';
-        case Cimkek.NaploTipus.TanuMeghallgatas:
-        case Cimkek.NaploTipus.EljarasAlaVontMeghallgatasa:
-          return 'tanu-meghallgatasi-jegyzokonyv-naplobejegyzes';
-        case Cimkek.NaploTipus.SzemelyiAllomanyiTanuMeghallgatas:
-          return 'szemelyi-allomanyi-tanu-meghallgatasi-jegyzokonyv-naplobejegyzes';
-        case Cimkek.NaploTipus.HataridoModositasiJavaslat:
-          return 'hatarido-modositasi-javaslat-naplobejegyzes';
-        case Cimkek.NaploTipus.FelfuggesztesiJavaslat:
-          return 'felfuggesztesi-javaslat-naplobejegyzes';
-        case Cimkek.NaploTipus.OsszefoglaloJelentes:
-          return 'osszefogalo-jelentes-naplobejegyzes';
-        case Cimkek.NaploTipus.HelysziniSzemle:
-          return 'helyszini-szemle-naplobejegyzes';
-        case Cimkek.NaploTipus.SzakteruletiVelemeny:
-          return 'szakteruleti-velemeny-naplobejegyzes';
-        case Cimkek.NaploTipus.TagyalasElokeszitese:
-          return 'elso-foku-targyalas-kituzese-naplo-bejegyzes';
-        case Cimkek.NaploTipus.I_fokuTargyalasiJegyzokonyv:
-          return 'elso-foku-targyalasi-jegyzokonyv-naplobejegyzes';
-        case Cimkek.NaploTipus.UgyOsszevonasa:
-          return 'ugy-osszevonas-naplobejegyzes';
-        case Cimkek.NaploTipus.MasodfokuTargyalasElokeszites:
-          return 'masod-foku-targyalas-kituzese-naplo-bejegyzes';
-        case Cimkek.NaploTipus.HatarozatRogzitese:
-          return 'hatarozat-rogzitese-naplobejegyzes';
-        case Cimkek.NaploTipus.KirendeltVedoKerese:
-          return 'kirendelt-vedo-kerese-naplobejegyzes';
-        case Cimkek.NaploTipus.MeghatalmazottVedoKerese:
-          return 'meghatalmazott-vedo-kerese-naplobejegyzes';
-        case Cimkek.NaploTipus.HataridoModositas:
-          return 'hatarido-modositas-naplobejegyzes';
-        case Cimkek.NaploTipus.Felfuggesztes:
-          return 'felfuggesztes-naplo-bejegyzes';
-        case Cimkek.NaploTipus.VedoTelefonosTajekoztatasa:
-          return 'vedo-telefonos-tajekoztatasa-naplobejegyzes';
-        case Cimkek.NaploTipus.FelfuggesztesMegszuntetese:
-          return 'felfuggesztes-megszuntetese-naplobejegyzes';
-        case Cimkek.NaploTipus.SzakteruletiVelemenyKerese:
-          return 'szakteruleti-velemeny-kerese-naplobejegyzes';
-        case Cimkek.NaploTipus.MasodfokuTargyalasiJegyzokonyv:
-          return 'masod-foku-targyalasi-jegyzokonyv-naplobejegyzes';
-        case Cimkek.NaploTipus.HatarozatRogziteseMasodFokon:
-          return 'hatarozat-rogzitese-masod-fokon-naplo-bejegyzes';
-        case Cimkek.NaploTipus.UjEljarasLefolytatasa:
-          return 'uj-eljaras-lefolytatasa-naplobejegyzes';
-        case Cimkek.NaploTipus.SzembesitesiJegyzokonyv:
-          return 'szembesitesi-jegyzokonyv-naplobejegyzes';
-        case Cimkek.NaploTipus.JogiKepviseletVisszavonasa:
-          return 'jogi-kepviselet-visszavonasa-naplo-bejegyzes';
-        case Cimkek.NaploTipus.MaganelzarasMegkezdesenekRogzitese:
-          return 'maganelzaras-megkezdesenek-rogzitese-naplobejegyzes';
-        case Cimkek.NaploTipus.FenyitesVegrehajthatatlannaTetele:
-          return 'fenyites-vegrehajthatatlanna-tetele-naplobejegyzes';
-        case Cimkek.NaploTipus.MaganelzarasIdeiglenesenEllenjavallt:
-          return 'maganelzaras-ideiglenesen-ellenjavallt-naplobejegyzes';
-        case Cimkek.NaploTipus.MaganelzarasMegszakitasa:
-          return 'maganelzaras-megszakitasa-naplobejegyzes';
-        case Cimkek.NaploTipus.MaganelzarasVegrehajtva:
-          return 'maganelzaras-vegrehajtva-naplobejegyzes';
-        case Cimkek.NaploTipus.KozvetitoiEljarasKezdemenyezese:
-          return 'kozvetitoi-eljaras-kezdemenyezese-naplobejegyzes';
-        case Cimkek.NaploTipus.KozvetitoiEljarasElrendeles:
-          return 'kozvetitoi-eljaras-elrendeles-naplobejegyzes';
-        case Cimkek.NaploTipus.KozvetitoiEljarasMegtagadas:
-          return 'kozvetitoi-eljaras-megtagadas-naplobejegyzes';
-        case Cimkek.NaploTipus.KozvetitoiEljarasFeljegyzes:
-          return 'kozvetitoi-eljaras-feljegyzes-naplobejegyzes';
-        case Cimkek.NaploTipus.KozvetitoiEljarasMegallapodas:
-          return 'kozvetitoi-eljaras-megallapodas-naplobejegyzes';
-        case Cimkek.NaploTipus.KozvetitoiEljarasMegallapodasTeljesult:
-          return 'kozvetitoi-eljaras-megallapodas-teljesult-naplobejegyzes';
-        case Cimkek.NaploTipus.KozvetitoiEljarasLezaras:
-          return 'kozvetitoi-eljaras-lezarasa-naplobejegyzes';
-        case Cimkek.NaploTipus.KozvetitoiEljarasIndoklassalMegszuntetes:
-          return 'kozvetitoi-eljaras-indoklassal-megszuntetes-naplobejegyzes';
-        case Cimkek.NaploTipus.FegyelmiElkulonitesElrendelese:
-          return 'fegyelmi-elkulonites-elrendelese-naplo-bejegyzes';
-        case Cimkek.NaploTipus.FegyelmiElkulonitesVegrehajtva:
-          return 'fegyelmi-elkulonites-vegrehajtva-naplo-bejegyzes';
-        case Cimkek.NaploTipus.HataridoTullepesMiattiMegszuntetesNaplobejegyzes:
-          return 'hatarido-tullepes-miatti-megszuntetes-naplobejegyzes';
-        case Cimkek.NaploTipus.BuntetoFeljelentesRogziteseNaploBejegyzes:
-          return 'bunteto-feljelentes-rogzitese-naplo-bejegyzes';
-        case Cimkek.NaploTipus.KozvetitoiEljarasHataridoModositasNaplobejegyzes:
-          return 'kozvetitoi-eljaras-hatarido-modositas-naplobejegyzes';
-        case Cimkek.NaploTipus
-          .KozvetitoiEljarasHataridoModositasKereseNaplobejegyzes:
-          return 'kozvetitoi-eljaras-hatarido-modositas-kerese-naplobejegyzes';
-        case Cimkek.NaploTipus.MaganelzarasElrendelese:
-          return 'maganelzaras-elrendelese-naplobejegyzes';
-        case Cimkek.NaploTipus.FenyitesVegrehajtasaKesz:
-          return 'fenyites-vegrehajtasa-kesz-naplobejegyzes';
-        case Cimkek.NaploTipus.VegrehajthatosagElevultNaplobejegyzes:
-          return 'fegyelmi-ugy-vegrehajthatosag-elevult-naplobejegyzes';
-        case Cimkek.NaploTipus.AutomatikusLezaras:
-          return 'automatikus-lezaras-naplobejegyzes';
-        case Cimkek.NaploTipus.AutomatikusVegrehajtasMegkezdese:
-          return 'automatikus-vegrehajtas-megkezdes-naplobejegyzes';
-        case Cimkek.NaploTipus.AutomatikusVegrehajtasBefejezese:
-          return 'automatikus-vegrehajtas-befejezes-naplobejegyzes';
-        case Cimkek.NaploTipus.KivizsgaloModositasa:
-          return 'kivizsgalo-modositasa-naplobejegyzes';
         case Cimkek.NaploTipus.SzabadszovegesNaplobejegyzes:
           return 'szabadszavas-fegyelmi-naplobejegyzes';
         default:

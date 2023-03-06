@@ -169,9 +169,7 @@
                 >Üdv, {{ userInfo.SzemelyzetNev }}</a
               >
             </li>
-            <li>
-              <k-n2020toolbar></k-n2020toolbar>
-            </li>
+            <li></li>
           </ul>
         </div>
       </div>

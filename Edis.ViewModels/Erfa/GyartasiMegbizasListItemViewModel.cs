@@ -8,6 +8,7 @@ namespace Edis.ViewModels.Erfa
     {
         public int PrdID { get; set; }
         public string PrjCode { get; set; }
+        public string PrjDescription { get; set; }
         public string Szabszam { get; set; }
         public DateTime OrdCustRequestDate { get; set; }
         public string Prdinfo2 { get; set; }

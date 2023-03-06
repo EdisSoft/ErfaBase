@@ -108,7 +108,7 @@
                         </p>
                       </div>
                       <p
-                        class="akt-nyilv-szam blue-grey-700 mt-0 mb-0 font-size-12 fogv-nev text-capitalize"
+                        class="akt-nyilv-szam blue-grey-700 mt-0 mb-0 font-size-12 almunka-szam text-capitalize"
                       >
                         {{ fenyites.FogvatartottNev }}
                       </p>
@@ -451,7 +451,7 @@ h5 {
 .media-body p {
   line-height: 14px;
 }
-.media-body .fogv-nev {
+.media-body .almunka-szam {
   /* max-width: 100px; */
   margin-bottom: 3px !important;
   /* word-break: break-all; */

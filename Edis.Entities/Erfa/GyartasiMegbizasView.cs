@@ -14,6 +14,9 @@ namespace Edis.Entities.Erfa
         [Column("prjCode")]
         public string PrjCode { get; set; }
 
+        [Column("prjDescription")]
+        public string PrjDescription { get; set; }
+
         [Column("szabszam")]
         public string Szabszam { get; set; }
 
@@ -35,28 +38,11 @@ namespace Edis.Entities.Erfa
         [Column("fo")]
         public int? Fo { get; set; }
 
-        [Column("lapanyag")]
-        public int? Lapanyag { get; set; }
-
-        [Column("elanyag")]
-        public int? Elanyag { get; set; }
-
-        [Column("kellekek")]
-        public int? Kellekek { get; set; }
-
         [Column("prioritas")]
         public int? Prioritas { get; set; }
 
         [Column("lejart")]
         public string Lejart { get; set; }
 
-        [Column("lapHiany")]
-        public int? LapHiany { get; set; }
-
-        [Column("elHiany")]
-        public int? ElHiany { get; set; }
-
-        [Column("kellekHiany")]
-        public int? KellekHiany { get; set; }
     }
 }

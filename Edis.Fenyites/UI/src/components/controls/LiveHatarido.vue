@@ -12,17 +12,33 @@
         <div class="pl-0 add-data" :class="{ 'nem-lejart': diff > 0 }">
           <p class="mb-0 text-right">
             <span class="badge badge-outline badge-dark font-weight-400">
-              <span v-if="diff < 0" class="basic-span" :key="GetKey()">Lejárt {{ -diff }} napja</span>
-              <span v-else-if="diff == 0" class="basic-span" :key="GetKey()">Ma jár le</span>
-              <span v-else class="basic-span" :key="GetKey()">Még {{ diff }} nap</span>
+              <span v-if="diff < 0" class="basic-span" :key="GetKey()"
+                >Lejárt {{ -diff }} napja</span
+              >
+              <span v-else-if="diff == 0" class="basic-span" :key="GetKey()"
+                >Ma jár le</span
+              >
+              <span v-else class="basic-span" :key="GetKey()"
+                >Még {{ diff }} nap</span
+              >
             </span>
           </p>
         </div>
-        <p class="blue-grey-700 mt-0 mb-0 font-size-12 text-break fogv-nev text-capitalize">
+        <p
+          class="blue-grey-700 mt-0 mb-0 font-size-12 text-break text-capitalize"
+        >
           {{ ugy.PrjCode }}
         </p>
+        <p
+          class="blue-grey-700 mt-0 mb-0 font-size-12 text-break text-capitalize"
+        >
+          {{ ugy.prjDescription }}
+        </p>
         <p class="mt-0 mb-5">
-          <span v-if="ugy.Szabszam" class="badge badge-outline mt-1 mr-1 badge-default font-weight-400 text-break">
+          <span
+            v-if="ugy.Szabszam"
+            class="badge badge-outline mt-1 mr-1 badge-default font-weight-400 almunka-szam text-break"
+          >
             {{ ugy.Szabszam }}
           </span>
           <!-- <span v-else class="badge badge-outline mt-1 mr-1 badge-default font-weight-400 text-break">
@@ -67,7 +83,7 @@
            class="blue-grey-700 mt-0 mb-0 font-size-11">
           Jav:
           <span class="text-capitalize">{{ ugy.JavaslatTevo }}</span> -->
-          <!--<span v-if="ugy.KivizsgaloRendfokozat != 'Nincs megadva'">
+        <!--<span v-if="ugy.KivizsgaloRendfokozat != 'Nincs megadva'">
             {{ ugy.KivizsgaloRendfokozat }}
           </span>-->
         <!-- </p> -->
@@ -87,8 +103,8 @@ var livehatartidoCounter = 0;
 
 export default {
   name: 'k-live-hatarido',
-    props: ['ugy', 'isBvop'],
-  data: function() {
+  props: ['ugy', 'isBvop'],
+  data: function () {
     return {
       currentSettimeout: null,
       diff: 0,
@@ -99,10 +115,10 @@ export default {
       },
     };
   },
-  mounted: function() {},
+  mounted: function () {},
   watch: {
     ugy: {
-      handler: function() {
+      handler: function () {
         this.CalculateTimeText();
         var vm = this;
       },
@@ -114,17 +130,15 @@ export default {
       userInfo: UserStoreTypes.getters.getUserInfo,
     }),
     isUgyJutalom: function () {
-      if (this.ugy)
-        if (this.ugy.JutalomId)
-          return true;
+      if (this.ugy) if (this.ugy.JutalomId) return true;
       return false;
-    }
+    },
   },
   methods: {
     GetKey() {
       return this.livehatartidoCounter + this.timeText;
     },
-    CalculateTimeText: function() {
+    CalculateTimeText: function () {
       if (!this.ugy) return;
       var vm = this;
 
@@ -132,12 +146,12 @@ export default {
 
       vm.diff = dateDiffInDays(moment().format(), this.ugy.OrdCustRequestDate);
 
-      vm.currentSettimeout = setTimeout(function() {
+      vm.currentSettimeout = setTimeout(function () {
         vm.CalculateTimeText();
       }, 60 * 60 * 1000);
     },
   },
-  destroyed: function() {
+  destroyed: function () {
     if (this.currentSettimeout) clearTimeout(this.currentSettimeout);
   },
 };
@@ -168,7 +182,7 @@ export default {
 .media-body p {
   line-height: 14px;
 }
-.media-body .fogv-nev {
+.media-body .almunka-szam {
   /* max-width: 100px; */
   /* word-break: break-all; */
   margin-bottom: 3px !important;

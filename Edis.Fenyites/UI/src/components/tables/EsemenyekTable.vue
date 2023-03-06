@@ -356,14 +356,21 @@ export default {
             sTitle: 'Munkaszám',
             width: '20%',
             mRender: function (data, type, row, meta) {
-              var prjCode = '';
+              var cimkek = '';
               if (row.PrjCode != null) {
-                prjCode +=
+                cimkek +=
                   '<span class="unique-desc"><b><i>' +
                   row.PrjCode +
                   '</i></b></span>';
               }
-              return prjCode;
+              if (row.PrjDescription != null) {
+                cimkek +=
+                  '<span class="unique-desc" data-toggle="m-tooltip" data-original-title="Vevő">' +
+                  '<br/>' +
+                  row.PrjDescription +
+                  '</span>';
+              }
+              return cimkek;
             },
           },
           {
@@ -372,13 +379,6 @@ export default {
             mRender: function (data, type, row, meta) {
               var cimkek = '';
 
-              if (row.OrdCustRequestDate != null) {
-                cimkek +=
-                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Határidő">' +
-                  'Hat: ' +
-                  moment(row.OrdCustRequestDate).format('YYYY.MM.DD') +
-                  '</span><br/>';
-              }
               if (row.Szabszam != null) {
                 cimkek +=
                   '<span class="unique-desc" data-toggle="m-tooltip" data-original-title="Munkaszám">' +
@@ -391,35 +391,13 @@ export default {
                   capitalize(row.Prdinfo2) +
                   '</span>';
               }
-              //return cimkek;
-              // var cimkek = row.Resztvevok.map(function(element) {
-              //   if (element.ErintettsegFokaCimId == '65') {
-              //     return (
-              //       ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Elkövető">' +
-              //       capitalize(element.Nev) +
-              //       '</span>'
-              //     );
-              //   } else if (element.ErintettsegFokaCimId == '66') {
-              //     return (
-              //       ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Sértett">' +
-              //       capitalize(element.Nev) +
-              //       '</span>'
-              //     );
-              //   } else {
-              //     return (
-              //       ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Tanú">' +
-              //       capitalize(element.Nev) +
-              //       '</span>'
-              //     );
-              //   }
-              // });
               var cimkekStr = cimkek.toString().replace(/,/g, '');
               return cimkekStr;
             },
           },
           {
             mDataProp: null, // címkék
-            sTitle: 'Terv',
+            sTitle: 'Dátumok',
             mRender: function (data, type, row, meta) {
               var cimkek = '';
 
@@ -428,6 +406,13 @@ export default {
                   ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő személy">' +
                   capitalize(row.Terv) +
                   '</span>';
+              }
+              if (row.OrdCustRequestDate != null) {
+                cimkek +=
+                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Határidő">' +
+                  'Hat: ' +
+                  moment(row.OrdCustRequestDate).format('YYYY.MM.DD') +
+                  '</span><br/>';
               }
               if (
                 row.ObsStartDate != null &&
@@ -459,32 +444,6 @@ export default {
             //width: '60%',
             mRender: function (data, type, row, meta) {
               var cimkek = '';
-              // cimkek += '<div>';
-              // if (row.Lapanyag != null) {
-              //   cimkek +=
-              //     ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő személy">' +
-              //     capitalize(row.Lapanyag) +
-              //     '</span>';
-              // }
-              // if (row.Elanyag != null) {
-              //   cimkek +=
-              //     ' <span class="badge text-break badge-outline badge-warning" data-toggle="m-tooltip" data-original-title="Rögzítő intézet">' +
-              //     row.Elanyag +
-              //     '</span>';
-              // }
-              // if (row.Kellekek != null) {
-              //   cimkek +=
-              //     ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Napszak">' +
-              //     row.Kellekek +
-              //     '</span>';
-              // }
-              // if (row.Prioritas != null) {
-              //   cimkek +=
-              //     ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény helye">' +
-              //     row.Prioritas +
-              //     '</span>';
-              // }
-              // cimkek += '</div>';
               cimkek += `
                     Lapanyag: ${row.LapSt}/${row.LapReq}
                     <br/>
@@ -498,7 +457,7 @@ export default {
               //row.MindenAlapanyagMegvan = 'Gyártásba kiadható';
               if (row.MindenAlapanyagMegvan != null) {
                 cimkek +=
-                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Gyártható">' +
+                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Gyártható" style="text-align:right;vertical-align: text-top">' +
                   row.MindenAlapanyagMegvan +
                   '</span>';
               }

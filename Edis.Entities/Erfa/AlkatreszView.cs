@@ -26,11 +26,11 @@ namespace Edis.Entities.Erfa
         [Column("oriReqQty")]
         public Single OriReqQty { get; set; }
 
-        [Column("IssuedQty")]
-        public float? IssuedQty { get; set; }
+        //[Column("IssuedQty")]
+        //public float? IssuedQty { get; set; }
 
-        [Column("IslLocationQtyTotal")]
-        public float? IslLocationQtyTotal { get; set; }
+        //[Column("IslLocationQtyTotal")]
+        //public float? IslLocationQtyTotal { get; set; }
 
         [Column("IcgCode")]
         public string IcgCode { get; set; }
@@ -61,5 +61,8 @@ namespace Edis.Entities.Erfa
 
         [Column("Bruttó mennyiség")]
         public float? BruttoMennyiseg { get; set; }
+
+        [Column("SzabadMennyiseg")]
+        public Single? SzabadMennyiseg { get; set; }
     }
 }

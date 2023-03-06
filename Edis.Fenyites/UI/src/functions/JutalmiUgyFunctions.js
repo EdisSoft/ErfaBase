@@ -560,36 +560,6 @@ class JutalmiUgy {
     }
     return tempBool;
   }
-  FegyelmiUgyTovabbiMezokKitoltese(jutalomUgyek) {
-    let jutalomUgyekModositott = jutalomUgyek.map((v) => {
-      let elem = { ...v };
-
-      // IIFokuTargyalas ügystátusz esetén nem kell megjelenjen a 'Tárgyalás kitűzésre vár' szűrőcímke
-      if (
-        v.UgyStatuszId == Cimkek.FegyelmiUgyStatusza.IFokuTargyalas &&
-        !v.ElsofokuTargyalasIdopontja
-      ) {
-        elem.TargyalasKituzesreVar = 'Tárgyalás kitűzésre vár';
-        elem.TargyalasKituzesreVarId = -1;
-      }
-
-      if (
-        !elem.FenyitesTipusCimkeId &&
-        elem.UgyStatuszId != Cimkek.FegyelmiUgyStatusza.Osszevonva
-      ) {
-        elem.FenyitesTipus = 'Nincs fenyítés kiszabva';
-        elem.FenyitesTipusCimkeId = -1;
-      }
-
-      if (v.Felfuggesztve) {
-        elem.FelfuggesztveSzoveg = 'Felfüggesztve';
-        elem.FelfuggesztveSzovegId = -1;
-      }
-
-      return elem;
-    });
-    return jutalomUgyekModositott;
-  }
   GetJutalomSzuroBadgek(isBvop) {
     let props = [
       {

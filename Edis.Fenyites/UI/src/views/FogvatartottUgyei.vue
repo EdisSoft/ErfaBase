@@ -81,7 +81,7 @@ import { FegyelmiUgyStoreTypes } from '../store/modules/fegyelmiugy';
 
 export default {
   name: 'fogvatartottUgyei',
-  data: function() {
+  data: function () {
     return {
       fegyelmiUgyek: [],
       selectedUgyStatuszok: [],
@@ -128,16 +128,16 @@ export default {
       fegyelmiUgyekVuex: FegyelmiUgyStoreTypes.getters.getFegyelmiUgyek,
     }),
     szuroProps() {
-      return FegyelmiUgyFunctions.GetFegyelmiUgySzuroBadgek();
+      return FegyelmiUgyFunctions.GetRendelesekSzuroBadgek();
     },
-    SzurtFegyelmiUgyek: function() {
+    SzurtFegyelmiUgyek: function () {
       if (!this.delayed) {
         // return [];
       }
       var filteredList = [];
       var fegyelmiUgyekTmp = this.fegyelmiUgyek.slice();
       let userId = this.$get(this.userInfo, 'SzemelyzetSid');
-      var selectedSzurok = this.selectedSzurok.map(m => m.value);
+      var selectedSzurok = this.selectedSzurok.map((m) => m.value);
       for (var i in fegyelmiUgyekTmp) {
         var v = fegyelmiUgyekTmp[i];
         if (FegyelmiUgyFunctions.ValidateSzurok(selectedSzurok, v)) {
@@ -148,9 +148,8 @@ export default {
       return filteredList;
     },
     fogvatartottNev() {
-      let selectedFogvatartott = this.$store.getters[
-        FogvatartottakStoreTypes.fogvatartottKereses.get
-      ];
+      let selectedFogvatartott =
+        this.$store.getters[FogvatartottakStoreTypes.fogvatartottKereses.get];
       if (selectedFogvatartott) {
         return selectedFogvatartott.text;
       }
@@ -176,7 +175,7 @@ export default {
   },
   watch: {
     '$route.query': {
-      handler: function(value) {
+      handler: function (value) {
         let fogvatartottId = value.fogvatartottId || null;
         this.GetFogvatartottFegyelmiUgyei(fogvatartottId);
       },

@@ -12,9 +12,9 @@ namespace Edis.ViewModels.Erfa
         public string ItmDescription { get; set; }
         public string PrimaryUOMCode { get; set; }
         public Single OriReqQty { get; set; }
-        public float? IssuedQty { get; set; }
-        public float? islLocationQtyTotal { get; set; }
-        public float? IslLocationQtyTotal { get; set; }
+        //public float? IssuedQty { get; set; }
+        //public float? islLocationQtyTotal { get; set; }
+        //public float? IslLocationQtyTotal { get; set; }
         public string IcgCode { get; set; }
         public string Icg2Code { get; set; }
         public bool szabjuk { get; set; }
@@ -25,6 +25,7 @@ namespace Edis.ViewModels.Erfa
         public int? TablaDb { get; set; }
         public float? UtolsoTablaKihozatal { get; set; }
         public float? BruttoMennyiseg { get; set; }
+        public Single? SzabadMennyiseg { get; set; }
 
         public static explicit operator AlkatreszView(AlkatreszekListItemViewModel model)
         {

@@ -426,7 +426,7 @@ export default {
       return filteredList;
     },
     szuroProps() {
-      return FegyelmiUgyFunctions.GetFegyelmiUgySzuroBadgek(this.isBvop);
+      return FegyelmiUgyFunctions.GetRendelesekSzuroBadgek();
     },
     isBvop() {
       if (!this.userInfo) {

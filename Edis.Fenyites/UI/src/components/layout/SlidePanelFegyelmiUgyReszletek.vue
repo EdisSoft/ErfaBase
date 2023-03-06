@@ -271,61 +271,117 @@
                             :key="index"
                             class="d-flex flex-column list-group-item"
                           >
-                          <div class="d-flex flex-row">
-                            <p
-                              class="flex-grow-1 flex-shrink-1 px-10"
-                            >
-                              <span>{{ alkatresz.ItmItemNumber }}</span>
-                            </p>
-                            <p class="flex-grow-1 flex-shrink-1 px-10">
-                              <span
-                                class="badge badge-outline badge-warning mr-5 bg-white font-weight-400 shadow-sm w-p100"
-                                v-b-tooltip="{
-                                  title: 'Alkatrész típus',
-                                  html: true,
-                                  container: '#slidepanel-fegyelmi-ugy',
-                                  delay: { show: 500, hide: 100 },
-                                  trigger: 'hover',
-                                }"
-                                v-if="alkatresz.IcgCode"
-                                >{{
-                                  alkatresz.IcgCode + ': ' + alkatresz.Icg2Code
-                                }}
-                              </span>
-                            </p>
-                            <p class="flex-grow-1 flex-shrink-1 px-10">
-                              <span
-                                class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm w-p100"
-                                v-b-tooltip="{
-                                  title: 'Szükséges mennyiség',
-                                  html: true,
-                                  container: '#slidepanel-fegyelmi-ugy',
-                                  delay: { show: 500, hide: 100 },
-                                  trigger: 'hover',
-                                }"
-                                v-if="alkatresz.OriReqQty"
-                                >{{
-                                  alkatresz.OriReqQty +
-                                  ' ' +
-                                  alkatresz.PrimaryUOMCode
-                                }}
-                              </span>
-                            </p>
-                            <p class="flex-grow-1 flex-shrink-1 px-10">
-                              <span
-                                class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm w-p100"
-                                v-b-tooltip="{
-                                  title: 'Tábla mennyiség',
-                                  html: true,
-                                  container: '#slidepanel-fegyelmi-ugy',
-                                  delay: { show: 500, hide: 100 },
-                                  trigger: 'hover',
-                                }"
-                                v-if="alkatresz.TablaDb"
-                                >{{ alkatresz.TablaDb + ' tábla' }}
-                              </span>
-                            </p>
-                            <p class="flex-grow-1 flex-shrink-1 px-10">
+                            <div class="d-flex flex-row">
+                              <p class="flex-grow-1 flex-shrink-1 px-10">
+                                <span>{{ alkatresz.ItmItemNumber }}</span>
+                              </p>
+                              <p class="flex-grow-1 flex-shrink-1 px-10">
+                                <span
+                                  class="badge badge-outline badge-warning mr-5 bg-white font-weight-400 shadow-sm w-p100"
+                                  v-b-tooltip="{
+                                    title: 'Alkatrész típus',
+                                    html: true,
+                                    container: '#slidepanel-fegyelmi-ugy',
+                                    delay: { show: 500, hide: 100 },
+                                    trigger: 'hover',
+                                  }"
+                                  v-if="alkatresz.IcgCode"
+                                  >{{
+                                    alkatresz.IcgCode +
+                                    ': ' +
+                                    alkatresz.Icg2Code
+                                  }}
+                                </span>
+                              </p>
+                              <p class="flex-grow-1 flex-shrink-1 px-10">
+                                <span
+                                  class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm w-p100"
+                                  v-b-tooltip="{
+                                    title: 'Szükséges mennyiség',
+                                    html: true,
+                                    container: '#slidepanel-fegyelmi-ugy',
+                                    delay: { show: 500, hide: 100 },
+                                    trigger: 'hover',
+                                  }"
+                                  v-if="alkatresz.OriReqQty"
+                                  >{{
+                                    alkatresz.OriReqQty +
+                                    ' ' +
+                                    alkatresz.PrimaryUOMCode
+                                  }}
+                                </span>
+                              </p>
+                              <p class="flex-grow-1 flex-shrink-1 px-10">
+                                <span
+                                  class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm w-p100"
+                                  v-b-tooltip="{
+                                    title: 'Szükséges tábla mennyiség',
+                                    html: true,
+                                    container: '#slidepanel-fegyelmi-ugy',
+                                    delay: { show: 500, hide: 100 },
+                                    trigger: 'hover',
+                                  }"
+                                  v-if="alkatresz.TablaDb"
+                                  >{{ alkatresz.TablaDb + ' tábla' }}
+                                </span>
+                              </p>
+                              <p class="flex-grow-1 flex-shrink-1 px-10">
+                                <span
+                                  class="badge badge-outline badge-warning mr-5 bg-white font-weight-400 shadow-sm w-p100"
+                                  v-b-tooltip="{
+                                    title: 'Készlet mennyiség',
+                                    html: true,
+                                    container: '#slidepanel-fegyelmi-ugy',
+                                    delay: { show: 500, hide: 100 },
+                                    trigger: 'hover',
+                                  }"
+                                  v-if="
+                                    alkatresz.SzabadMennyiseg &&
+                                    alkatresz.IcgCode == 'Lapanyag'
+                                  "
+                                  >{{ alkatresz.SzabadMennyiseg + ' tábla' }}
+                                </span>
+                              </p>
+                              <p class="flex-grow-1 flex-shrink-1 px-10">
+                                <span
+                                  class="badge badge-outline badge-warning mr-5 bg-white font-weight-400 shadow-sm w-p100"
+                                  v-b-tooltip="{
+                                    title: 'Készlet mennyiség',
+                                    html: true,
+                                    container: '#slidepanel-fegyelmi-ugy',
+                                    delay: { show: 500, hide: 100 },
+                                    trigger: 'hover',
+                                  }"
+                                  v-if="
+                                    alkatresz.SzabadMennyiseg &&
+                                    alkatresz.IcgCode == 'Élanyag'
+                                  "
+                                  >{{
+                                    alkatresz.SzabadMennyiseg +
+                                    ' ' +
+                                    alkatresz.PrimaryUOMCode
+                                  }}
+                                </span>
+                              </p>
+                              <p class="flex-grow-1 flex-shrink-1 px-10">
+                                <span
+                                  class="badge badge-outline badge-warning mr-5 bg-white font-weight-400 shadow-sm w-p100"
+                                  v-b-tooltip="{
+                                    title: 'Készlet mennyiség',
+                                    html: true,
+                                    container: '#slidepanel-fegyelmi-ugy',
+                                    delay: { show: 500, hide: 100 },
+                                    trigger: 'hover',
+                                  }"
+                                  v-if="
+                                    alkatresz.SzabadMennyiseg &&
+                                    alkatresz.IcgCode == 'Kellek_Ertl'
+                                  "
+                                  >{{ alkatresz.SzabadMennyiseg + ' db' }}
+                                </span>
+                              </p>
+                            </div>
+                            <!-- <p class="flex-grow-1 flex-shrink-1 px-10">
                               <span
                                 class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm w-p100"
                                 v-b-tooltip="{
@@ -340,14 +396,13 @@
                                   alkatresz.DimZ + 'mm, ' + alkatresz.ItmavValue
                                 }}
                               </span>
-                            </p></div>
+                            </p></div> -->
                             <div>
-                              
-                            <p
-                              class="d-flex flex-column justify-content-between flex-grow-1 flex-shrink-1 px-10"
-                            >
-                              <span>{{ alkatresz.ItmDescription }}</span>
-                            </p>
+                              <p
+                                class="d-flex flex-column justify-content-between flex-grow-1 flex-shrink-1 px-10"
+                              >
+                                <span>{{ alkatresz.ItmDescription }}</span>
+                              </p>
                             </div>
                           </li>
                         </ul>

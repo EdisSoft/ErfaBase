@@ -80,7 +80,7 @@ import Intezetek from '../data/enums/intezetek';
 
 export default {
   name: 'fegyelmiUgyek',
-  data: function() {
+  data: function () {
     return {
       fegyelmiUgyek: [],
       selectedUgyStatuszok: [],
@@ -109,9 +109,9 @@ export default {
     GetUgyszam(f) {
       return getUgyszam(f);
     },
-    UgyStatuszKigyujtes: function(datalist) {
+    UgyStatuszKigyujtes: function (datalist) {
       var tagsObj = {};
-      $(datalist).each(function(i, v) {
+      $(datalist).each(function (i, v) {
         if (tagsObj.hasOwnProperty(v.UgyStatusz)) {
           tagsObj[v.UgyStatusz].count++;
         } else {
@@ -128,9 +128,9 @@ export default {
       }
       return list;
     },
-    TargyalasKituzesreVarKigyujtes: function(datalist) {
+    TargyalasKituzesreVarKigyujtes: function (datalist) {
       var counter = 0;
-      $(datalist).each(function(i, v) {
+      $(datalist).each(function (i, v) {
         if (
           (v.UgyStatuszId == Cimkek.FegyelmiUgyStatusza.IFokuTargyalas &&
             !v.ElsofokuTargyalasIdopontja) ||
@@ -151,9 +151,9 @@ export default {
 
       return list;
     },
-    JellegekKigyujtes: function(datalist) {
+    JellegekKigyujtes: function (datalist) {
       var tagsObj = {};
-      $(datalist).each(function(i, v) {
+      $(datalist).each(function (i, v) {
         if (v.Jelleg) {
           if (tagsObj.hasOwnProperty(v.Jelleg)) {
             tagsObj[v.Jelleg].count++;
@@ -173,28 +173,24 @@ export default {
       return list;
     },
     ChangeUgyStatuszokSelectedTag(id, name, isKonaliticsEnabled = true) {
-      var index = this.selectedUgyStatuszok.findIndex(x => x.id == id);
+      var index = this.selectedUgyStatuszok.findIndex((x) => x.id == id);
       if (index == -1) {
         this.selectedUgyStatuszok.push({ id, name });
       } else {
         this.selectedUgyStatuszok.splice(index, 1);
       }
       if (this.$refs.fegyTable) {
-        $(this.$refs.fegyTable.$refs.datatable.$el)
-          .DataTable()
-          .search('');
+        $(this.$refs.fegyTable.$refs.datatable.$el).DataTable().search('');
       }
     },
     ChangeTargyalasKituzesreVarSelectedTag(isKonaliticsEnabled = true) {
       this.targyalasraVarSzures = !this.targyalasraVarSzures;
       if (this.$refs.fegyTable) {
-        $(this.$refs.fegyTable.$refs.datatable.$el)
-          .DataTable()
-          .search('');
+        $(this.$refs.fegyTable.$refs.datatable.$el).DataTable().search('');
       }
     },
-    Contains: function(list, value) {
-      return list.find(x => x.id == value) != null;
+    Contains: function (list, value) {
+      return list.find((x) => x.id == value) != null;
     },
 
     async GetArchivFegyelmiUgyek(ev) {
@@ -223,18 +219,18 @@ export default {
         UserStoreTypes.getters.vanReintegraciosTisztJoga,
       isModalOpen: AppStoreTypes.getters.isModalOpen,
     }),
-    SzurtFegyelmiUgyek: function() {
+    SzurtFegyelmiUgyek: function () {
       if (!this.delayed) {
         // return [];
       }
 
       var ugyStatuszok = new Set();
-      ugyStatuszok = new Set(this.selectedUgyStatuszok.map(m => m.id));
+      ugyStatuszok = new Set(this.selectedUgyStatuszok.map((m) => m.id));
 
       var filteredList = [];
       var fegyelmiUgyekTmp = this.fegyelmiUgyek.slice();
       let userId = this.$get(this.userInfo, 'SzemelyzetSid');
-      var selectedSzurok = this.selectedSzurok.map(m => m.value);
+      var selectedSzurok = this.selectedSzurok.map((m) => m.value);
       for (var i in fegyelmiUgyekTmp) {
         var v = fegyelmiUgyekTmp[i];
         if (FegyelmiUgyFunctions.ValidateSzurok(selectedSzurok, v)) {
@@ -245,7 +241,7 @@ export default {
       return filteredList;
     },
     szuroProps() {
-      return FegyelmiUgyFunctions.GetFegyelmiUgySzuroBadgek(this.isBvop);
+      return FegyelmiUgyFunctions.GetRendelesekSzuroBadgek();
     },
     isBvop() {
       if (!this.userInfo) {
@@ -276,7 +272,7 @@ export default {
   },
   watch: {
     '$route.query': {
-      handler: function(value) {
+      handler: function (value) {
         let ev = value.ev || null;
         this.GetArchivFegyelmiUgyek(ev);
       },

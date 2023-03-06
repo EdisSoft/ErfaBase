@@ -135,7 +135,7 @@ export default {
         isSelected:
           this.fegyelmiUgyekSzuro == StatisztikaSzurok.SzallitasraElojegyezve,
         szuro: StatisztikaSzurok.SzallitasraElojegyezve,
-        title: 'Szállításra előjegyezve',
+        title: 'Kellék hiány',
         array: szallitasraElojegyezveArr,
       };
       let vegrehajtasraVaroArr =

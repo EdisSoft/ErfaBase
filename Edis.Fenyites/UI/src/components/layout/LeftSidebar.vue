@@ -41,9 +41,7 @@
                 id="felelosLista"
               >
                 <k-live-hatarido
-                  :key="
-                    fenyites.PrdID
-                  "
+                  :key="fenyites.PrdID"
                   class="list-group-item"
                   v-for="fenyites in HataridosUgyek"
                   :ugy="fenyites"
@@ -66,7 +64,7 @@
               ></k-animated-number>
             </span>
           </h3>
-          <p class="mb-0">Legutóbb változtatott fegyelmi ügyek</p>
+          <p class="mb-0">Insightban legutóbb változtatott rendelések</p>
         </div>
 
         <div class="panel-body px-0 py-0" ref="panel2" id="AktivitasFolyam">
@@ -350,23 +348,13 @@ export default {
     HataridosUgyek: function () {
       var hatarDatum = moment().startOf('d').add(4, 'days').toDate();
 
-      let isFegyelmi = this.$route.meta.layout == 'fenyites';
       var list = [];
-      if (isFegyelmi) {
-        list = this.fenyitesekVuex.filter(
-          (x) =>
-            x.Lejart != null &&
-            x.OrdCustRequestDate &&
-            new Date(x.OrdCustRequestDate).getTime() < hatarDatum.getTime()
-        );
-      } else {
-        list = this.jutalmakVuex.filter(
-          (x) =>
-            x.StatuszId != Cimkek.JutalomStatusz.Osszevonva &&
-            x.Hatarido &&
-            new Date(x.Hatarido).getTime() < hatarDatum.getTime()
-        );
-      }
+      list = this.fenyitesekVuex.filter(
+        (x) =>
+          x.Lejart != null &&
+          x.OrdCustRequestDate &&
+          new Date(x.OrdCustRequestDate).getTime() < hatarDatum.getTime()
+      );
 
       list.sort(sortDate('Hatarido'));
 

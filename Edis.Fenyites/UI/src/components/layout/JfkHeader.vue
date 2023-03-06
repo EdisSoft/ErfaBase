@@ -508,27 +508,7 @@ export default {
         Id: 1,
         Nev: 'Réka',
         Active: this.$route.meta.layout == 'fenyites',
-        // ClickEvent: () => {
-        //   this.FegyelmiFejlecvaltas();
-        // },
       });
-      // let jutalomMenupont = {
-      //   Id: 2,
-      //   Nev: 'Jutalom modul',
-      //   Active: this.$route.meta.layout == 'jutalom',
-      //   ClickEvent: () => {
-      //     this.JutalomFejlecvaltas();
-      //   },
-      // };
-      // switch (this.$route.meta.layout) {
-      //   case 'fenyites':
-      //     fejlecMenupontok.push(jutalomMenupont);
-      //     break;
-
-      //   default:
-      //     fejlecMenupontok.unshift(jutalomMenupont);
-      //     break;
-      // }
       return fejlecMenupontok;
     },
     isFogvKeresesAktiv() {
@@ -819,14 +799,6 @@ export default {
         state: true,
         data: {},
       });
-    },
-    FegyelmiFejlecvaltas() {
-      this.vanJogosultsaga
-        ? this.$router.push('/FegyelmiUgyek/')
-        : this.$router.push('/');
-    },
-    JutalomFejlecvaltas() {
-      this.$router.push('/JutalomUgyek/');
     },
   },
   watch: {

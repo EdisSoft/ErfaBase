@@ -1313,7 +1313,8 @@ class FegyelmiUgy {
     let now = new Date();
     let sameWeek = isSameWeek;
     return fegyelmiUgyek.filter(
-      (f) => f.OrdCustRequestDate && sameWeek(now, new Date(f.OrdCustRequestDate))
+      (f) =>
+        f.OrdCustRequestDate && sameWeek(now, new Date(f.OrdCustRequestDate))
     );
   }
   GetSzallitasraElojegyezveUgyek(fegyelmiUgyek) {
@@ -1585,7 +1586,6 @@ class FegyelmiUgy {
     let fegyelmiUgyekModositott = fegyelmiUgyek.map((v) => {
       let elem = { ...v };
 
-      // IIFokuTargyalas ügystátusz esetén nem kell megjelenjen a 'Tárgyalás kitűzésre vár' szűrőcímke
       if (
         v.UgyStatuszId == Cimkek.FegyelmiUgyStatusza.IFokuTargyalas &&
         !v.ElsofokuTargyalasIdopontja
@@ -1611,7 +1611,7 @@ class FegyelmiUgy {
     });
     return fegyelmiUgyekModositott;
   }
-  GetFegyelmiUgySzuroBadgek(isBvop) {
+  GetRendelesekSzuroBadgek() {
     let props = [
       {
         propId: 'UgyStatuszId',
@@ -1643,19 +1643,9 @@ class FegyelmiUgy {
         order: 5,
         mapObj: 'fo',
         class: 'badge-outline badge-info text-default',
-        tooltip: 'Fenyítés típusa',
+        tooltip: 'Gyártásab kiadható',
       },
     ];
-    if (isBvop) {
-      props.push({
-        propId: 'FegyelmiIntezetId',
-        propNev: 'FegyelmiIntezet',
-        order: 1,
-        mapObj: 'fo',
-        class: 'badge-outline badge-default',
-        tooltip: 'Intézet',
-      });
-    }
     return props;
   }
   async CloseModalsAndPanels() {

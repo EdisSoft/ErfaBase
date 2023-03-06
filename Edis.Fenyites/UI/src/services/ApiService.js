@@ -178,6 +178,7 @@ class ApiService {
     }
     this.GetAlkatreszKeszletek();
     this.GetAlkatreszek();
+    // this.GetKellekKeszletek();
     return result;
   }
   // GetFenyitesek({ mock = true } = {}) {
@@ -3543,6 +3544,14 @@ class ApiService {
     });
     return result;
   }
+  // async GetKellekKeszletek({ mock = true } = {}) {
+  //   var url = settings.baseUrl + 'Api/Alkatresz/GetKellekKeszletek';
+  //   let result = await this.http.post({ url, mock });
+  //   await store.dispatch(FegyelmiUgyStoreTypes.actions.setKellekKeszletek, {
+  //     value: result.kellekKeszletek,
+  //   });
+  //   return result;
+  // }
   async GetAlkatreszek({ mock = true } = {}) {
     var url = settings.baseUrl + 'Api/Alkatresz/GetAlkatreszek';
     let result = await this.http.post({ url, mock });

@@ -73,7 +73,13 @@
           </div>
           <div v-if="fegyelmiUgy">
             <h1 class="white mb-5 slidepanel-title">
-              {{ fegyelmiUgy.PrjCode + ': ' + fegyelmiUgy.Szabszam }}
+              {{
+                fegyelmiUgy.PrjCode +
+                ': ' +
+                fegyelmiUgy.Szabszam +
+                ' – ' +
+                fegyelmiUgy.PrjDescription
+              }}
               {{ fegyelmiUgy.ObsStartDate | toShortDate }}
             </h1>
             <span

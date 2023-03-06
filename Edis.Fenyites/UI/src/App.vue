@@ -50,6 +50,9 @@ export default {
     eventBus.$on('alkatresz-keszletek-frissites', () => {
       apiService.GetAlkatreszKeszletek();
     });
+    // eventBus.$on('kellek-keszletek-frissites', () => {
+    //   apiService.GetKellekKeszletek();
+    // });
   },
   methods: {
     async GetAdatok() {

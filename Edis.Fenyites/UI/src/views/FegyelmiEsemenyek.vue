@@ -389,6 +389,7 @@ export default {
       isModalOpen: AppStoreTypes.getters.isModalOpen,
       fegyelmiUgyekSzuro: FegyelmiUgyStoreTypes.getters.getFegyelmiUgyekSzuro,
       alkatreszKeszletek: FegyelmiUgyStoreTypes.getters.getAlkatreszKeszletek,
+      // kellekKeszletek: FegyelmiUgyStoreTypes.getters.getKellekKeszletek,
       alkatreszek: FegyelmiUgyStoreTypes.getters.getAlkatreszek,
     }),
     fegyelmiUgyekModositott() {
@@ -402,6 +403,10 @@ export default {
         cloneDeep(this.alkatreszKeszletek),
         'Ottimokod'
       );
+      // let kellekKeszletek = keyBy(
+      //   cloneDeep(this.kellekKeszletek),
+      //   'Id'
+      // );
       let alkatreszek = groupBy(this.alkatreszek, 'PrdId');
 
       for (let i = 0; i < fegyelmiUgyekSelected.length; i++) {
@@ -461,20 +466,34 @@ export default {
           const alkatresz = szuksegesAlkatreszek[i];
           let keszlet = alkatreszKeszletek[alkatresz.OttimoKod];
           if (keszlet) {
-            if (alkatresz.IcgCode == 'Élanyag') {
-              let db = alkatresz.OriReqQty;
-              if (kivalasztva) {
-                row.ElSt = row.ElReq;
-              } else if (db < keszlet.SzabadMennyiseg) {
-                row.ElSt++;
+            //alkatresz === true
+            switch (alkatresz.IcgCode) {
+              case 'Élanyag': {
+                let db = alkatresz.OriReqQty;
+                if (kivalasztva) {
+                  row.ElSt = row.ElReq;
+                } else if (db < keszlet.SzabadMennyiseg) {
+                  row.ElSt++;
+                }
+                break;
               }
-            }
-            if (alkatresz.IcgCode == 'Lapanyag') {
-              let db = alkatresz.TablaDb;
-              if (kivalasztva) {
-                row.LapSt = row.LapReq;
-              } else if (db < keszlet.SzabadMennyiseg) {
-                row.LapSt++;
+              case 'Lapanyag': {
+                let db = alkatresz.TablaDb;
+                if (kivalasztva) {
+                  row.LapSt = row.LapReq;
+                } else if (db < keszlet.SzabadMennyiseg) {
+                  row.LapSt++;
+                }
+                break;
+              }
+              default: {
+                let db = alkatresz.OriReqQty;
+                if (kivalasztva) {
+                  row.KellekSt = row.LapReq;
+                } else if (db < keszlet.SzabadMennyiseg) {
+                  row.KellekSt++;
+                }
+                break;
               }
             }
           }
@@ -488,7 +507,7 @@ export default {
           row.ElHianyFl = 1;
         }
         if (row.KellekekStock < row.KellekekReq) {
-          row.KellekHiany = 'Laphiány';
+          row.KellekHiany = 'Kellék hiány';
           row.KellekHianyFl = 1;
         }
 

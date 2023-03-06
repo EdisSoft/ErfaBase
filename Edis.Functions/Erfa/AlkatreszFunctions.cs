@@ -14,7 +14,7 @@ namespace Edis.Functions.Erfa
         private DbSet<AlkatreszView> Alkatreszek => KonasoftBVFonixContext.AlkatreszekView;
         private DbSet<AlkatreszKeszletView> AlkatreszKeszletek => KonasoftBVFonixContext.AlkatreszKeszletekView;
 
-        private Dictionary<int, AlkatreszKeszletekHelperModel> alkatreszKeszletHelper = new Dictionary<int, AlkatreszKeszletekHelperModel>();
+        //private Dictionary<int, AlkatreszKeszletekHelperModel> alkatreszKeszletHelper = new Dictionary<int, AlkatreszKeszletekHelperModel>();
 
         public List<AlkatreszekListItemViewModel> GetAlkatreszek()
         {

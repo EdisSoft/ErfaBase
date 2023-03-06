@@ -423,18 +423,6 @@ export default {
                   moment(row.ObsStartDate).format('YYYY.MM.DD');
                 +'</span>';
               }
-              if (row.Fo != null) {
-                cimkek +=
-                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Napszak">' +
-                  row.Fo +
-                  '</span>';
-              }
-              if (row.Felulet != null) {
-                cimkek +=
-                  ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Esemény helye">' +
-                  row.Felulet +
-                  '</span>';
-              }
               return cimkek;
             },
           },

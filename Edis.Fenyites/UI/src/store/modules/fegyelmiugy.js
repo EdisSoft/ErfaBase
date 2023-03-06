@@ -27,6 +27,7 @@ export const FegyelmiUgyStoreTypes = {
     refreshAktivitasFolyam: 'fegyelmiugy/refreshAktivitasFolyam',
     modifyFegyelmiUgyek: 'fegyelmiugy/modifyFegyelmiUgyek',
     setAlkatreszKeszletek: 'fegyelmiugy/setAlkatreszKeszletek',
+    // setKellekKeszletek: 'fegyelmiugy/setKellekKeszletek',
     setAlkatreszek: 'fegyelmiugy/setAlkatreszek',
   },
   mutations: {
@@ -39,6 +40,7 @@ export const FegyelmiUgyStoreTypes = {
     SET_FEGYELMI_UGYEK_SZURO: 'fegyelmiugy/SET_FEGYELMI_UGYEK_SZURO',
     SET_AKTIVITASFOLYAM: 'fegyelmiugy/SET_AKTIVITASFOLYAM',
     SET_ALKATRESZ_KESZLETEK: 'fegyelmiugy/SET_ALKATRESZ_KESZLETEK',
+    SET_KELLEK_KESZLETEK: 'fegyelmiugy/SET_KELLEK_KESZLETEK',
     SET_ALKATRESZEK: 'fegyelmiugy/SET_ALKATRESZEK',
   },
 };
@@ -51,6 +53,7 @@ const state = {
   fegyelmiUgyekSzuro: -1,
   aktivitasfolyam: Object.freeze([]),
   alkatreszKeszletek: Object.freeze([]),
+  // kellekKeszletek: Object.freeze([]),
   alkatreszek: Object.freeze([]),
 };
 export var fegyelmiListStatusz = {
@@ -86,6 +89,10 @@ const getters = {
     var rows = state.alkatreszKeszletek;
     return rows;
   },
+  // [_types.getters.getKellekKeszletek]: (state) => {
+  //   var rows = state.kellekKeszletek;
+  //   return rows;
+  // },
   [_types.getters.getAlkatreszek]: (state) => {
     var rows = state.alkatreszek;
     return rows;
@@ -215,6 +222,9 @@ const actions = {
   [_types.actions.setAlkatreszKeszletek]({ commit }, { value }) {
     commit(_types.mutations.SET_ALKATRESZ_KESZLETEK, [...value]);
   },
+  // [_types.actions.setKellekKeszletek]({ commit }, { value }) {
+  //   commit(_types.mutations.SET_KELLEK_KESZLETEK, [...value]);
+  // },
   [_types.actions.setAlkatreszek]({ commit }, { value }) {
     commit(_types.mutations.SET_ALKATRESZEK, [...value]);
   },
@@ -259,6 +269,9 @@ const mutations = {
   [_types.mutations.SET_ALKATRESZ_KESZLETEK](state, value) {
     state.alkatreszKeszletek = Object.freeze(value);
   },
+  // [_types.mutations.SET_KELLEK_KESZLETEK](state, value) {
+  //   state.kellekKeszletek = Object.freeze(value);
+  // },
   [_types.mutations.SET_ALKATRESZEK](state, value) {
     state.alkatreszek = Object.freeze(value);
   },

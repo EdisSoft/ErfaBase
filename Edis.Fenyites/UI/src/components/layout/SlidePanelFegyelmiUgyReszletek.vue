@@ -72,16 +72,13 @@
             ></b-button>
           </div>
           <div v-if="fegyelmiUgy">
-            <h1 class="white mb-5 slidepanel-title">
-              {{
-                fegyelmiUgy.PrjCode +
-                ': ' +
-                fegyelmiUgy.Szabszam +
-                ' – ' +
-                fegyelmiUgy.PrjDescription
-              }}
+            <h1 class="white mb-0 slidepanel-title">
+              {{ fegyelmiUgy.PrjCode + ': ' + fegyelmiUgy.Szabszam }}
               {{ fegyelmiUgy.ObsStartDate | toShortDate }}
             </h1>
+            <div>
+              {{ fegyelmiUgy.PrjDescription }}
+            </div>
             <span
               class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
               v-b-tooltip="{
@@ -109,15 +106,39 @@
             <span
               class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
               v-b-tooltip="{
-                title: 'Fegyelmi ügy státusza',
+                title: 'Lapanyag',
                 html: true,
                 container: '#slidepanel-fegyelmi-ugy',
                 delay: { show: 500, hide: 100 },
                 trigger: 'hover',
               }"
-              v-if="fegyelmiUgy.Lapanyag"
-              >{{ fegyelmiUgy.Lapanyag }}</span
             >
+              Lapanyag: {{ fegyelmiUgy.LapSt }} / {{ fegyelmiUgy.LapReq }}
+            </span>
+            <span
+              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
+              v-b-tooltip="{
+                title: 'Élanyag',
+                html: true,
+                container: '#slidepanel-fegyelmi-ugy',
+                delay: { show: 500, hide: 100 },
+                trigger: 'hover',
+              }"
+            >
+              Élanyag: {{ fegyelmiUgy.ElSt }} / {{ fegyelmiUgy.ElReq }}
+            </span>
+            <span
+              class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
+              v-b-tooltip="{
+                title: 'Kellék',
+                html: true,
+                container: '#slidepanel-fegyelmi-ugy',
+                delay: { show: 500, hide: 100 },
+                trigger: 'hover',
+              }"
+            >
+              Kellék: {{ fegyelmiUgy.KellekSt }} / {{ fegyelmiUgy.KellekReq }}
+            </span>
             <span
               class="badge badge-outline badge-dark mr-5 bg-white font-weight-400 shadow-sm"
               v-b-tooltip="{

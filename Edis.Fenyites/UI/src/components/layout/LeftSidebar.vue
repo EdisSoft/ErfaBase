@@ -256,11 +256,10 @@ export default {
     },
 
     UgyReszletekMegtekintes(data) {
-      console.log('UgyReszletekMegtekintes', data);
-      if (data.FegyelmiUgyId) {
+      if (data.PrdID) {
         let args = {
-          fegyelmiUgyId: data.FegyelmiUgyId,
-          fegyelmiUgy: data,
+          prdId: data.PrdID,
+          prd: data,
         };
 
         eventBus.$emit('Sidebar:ugyReszletek', {
@@ -347,16 +346,15 @@ export default {
     },
     HataridosUgyek: function () {
       var hatarDatum = moment().startOf('d').add(4, 'days').toDate();
-
+      console.log(hatarDatum);
       var list = [];
       list = this.fenyitesekVuex.filter(
         (x) =>
-          x.Lejart != null &&
           x.OrdCustRequestDate &&
           new Date(x.OrdCustRequestDate).getTime() < hatarDatum.getTime()
       );
 
-      list.sort(sortDate('Hatarido'));
+      list.sort(sortDate('OrdCustRequestDate'));
 
       return list;
     },

@@ -431,26 +431,29 @@ export default {
             sTitle: 'Rendelkezésre álló készletek',
             //width: '60%',
             mRender: function (data, type, row, meta) {
-              var cimkek = '';
-              cimkek += `
+              var cimkek =
+                '<div class="d-flex justify-content-between align-items-start">';
+              cimkek += `<div>
                     Lapanyag: ${row.LapSt}/${row.LapReq}
                     <br/>
                     Élanyag : ${row.ElSt}/${row.ElReq}
                     <br/>
                     Kellék : ${row.KellekSt}/${row.KellekReq}
-                    `;
+                    </div>`;
               //row.LapHiany = 'Lapanyag hiány';
               //row.ElHiany = 'Élanyag hiány';
               //row.KellekHiany = 'Laphiány';
               //row.MindenAlapanyagMegvan = 'Gyártásba kiadható';
+              cimkek += '<div>';
               if (row.MindenAlapanyagMegvan != null) {
                 cimkek +=
                   ' <span class="badge text-break badge-outline badge-default" data-toggle="m-tooltip" data-original-title="Gyártható" style="text-align:right;vertical-align: text-top">' +
                   row.MindenAlapanyagMegvan +
                   '</span>';
               }
+              cimkek += '</div>';
 
-              return cimkek;
+              return cimkek + '</div>';
               // return (
               //   '<span class="unique-desc">' +
               //   row.Leiras.substring(0, 120) +

@@ -424,6 +424,14 @@ export default {
               let db = alkatresz.TablaDb;
               keszlet.SzabadMennyiseg -= db;
             }
+            if (
+              alkatresz.IcgCode == 'Kellék_Ertl' ||
+              alkatresz.IcgCode == 'Ertl_termékek' ||
+              alkatresz.IcgCode == 'Egyéb'
+            ) {
+              let db = alkatresz.TablaDb;
+              keszlet.SzabadMennyiseg -= db;
+            }
           }
         }
       }
@@ -453,6 +461,13 @@ export default {
           if (alkatresz.IcgCode == 'Lapanyag') {
             row.LapReq++;
           }
+          if (
+            alkatresz.IcgCode == 'Kellék_Ertl' ||
+            alkatresz.IcgCode == 'Ertl_termékek' ||
+            alkatresz.IcgCode == 'Egyéb'
+          ) {
+            row.KellekReq++;
+          }
         }
       }
 
@@ -467,37 +482,38 @@ export default {
           let keszlet = alkatreszKeszletek[alkatresz.OttimoKod];
           if (keszlet) {
             //alkatresz === true
+            let db = 0;
             switch (alkatresz.IcgCode) {
-              case 'Élanyag': {
-                let db = alkatresz.OriReqQty;
+              case 'Élanyag':
+                db = alkatresz.OriReqQty;
                 if (kivalasztva) {
                   row.ElSt = row.ElReq;
                 } else if (db < keszlet.SzabadMennyiseg) {
                   row.ElSt++;
                 }
                 break;
-              }
-              case 'Lapanyag': {
-                let db = alkatresz.TablaDb;
+
+              case 'Lapanyag':
+                db = alkatresz.TablaDb;
                 if (kivalasztva) {
                   row.LapSt = row.LapReq;
                 } else if (db < keszlet.SzabadMennyiseg) {
                   row.LapSt++;
                 }
                 break;
-              }
-              default: {
-                let db = alkatresz.OriReqQty;
+
+              default:
+                db = alkatresz.OriReqQty;
                 if (kivalasztva) {
-                  row.KellekSt = row.LapReq;
+                  row.KellekSt = row.KellekReq;
                 } else if (db < keszlet.SzabadMennyiseg) {
                   row.KellekSt++;
                 }
                 break;
-              }
             }
           }
         }
+
         if (row.LapSt < row.LapReq) {
           row.LapHiany = 'Lapanyag hiány';
           row.LapHianyFl = 1;

@@ -381,7 +381,9 @@
                                   }"
                                   v-if="
                                     alkatresz.SzabadMennyiseg &&
-                                    alkatresz.IcgCode == 'Kellek_Ertl'
+                                    (alkatresz.IcgCode == 'Kellek_Ertl' ||
+                                      alkatresz.IcgCode == 'Ertl_termékek' ||
+                                      alkatresz.IcgCode == 'Egyéb')
                                   "
                                   >{{ alkatresz.SzabadMennyiseg + ' db' }}
                                 </span>

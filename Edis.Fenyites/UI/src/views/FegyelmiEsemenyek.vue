@@ -431,15 +431,15 @@ export default {
       for (let z = 0; z < fegyelmiUgyekModositott.length; z++) {
         const row = fegyelmiUgyekModositott[z];
         row.LapReq = 0;
-        row.LapSt = 0;
+        row.LapAvail = 0;
         row.LapHiany = '';
         row.LapHianyFl = 0;
         row.ElReq = 0;
-        row.ElSt = 0;
+        row.ElAvail = 0;
         row.ElHiany = '';
         row.ElHianyFl = 0;
         row.KellekReq = 0;
-        row.KellekSt = 0;
+        row.KellekAvail = 0;
         row.KellekHiany = '';
         row.KellekHianyFl = 0;
         row.MindenAlapanyagMegvan = '';
@@ -471,42 +471,42 @@ export default {
               case 'Élanyag': {
                 let db = alkatresz.OriReqQty;
                 if (kivalasztva) {
-                  row.ElSt = row.ElReq;
+                  row.ElAvail = row.ElReq;
                 } else if (db < keszlet.SzabadMennyiseg) {
-                  row.ElSt++;
+                  row.ElAvail++;
                 }
                 break;
               }
               case 'Lapanyag': {
                 let db = alkatresz.TablaDb;
                 if (kivalasztva) {
-                  row.LapSt = row.LapReq;
+                  row.LapAvail = row.LapReq;
                 } else if (db < keszlet.SzabadMennyiseg) {
-                  row.LapSt++;
+                  row.LapAvail++;
                 }
                 break;
               }
               default: {
                 let db = alkatresz.OriReqQty;
                 if (kivalasztva) {
-                  row.KellekSt = row.LapReq;
+                  row.KellekAvail = row.LapReq;
                 } else if (db < keszlet.SzabadMennyiseg) {
-                  row.KellekSt++;
+                  row.KellekAvail++;
                 }
                 break;
               }
             }
           }
         }
-        if (row.LapSt < row.LapReq) {
+        if (row.LapAvail < row.LapReq) {
           row.LapHiany = 'Lapanyag hiány';
           row.LapHianyFl = 1;
         }
-        if (row.ElSt < row.ElReq) {
+        if (row.ElAvail < row.ElReq) {
           row.ElHiany = 'Élanyag hiány';
           row.ElHianyFl = 1;
         }
-        if (row.KellekekStock < row.KellekekReq) {
+        if (row.KellekekAvail < row.KellekekReq) {
           row.KellekHiany = 'Kellék hiány';
           row.KellekHianyFl = 1;
         }

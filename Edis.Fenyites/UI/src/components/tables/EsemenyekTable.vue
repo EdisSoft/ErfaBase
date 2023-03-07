@@ -433,11 +433,11 @@ export default {
             mRender: function (data, type, row, meta) {
               var cimkek = '';
               cimkek += `
-                    Lapanyag: ${row.LapSt}/${row.LapReq}
+                    Lapanyag: ${row.LapAvail}/${row.LapReq}
                     <br/>
-                    Élanyag : ${row.ElSt}/${row.ElReq}
+                    Élanyag : ${row.ElAvail}/${row.ElReq}
                     <br/>
-                    Kellék : ${row.KellekSt}/${row.KellekReq}
+                    Kellék : ${row.KellekAvail}/${row.KellekReq}
                     `;
               //row.LapHiany = 'Lapanyag hiány';
               //row.ElHiany = 'Élanyag hiány';

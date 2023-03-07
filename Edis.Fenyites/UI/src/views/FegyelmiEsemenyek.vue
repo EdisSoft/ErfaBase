@@ -439,15 +439,15 @@ export default {
       for (let z = 0; z < fegyelmiUgyekModositott.length; z++) {
         const row = fegyelmiUgyekModositott[z];
         row.LapReq = 0;
-        row.LapAvail = 0;
+        row.LapSt = 0;
         row.LapHiany = '';
         row.LapHianyFl = 0;
         row.ElReq = 0;
-        row.ElAvail = 0;
+        row.ElSt = 0;
         row.ElHiany = '';
         row.ElHianyFl = 0;
         row.KellekReq = 0;
-        row.KellekAvail = 0;
+        row.KellekSt = 0;
         row.KellekHiany = '';
         row.KellekHianyFl = 0;
         row.MindenAlapanyagMegvan = '';
@@ -487,18 +487,18 @@ export default {
               case 'Élanyag':
                 db = alkatresz.OriReqQty;
                 if (kivalasztva) {
-                  row.ElAvail = row.ElReq;
+                  row.ElSt = row.ElReq;
                 } else if (db < keszlet.SzabadMennyiseg) {
-                  row.ElAvail++;
+                  row.ElSt++;
                 }
                 break;
 
               case 'Lapanyag':
                 db = alkatresz.TablaDb;
                 if (kivalasztva) {
-                  row.LapAvail = row.LapReq;
+                  row.LapSt = row.LapReq;
                 } else if (db < keszlet.SzabadMennyiseg) {
-                  row.LapAvail++;
+                  row.LapSt++;
                 }
                 break;
 
@@ -507,7 +507,7 @@ export default {
                 if (kivalasztva) {
                   row.KellekSt = row.KellekReq;
                 } else if (db < keszlet.SzabadMennyiseg) {
-                  row.KellekAvail++;
+                  row.KellekSt++;
                 }
                 break;
             }
@@ -518,11 +518,11 @@ export default {
           row.LapHiany = 'Lapanyag hiány';
           row.LapHianyFl = 1;
         }
-        if (row.ElAvail < row.ElReq) {
+        if (row.ElSt < row.ElReq) {
           row.ElHiany = 'Élanyag hiány';
           row.ElHianyFl = 1;
         }
-        if (row.KellekekAvail < row.KellekekReq) {
+        if (row.KellekekSt < row.KellekekReq) {
           row.KellekHiany = 'Kellék hiány';
           row.KellekHianyFl = 1;
         }

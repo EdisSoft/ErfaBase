@@ -436,7 +436,7 @@ export default {
               cimkek += `<div>
                     Lapanyag: ${row.LapSt}/${row.LapReq}
                     <br/>
-                    Élanyag : ${row.ElAvail}/${row.ElReq}
+                    Élanyag : ${row.ElSt}/${row.ElReq}
                     <br/>
                     Kellék : ${row.KellekSt}/${row.KellekReq}
                     </div>`;

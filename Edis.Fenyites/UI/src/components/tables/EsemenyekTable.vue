@@ -84,208 +84,68 @@ export default {
           .data()
       );
       let exportData = [
-        // Elkövető
         {
-          header: 'Fogvatarott azonosítószáma és neve',
+          header: 'Munkaszám',
           getCellValue(row) {
-            return `${row.AktNyilvantartasiSzam} ${row.FogvatartottNev}`;
+            return row.PrjCode || '';
           },
         },
         {
-          header: 'Fogvatartott nyilvántartási státusza',
+          header: 'Vevő',
           getCellValue(row) {
-            return row.NyilvantartottStatusz || '';
+            return row.PrjDescription || '';
           },
         },
         {
-          header: 'Fogvatartott elhelyezése',
+          header: 'Munkaszám',
           getCellValue(row) {
-            return `${row.Intezet}/${row.Elhelyezes}/${row.Korlet}/${row.Zarka}`;
+            return row.Szabszam;
           },
         },
-        // Esemény
         {
-          header: 'Esemény napja és ideje',
+          header: 'Termék',
           getCellValue(row) {
-            if (row.EsemenyDatuma) {
-              return `${moment(row.EsemenyDatuma).format('YYYY.MM.DD. HH:mm')}`;
+            return row.Prdinfo2;
+          },
+        },
+        {
+          header: 'Kezdés',
+          getCellValue(row) {
+            if (row.ObsStartDate) {
+              return moment(row.ObsStartDate).format('YYYY.MM.DD');
             } else {
               return '';
             }
           },
         },
         {
-          header: 'Esemény jellege',
+          header: 'Határidő',
           getCellValue(row) {
-            return row.Jelleg || '';
-          },
-        },
-
-        // Ügy
-        {
-          header: 'Ügyszám',
-          getCellValue(row) {
-            return getUgyszam(row);
-          },
-        },
-        {
-          header: 'Ügy intézete',
-          getCellValue(row) {
-            return row.FegyelmiIntezet || '';
-          },
-        },
-        {
-          header: 'Elrendelés ideje',
-          getCellValue(row) {
-            if (row.DontesDatuma) {
-              return `${moment(row.DontesDatuma).format('YYYY.MM.DD.')}`;
+            if (row.OrdCustRequestDate) {
+              return moment(row.OrdCustRequestDate).format('YYYY.MM.DD.');
             } else {
               return '';
             }
           },
         },
         {
-          header: 'Kivizsgáló személy',
+          header: 'Lapanyag',
           getCellValue(row) {
-            return capitalize(row.Kivizsgalo) || '';
+            return `${row.LapSt}/${row.LapReq}`;
           },
         },
         {
-          header: 'Elrendelő személy',
+          header: 'Élanyag',
           getCellValue(row) {
-            return capitalize(row.Elrendelo) || '';
-          },
-        },
-        // Státusz
-        {
-          header: 'Jogszabályi határidő',
-          getCellValue(row) {
-            if (row.Hatarido) {
-              return `${moment(row.Hatarido).format('YYYY.MM.DD.')}`;
-            } else {
-              return '';
-            }
+            return `${row.ElSt}/${row.ElReq}`;
           },
         },
         {
-          header: 'Kivizsgálási határidő',
+          header: 'Kellék',
           getCellValue(row) {
-            if (row.KivizsgalasiHatarido) {
-              return `${moment(row.KivizsgalasiHatarido).format(
-                'YYYY.MM.DD.'
-              )}`;
-            } else {
-              return '';
-            }
+            return `${row.KellekSt}/${row.KellekReq}`;
           },
         },
-        {
-          header: 'Fegyelmi ügy státusza',
-          getCellValue(row) {
-            return row.UgyStatusz || '';
-          },
-        },
-        {
-          header: 'Fenyítés típusa',
-          getCellValue(row) {
-            if (row.LapHiany == 'Lapanyag hiány') {
-              return row.LapHiany;
-            } else {
-              return '';
-            }
-          },
-        },
-        {
-          header: 'Határidő lejárt',
-          getCellValue(row) {
-            if (row.Csuszas > 0) {
-              return `Lejárt ${row.Csuszas} napja`;
-            } else {
-              return '';
-            }
-          },
-        },
-        {
-          header: 'Jogi képviselet',
-          getCellValue(row) {
-            return excelExportCellBool(row.VanJogiKepviselet);
-          },
-        },
-        {
-          header: 'Felfüggesztési javaslat',
-          getCellValue(row) {
-            return excelExportCellBool(row.FelfuggesztesiJavaslat);
-          },
-        },
-        {
-          header: 'Felfüggesztve',
-          getCellValue(row) {
-            return excelExportCellBool(row.Felfuggesztve);
-          },
-        },
-        {
-          header: 'Határidő módosítási javaslat',
-          getCellValue(row) {
-            return excelExportCellBool(row.HataridoModositasJavaslat);
-          },
-        },
-        // {
-        //   header: 'Tárgyalás kitűzésre vár',
-        //   getCellValue(row) {
-        //     return excelExportCellBool(
-        //       row.UgyStatuszId == Cimkek.FegyelmiUgyStatusza.IFokuTargyalas &&
-        //         !row.ElsofokuTargyalasIdopontja
-        //     );
-        //   },
-        // },
-        // {
-        //   header: 'Reintegrációból viszaküldve',
-        //   getCellValue(row) {
-        //     return excelExportCellBool(row.Visszakuldve);
-        //   },
-        // },
-        // {
-        //   header: 'Szállításra előjegyezve',
-        //   getCellValue(row) {
-        //     if (row.SzallitasraElojegyezve) {
-        //       return `${moment(row.SzallitasraElojegyezve).format(
-        //         'YYYY.MM.DD.'
-        //       )}`;
-        //     } else {
-        //       return '';
-        //     }
-        //   },
-        // },
-        // {
-        //   header: 'Szakterületi véleményre vár',
-        //   getCellValue(row) {
-        //     return excelExportCellBool(row.SzakteruletiVelemenyreVarFL);
-        //   },
-        // },
-        // {
-        //   header: 'Közvetítői eljárás kezdeményezve',
-        //   getCellValue(row) {
-        //     return excelExportCellBool(row.KozvetitoiEljarasKezdemenyezve);
-        //   },
-        // },
-        // {
-        //   header: 'Közvetítői eljárásban',
-        //   getCellValue(row) {
-        //     return excelExportCellBool(row.KozvetitoiEljarasban);
-        //   },
-        // },
-        // {
-        //   header: 'Elkülönítve',
-        //   getCellValue(row) {
-        //     return excelExportCellBool(row.FegyelmiElkulonitesFL);
-        //   },
-        // },
-        // {
-        //   header: 'Jelölje ki a jogi képviselőt',
-        //   getCellValue(row) {
-        //     return excelExportCellBool(row.JogiKepviseletetKer);
-        //   },
-        // },
       ];
       let body = [];
       let footer = null;

@@ -15,5 +15,9 @@ const StatisztikaSzurok = Object.freeze({
   LapanyagHiany: 5,
   /**  6*/
   VegrehajtasraVaro: 6,
+  /**  7*/
+  ElanyagHiany: 7,
+  /**  8*/
+  KellekHiany: 8,
 });
 export default StatisztikaSzurok;

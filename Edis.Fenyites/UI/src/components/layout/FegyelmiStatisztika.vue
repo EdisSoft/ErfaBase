@@ -61,9 +61,9 @@ export default {
         FegyelmiUgyStoreTypes.actions.setFegyelmiUgyekSzuro,
     }),
     SelectStatisztika(value) {
-      if (this.$route.name != 'Gyartasban') {
+      if (this.$route.name != 'FegyelmiEsemenyek') {
         setTimeout(() => {
-          this.$router.push('/Gyartasban/');
+          this.$router.push({ name: 'FegyelmiEsemenyek' });
         }, 350);
       }
       this.SetFegyelmiUgyekSzuro({ value });
@@ -72,11 +72,13 @@ export default {
   computed: {
     ...mapGetters({
       fegyelmiUgyek: FegyelmiUgyStoreTypes.getters.getFegyelmiUgyek,
+      getFegyelmiUgyekSzamolt:
+        FegyelmiUgyStoreTypes.getters.getFegyelmiUgyekSzamolt,
       user: UserStoreTypes.getters.getUserInfo,
       fegyelmiUgyekSzuro: FegyelmiUgyStoreTypes.getters.getFegyelmiUgyekSzuro,
     }),
     statisztika() {
-      let fegyelmiUgyek = this.fegyelmiUgyek;
+      let fegyelmiUgyek = this.getFegyelmiUgyekSzamolt;
       if (this.fegyelmiUgyekSzuro >= 0) {
         fegyelmiUgyek = FegyelmiUgyFunctions.GetFegyelmiUgyekByStatisztikaSzuro(
           fegyelmiUgyek,
@@ -121,11 +123,10 @@ export default {
         array: hetenEsedekesArr,
       };
       let vegrehajtasAlattArr =
-        FegyelmiUgyFunctions.GetVegrehajtasAlattiUgyek(fegyelmiUgyek);
+        FegyelmiUgyFunctions.GetElanyagHiany(fegyelmiUgyek);
       let vegrehajtasAlatt = {
-        isSelected:
-          this.fegyelmiUgyekSzuro == StatisztikaSzurok.VegrehajtasAlatt,
-        szuro: StatisztikaSzurok.VegrehajtasAlatt,
+        isSelected: this.fegyelmiUgyekSzuro == StatisztikaSzurok.ElanyagHiany,
+        szuro: StatisztikaSzurok.ElanyagHiany,
         title: 'Élanyag hiány',
         array: vegrehajtasAlattArr,
       };
@@ -138,11 +139,10 @@ export default {
         array: lapanyagHianyArr,
       };
       let vegrehajtasraVaroArr =
-        FegyelmiUgyFunctions.GetVegrehajtasraVaroUgyek(fegyelmiUgyek);
+        FegyelmiUgyFunctions.GetKellekHiany(fegyelmiUgyek);
       let vegrehajtasraVaro = {
-        isSelected:
-          this.fegyelmiUgyekSzuro == StatisztikaSzurok.VegrehajtasraVaro,
-        szuro: StatisztikaSzurok.VegrehajtasraVaro,
+        isSelected: this.fegyelmiUgyekSzuro == StatisztikaSzurok.KellekHiany,
+        szuro: StatisztikaSzurok.KellekHiany,
         title: 'Kellék hiány',
         array: vegrehajtasraVaroArr,
       };

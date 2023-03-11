@@ -1317,8 +1317,14 @@ class FegyelmiUgy {
         f.OrdCustRequestDate && sameWeek(now, new Date(f.OrdCustRequestDate))
     );
   }
+  GetElanyagHiany(fegyelmiUgyek) {
+    return fegyelmiUgyek.filter((f) => f.ElHianyFl);
+  }
   GetLapanyagHiany(fegyelmiUgyek) {
     return fegyelmiUgyek.filter((f) => f.LapHianyFl);
+  }
+  GetKellekHiany(fegyelmiUgyek) {
+    return fegyelmiUgyek.filter((f) => f.KellekHianyFl);
   }
   async CanModalOpen(modalName, { fegyelmiUgyIds }) {
     switch (modalName) {
@@ -1488,6 +1494,10 @@ class FegyelmiUgy {
         return this.GetVegrehajtasAlattiUgyek(fegyelmiUgyek);
       case StatisztikaSzurok.VegrehajtasraVaro:
         return this.GetVegrehajtasraVaroUgyek(fegyelmiUgyek);
+      case StatisztikaSzurok.ElanyagHiany:
+        return this.GetElanyagHiany(fegyelmiUgyek);
+      case StatisztikaSzurok.KellekHiany:
+        return this.GetKellekHiany(fegyelmiUgyek);
       default:
         throw 'GetStatisztikaBySzuro - Hiányzó zsűrő';
         break;

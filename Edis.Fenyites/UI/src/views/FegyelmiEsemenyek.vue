@@ -380,6 +380,8 @@ export default {
   computed: {
     ...mapGetters({
       fegyelmiUgyek: FegyelmiUgyStoreTypes.getters.getFegyelmiUgyek,
+      getFegyelmiUgyekSzamolt:
+        FegyelmiUgyStoreTypes.getters.getFegyelmiUgyekSzamolt,
       userInfo: UserStoreTypes.getters.getUserInfo,
       fegyelmiUgyekSelected:
         FegyelmiUgyStoreTypes.getters.getFegyelmiUgyekSelected,
@@ -393,147 +395,9 @@ export default {
       alkatreszek: FegyelmiUgyStoreTypes.getters.getAlkatreszek,
     }),
     fegyelmiUgyekModositott() {
-      let fegyelmiUgyek = this.fegyelmiUgyek;
-      let fegyelmiUgyekModositott =
-        FegyelmiUgyFunctions.FegyelmiUgyTovabbiMezokKitoltese(fegyelmiUgyek);
+      let fegyelmiUgyek = this.getFegyelmiUgyekSzamolt;
 
-      let fegyelmiUgyekSelected = this.fegyelmiUgyekSelected;
-      let fegyelmiUgyekSelectedDict = keyBy(fegyelmiUgyekSelected, 'PrdID');
-      let alkatreszKeszletek = keyBy(
-        cloneDeep(this.alkatreszKeszletek),
-        'Ottimokod'
-      );
-      // let kellekKeszletek = keyBy(
-      //   cloneDeep(this.kellekKeszletek),
-      //   'Id'
-      // );
-      let alkatreszek = groupBy(this.alkatreszek, 'PrdId');
-
-      for (let i = 0; i < fegyelmiUgyekSelected.length; i++) {
-        const selected = fegyelmiUgyekSelected[i];
-        let szuksegesAlkatreszek = alkatreszek[selected.PrdID] || [];
-        for (let i = 0; i < szuksegesAlkatreszek.length; i++) {
-          const alkatresz = szuksegesAlkatreszek[i];
-          let keszlet = alkatreszKeszletek[alkatresz.OttimoKod];
-          if (keszlet) {
-            if (alkatresz.IcgCode == 'Élanyag') {
-              let db = alkatresz.OriReqQty;
-              keszlet.SzabadMennyiseg -= db;
-            }
-            if (alkatresz.IcgCode == 'Lapanyag') {
-              let db = alkatresz.TablaDb;
-              keszlet.SzabadMennyiseg -= db;
-            }
-            if (
-              alkatresz.IcgCode == 'Kellék_Ertl' ||
-              alkatresz.IcgCode == 'Ertl_termékek' ||
-              alkatresz.IcgCode == 'Egyéb'
-            ) {
-              let db = alkatresz.TablaDb;
-              keszlet.SzabadMennyiseg -= db;
-            }
-          }
-        }
-      }
-
-      for (let z = 0; z < fegyelmiUgyekModositott.length; z++) {
-        const row = fegyelmiUgyekModositott[z];
-        row.LapReq = 0;
-        row.LapSt = 0;
-        row.LapHiany = '';
-        row.LapHianyFl = 0;
-        row.ElReq = 0;
-        row.ElSt = 0;
-        row.ElHiany = '';
-        row.ElHianyFl = 0;
-        row.KellekReq = 0;
-        row.KellekSt = 0;
-        row.KellekHiany = '';
-        row.KellekHianyFl = 0;
-        row.MindenAlapanyagMegvan = '';
-        row.MindenAlapanyagMegvanFl = 0;
-        let szuksegesAlkatreszek = alkatreszek[row.PrdID] || [];
-        for (let i = 0; i < szuksegesAlkatreszek.length; i++) {
-          const alkatresz = szuksegesAlkatreszek[i];
-          if (alkatresz.IcgCode == 'Élanyag') {
-            row.ElReq++;
-          }
-          if (alkatresz.IcgCode == 'Lapanyag') {
-            row.LapReq++;
-          }
-          if (
-            alkatresz.IcgCode == 'Kellék_Ertl' ||
-            alkatresz.IcgCode == 'Ertl_termékek' ||
-            alkatresz.IcgCode == 'Egyéb'
-          ) {
-            row.KellekReq++;
-          }
-        }
-      }
-
-      for (let z = 0; z < fegyelmiUgyekModositott.length; z++) {
-        const row = fegyelmiUgyekModositott[z];
-
-        let szuksegesAlkatreszek = alkatreszek[row.PrdID] || [];
-        let kivalasztva = fegyelmiUgyekSelectedDict[row.PrdID] != null;
-
-        for (let i = 0; i < szuksegesAlkatreszek.length; i++) {
-          const alkatresz = szuksegesAlkatreszek[i];
-          let keszlet = alkatreszKeszletek[alkatresz.OttimoKod];
-          if (keszlet) {
-            //alkatresz === true
-            let db = 0;
-            switch (alkatresz.IcgCode) {
-              case 'Élanyag':
-                db = alkatresz.OriReqQty;
-                if (kivalasztva) {
-                  row.ElSt = row.ElReq;
-                } else if (db < keszlet.SzabadMennyiseg) {
-                  row.ElSt++;
-                }
-                break;
-
-              case 'Lapanyag':
-                db = alkatresz.TablaDb;
-                if (kivalasztva) {
-                  row.LapSt = row.LapReq;
-                } else if (db < keszlet.SzabadMennyiseg) {
-                  row.LapSt++;
-                }
-                break;
-
-              default:
-                db = alkatresz.OriReqQty;
-                if (kivalasztva) {
-                  row.KellekSt = row.KellekReq;
-                } else if (db < keszlet.SzabadMennyiseg) {
-                  row.KellekSt++;
-                }
-                break;
-            }
-          }
-        }
-
-        if (row.LapSt < row.LapReq) {
-          row.LapHiany = 'Lapanyag hiány';
-          row.LapHianyFl = 1;
-        }
-        if (row.ElSt < row.ElReq) {
-          row.ElHiany = 'Élanyag hiány';
-          row.ElHianyFl = 1;
-        }
-        if (row.KellekekSt < row.KellekekReq) {
-          row.KellekHiany = 'Kellék hiány';
-          row.KellekHianyFl = 1;
-        }
-
-        if (row.LapHianyFl + row.ElHianyFl + row.KellekHianyFl == 0) {
-          row.MindenAlapanyagMegvan = 'Gyártásba kiadható';
-          row.MindenAlapanyagMegvanFl = 1;
-        }
-      }
-
-      return fegyelmiUgyekModositott;
+      return fegyelmiUgyek;
     },
     fegyelmiUgyekSelectedDropdown() {
       let fegyelmiUgyMuveletekObj =

@@ -198,7 +198,7 @@ const getters = {
         row.ElHiany = 'Élanyag hiány';
         row.ElHianyFl = 1;
       }
-      if (row.KellekekSt < row.KellekekReq) {
+      if (row.KellekSt < row.KellekReq) {
         row.KellekHiany = 'Kellék hiány';
         row.KellekHianyFl = 1;
       }

@@ -294,11 +294,11 @@ export default {
               var cimkek =
                 '<div class="d-flex justify-content-between align-items-start">';
               cimkek += `<div>
-                    Lapanyag: ${row.LapSt}/${row.LapReq}
+                    Lapanyag: ${row.LapSt}/${row.LapReq} <span class="text-danger">${row.LapHiany}</span>
                     <br/>
-                    Élanyag : ${row.ElSt}/${row.ElReq}
+                    Élanyag : ${row.ElSt}/${row.ElReq} <span class="text-danger">${row.ElHiany}</span>
                     <br/>
-                    Kellék : ${row.KellekSt}/${row.KellekReq}
+                    Kellék : ${row.KellekSt}/${row.KellekReq} <span class="text-danger">${row.KellekHiany}</span>
                     </div>`;
               //row.LapHiany = 'Lapanyag hiány';
               //row.ElHiany = 'Élanyag hiány';
@@ -372,7 +372,7 @@ export default {
           $(row).attr('data-id', data.PrdID);
           $(row).css('cursor', 'pointer');
           if (data.KellekHiany) {
-            $(row).addClass('row-warning');
+            // $(row).addClass('row-warning');
           }
 
           $(row)
